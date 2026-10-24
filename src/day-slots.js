@@ -105,6 +105,177 @@ export const daySlots = {
   ],
 };
 
+/** @typedef {{ name: string, query: string, where: string, dishes: string }} EatPlace */
+/** @typedef {{ note: string, places: EatPlace[] }} DayEats */
+
+const amirTemur = [
+  {
+    name: "Navvat",
+    query: "Navvat Sayilgoh 7 Poytaxt Mall Tashkent",
+    where: "Sayilgoh 7, tầng 1 Poytaxt Mall, khoảng 460 m từ quảng trường Amir Temur. Mở khuya.",
+    dishes: "Norin, shashlik, manti bí, cánh gà nướng.",
+  },
+  {
+    name: "Quầy trên Broadway",
+    query: "Sayilgoh Street Tashkent Broadway",
+    where: "Phố đi bộ Sayilgoh. Đi bộ từ Hampton hoặc InterContinental.",
+    dishes: "Samsa thịt, non nóng, shashlik gà, trà. Chọn quán đông.",
+  },
+];
+
+const chorsu = [
+  {
+    name: "Khu ăn Chorsu",
+    query: "Chorsu Bazaar Tashkent",
+    where: "Trong chợ, sau Hazrati Imam. Trả tiền mặt.",
+    dishes: "Plov, samsa, non, trái cây khô.",
+  },
+  ...amirTemur,
+];
+
+const tashkentCity = [
+  {
+    name: "Afsona Tashkent City",
+    query: "Afsona Ukchi 4 Tashkent",
+    where: "Ukchi 4, sát Holiday Inn.",
+    dishes: "Plov, manti, shurpa, samsa. Có manti cá hồi và plov trái cây nếu muốn đổi món.",
+  },
+  {
+    name: "Proshashlyk",
+    query: "Proshashlyk Ukchi 6 Tashkent",
+    where: "Ukchi 6, gần công viên.",
+    dishes: "Shashlik cừu, gà hoặc cá hồi, kèm bánh và salad.",
+  },
+  {
+    name: "Boboy",
+    query: "BOBOY Tashkent City Mall Batir Zakirov 7",
+    where: "Trong Tashkent City Mall. Máy lạnh, đắt hơn quán ngoài một chút.",
+    dishes: "Plov, manti, shashlik, salad cà tím.",
+  },
+];
+
+const mirabad = [
+  {
+    name: "Afsona Shevchenko",
+    query: "Afsona Taras Shevchenko 30 Tashkent",
+    where: "Shevchenko 30, gần ga Oybek. Có menu tiếng Anh.",
+    dishes: "Plov lễ, plov trà đạo, kazan kabob, mastava, mashhurda, manti bò, shashlik gà. Đĩa tổng hợp khoảng 325.000 som.",
+  },
+  {
+    name: "Caravan",
+    query: "Caravan restaurant Abdulla Kahhar 22 Tashkent",
+    where: "Abdulla Kahhar 22, Yakkasaray. Không đi bộ từ Swissôtel, gọi Yandex.",
+    dishes: "Plov, kazan kabob, lagman, manti, beshbarmak, shashlik.",
+  },
+  {
+    name: "Quầy gần Oybek",
+    query: "Oybek metro Tashkent samsa",
+    where: "Quanh ga, ăn nhẹ.",
+    dishes: "Samsa thịt hoặc khoai, non, trà.",
+  },
+];
+
+const plovDay = [
+  {
+    name: "Besh Qozon",
+    query: "Central Asian Plov Center Besh Qozon Tashkent",
+    where: "Trung tâm plov, gần đài động đất. Đi đúng trưa vì nồi hết giữa chiều.",
+    dishes: "Plov nấu nồi lớn, salad, non, trà. Một đĩa khoảng $3.",
+  },
+  ...mirabad.slice(0, 2),
+];
+
+const samarkand = [
+  {
+    name: "Old Havuz",
+    query: "Shashlik.uz Old Havuz Samarkand",
+    where: "Khoảng 300 m từ Registan. Mở 10:00–23:00.",
+    dishes: "Shashlik sườn cừu, manti, lagman.",
+  },
+  {
+    name: "Emirhan",
+    query: "Emirhan restaurant Mahmudjonov 1/18 Samarkand",
+    where: "Mahmudjonov 1/18, sân thượng nhìn Registan. Bàn hoàng hôn hết sớm.",
+    dishes: "Plov kiểu Samarkand, lagman, shashlik, non lò tandir.",
+  },
+  {
+    name: "Chợ Siab",
+    query: "Siyob Bazaar Samarkand",
+    where: "Trong chợ. Tiền mặt.",
+    dishes: "Non nóng, samsa, plov, trái cây. Một đĩa plov chia đôi là đủ.",
+  },
+];
+
+const lastNight = [
+  ...amirTemur,
+  {
+    name: "Afsona Shevchenko",
+    query: "Afsona Taras Shevchenko 30 Tashkent",
+    where: "Shevchenko 30. Từ InterContinental gọi Yandex ngắn, không kịp nếu chỉ còn một tiếng.",
+    dishes: "Plov, kazan kabob, shashlik gà, mastava.",
+  },
+];
+
+/** @type {Record<string, DayEats>} */
+export const dayEats = {
+  "2026-10-27": {
+    note: "Mới đến. Ăn gần Hampton, đừng sang Chorsu tối nay.",
+    places: amirTemur,
+  },
+  "2026-10-28": {
+    note: "Trưa trong chợ. Tối về Broadway.",
+    places: chorsu,
+  },
+  "2026-10-29": {
+    note: "Cả ngày quanh quảng trường, tối đi bộ về Hampton.",
+    places: amirTemur,
+  },
+  "2026-10-30": {
+    note: "Sau khi nhận phòng Holiday Inn. Ba quán này đều gần Ukchi hoặc trong mall.",
+    places: tashkentCity,
+  },
+  "2026-10-31": {
+    note: "Trưa ăn đồ mang lên núi. Tối về Ukchi.",
+    places: tashkentCity,
+  },
+  "2026-11-01": {
+    note: "Chủ nhật quanh công viên và mall.",
+    places: tashkentCity,
+  },
+  "2026-11-02": {
+    note: "Đêm đầu ở Swissôtel. Afsona gần Oybek nhất.",
+    places: mirabad,
+  },
+  "2026-11-03": {
+    note: "Sau công viên Navoi, về Mirabad ăn.",
+    places: mirabad,
+  },
+  "2026-11-04": {
+    note: "Trưa dành cho plov. Tối ăn nhẹ gần Oybek nếu còn đói.",
+    places: plovDay,
+  },
+  "2026-11-05": {
+    note: "Mai tàu 08:37. Ăn sớm, gần khách sạn.",
+    places: mirabad,
+  },
+  "2026-11-06": {
+    note: "Chiều Registan xong thì ăn gần quảng trường. Siab để mai.",
+    places: samarkand.slice(0, 2),
+  },
+  "2026-11-07": {
+    note: "Trưa Siab. Tối một trong hai quán gần Registan, rồi ngủ sớm vì tàu 08:10.",
+    places: samarkand,
+  },
+  "2026-11-08": {
+    note: "Tàu về trưa. Ăn gần InterContinental, đừng đi xa.",
+    places: lastNight,
+  },
+  "2026-11-09": {
+    note: "Bữa chính là trưa. 17:15 đã ra sân bay, không ngồi nhà hàng tối.",
+    places: amirTemur,
+  },
+};
+
 /** @param {DaySlot[]} slots */
 export function slotCost(slots) {
   return slots.reduce((sum, slot) => sum + slot.usd, 0);

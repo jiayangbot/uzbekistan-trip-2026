@@ -1,6 +1,6 @@
 import { days, hotelStays, hotelOptions, meta } from "./trip-data.js";
 import { dayDetails, stayLinks, mapLink, packing, masterChecklist, sources, localLife } from "./trip-guide.js";
-import { daySlots, slotCost, tripFoodUsd } from "./day-slots.js";
+import { dayEats, daySlots, slotCost, tripFoodUsd } from "./day-slots.js";
 import { icon } from "./icons.js";
 
 const STORE_KEY = "uz-trip-2026-checks";
@@ -617,6 +617,7 @@ function renderDetail(entry, stay) {
         </section>
       </div>
       <div class="detail-col">
+        ${renderEats(entry.date)}
         <section class="block">
           <h4>${icon("pin", 16)} Đi đâu</h4>
           <ul class="places">${places}</ul>
@@ -627,6 +628,30 @@ function renderDetail(entry, stay) {
         </section>
       </div>
     </div>`;
+}
+
+function renderEats(date) {
+  const eats = dayEats[date];
+  if (!eats) return "";
+  const items = eats.places
+    .map(
+      (place) => `
+      <li class="place">
+        <span class="place-icon">${icon("pin", 16)}</span>
+        <div>
+          ${extLink(mapLink(place.query), place.name, "place-name")}
+          <p>${place.where}</p>
+          <p>${place.dishes}</p>
+        </div>
+      </li>`,
+    )
+    .join("");
+  return `
+    <section class="block">
+      <h4>${icon("wallet", 16)} Quán ăn</h4>
+      <p class="muted">${eats.note} Chọn một quán, không cần ăn hết.</p>
+      <ul class="places">${items}</ul>
+    </section>`;
 }
 
 function renderSlots(date) {
@@ -701,7 +726,7 @@ function renderTimeline() {
     <section class="section" id="timeline" aria-labelledby="timeline-title" tabindex="-1">
       <div class="section-head">
         <h2 id="timeline-title">Lịch từng ngày</h2>
-        <p class="muted">Mỗi ngày chia theo giờ. Giá ăn là ước lượng cho 2 người. Bấm ngày để xem bản đồ, tàu và khách sạn.</p>
+        <p class="muted">Mỗi ngày chia theo giờ. Giá ăn là ước lượng cho 2 người. Bấm một ngày để xem vài quán và món gần chỗ ở.</p>
       </div>
       <div class="toolbar">
         <div class="filters" role="group" aria-label="Lọc ngày">
