@@ -142,6 +142,7 @@ const optionLabel = {
   "mov-room": "Mövenpick Samarkand",
   "hampton-1": "Hampton by Hilton",
   "ic-1": "InterContinental Tashkent",
+  "hyatt-1": "Hyatt Regency Tashkent",
 };
 
 function loadPicks() {

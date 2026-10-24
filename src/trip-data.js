@@ -391,4 +391,17 @@ export const hotelOptions = [
     score: "9.5",
     why: "Phòng nhìn quảng trường Amir Temur ở tầng 12–16. Bar Embar tầng 17 nhìn thành phố. Chưa có quote đúng đêm 8/11.",
   },
+  {
+    id: "hyatt-1",
+    segment: "Trước giờ bay · 8–9 Nov",
+    tier: "alt",
+    name: "Hyatt Regency Tashkent",
+    area: "Navoi 1A",
+    nights: 1,
+    total: 221,
+    cancel: "Xem lúc đặt",
+    breakfast: "Không gồm ăn sáng",
+    score: "—",
+    why: "Đêm 8–9/11, $221, không ăn sáng. Phố Navoi 1A.",
+  },
 ];

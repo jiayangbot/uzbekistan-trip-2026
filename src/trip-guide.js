@@ -51,6 +51,12 @@ export const hotelLinks = {
     cityId: 639,
     map: "InterContinental Tashkent, 2 Shakhrisabz Street",
   },
+  "Hyatt Regency Tashkent": {
+    tripWord: "Hyatt Regency Tashkent",
+    bookingWord: "Hyatt Regency Tashkent",
+    cityId: 639,
+    map: "Hyatt Regency Tashkent, 1A Navoi Street",
+  },
 };
 
 export function stayLinks(stay, hotelName = stay.name) {
