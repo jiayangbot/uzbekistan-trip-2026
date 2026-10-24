@@ -142,7 +142,7 @@ body {
 
 .stay-track {
   position: relative;
-  height: 72px;
+  height: 84px;
   background: var(--surface2);
   border-radius: 10px;
   border: 1px dashed var(--border);
@@ -198,8 +198,16 @@ body {
 
 .stay-price {
   font-family: var(--mono);
-  font-size: 0.65rem;
-  opacity: 0.9;
+  font-size: 0.78rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.stay-total {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  opacity: 0.85;
+  white-space: nowrap;
 }
 
 .stay-legend {

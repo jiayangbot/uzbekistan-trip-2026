@@ -12,6 +12,10 @@ const fmtMoney = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
+function perNight(total, nights) {
+  return fmtMoney.format(Math.round(total / nights));
+}
+
 function parseDate(iso) {
   const [y, m, d] = iso.split("-").map(Number);
   return new Date(y, m - 1, d);
@@ -133,7 +137,8 @@ function renderHotelBars() {
       return `
         <div class="stay-bar stay-${i}" style="left:${left}%;width:${width}%">
           <span class="stay-label">${short}</span>
-          <span class="stay-price">${fmtMoney.format(stay.actualTotal)} · ${stay.nights}đ</span>
+          <span class="stay-price">${perNight(stay.actualTotal, stay.nights)}/đêm</span>
+          <span class="stay-total">${fmtMoney.format(stay.actualTotal)} · ${stay.nights}đ</span>
         </div>
       `;
     })
@@ -202,11 +207,12 @@ function mount() {
             <div class="stat">
               <span class="stat-label">Budget KS</span>
               <strong>${fmtMoney.format(meta.budgetUsd)}</strong>
+              <span class="stat-sub">${perNight(meta.budgetUsd, hotelStays.reduce((sum, stay) => sum + stay.nights, 0))}/đêm</span>
             </div>
             <div class="stat highlight">
               <span class="stat-label">Quote đề xuất</span>
               <strong>${fmtMoney.format(meta.quotedTotalUsd)}</strong>
-              <span class="stat-sub ${meta.budgetUsd - meta.quotedTotalUsd < 0 ? "over" : ""}">${meta.budgetUsd - meta.quotedTotalUsd < 0 ? "Vượt" : "Còn"} ${fmtMoney.format(Math.abs(meta.budgetUsd - meta.quotedTotalUsd))}</span>
+              <span class="stat-sub ${meta.budgetUsd - meta.quotedTotalUsd < 0 ? "over" : ""}">${perNight(meta.quotedTotalUsd, hotelStays.reduce((sum, stay) => sum + stay.nights, 0))}/đêm · ${meta.budgetUsd - meta.quotedTotalUsd < 0 ? "Vượt" : "Còn"} ${fmtMoney.format(Math.abs(meta.budgetUsd - meta.quotedTotalUsd))}</span>
             </div>
             <div class="stat">
               <span class="stat-label">Đêm KS</span>
@@ -222,7 +228,7 @@ function mount() {
             ${hotelStays
               .map(
                 (s) =>
-                  `<span><strong>${s.name.split(" ")[0]} ${s.name.split(" ")[1] || ""}</strong> ${s.checkIn} → ${s.checkOut}</span>`,
+                  `<span><strong>${s.name}</strong> ${perNight(s.actualTotal, s.nights)}/đêm · ${s.checkIn} → ${s.checkOut}</span>`,
               )
               .join("")}
           </div>
