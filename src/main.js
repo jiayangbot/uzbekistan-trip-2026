@@ -251,7 +251,7 @@ function renderStays() {
     <section class="section" id="stays" aria-labelledby="stays-title">
       <div class="section-head">
         <h2 id="stays-title">Khách sạn theo chặng</h2>
-        <p class="muted">Mỗi thẻ mở thẳng Trip.com hoặc Booking.com đúng ngày, 2 người lớn.</p>
+        <p class="muted">Giá Trip.com cho 2 người, đã gồm thuế và ăn sáng. Bấm để mở đúng ngày.</p>
       </div>
       <div class="strip" aria-hidden="true">${strip}</div>
       <ol class="stay-grid">${cards}</ol>
@@ -288,7 +288,8 @@ function renderDetail(entry, stay) {
             ? `<section class="block">
                 <h4>${icon("bed", 16)} Khách sạn đêm nay</h4>
                 <p><strong>${stay.name}</strong> · ${perNight(stay.actualTotal, stay.nights)}/đêm</p>
-                <p class="muted">${stay.breakfast} · ${stay.cancel}</p>
+                <p>${icon("check", 14)} Ăn sáng ${stay.breakfast.toLowerCase()}.</p>
+                <p class="muted">${stay.cancel}. ${stay.note}</p>
                 <div class="actions">
                   ${extLink(links.trip, "Trip.com", "btn btn-primary")}
                   ${extLink(links.booking, "Booking", "btn")}
@@ -354,6 +355,7 @@ function renderDay(entry, index) {
               <span class="tag tag-${kind}">${icon(info.icon, 13)} ${info.label}</span>
               ${moved ? `<span class="tag tag-move">${icon("swap", 13)} Đổi chỗ ở</span>` : ""}
               ${stay && entry.hotel !== "Checkout / flight" ? `<span class="tag tag-plain">${icon("bed", 13)} ${entry.hotel}</span>` : ""}
+              ${stay && stay.breakfast.startsWith("Đã gồm") ? `<span class="tag tag-ok">${icon("check", 13)} Ăn sáng 2 người</span>` : ""}
             </span>
           </span>
           <span class="chev">${icon("chevron", 20)}</span>
