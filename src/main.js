@@ -210,9 +210,8 @@ function renderStays() {
             </div>
           </div>
           <p class="stay-dates">${shortDate(s.checkIn)} → ${shortDate(s.checkOut)} · ${s.nights} đêm</p>
-          <p class="stay-price"><strong>${perNight(s.actualTotal, s.nights)}</strong>/đêm <span>· ${fmtMoney.format(s.actualTotal)} tổng</span></p>
+          <p class="stay-price"><strong>${perNight(s.actualTotal, s.nights)}</strong>/đêm <span>· ăn sáng cho 2 người · ${fmtMoney.format(s.actualTotal)} tổng</span></p>
           <ul class="facts">
-            <li>Ăn sáng: ${s.breakfast}</li>
             <li>Hủy: ${s.cancel}</li>
           </ul>
           ${renderReview(s)}
@@ -249,7 +248,7 @@ function renderStays() {
                 <span class="num">${o.total != null ? fmtMoney.format(o.total) : "—"}</span>
               </div>
               ${o.tier === "recommended" ? `<span class="tag tag-ok">${icon("check", 12)} Đang chọn</span>` : ""}
-              <p class="muted">${o.area} · ${o.score} · ${o.breakfast} · ${o.cancel}</p>
+              <p class="muted">${o.area} · ${o.score} · ${o.breakfast.startsWith("Đã gồm") ? "ăn sáng cho 2 người" : o.breakfast} · ${o.cancel}</p>
               <p>${o.why}</p>
             </li>`,
             )
@@ -300,7 +299,7 @@ function renderDetail(entry, stay) {
             ? `<section class="block">
                 <h4>${icon("bed", 16)} Khách sạn đêm nay</h4>
                 <p><strong>${stay.name}</strong> · ${perNight(stay.actualTotal, stay.nights)}/đêm</p>
-                <p>${icon("check", 14)} Ăn sáng ${stay.breakfast.toLowerCase()}.</p>
+                <p>${icon("check", 14)} Ăn sáng cho 2 người, đã gồm trong giá.</p>
                 <p class="muted">${stay.cancel}. ${stay.note}</p>
                 ${renderReview(stay)}
                 <div class="actions">
@@ -368,7 +367,7 @@ function renderDay(entry, index) {
               <span class="tag tag-${kind}">${icon(info.icon, 13)} ${info.label}</span>
               ${moved ? `<span class="tag tag-move">${icon("swap", 13)} Đổi chỗ ở</span>` : ""}
               ${stay && entry.hotel !== "Checkout / flight" ? `<span class="tag tag-plain">${icon("bed", 13)} ${entry.hotel}</span>` : ""}
-              ${stay && stay.breakfast.startsWith("Đã gồm") ? `<span class="tag tag-ok">${icon("check", 13)} Ăn sáng 2 người</span>` : ""}
+              ${stay && stay.breakfast.startsWith("Đã gồm") ? `<span class="tag tag-ok">${icon("check", 13)} Ăn sáng đã gồm</span>` : ""}
             </span>
           </span>
           <span class="chev">${icon("chevron", 20)}</span>
