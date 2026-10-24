@@ -333,11 +333,3 @@ export const hotelOptions = [
     why: "Bớt $292, kéo cả chuyến xuống dưới trần. Giá list, cần mở lại trang phòng.",
   },
 ];
-
-export const verifyItems = [
-  { label: "Tàu 6 Nov TAS → Samarkand", priority: "High", done: false },
-  { label: "Tàu 8 Nov Samarkand → TAS", priority: "High", done: false },
-  { label: "Vé 27 Oct / 9 Nov", priority: "High", done: false },
-  { label: "E-mehmon / đăng ký lưu trú", priority: "High", done: false },
-  { label: "Giờ bay 9 Nov (chiều/tối cho tàu CN)", priority: "High", done: false },
-];
