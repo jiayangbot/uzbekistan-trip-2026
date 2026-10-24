@@ -482,6 +482,89 @@ body {
   color: var(--muted);
 }
 
+.timeline-card {
+  cursor: pointer;
+}
+
+.open-hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.78rem;
+  color: var(--accent);
+}
+
+.day-detail {
+  margin-top: 0.9rem;
+  display: grid;
+  gap: 0.9rem;
+  cursor: auto;
+}
+
+.day-detail h4,
+.guide h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.day-detail p,
+.guide p,
+.guide li {
+  margin: 0.2rem 0;
+}
+
+.day-detail a,
+.guide a {
+  color: var(--accent);
+}
+
+.place-list,
+.research-list,
+.check-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.place-list li,
+.research-list li,
+.check-list li {
+  padding: 0.45rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.75rem;
+}
+
+.link-row a {
+  border: 1px solid var(--accent-dim);
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  text-decoration: none;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.guide ol {
+  margin: 0.3rem 0 0.6rem;
+  padding-left: 1.2rem;
+}
+
+@media (max-width: 860px) {
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media print {
   body {
     background: #fff;

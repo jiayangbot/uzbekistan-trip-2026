@@ -1,4 +1,5 @@
 import { days, hotelStays, hotelOptions, meta, verifyItems } from "./trip-data.js";
+import { dayDetails, stayLinks, mapLink, packing, masterChecklist, sources } from "./trip-guide.js";
 
 const fmtDate = new Intl.DateTimeFormat("vi-VN", {
   weekday: "short",
@@ -57,7 +58,79 @@ function hotelForDate(iso) {
   return null;
 }
 
-function renderTimeline(filter) {
+function stayOnDate(iso) {
+  return hotelForDate(iso) || hotelStays.find((stay) => stay.checkOut === iso) || null;
+}
+
+function renderDetail(entry, stay) {
+  const detail = dayDetails[entry.date];
+  if (!detail) return "";
+  const links = stay ? stayLinks(stay) : null;
+  const places = detail.places
+    .map(
+      (place) => `
+      <li>
+        <a href="${mapLink(place.query)}" target="_blank" rel="noopener">${place.name}</a>
+        <p>${place.tip}</p>
+      </li>`,
+    )
+    .join("");
+  const research = detail.research
+    .map(
+      (note) => `
+      <li>
+        <p>${note.text}</p>
+        <a href="${note.url}" target="_blank" rel="noopener">${note.source}</a>
+      </li>`,
+    )
+    .join("");
+  const checks = detail.checklist.map((item) => `<li>${item}</li>`).join("");
+  const transport = detail.transport
+    ? `
+      <section>
+        <h4>${detail.transport.title}</h4>
+        <ol>${detail.transport.steps.map((step) => `<li>${step}</li>`).join("")}</ol>
+        <p class="link-row">${detail.transport.links.map((link) => `<a href="${link.url}" target="_blank" rel="noopener">${link.label}</a>`).join("")}</p>
+      </section>`
+    : "";
+  return `
+    <div class="day-detail">
+      <section>
+        <h4>Thời tiết</h4>
+        <p><strong>${detail.weather.label}</strong></p>
+        <p>${detail.weather.note}</p>
+        <a href="${detail.weather.url}" target="_blank" rel="noopener">${detail.weather.source}</a>
+      </section>
+      ${
+        stay && links
+          ? `<section>
+              <h4>Khách sạn</h4>
+              <p>${stay.name}. ${perNight(stay.actualTotal, stay.nights)}/đêm · ${fmtMoney.format(stay.actualTotal)} / ${stay.nights} đêm. ${stay.breakfast}. ${stay.cancel}.</p>
+              <p class="link-row">
+                <a href="${links.trip}" target="_blank" rel="noopener">Mở Trip.com</a>
+                <a href="${links.booking}" target="_blank" rel="noopener">Mở Booking.com</a>
+                <a href="${links.map}" target="_blank" rel="noopener">Google Maps</a>
+              </p>
+            </section>`
+          : ""
+      }
+      <section>
+        <h4>Đi đâu</h4>
+        <ul class="place-list">${places}</ul>
+      </section>
+      ${transport}
+      <section>
+        <h4>Đã đọc</h4>
+        <ul class="research-list">${research}</ul>
+      </section>
+      <section>
+        <h4>Việc trong ngày</h4>
+        <ul class="check-list">${checks}</ul>
+      </section>
+    </div>`;
+}
+
+function renderTimeline(filter, selectedDate) {
   const filtered = days.filter((d) => {
     if (filter === "all") return true;
     if (filter === "meeting") return dayKind(d) === "meeting";
@@ -73,14 +146,15 @@ function renderTimeline(filter) {
   return filtered
     .map((entry, i, arr) => {
       const kind = dayKind(entry);
-      const stay = hotelForDate(entry.date);
+      const stay = stayOnDate(entry.date);
+      const open = selectedDate === entry.date;
       const prev = i > 0 ? arr[i - 1] : null;
       const hotelChanged =
         prev && (prev.hotel !== entry.hotel || prev.city !== entry.city);
       const cityChanged = prev && prev.city !== entry.city;
 
       return `
-        <article class="timeline-card ${kind}" data-date="${entry.date}">
+        <article class="timeline-card ${kind}${open ? " open" : ""}" data-date="${entry.date}">
           <div class="timeline-rail">
             <span class="dot" aria-hidden="true"></span>
             ${i < arr.length - 1 ? '<span class="line" aria-hidden="true"></span>' : ""}
@@ -113,6 +187,8 @@ function renderTimeline(filter) {
                 ? `<p class="transfer-line"><strong>Lưu ý:</strong> ${entry.transfer}</p>`
                 : ""
             }
+            <p class="open-hint">${open ? "Thu gọn" : "Bấm để xem bản đồ, khách sạn, tàu và việc cần làm"}</p>
+            ${open ? renderDetail(entry, stay) : ""}
           </div>
         </article>
       `;
@@ -189,9 +265,45 @@ function renderVerify() {
     .join("");
 }
 
+function renderGuide() {
+  return `
+    <section class="panel guide" id="guide">
+      <h2>Cả chuyến</h2>
+      <div class="guide-grid">
+        <section>
+          <h3>Đồ mang theo</h3>
+          <ul class="place-list">
+            ${packing.map((row) => `<li><strong>${row.item}</strong><p>${row.why}</p></li>`).join("")}
+          </ul>
+        </section>
+        <section>
+          <h3>Trước khi bay</h3>
+          <ul class="check-list">
+            ${masterChecklist.map((row) => `<li><span class="prio">${row.priority}</span> ${row.label}</li>`).join("")}
+          </ul>
+        </section>
+      </div>
+      <section>
+        <h3>Đặt tàu</h3>
+        <ol>
+          <li>Vào <a href="https://eticket.uzrailpass.uz/en/" target="_blank" rel="noopener">eticket.uzrailpass.uz</a>. Site cũ eticket.railway.uz chuyển tiếp sang đây.</li>
+          <li>Chọn Toshkent → Samarqand ngày 6/11, chuyến sáng. Chiều về Samarqand → Toshkent ngày 8/11.</li>
+          <li>Điền đúng số passport. Ga đi là Toshkent Markaziy, không phải ga Nam.</li>
+          <li>Economy khoảng 311.000 som một người vào giữa năm 2026. Giữ PDF offline. Có mặt trước giờ tàu khoảng 40 phút.</li>
+        </ol>
+        <p><a href="https://oxusroad.com/en/trains/afrosiyob/" target="_blank" rel="noopener">Chi tiết giá và giờ mở bán</a></p>
+      </section>
+      <section>
+        <h3>Nguồn</h3>
+        <p class="link-row">${sources.map((source) => `<a href="${source.url}" target="_blank" rel="noopener">${source.label}</a>`).join("")}</p>
+      </section>
+    </section>`;
+}
+
 function mount() {
   const root = document.getElementById("app");
   let filter = "all";
+  let selectedDate = "";
 
   const paint = () => {
     root.innerHTML = `
@@ -249,8 +361,9 @@ function mount() {
         </nav>
 
         <section class="timeline" aria-label="Timeline từng ngày">
-          ${renderTimeline(filter)}
+          ${renderTimeline(filter, selectedDate)}
         </section>
+        ${renderGuide()}
 
         <div class="grid-2">
           <section class="panel">
@@ -266,10 +379,26 @@ function mount() {
       </div>
     `;
 
+    const keepScroll = (change) => {
+      const y = window.scrollY;
+      change();
+      paint();
+      window.scrollTo(0, y);
+    };
     root.querySelectorAll(".filter-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        filter = btn.getAttribute("data-filter") || "all";
-        paint();
+        keepScroll(() => {
+          filter = btn.getAttribute("data-filter") || "all";
+        });
+      });
+    });
+    root.querySelectorAll(".timeline-card").forEach((card) => {
+      card.addEventListener("click", (event) => {
+        if (event.target.closest("a")) return;
+        const date = card.getAttribute("data-date") || "";
+        keepScroll(() => {
+          selectedDate = selectedDate === date ? "" : date;
+        });
       });
     });
   };
