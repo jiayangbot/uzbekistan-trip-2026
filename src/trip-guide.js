@@ -335,8 +335,10 @@ export const dayDetails = {
     transport: {
       title: "Afrosiyob, Samarkand → Tashkent",
       steps: [
-        "Chủ nhật 8/11, giờ trên eticket.uzrailpass.uz ngày 24/10/2026. Mua 769: Samarkand 16:56, Toshkent Markaziy 19:17, 2 giờ 21. Về Hampton trước 20:30.",
-        "Muộn hơn nếu 769 hết chỗ: 767 lúc 17:40 đến 20:12, 765 lúc 18:15 đến 20:30. Đừng lấy 777 lúc 20:01, tới 22:16.",
+        "Cùng site, English. FROM gõ Samarkand, TO gõ Tashkent, ngày 08.11.2026. Đừng gõ Toshkent Markaziy. Ga tới của tàu đúng là Tashkent Central, tức Markaziy.",
+        "Kéo tới Afrosiyob 769: Samarkand 16:56, tới 19:17. Dòng phụ ghi Bukhara → Tashkent Central. Về Hampton trước 20:30.",
+        "Nếu 769 hiện There are no seats: 767 lúc 17:40 đến 20:12, rồi 765 lúc 18:15 đến 20:30. Đừng lấy 777 lúc 20:01.",
+        "Đừng lấy tàu ghi Tashkent south. Đó là ga Nam, không phải Markaziy. Sáng 8/11, Sharq 711 và Nasaf 703 cùng lúc 08:10 tới 12:19, mỗi tàu đang còn 2 ghế ngồi, 200.060 som, và tới đúng ga trung tâm.",
         "HY531 cất cánh 21:15 ngày 9/11. Giữ đêm Hampton. Tàu 771 lúc 05:21 sáng 9/11 không dùng cho vé này.",
       ],
       links: [{ label: "Đặt vé chiều về", url: "https://eticket.uzrailpass.uz/en/" }],
