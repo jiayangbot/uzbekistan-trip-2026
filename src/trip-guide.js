@@ -263,7 +263,7 @@ export const dayDetails = {
     weather: tashkentEarlyNov,
     places: [
       { name: "Oybek", query: "Oybek metro Tashkent", tip: "Đi bộ quanh ga nếu còn chỗ muốn xem." },
-      { name: "Mirabad", query: "Mirabad Avenue Tashkent", tip: "Đi nhẹ. Tối về Swissôtel, mai tàu sớm." },
+      { name: "Mirabad", query: "Mirabad Avenue Tashkent", tip: "Đi nhẹ. Tối về Swissôtel, mai tàu 08:37." },
       { name: "Ga trung tâm", query: "Tashkent Central Railway Station", tip: "Chạy thử Yandex từ Swissôtel tới ga để biết phải dậy lúc mấy giờ." },
     ],
     research: [
@@ -284,19 +284,14 @@ export const dayDetails = {
       { name: "Registan", query: "Registan Square Samarkand", tip: "Cách khách sạn khoảng 0.5–1 km tuỳ lối vào. Chiều là đủ cho quảng trường." },
     ],
     transport: {
-      title: "Afrosiyob, Tashkent → Samarkand",
+      title: "Sharq 710, đã mua",
       steps: [
-        "Vào eticket.uzrailpass.uz, chọn English. Ô FROM gõ Tashkent, bấm gợi ý Tashkent. Đừng gõ Toshkent Markaziy, ô tìm không ra chữ đó. Đừng chọn Tashkent South, đó là ga Nam.",
-        "Ô TO gõ Samarkand. Ngày 06.11.2026, rồi SEARCH.",
-        "Kéo xuống dưới dòng 06:33. Thứ tự tiếp theo là 07:00, rồi Afrosiyob 766 lúc 07:30, rồi Afrosiyob 768 lúc 07:55 tới 10:25. Dòng 768 ghi Tashkent Central.",
-        "Nếu 768 cũng hiện There are no seats, lấy Sharq 710 lúc 08:37, tới Samarkand 11:46. Ngày 24/10 còn 4 ghế ngồi, 300.560 som một vé. Vẫn kịp Registan buổi chiều.",
-        "Không có tàu nhanh giữa trưa. Chuyến muộn trong ngày là 772 lúc 19:48, tới 22:13, mất buổi chiều Registan.",
-        "Chọn 2 ghế, điền đúng passport, giữ PDF. Có mặt ga khoảng 07:15. Yandex từ Swissôtel tới ga trung tâm, không phải ga Nam.",
+        "Đơn UO78185JOUVPRC. Sharq 710, thứ Sáu 6/11, Toshkent-Yo'lovchi 08:37, Samarkand 11:46. 601.120 som cho cả hai.",
+        "Cùng toa ngồi 16, ghế 007 và 034. Không ngồi cạnh nhau. Gặp nhau ở cửa toa.",
+        "Ga đi là ТОШКЕНТ-ЙЎЛОВЧИ, tức ga trung tâm. Yandex từ Swissôtel tới đó, không phải ga Nam.",
+        "Rời khách sạn khoảng 07:15. Có mặt ga trước 08:37 khoảng 40 phút. Bấm Download và giữ PDF offline.",
       ],
-      links: [
-        { label: "Đặt vé chính thức", url: "https://eticket.uzrailpass.uz/en/" },
-        { label: "Cách mua và giá 2026", url: "https://oxusroad.com/en/trains/afrosiyob/" },
-      ],
+      links: [{ label: "Vé trong tài khoản", url: "https://eticket.uzrailpass.uz/en/" }],
     },
     research: [
       {
@@ -333,16 +328,14 @@ export const dayDetails = {
       { name: "Hampton by Hilton", query: "Hampton by Hilton Tashkent Istiqbol 17", tip: "Một đêm, giường king, ăn sáng. Mai ở lại đến chiều vì bay 21:15." },
     ],
     transport: {
-      title: "Sharq 711, Samarkand → Tashkent",
+      title: "Sharq 711, đã mua",
       steps: [
-        "Cùng site, English. FROM gõ Samarkand, TO gõ Tashkent, ngày 08.11.2026. Đừng gõ Toshkent Markaziy.",
-        "Tối 24/10, Afrosiyob 769 lúc 16:56 và các tàu chiều khác hiện There are no seats. Đừng chờ những dòng đó.",
-        "Lấy Sharq 711: Samarkand 08:10, Tashkent 12:19. Dòng phụ ghi Bukhara → Tashkent Central. Ghế ngồi, 2 chỗ, 200.060 som một vé. Cả hai người cùng tàu này.",
-        "Nếu 711 mất 2 ghế trong lúc điền tên, chuyển sang Nasaf 703. Cùng 08:10, cùng 12:19, cùng Tashkent Central, cùng giá.",
-        "Các tàu 02:40, 02:45, 03:20, 04:10 và 05:29 ghi Tashkent south hoặc Andijan. Đó không phải ga trung tâm.",
-        "HY531 cất cánh 21:15 ngày 9/11. Giữ đêm Hampton. Tàu 771 lúc 05:21 không dùng cho vé này.",
+        "Chủ Nhật 8/11, Sharq 711, Samarkand 08:10, Toshkent-Yo'lovchi 12:19. Mỗi vé 200.060 som.",
+        "Hai đơn riêng. UO78185PYKL348: toa 06, ghế 016. UO78185QSZAOHS: toa 07, ghế 026. Cùng tàu, khác toa. Gặp nhau lúc xuống ga.",
+        "Ga đến là ga trung tâm, không phải ga Nam. Yandex về Hampton.",
+        "Rời Mövenpick khoảng 07:20. Bấm Download và giữ PDF offline. HY531 cất cánh 21:15 ngày 9/11.",
       ],
-      links: [{ label: "Đặt vé về", url: "https://eticket.uzrailpass.uz/en/" }],
+      links: [{ label: "Vé trong tài khoản", url: "https://eticket.uzrailpass.uz/en/" }],
     },
     research: [
       {
@@ -351,7 +344,7 @@ export const dayDetails = {
         url: "https://us.trip.com/",
       },
     ],
-    checklist: ["Vé Sharq 711, 08:10, tới ga trung tâm", "Check-in Hampton", "Khai TDAC Thái Lan trước khi về"],
+    checklist: ["PDF Sharq 711, toa 06 và toa 07", "Check-in Hampton", "Khai TDAC Thái Lan trước khi về"],
   },
   "2026-11-09": {
     weather: tashkentEarlyNov,
@@ -389,8 +382,8 @@ export const packing = [
 ];
 
 export const masterChecklist = [
-  { label: "Vé 768 ngày 6/11: tìm Tashkent → Samarkand, tàu 07:55", priority: "High" },
-  { label: "Vé Sharq 711 ngày 8/11, 08:10, 2 ghế ngồi", priority: "High" },
+  { label: "PDF Sharq 710, 6/11, 08:37, toa 16", priority: "High" },
+  { label: "PDF Sharq 711, 8/11, 08:10, toa 06 và toa 07", priority: "High" },
   { label: "Lưu vé HY532 và HY531. Màn hình đang hiện 1 khách", priority: "High" },
   { label: "TDAC trước khi về Thái Lan", priority: "High" },
   { label: "E-mehmon: lễ tân đăng ký tạm trú mỗi khách sạn, giữ tờ xác nhận", priority: "High" },

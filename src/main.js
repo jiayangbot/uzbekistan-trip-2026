@@ -524,15 +524,14 @@ function renderPrep() {
           <ul class="checks">${pack}</ul>
         </article>
         <article class="card">
-          <h3>${icon("train")} Đặt tàu Afrosiyob</h3>
+          <h3>${icon("train")} Vé tàu đã mua</h3>
           <ol class="steps">
-            <li>Vào ${extLink("https://eticket.uzrailpass.uz/en/", "eticket.uzrailpass.uz")}. Site cũ eticket.railway.uz chuyển tiếp sang đây.</li>
-            <li>6/11: FROM Tashkent, TO Samarkand. Kéo xuống quá dòng 06:33, chọn Afrosiyob 768 lúc 07:55. Hết ghế thì lấy Sharq 710 lúc 08:37.</li>
-            <li>8/11: FROM Samarkand, TO Tashkent. Afrosiyob chiều đã hết ghế. Lấy Sharq 711 lúc 08:10, tới Tashkent Central 12:19. Hết 2 ghế thì Nasaf 703, cùng giờ. Đừng chọn tàu ghi Tashkent south.</li>
-            <li>HY531 cất cánh TAS 21:15 ngày 9/11, Bangkok 05:25 ngày 10/11. Rời Hampton khoảng 17:15. Không đi tàu 05:21 sáng 9/11.</li>
-            <li>Điền đúng số passport. Ga Tashkent là Markaziy, không phải ga Nam. Giữ PDF offline, có mặt trước giờ tàu khoảng 40 phút.</li>
+            <li>6/11, Sharq 710: Toshkent-Yo'lovchi 08:37, Samarkand 11:46. Cùng toa 16, ghế 007 và 034. Đơn UO78185JOUVPRC, 601.120 som.</li>
+            <li>8/11, Sharq 711: Samarkand 08:10, Toshkent-Yo'lovchi 12:19. Toa 06 ghế 016 và toa 07 ghế 026. Hai đơn, mỗi vé 200.060 som.</li>
+            <li>Ga ТОШКЕНТ-ЙЎЛОВЧИ là ga trung tâm. Yandex tới đó, không phải ga Nam.</li>
+            <li>Bấm Download trên ${extLink("https://eticket.uzrailpass.uz/en/", "eticket.uzrailpass.uz")} và giữ PDF offline. Có mặt trước giờ tàu khoảng 40 phút.</li>
+            <li>HY531 cất cánh TAS 21:15 ngày 9/11, Bangkok 05:25 ngày 10/11. Rời Hampton khoảng 17:15.</li>
           </ol>
-          ${extLink("https://oxusroad.com/en/trains/afrosiyob/", "Giá và giờ mở bán", "text-link")}
         </article>
         <article class="card">
           <h3>${icon("book")} Nguồn đã đọc</h3>
