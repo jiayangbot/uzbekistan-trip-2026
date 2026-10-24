@@ -45,6 +45,12 @@ export const hotelLinks = {
     cityId: 639,
     map: "Wyndham Tashkent, Amir Temur Avenue",
   },
+  "InterContinental Tashkent": {
+    tripWord: "InterContinental Tashkent",
+    bookingWord: "InterContinental Tashkent",
+    cityId: 639,
+    map: "InterContinental Tashkent, 2 Shakhrisabz Street",
+  },
 };
 
 export function stayLinks(stay, hotelName = stay.name) {

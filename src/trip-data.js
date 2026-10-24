@@ -378,4 +378,17 @@ export const hotelOptions = [
     score: "9.3",
     why: "Ngủ đêm 8/11. Bay 21:15 nên dùng nốt phòng đến chiều 9/11.",
   },
+  {
+    id: "ic-1",
+    segment: "Trước giờ bay · 8–9 Nov",
+    tier: "alt",
+    name: "InterContinental Tashkent",
+    area: "2 Shakhrisabz",
+    nights: 1,
+    total: null,
+    cancel: "Xem lúc đặt",
+    breakfast: "Phòng Classic view không ghi ăn sáng",
+    score: "9.5",
+    why: "Phòng nhìn quảng trường Amir Temur ở tầng 12–16. Bar Embar tầng 17 nhìn thành phố. Chưa có quote đúng đêm 8/11.",
+  },
 ];

@@ -141,6 +141,7 @@ const optionLabel = {
   "mov-sam": "Mövenpick Samarkand",
   "mov-room": "Mövenpick Samarkand",
   "hampton-1": "Hampton by Hilton",
+  "ic-1": "InterContinental Tashkent",
 };
 
 function loadPicks() {
@@ -274,7 +275,7 @@ function viewDay(entry) {
   const option = optionForStay(stay);
   return {
     ...entry,
-    area: areaByOrigin[stay.origin] || entry.area,
+    area: sameHotel(stay, option) ? areaByOrigin[stay.origin] || entry.area : option.area,
     hotel: optionLabel[option.id] || stay.name,
   };
 }
@@ -332,14 +333,13 @@ function optionForStay(stay) {
 
 function quoteTotal(stay) {
   const opt = optionForStay(stay);
-  const base = hotelStays.find((s) => s.checkIn === (stay.origin || stay.checkIn));
-  if (!opt || opt.total == null) return base?.actualTotal ?? 0;
+  if (!opt || opt.total == null) return null;
   if (stay.nights === opt.nights) return opt.total;
   return Math.round((opt.total / opt.nights) * stay.nights);
 }
 
 function chosenTotal() {
-  return activeStays().reduce((sum, stay) => sum + quoteTotal(stay), 0);
+  return activeStays().reduce((sum, stay) => sum + (quoteTotal(stay) ?? 0), 0);
 }
 
 function breakfastIncluded(option) {
@@ -408,6 +408,7 @@ function renderOverview() {
           </p>
           ${quoted === meta.quotedTotalUsd ? "" : `<p class="muted">Quote gốc ${fmtMoney.format(meta.quotedTotalUsd)}. Đang chọn phương án khác.</p>`}
           ${isShifted() ? `<p class="muted">Số đêm đã kéo khác quote. Tổng là giá mỗi đêm nhân số đêm mới, chưa tra lại khách sạn.</p>` : ""}
+          ${activeStays().some((stay) => quoteTotal(stay) == null) ? `<p class="muted">Có chặng chưa có quote, chưa cộng vào tổng.</p>` : ""}
         </article>
         <article class="card">
           <h2 class="card-label">${icon("bed")} Lưu trú</h2>
@@ -469,17 +470,17 @@ function renderStays() {
             <span class="stay-index seg-${i}" aria-hidden="true">${i + 1}</span>
             <div>
               <h3>${opt.name}</h3>
-              <p class="muted">${icon("pin", 14)} ${areaFor(s)}</p>
+              <p class="muted">${icon("pin", 14)} ${sameHotel(s, opt) ? areaFor(s) : opt.area}</p>
             </div>
           </div>
           <p class="stay-dates">${shortDate(s.checkIn)} → ${shortDate(s.checkOut)} · ${s.nights} đêm</p>
           <ul class="nights">${nightChips(s)}</ul>
-          <p class="stay-price"><strong>${perNight(total, s.nights)}</strong>/đêm <span>· ${meal} · ${fmtMoney.format(total)} tổng</span></p>
+          <p class="stay-price">${total == null ? "Chưa có quote đêm này." : `<strong>${perNight(total, s.nights)}</strong>/đêm <span>· ${meal} · ${fmtMoney.format(total)} tổng</span>`}</p>
           <label class="price-note">
             <span>Giá thực tế</span>
             <input type="text" data-price-note="${s.origin}" value="${escapeAttr(priceNotes[s.origin] || "")}" placeholder="Ghi giá vừa xem" autocomplete="off" />
           </label>
-          ${scaled ? `<p class="muted">Quote gốc ${base.nights} đêm, ${fmtMoney.format(opt.total)}. Số mới tính theo cùng giá mỗi đêm.</p>` : ""}
+          ${scaled && opt.total != null ? `<p class="muted">Quote gốc ${base.nights} đêm, ${fmtMoney.format(opt.total)}. Số mới tính theo cùng giá mỗi đêm.</p>` : ""}
           <ul class="facts">
             <li>Hủy: ${opt.cancel}</li>
           </ul>
@@ -575,7 +576,7 @@ function renderDetail(entry, stay) {
           stay && links
             ? `<section class="block">
                 <h4>${icon("bed", 16)} Khách sạn đêm nay</h4>
-                <p><strong>${opt.name}</strong> · ${perNight(quoteTotal(stay), stay.nights)}/đêm</p>
+                <p><strong>${opt.name}</strong> · ${quoteTotal(stay) == null ? "chưa có quote" : `${perNight(quoteTotal(stay), stay.nights)}/đêm`}</p>
                 <p>${breakfastIncluded(opt) ? `${icon("check", 14)} Ăn sáng cho 2 người, đã gồm trong giá.` : `${icon("alert", 14)} ${opt.breakfast}.`}</p>
                 <p class="muted">${opt.cancel}. ${sameHotel(stay, opt) ? stay.note : opt.why}</p>
                 ${sameHotel(stay, opt) ? renderReview(stay) : ""}
