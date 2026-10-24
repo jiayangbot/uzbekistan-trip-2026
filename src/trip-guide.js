@@ -264,12 +264,11 @@ export const dayDetails = {
     transport: {
       title: "Afrosiyob, Tashkent → Samarkand",
       steps: [
-        "Mua trên eticket.uzrailpass.uz. Địa chỉ cũ eticket.railway.uz chuyển tiếp sang site này.",
-        "Vé mở bán khoảng 45–60 ngày trước, có nguồn ghi 10:00 giờ Tashkent. Ngày 6/11 nằm trong khoảng đó tính từ hôm nay 24/10, nên vào site và giữ ghế sớm.",
-        "Điền đúng số passport sẽ mang theo. Cổng ga đối chiếu hộ chiếu.",
-        "Economy khoảng 311.000 som một người, khoảng $26, giá giữa năm 2026. Hai người một lượt khoảng $52, chưa gồm phí nếu cổng thẻ nước ngoài từ chối.",
-        "Tàu nhanh nhất từng được ghi khoảng 2 giờ 13 phút, ví dụ 07:30–09:43. Giờ này đổi. Chọn chuyến sáng để còn buổi chiều ở Registan.",
-        "Nếu thẻ quốc tế bị từ chối, thử lại hoặc mua qua 12Go. Giữ PDF offline.",
+        "Giờ lấy trên eticket.uzrailpass.uz ngày 24/10/2026, là giờ địa phương. Nên mua 768.",
+        "768, thứ Sáu 6/11: Toshkent Markaziy 07:55, Samarkand 10:25, 2 giờ 30. Tàu dừng ở Samarkand.",
+        "Sớm hơn nếu cần: 778 lúc 06:10 đến 08:23, hoặc 766 lúc 07:30 đến 09:43. Cả hai đi tiếp Bukhara.",
+        "Đừng lấy 772 lúc 19:48. Tới Samarkand 22:13 thì mất buổi chiều Registan.",
+        "Site trả danh sách tàu nhưng chưa trả số ghế Afrosiyob. Mở đúng chuyến, chọn 2 ghế economy, điền đúng passport, giữ PDF offline.",
       ],
       links: [
         { label: "Đặt vé chính thức", url: "https://eticket.uzrailpass.uz/en/" },
@@ -313,15 +312,17 @@ export const dayDetails = {
     transport: {
       title: "Afrosiyob, Samarkand → Tashkent",
       steps: [
-        "Chọn chuyến chiều, không phải tàu tối muộn, vì sáng 9/11 phải có mặt sân bay trước giờ bay 3 tiếng.",
-        "Cùng cách đặt như lượt đi: eticket.uzrailpass.uz, passport, vé offline.",
-        "Nếu chuyến chiều hết ghế, lấy chuyến sớm hơn và nghỉ ở Hampton lâu hơn. Đừng lấy tàu khiến mình tới Tashkent sau 20:00 nếu bay sáng.",
+        "Chủ nhật 8/11, giờ trên eticket.uzrailpass.uz ngày 24/10/2026. Nên mua 769: Samarkand 16:56, Toshkent Markaziy 19:17, 2 giờ 21. Còn buổi chiều ở Samarkand, về Hampton trước 20:30.",
+        "Muộn hơn: 767 lúc 17:40 đến 20:12, 765 lúc 18:15 đến 20:30. Đừng lấy 777 lúc 20:01, tới 22:16.",
+        "Bỏ đêm Hampton chỉ khi bay 9/11 từ khoảng 12:00 giờ Tashkent. Khi đó ở thêm Samarkand và sáng thứ Hai đi 771: 05:21 đến Toshkent Markaziy 07:42, taxi ra TAS khoảng 40–60 phút, có mặt sân bay trước 09:00.",
+        "Một đêm Mövenpick đang khoảng $290–330, Hampton đêm cuối là $99. Ở thêm Samarkand đắt hơn nhiều so với một đêm Hampton.",
+        "Cùng ngày 8/11 ra thẳng sân bay thì không kịp, trừ khi bay sau khoảng 23:00. Tàu sớm nhất trong nhóm chiều tới ga lúc 19:17.",
       ],
       links: [{ label: "Đặt vé chiều về", url: "https://eticket.uzrailpass.uz/en/" }],
     },
     research: [
       {
-        text: "Giờ bay 9/11 chưa có trong tracker. Tàu chiều Chủ nhật chỉ ổn khi bay chiều hoặc tối thứ Hai. Nếu bay sáng, phải đổi tàu sang Chủ nhật sớm hoặc thứ Bảy đêm.",
+        text: "Giờ bay 9/11 vẫn chưa có. Bay sáng thì giữ Hampton và tàu 769 chiều 8/11. Bay từ khoảng 12:00 giờ Tashkent thì có thể bỏ Hampton, ở thêm Samarkand và đi tàu 771 lúc 05:21 sáng 9/11 ra thẳng sân bay.",
         source: "Mục cần xác nhận của lịch",
         url: "https://eticket.uzrailpass.uz/en/",
       },
@@ -362,8 +363,8 @@ export const packing = [
 ];
 
 export const masterChecklist = [
-  { label: "Vé Afrosiyob 6/11, chuyến sáng, 2 ghế", priority: "High" },
-  { label: "Vé Afrosiyob 8/11, chuyến chiều khớp giờ bay", priority: "High" },
+  { label: "Vé Afrosiyob 768, 6/11, 07:55, 2 ghế", priority: "High" },
+  { label: "Vé Afrosiyob 769, 8/11, 16:56, trừ khi bay 9/11 sau 12:00", priority: "High" },
   { label: "Giờ bay 27/10 và 9/11", priority: "High" },
   { label: "TDAC trước khi về Thái Lan", priority: "High" },
   { label: "E-mehmon tại mỗi khách sạn", priority: "High" },

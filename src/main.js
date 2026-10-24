@@ -433,9 +433,10 @@ function renderPrep() {
           <h3>${icon("train")} Đặt tàu Afrosiyob</h3>
           <ol class="steps">
             <li>Vào ${extLink("https://eticket.uzrailpass.uz/en/", "eticket.uzrailpass.uz")}. Site cũ eticket.railway.uz chuyển tiếp sang đây.</li>
-            <li>6/11: Toshkent → Samarqand, chuyến sáng. 8/11: Samarqand → Toshkent, chuyến chiều.</li>
-            <li>Điền đúng số passport. Ga đi là Toshkent Markaziy, không phải ga Nam.</li>
-            <li>Economy khoảng 311.000 som một người, giá giữa năm 2026. Giữ PDF offline, có mặt trước giờ tàu khoảng 40 phút.</li>
+            <li>6/11, tàu 768: Toshkent Markaziy 07:55, Samarkand 10:25.</li>
+            <li>8/11, tàu 769: Samarkand 16:56, Toshkent Markaziy 19:17. Rồi ngủ Hampton.</li>
+            <li>Chỉ bỏ đêm Hampton nếu bay 9/11 từ khoảng 12:00 giờ Tashkent. Khi đó đi tàu 771 sáng 9/11, 05:21 đến ga 07:42, rồi ra sân bay.</li>
+            <li>Điền đúng số passport. Ga Tashkent là Markaziy, không phải ga Nam. Giữ PDF offline, có mặt trước giờ tàu khoảng 40 phút.</li>
           </ol>
           ${extLink("https://oxusroad.com/en/trains/afrosiyob/", "Giá và giờ mở bán", "text-link")}
         </article>

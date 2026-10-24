@@ -134,8 +134,8 @@ export const days = [
     area: "Trung tâm Samarkand",
     hotel: "Mövenpick Samarkand",
     work: "Remote / flexible",
-    plan: "Checkout Swissôtel trước giờ tàu. Afrosiyob sáng nếu có ghế. Gửi hành lý, check-in Mövenpick. Chiều Registan.",
-    transfer: "Train: verify departure and seats",
+    plan: "Checkout Swissôtel. Afrosiyob 768: Toshkent Markaziy 07:55, đến Samarkand 10:25, giờ địa phương. Gửi hành lý, check-in Mövenpick. Chiều Registan.",
+    transfer: "Afrosiyob 768, 07:55–10:25. Ghế xem trên site vé.",
     status: "Planned",
   },
   {
@@ -156,8 +156,8 @@ export const days = [
     area: "Amir Temur / Istiqbol",
     hotel: "Hampton by Hilton",
     work: "Weekend",
-    plan: "Checkout Mövenpick. Tham quan nhẹ. Tàu chiều về Tashkent, check-in lại Hampton để sáng mai ra sân bay.",
-    transfer: "Train: verify departure and seats",
+    plan: "Checkout Mövenpick. Afrosiyob 769: Samarkand 16:56, Toshkent Markaziy 19:17. Về Hampton ngủ, sáng mai ra sân bay. Chỉ bỏ đêm Hampton nếu bay 9/11 từ khoảng 12:00 giờ Tashkent: khi đó ở thêm Samarkand và sáng 9/11 đi tàu 771 lúc 05:21.",
+    transfer: "Afrosiyob 769, 16:56–19:17",
     status: "Planned",
   },
   {
