@@ -1,5 +1,6 @@
 import { days, hotelStays, hotelOptions, meta } from "./trip-data.js";
 import { dayDetails, stayLinks, mapLink, packing, masterChecklist, sources, localLife } from "./trip-guide.js";
+import { daySlots, slotCost, tripFoodUsd } from "./day-slots.js";
 import { icon } from "./icons.js";
 
 const STORE_KEY = "uz-trip-2026-checks";
@@ -237,6 +238,7 @@ function renderOverview() {
           <h2 class="card-label">${icon("bed")} Lưu trú</h2>
           <p class="big-number">${totalNights} <span>đêm</span></p>
           <p class="muted">${hotelStays.length} lần nhận phòng · 3 khu Tashkent + Samarkand</p>
+          <p class="muted">Ăn trưa và tối khoảng ${fmtMoney.format(tripFoodUsd)} cho 2 người, ngoài tiền phòng. Sáng đã gồm. Xe núi chưa tính.</p>
         </article>
         <article class="card">
           <h2 class="card-label">${icon("alert")} Việc gấp</h2>
@@ -413,11 +415,31 @@ function renderDetail(entry, stay) {
     </div>`;
 }
 
+function renderSlots(date) {
+  const slots = daySlots[date] || [];
+  const rows = slots
+    .map((slot) => {
+      const title = slot.eat ? (slot.query ? extLink(mapLink(slot.query), slot.eat, "slot-link") : `<strong>${slot.eat}</strong>`) : "";
+      return `
+        <li class="slot">
+          <time datetime="${slot.time}">${slot.time}</time>
+          <span class="part">${slot.part}</span>
+          <span class="slot-body">${title ? `<span class="slot-eat">${title}. </span>` : ""}${slot.text}</span>
+          <span class="usd">${slot.usd > 0 ? `~${fmtMoney.format(slot.usd)}` : ""}</span>
+        </li>`;
+    })
+    .join("");
+  return `
+    <ol class="slots">${rows}</ol>
+    <p class="slot-sum">Ước lượng ${fmtMoney.format(slotCost(slots))} cho 2 người. Bữa sáng khách sạn không tính vào số này.</p>`;
+}
+
 function renderDay(entry, index) {
   const kind = dayKind(entry);
   const info = kindInfo(kind);
   const stay = stayOnDate(entry.date);
   const opt = stay ? optionForStay(stay) : null;
+  const food = slotCost(daySlots[entry.date] || []);
   const prev = index > 0 ? days[index - 1] : null;
   const moved = prev && (prev.hotel !== entry.hotel || prev.city !== entry.city);
   const d = parseDate(entry.date);
@@ -433,17 +455,18 @@ function renderDay(entry, index) {
           <span class="day-main">
             <span class="sr-only">${fmtLong.format(d)}. </span>
             <span class="day-title">${entry.city} <span class="muted">· ${entry.area}</span></span>
-            <span class="day-plan">${entry.plan}</span>
             <span class="tags">
               <span class="tag tag-${kind}">${icon(info.icon, 13)} ${info.label}</span>
               ${moved ? `<span class="tag tag-move">${icon("swap", 13)} Đổi chỗ ở</span>` : ""}
               ${opt && entry.hotel !== "Checkout / flight" ? `<span class="tag tag-plain">${icon("bed", 13)} ${optionLabel[opt.id] || entry.hotel}</span>` : ""}
               ${opt && entry.hotel !== "Checkout / flight" && breakfastIncluded(opt) ? `<span class="tag tag-ok">${icon("check", 13)} Ăn sáng đã gồm</span>` : ""}
+              ${food > 0 ? `<span class="tag tag-plain">${icon("wallet", 13)} Ăn ~${fmtMoney.format(food)}</span>` : ""}
             </span>
           </span>
           <span class="chev">${icon("chevron", 20)}</span>
         </button>
       </h3>
+      ${renderSlots(entry.date)}
       <div class="day-panel" id="p-${entry.date}" role="region" aria-label="Chi tiết ${fmtLong.format(d)}" hidden>
         ${renderDetail(entry, stay)}
       </div>
@@ -461,7 +484,7 @@ function renderTimeline() {
     <section class="section" id="timeline" aria-labelledby="timeline-title" tabindex="-1">
       <div class="section-head">
         <h2 id="timeline-title">Lịch từng ngày</h2>
-        <p class="muted">Bấm một ngày để xem chỗ đi, bản đồ, khách sạn, tàu và việc cần làm.</p>
+        <p class="muted">Mỗi ngày chia theo giờ. Giá ăn là ước lượng cho 2 người. Bấm ngày để xem bản đồ, tàu và khách sạn.</p>
       </div>
       <div class="toolbar">
         <div class="filters" role="group" aria-label="Lọc ngày">

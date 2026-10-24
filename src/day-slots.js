@@ -1,0 +1,106 @@
+/** @typedef {{ time: string, part: string, eat: string, text: string, usd: number, query?: string }} DaySlot */
+
+/** Giá là ước lượng cho 2 người, giữa năm 2026. Bữa sáng khách sạn không tính. */
+/** @type {Record<string, DaySlot[]>} */
+export const daySlots = {
+  "2026-10-27": [
+    { time: "11:45", part: "Đến", eat: "Sân bay TAS", text: "Hạ cánh, giờ Tashkent. Taxi chính thức, mua SIM, đổi $100–200 sang som.", usd: 0, query: "Tashkent International Airport Terminal 2" },
+    { time: "14:00", part: "Trưa", eat: "Lagman gần Hampton", text: "Ăn muộn sau khi nhận phòng. Một tô mì và trà.", usd: 14, query: "lagman restaurant Amir Temur Square Tashkent" },
+    { time: "17:00", part: "Chiều", eat: "", text: "Nghỉ ở Hampton. Đi bộ nếu còn sức.", usd: 0 },
+    { time: "19:30", part: "Tối", eat: "Quảng trường Amir Temur", text: "Đi bộ sang quảng trường Độc lập. Chỉ trà và samsa nếu còn đói.", usd: 8, query: "Amir Temur Square Tashkent" },
+  ],
+  "2026-10-28": [
+    { time: "08:30", part: "Sáng", eat: "Hampton", text: "Ăn sáng tại khách sạn. Thứ Tư, không đổi khách sạn.", usd: 0, query: "Hampton by Hilton Tashkent" },
+    { time: "09:30", part: "Sáng", eat: "Chợ Chorsu", text: "Rồi sang Hazrati Imam. Kín vai, kín gối, tiền mặt.", usd: 0, query: "Chorsu Bazaar Tashkent" },
+    { time: "13:00", part: "Trưa", eat: "Plov hoặc samsa trong chợ", text: "Ăn ở khu food hall của chợ. Một đĩa plov hoặc samsa và trà.", usd: 10, query: "Chorsu Bazaar Tashkent" },
+    { time: "15:30", part: "Chiều", eat: "Kukeldash", text: "Xem trường rồi metro hoặc đi bộ về khách sạn.", usd: 0, query: "Kukeldash Madrasah Tashkent" },
+    { time: "19:00", part: "Tối", eat: "Broadway", text: "Lagman hoặc shashlik ở quán quốc dân trên phố đi bộ.", usd: 16, query: "Sayilgoh Street Tashkent Broadway" },
+  ],
+  "2026-10-29": [
+    { time: "08:30", part: "Sáng", eat: "Hampton", text: "Ăn sáng tại khách sạn.", usd: 0 },
+    { time: "10:00", part: "Sáng", eat: "Bảo tàng Amir Temur", text: "Rồi đi bộ quảng trường Độc lập. Vé mua tại cửa.", usd: 0, query: "Amir Temur Museum Tashkent" },
+    { time: "13:00", part: "Trưa", eat: "Lagman gần quảng trường", text: "Một tô mì ở quán thường quanh quảng trường.", usd: 14, query: "Independence Square Tashkent restaurants" },
+    { time: "15:30", part: "Chiều", eat: "Ga Kosmonavtlar", text: "Đi vài ga metro cho đẹp, rồi về.", usd: 0, query: "Kosmonavtlar metro station Tashkent" },
+    { time: "19:00", part: "Tối", eat: "Shashlik gần Hampton", text: "Một xiên gà hoặc bò, salad, bánh. Đi bộ về.", usd: 16, query: "shashlik near Istiqbol Street Tashkent" },
+  ],
+  "2026-10-30": [
+    { time: "08:30", part: "Sáng", eat: "Hampton", text: "Ăn sáng, checkout, Yandex sang Holiday Inn.", usd: 0 },
+    { time: "13:00", part: "Trưa", eat: "Food court Tashkent City Mall", text: "Ăn sau khi gửi đồ. Chọn món địa phương trong mall, rẻ hơn nhà hàng khách sạn.", usd: 14, query: "Tashkent City Mall" },
+    { time: "15:30", part: "Chiều", eat: "City Park", text: "Đi bộ công viên và xem đài phun nước.", usd: 0, query: "Tashkent City Park" },
+    { time: "19:30", part: "Tối", eat: "Shashlik gần công viên", text: "Một xiên, salad và bánh ở quán cạnh công viên.", usd: 18, query: "restaurants near Tashkent City Park" },
+  ],
+  "2026-10-31": [
+    { time: "07:30", part: "Sáng", eat: "Holiday Inn, rồi cửa hàng", text: "Ăn sáng. Mua samsa, bánh, trái cây và nước mang lên xe.", usd: 8 },
+    { time: "08:30", part: "Sáng", eat: "Amirsoy, Chimgan, Charvak", text: "Xe riêng cả ngày. Khoảng $150 là báo giá chưa chốt, không nằm trong tiền ăn.", usd: 0, query: "Amirsoy Mountain Resort" },
+    { time: "13:00", part: "Trưa", eat: "Đồ đã mang theo", text: "Ăn picnic. Trên núi chỉ uống trà nếu quán resort đắt.", usd: 6 },
+    { time: "17:30", part: "Chiều", eat: "", text: "Về Holiday Inn, nghỉ.", usd: 0 },
+    { time: "20:00", part: "Tối", eat: "Lagman gần Ukchi", text: "Bữa nóng sau một ngày gió. Gần khách sạn.", usd: 14, query: "lagman near Ukchi Street Tashkent" },
+  ],
+  "2026-11-01": [
+    { time: "09:00", part: "Sáng", eat: "Holiday Inn", text: "Ăn sáng. Chủ nhật, ngủ lại đây.", usd: 0 },
+    { time: "10:30", part: "Sáng", eat: "City Park", text: "Đi bộ khi chưa đông.", usd: 0, query: "Tashkent City Park" },
+    { time: "13:00", part: "Trưa", eat: "Food court trong mall", text: "Nghỉ chân, ăn món địa phương.", usd: 14, query: "Tashkent City Mall" },
+    { time: "16:00", part: "Chiều", eat: "Magic City", text: "Đài phun nước. Taxi ngắn từ khách sạn.", usd: 0, query: "Magic City Tashkent" },
+    { time: "19:30", part: "Tối", eat: "Quán quốc dân gần Ukchi", text: "Lagman hoặc shashlik. Ngày mai chuyển sang Mirabad.", usd: 16, query: "restaurants Ukchi Street Tashkent" },
+  ],
+  "2026-11-02": [
+    { time: "08:30", part: "Sáng", eat: "Holiday Inn", text: "Ăn sáng, checkout, nhận phòng Swissôtel.", usd: 0 },
+    { time: "13:00", part: "Trưa", eat: "Lagman ở Mirabad", text: "Ăn gần Oybek sau khi gửi đồ.", usd: 14, query: "Mirabad district Tashkent restaurants" },
+    { time: "16:00", part: "Chiều", eat: "Ga Oybek", text: "Đi bộ quanh khu, xem phố tối có sống không.", usd: 0, query: "Oybek metro station Tashkent" },
+    { time: "19:30", part: "Tối", eat: "Afsona, Shevchenko 30", text: "Shashlik gà, salad, bánh và trà. Đĩa tổng hợp trên menu khoảng 325.000 som.", usd: 22, query: "Afsona restaurant Taras Shevchenko 30 Tashkent" },
+  ],
+  "2026-11-03": [
+    { time: "09:00", part: "Sáng", eat: "Swissôtel", text: "Ăn sáng tại khách sạn.", usd: 0 },
+    { time: "10:00", part: "Sáng", eat: "Bảo tàng Mỹ thuật Ứng dụng", text: "Rồi cung điện Romanov nếu còn mở cửa.", usd: 0, query: "State Museum of Applied Arts Tashkent" },
+    { time: "13:00", part: "Trưa", eat: "Manti hoặc lagman gần Navoi", text: "Quán thường cạnh công viên.", usd: 14, query: "Alisher Navoi Park Tashkent" },
+    { time: "15:30", part: "Chiều", eat: "Công viên Navoi", text: "Đi bộ rồi về Swissôtel.", usd: 0, query: "Alisher Navoi Park Tashkent" },
+    { time: "19:30", part: "Tối", eat: "Quán trà Mirabad", text: "Súp và bánh. Giữ bữa vừa, mai vẫn ở đây.", usd: 16, query: "chaikhana Mirabad Tashkent" },
+  ],
+  "2026-11-04": [
+    { time: "09:00", part: "Sáng", eat: "Swissôtel", text: "Ăn sáng. Thứ Tư, không đổi khách sạn.", usd: 0 },
+    { time: "10:30", part: "Sáng", eat: "Đài động đất và vườn Nhật", text: "Một vòng taxi. Vé vườn mua tại cửa.", usd: 0, query: "Earthquake Memorial Tashkent" },
+    { time: "12:30", part: "Trưa", eat: "Besh Qozon", text: "Plov, salad, bánh, trà. Đi đúng trưa vì nồi hết giữa chiều. Một đĩa khoảng $3.", usd: 12, query: "Central Asian Plov Center Besh Qozon Tashkent" },
+    { time: "15:30", part: "Chiều", eat: "", text: "Về Swissôtel nghỉ. Trưa đã no.", usd: 0 },
+    { time: "19:30", part: "Tối", eat: "Samsa gần Oybek", text: "Ăn nhẹ. Trà và một hai cái samsa.", usd: 8, query: "Oybek Street Tashkent" },
+  ],
+  "2026-11-05": [
+    { time: "09:00", part: "Sáng", eat: "Swissôtel", text: "Ăn sáng. Mai tàu 07:55.", usd: 0 },
+    { time: "10:30", part: "Sáng", eat: "Mirabad", text: "Đi bộ nhẹ. Mua samsa và nước cho sáng mai nếu buffet mở muộn.", usd: 6, query: "Mirabad Avenue Tashkent" },
+    { time: "13:00", part: "Trưa", eat: "Lagman gần Swissôtel", text: "Bữa chính trong ngày.", usd: 14, query: "Swissotel Tashkent" },
+    { time: "16:00", part: "Chiều", eat: "", text: "Gói đồ và nghỉ. Chạy thử Yandex tới ga trung tâm.", usd: 0 },
+    { time: "19:00", part: "Tối", eat: "Súp gần khách sạn", text: "Ăn sớm, ngủ sớm.", usd: 12, query: "restaurant near Shakhrisabz Street Tashkent" },
+  ],
+  "2026-11-06": [
+    { time: "06:15", part: "Sáng", eat: "Samsa đã mua", text: "Rời Swissôtel. Ăn sáng khách sạn nếu buffet đã mở, không thì samsa.", usd: 4 },
+    { time: "07:55", part: "Sáng", eat: "Afrosiyob 768", text: "Toshkent Markaziy đến Samarkand 10:25.", usd: 0 },
+    { time: "11:30", part: "Trưa", eat: "Mövenpick", text: "Gửi đồ, nhận phòng.", usd: 0, query: "Mövenpick Samarkand" },
+    { time: "13:00", part: "Trưa", eat: "Lagman gần khách sạn", text: "Một tô ở phố gần Mövenpick. Quán sát Registan thường tính đắt hơn.", usd: 12, query: "lagman near Registan Samarkand" },
+    { time: "15:00", part: "Chiều", eat: "Registan", text: "Xem quảng trường khi trời còn sáng.", usd: 0, query: "Registan Samarkand" },
+    { time: "19:00", part: "Tối", eat: "Shashlik gần Gur-Emir", text: "Đi bộ từ khách sạn vài phút. Một xiên, bánh, trà.", usd: 16, query: "Gur-e-Amir Samarkand" },
+  ],
+  "2026-11-07": [
+    { time: "08:30", part: "Sáng", eat: "Mövenpick", text: "Ăn sáng tại khách sạn.", usd: 0 },
+    { time: "09:30", part: "Sáng", eat: "Shah-i-Zinda", text: "Kín vai, khăn. Cởi giày ở một số lối.", usd: 0, query: "Shah-i-Zinda Samarkand" },
+    { time: "12:30", part: "Trưa", eat: "Chợ Siab", text: "Non nóng, samsa, trái cây. Có plov thì một đĩa chia đôi.", usd: 12, query: "Siyob Bazaar Samarkand" },
+    { time: "15:00", part: "Chiều", eat: "Bibi-Khanym", text: "Rồi Gur-e-Amir nếu còn sức. Đi theo nhịp, không cần xem hết.", usd: 0, query: "Bibi-Khanym Mosque Samarkand" },
+    { time: "19:00", part: "Tối", eat: "Gần Mövenpick", text: "Lagman hoặc shashlik. Mai tàu chiều, không cần ăn xa.", usd: 16, query: "Mövenpick Samarkand restaurants" },
+  ],
+  "2026-11-08": [
+    { time: "08:30", part: "Sáng", eat: "Mövenpick", text: "Ăn sáng, gửi vali nếu muốn đi thêm một vòng.", usd: 0 },
+    { time: "09:30", part: "Sáng", eat: "Gur-Emir", text: "Xem nốt nếu hôm qua bỏ qua. Về khách sạn trước trưa.", usd: 0, query: "Gur-e-Amir Samarkand" },
+    { time: "12:30", part: "Trưa", eat: "Lagman gần khách sạn", text: "Ăn xong rồi mới ra ga. Tàu 16:56.", usd: 12, query: "Mövenpick Samarkand" },
+    { time: "15:30", part: "Chiều", eat: "Ga Samarkand", text: "Afrosiyob 769, đến Toshkent Markaziy 19:17.", usd: 0, query: "Samarkand Railway Station" },
+    { time: "20:00", part: "Tối", eat: "Súp gần Hampton", text: "Nhận phòng, ăn nhẹ, ngủ. Sáng mai bay.", usd: 14, query: "Hampton by Hilton Tashkent" },
+  ],
+  "2026-11-09": [
+    { time: "07:30", part: "Sáng", eat: "Hampton", text: "Ăn sáng, checkout, ra sân bay. Có mặt trước giờ bay 3 tiếng.", usd: 0 },
+    { time: "11:00", part: "Trưa", eat: "Quầy trong TAS", text: "Chỉ mua đồ ăn nhẹ nếu đói. Về Bangkok.", usd: 8, query: "Tashkent International Airport Terminal 2" },
+  ],
+};
+
+/** @param {DaySlot[]} slots */
+export function slotCost(slots) {
+  return slots.reduce((sum, slot) => sum + slot.usd, 0);
+}
+
+export const tripFoodUsd = Object.values(daySlots).reduce((sum, slots) => sum + slotCost(slots), 0);
