@@ -143,8 +143,8 @@ export const days = [
     city: "Tashkent",
     area: "Amir Temur / Istiqbol",
     hotel: "Hampton by Hilton",
-    plan: "Checkout Mövenpick. Afrosiyob 769: Samarkand 16:56, Toshkent Markaziy 19:17. Về Hampton ngủ. Mai ở Tashkent cả ngày, bay HY531 lúc 21:15.",
-    transfer: "Afrosiyob 769, 16:56–19:17",
+    plan: "Checkout Mövenpick sớm. Sharq 711: Samarkand 08:10, Toshkent Markaziy 12:19. Về Hampton. Chiều đi bộ quanh Amir Temur. Mai ở Tashkent cả ngày, bay HY531 lúc 21:15.",
+    transfer: "Sharq 711, 08:10–12:19",
     status: "Planned",
   },
   {

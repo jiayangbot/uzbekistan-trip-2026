@@ -323,25 +323,26 @@ export const dayDetails = {
         url: mapLink("Registan Shah-i-Zinda Siab Bazaar walking"),
       },
     ],
-    checklist: ["Giày dễ cởi", "Áo khoác", "Nước", "Vé tàu chiều mai đã nằm trong điện thoại"],
+    checklist: ["Giày dễ cởi", "Áo khoác", "Nước", "Vé tàu 08:10 sáng mai đã nằm trong điện thoại"],
   },
   "2026-11-08": {
     weather: tashkentEarlyNov,
     places: [
-      { name: "Ga Samarkand", query: "Samarkand Railway Station", tip: "Checkout Mövenpick, ăn nhẹ, ra ga cho tàu chiều." },
-      { name: "Toshkent Markaziy", query: "Tashkent Central Railway Station", tip: "Xuống ga trung tâm. Yandex về Hampton, Istiqbol 17." },
+      { name: "Ga Samarkand", query: "Samarkand Railway Station", tip: "Rời Mövenpick khoảng 07:20 cho tàu 08:10." },
+      { name: "Toshkent Markaziy", query: "Tashkent Central Railway Station", tip: "Xuống lúc 12:19. Yandex về Hampton, Istiqbol 17." },
       { name: "Hampton by Hilton", query: "Hampton by Hilton Tashkent Istiqbol 17", tip: "Một đêm, giường king, ăn sáng. Mai ở lại đến chiều vì bay 21:15." },
     ],
     transport: {
-      title: "Afrosiyob, Samarkand → Tashkent",
+      title: "Sharq 711, Samarkand → Tashkent",
       steps: [
-        "Cùng site, English. FROM gõ Samarkand, TO gõ Tashkent, ngày 08.11.2026. Đừng gõ Toshkent Markaziy. Ga tới của tàu đúng là Tashkent Central, tức Markaziy.",
-        "Kéo tới Afrosiyob 769: Samarkand 16:56, tới 19:17. Dòng phụ ghi Bukhara → Tashkent Central. Về Hampton trước 20:30.",
-        "Nếu 769 hiện There are no seats: 767 lúc 17:40 đến 20:12, rồi 765 lúc 18:15 đến 20:30. Đừng lấy 777 lúc 20:01.",
-        "Đừng lấy tàu ghi Tashkent south. Đó là ga Nam, không phải Markaziy. Sáng 8/11, Sharq 711 và Nasaf 703 cùng lúc 08:10 tới 12:19, mỗi tàu đang còn 2 ghế ngồi, 200.060 som, và tới đúng ga trung tâm.",
-        "HY531 cất cánh 21:15 ngày 9/11. Giữ đêm Hampton. Tàu 771 lúc 05:21 sáng 9/11 không dùng cho vé này.",
+        "Cùng site, English. FROM gõ Samarkand, TO gõ Tashkent, ngày 08.11.2026. Đừng gõ Toshkent Markaziy.",
+        "Tối 24/10, Afrosiyob 769 lúc 16:56 và các tàu chiều khác hiện There are no seats. Đừng chờ những dòng đó.",
+        "Lấy Sharq 711: Samarkand 08:10, Tashkent 12:19. Dòng phụ ghi Bukhara → Tashkent Central. Ghế ngồi, 2 chỗ, 200.060 som một vé. Cả hai người cùng tàu này.",
+        "Nếu 711 mất 2 ghế trong lúc điền tên, chuyển sang Nasaf 703. Cùng 08:10, cùng 12:19, cùng Tashkent Central, cùng giá.",
+        "Các tàu 02:40, 02:45, 03:20, 04:10 và 05:29 ghi Tashkent south hoặc Andijan. Đó không phải ga trung tâm.",
+        "HY531 cất cánh 21:15 ngày 9/11. Giữ đêm Hampton. Tàu 771 lúc 05:21 không dùng cho vé này.",
       ],
-      links: [{ label: "Đặt vé chiều về", url: "https://eticket.uzrailpass.uz/en/" }],
+      links: [{ label: "Đặt vé về", url: "https://eticket.uzrailpass.uz/en/" }],
     },
     research: [
       {
@@ -350,7 +351,7 @@ export const dayDetails = {
         url: "https://us.trip.com/",
       },
     ],
-    checklist: ["Vé tàu 769 khớp với đêm Hampton", "Check-in Hampton", "Khai TDAC Thái Lan trước khi về"],
+    checklist: ["Vé Sharq 711, 08:10, tới ga trung tâm", "Check-in Hampton", "Khai TDAC Thái Lan trước khi về"],
   },
   "2026-11-09": {
     weather: tashkentEarlyNov,
@@ -389,7 +390,7 @@ export const packing = [
 
 export const masterChecklist = [
   { label: "Vé 768 ngày 6/11: tìm Tashkent → Samarkand, tàu 07:55", priority: "High" },
-  { label: "Vé Afrosiyob 769, 8/11, 16:56, 2 ghế", priority: "High" },
+  { label: "Vé Sharq 711 ngày 8/11, 08:10, 2 ghế ngồi", priority: "High" },
   { label: "Lưu vé HY532 và HY531. Màn hình đang hiện 1 khách", priority: "High" },
   { label: "TDAC trước khi về Thái Lan", priority: "High" },
   { label: "E-mehmon: lễ tân đăng ký tạm trú mỗi khách sạn, giữ tờ xác nhận", priority: "High" },
