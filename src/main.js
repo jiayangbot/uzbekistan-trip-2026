@@ -2,6 +2,7 @@ import { days, hotelStays, hotelOptions, meta } from "./trip-data.js";
 import { dayDetails, stayLinks, mapLink, packing, masterChecklist, sources, localLife } from "./trip-guide.js";
 import { dayEats, daySlots, slotCost, tripFoodUsd } from "./day-slots.js";
 import { icon } from "./icons.js";
+import { docKindLabel, docKinds, listFiles, parseDocKind, putFile, removeFile } from "./documents.js";
 
 const STORE_KEY = "uz-trip-2026-checks";
 
@@ -219,7 +220,11 @@ function loadPriceNotes() {
   try {
     const raw = JSON.parse(localStorage.getItem(PRICE_KEY) || "{}");
     if (!raw || typeof raw !== "object") return {};
-    return Object.fromEntries(Object.entries(raw).filter((entry) => typeof entry[1] === "string"));
+    return Object.fromEntries(
+      Object.entries(raw)
+        .map(([origin, value]) => [origin, String(value).replace(/\D/g, "")])
+        .filter((entry) => entry[1] !== ""),
+    );
   } catch {
     return {};
   }
@@ -345,7 +350,21 @@ function quoteTotal(stay) {
   return Math.round((opt.total / opt.nights) * stay.nights);
 }
 
+function actualUsd(origin) {
+  const raw = priceNotes[origin];
+  if (!raw || !/^\d+$/.test(raw)) return null;
+  return Number(raw);
+}
+
+function spendOf(stay) {
+  return actualUsd(stay.origin) ?? quoteTotal(stay) ?? 0;
+}
+
 function chosenTotal() {
+  return activeStays().reduce((sum, stay) => sum + spendOf(stay), 0);
+}
+
+function quoteSum() {
   return activeStays().reduce((sum, stay) => sum + (quoteTotal(stay) ?? 0), 0);
 }
 
@@ -381,10 +400,28 @@ function renderTopbar() {
           <a href="#overview" data-nav="overview">Tổng quan</a>
           <a href="#stays" data-nav="stays">Khách sạn</a>
           <a href="#timeline" data-nav="timeline">Lịch</a>
+          <a href="#docs" data-nav="docs">Tài liệu</a>
           <a href="#prep" data-nav="prep">Chuẩn bị</a>
         </nav>
       </div>
     </header>`;
+}
+
+function budgetNotes() {
+  const stays = activeStays();
+  const used = stays.filter((stay) => actualUsd(stay.origin) != null).length;
+  const unquoted = stays.filter((stay) => actualUsd(stay.origin) == null && quoteTotal(stay) == null).length;
+  /** @type {string[]} */
+  const lines = [];
+  if (quoteSum() !== meta.quotedTotalUsd) {
+    lines.push(`Quote gốc ${fmtMoney.format(meta.quotedTotalUsd)}. Đang chọn phương án khác.`);
+  }
+  if (isShifted()) {
+    lines.push("Số đêm đã kéo khác quote. Tổng là giá mỗi đêm nhân số đêm mới, chưa tra lại khách sạn.");
+  }
+  if (used) lines.push(`Đã cộng giá thực tế của ${used} chặng. Chặng chưa nhập vẫn lấy quote.`);
+  if (unquoted) lines.push("Có chặng chưa có quote và chưa nhập giá thực tế, chưa cộng vào tổng.");
+  return lines;
 }
 
 function renderOverview() {
@@ -404,18 +441,16 @@ function renderOverview() {
       <div class="stats">
         <article class="card budget-card">
           <h2 class="card-label">${icon("wallet")} Ngân sách khách sạn</h2>
-          <p class="big-number">${fmtMoney.format(quoted)} <span>/ ${fmtMoney.format(meta.budgetUsd)}</span></p>
-          <div class="meter ${over ? "over" : ""}" role="img" aria-label="Quote bằng ${pct}% ngân sách">
+          <p class="big-number" data-budget-total>${fmtMoney.format(quoted)} <span>/ ${fmtMoney.format(meta.budgetUsd)}</span></p>
+          <div class="meter ${over ? "over" : ""}" data-budget-meter role="img" aria-label="Tổng bằng ${pct}% ngân sách">
             <span style="width:${pct}%"></span>
           </div>
-          <p class="status ${over ? "is-over" : "is-ok"}">
+          <p class="status ${over ? "is-over" : "is-ok"}" data-budget-status>
             ${icon(over ? "alert" : "check", 16)}
             ${over ? "Vượt" : "Còn"} ${fmtMoney.format(Math.abs(diff))} ·
             ${perNight(quoted, totalNights)}/đêm so với trần ${perNight(meta.budgetUsd, totalNights)}/đêm
           </p>
-          ${quoted === meta.quotedTotalUsd ? "" : `<p class="muted">Quote gốc ${fmtMoney.format(meta.quotedTotalUsd)}. Đang chọn phương án khác.</p>`}
-          ${isShifted() ? `<p class="muted">Số đêm đã kéo khác quote. Tổng là giá mỗi đêm nhân số đêm mới, chưa tra lại khách sạn.</p>` : ""}
-          ${activeStays().some((stay) => quoteTotal(stay) == null) ? `<p class="muted">Có chặng chưa có quote, chưa cộng vào tổng.</p>` : ""}
+          <div data-budget-notes>${budgetNotes().map((line) => `<p class="muted">${line}</p>`).join("")}</div>
         </article>
         <article class="card">
           <h2 class="card-label">${icon("bed")} Lưu trú</h2>
@@ -485,9 +520,10 @@ function renderStays() {
           <ul class="nights">${nightChips(s)}</ul>
           <p class="stay-price">${total == null ? "Chưa có quote đêm này." : `<strong>${perNight(total, s.nights)}</strong>/đêm <span>· ${meal} · ${fmtMoney.format(total)} tổng</span>`}</p>
           <label class="price-note">
-            <span>Giá thực tế</span>
-            <input type="text" data-price-note="${s.origin}" value="${escapeAttr(priceNotes[s.origin] || "")}" placeholder="Ghi giá vừa xem" autocomplete="off" />
+            <span>Giá thực tế, USD cả chặng</span>
+            <input type="text" inputmode="numeric" pattern="[0-9]*" data-price-note="${s.origin}" value="${escapeAttr(priceNotes[s.origin] || "")}" placeholder="Chỉ số" autocomplete="off" />
           </label>
+          <p class="muted">Có số thì tổng dùng số này thay quote của chặng.</p>
           ${scaled && opt.total != null ? `<p class="muted">Quote gốc ${base.nights} đêm, ${fmtMoney.format(opt.total)}. Số mới tính theo cùng giá mỗi đêm.</p>` : ""}
           <ul class="facts">
             <li>Hủy: ${opt.cancel}</li>
@@ -798,6 +834,31 @@ function renderPrep() {
     </section>`;
 }
 
+function renderDocs() {
+  const options = docKinds()
+    .map((kind) => `<option value="${kind}">${docKindLabel(kind)}</option>`)
+    .join("");
+  return `
+    <section class="section" id="docs" aria-labelledby="docs-title">
+      <div class="section-head">
+        <h2 id="docs-title">Tài liệu</h2>
+        <p class="muted">Vé máy bay, vé tàu, booking khách sạn. File nằm trên máy này, mở lại không cần mạng.</p>
+      </div>
+      <form class="doc-add card" data-doc-form>
+        <label>
+          <span>Loại</span>
+          <select data-doc-kind>${options}</select>
+        </label>
+        <label class="btn btn-primary doc-pick">
+          Thêm file
+          <input type="file" data-doc-file accept="application/pdf,image/*" multiple />
+        </label>
+      </form>
+      <p class="doc-msg" data-doc-msg role="status"></p>
+      <div data-doc-list></div>
+    </section>`;
+}
+
 function setDayOpen(li, open) {
   const button = li.querySelector(".day-toggle");
   const panel = li.querySelector(".day-panel");
@@ -815,6 +876,7 @@ function pageHtml() {
       ${renderOverview()}
       ${renderStays()}
       ${renderTimeline()}
+      ${renderDocs()}
       ${renderPrep()}
       <footer class="footer">Giá là quote, chưa đặt. Kiểm tra lại tổng và điều kiện hủy trước khi trả tiền.</footer>
     </main>`;
@@ -873,7 +935,77 @@ function watchNav() {
     },
     { rootMargin: "-45% 0px -50% 0px" },
   );
-  ["overview", "stays", "timeline", "prep"].forEach((id) => navObserver.observe(document.getElementById(id)));
+  ["overview", "stays", "timeline", "docs", "prep"].forEach((id) => navObserver.observe(document.getElementById(id)));
+}
+
+function refreshBudget() {
+  const total = document.querySelector("[data-budget-total]");
+  const meter = document.querySelector("[data-budget-meter]");
+  const status = document.querySelector("[data-budget-status]");
+  const notes = document.querySelector("[data-budget-notes]");
+  if (!total || !meter || !status || !notes) return;
+  const quoted = chosenTotal();
+  const diff = meta.budgetUsd - quoted;
+  const pct = Math.min(100, Math.round((quoted / meta.budgetUsd) * 100));
+  const over = diff < 0;
+  total.innerHTML = `${fmtMoney.format(quoted)} <span>/ ${fmtMoney.format(meta.budgetUsd)}</span>`;
+  meter.classList.toggle("over", over);
+  meter.setAttribute("aria-label", `Tổng bằng ${pct}% ngân sách`);
+  const bar = meter.querySelector("span");
+  if (bar) bar.style.width = `${pct}%`;
+  status.classList.toggle("is-over", over);
+  status.classList.toggle("is-ok", !over);
+  status.innerHTML = `${icon(over ? "alert" : "check", 16)} ${over ? "Vượt" : "Còn"} ${fmtMoney.format(Math.abs(diff))} · ${perNight(quoted, totalNights)}/đêm so với trần ${perNight(meta.budgetUsd, totalNights)}/đêm`;
+  notes.innerHTML = budgetNotes()
+    .map((line) => `<p class="muted">${line}</p>`)
+    .join("");
+}
+
+/** @type {string[]} */
+let docUrls = [];
+let docToken = 0;
+
+function revokeDocUrls() {
+  for (const url of docUrls) URL.revokeObjectURL(url);
+  docUrls = [];
+}
+
+async function fillDocs() {
+  const token = ++docToken;
+  const list = document.querySelector("[data-doc-list]");
+  const msg = document.querySelector("[data-doc-msg]");
+  if (!list) return;
+  try {
+    const files = await listFiles();
+    if (token !== docToken) return;
+    revokeDocUrls();
+    if (!files.length) {
+      list.innerHTML = `<p class="muted">Chưa có file. Chọn loại rồi thêm vé hoặc booking.</p>`;
+      return;
+    }
+    list.innerHTML = docKinds()
+      .map((kind) => {
+        const rows = files.filter((file) => file.kind === kind);
+        if (!rows.length) return "";
+        return `<section class="doc-group"><h3>${docKindLabel(kind)}</h3><ul>${rows.map(renderDocRow).join("")}</ul></section>`;
+      })
+      .join("");
+  } catch {
+    if (token !== docToken || !msg) return;
+    msg.textContent = "Máy này không lưu được file.";
+  }
+}
+
+/** @param {{ id: string; name: string; blob: Blob; added: number }} file */
+function renderDocRow(file) {
+  const url = URL.createObjectURL(file.blob);
+  docUrls.push(url);
+  const when = new Intl.DateTimeFormat("vi-VN", { day: "numeric", month: "short" }).format(file.added);
+  return `<li class="doc-row">
+    <a href="${url}" target="_blank" rel="noopener">${escapeAttr(file.name)}</a>
+    <span class="muted">${when}</span>
+    <button type="button" class="btn" data-doc-delete="${file.id}">Xóa</button>
+  </li>`;
 }
 
 function paint(focusId) {
@@ -883,6 +1015,7 @@ function paint(focusId) {
   if (ui) restoreUi(ui);
   if (focusId) root.querySelector(`[data-pick="${CSS.escape(focusId)}"]`)?.focus({ preventScroll: true });
   watchNav();
+  void fillDocs();
 }
 
 function mount() {
@@ -898,6 +1031,13 @@ function mount() {
       shiftMsg = "";
       localStorage.removeItem(SHIFT_KEY);
       paint();
+      return;
+    }
+
+    const drop = event.target.closest("[data-doc-delete]");
+    if (drop) {
+      const id = drop.getAttribute("data-doc-delete");
+      void removeFile(id).then(() => fillDocs());
       return;
     }
 
@@ -992,17 +1132,41 @@ function mount() {
     document.querySelector(`[data-night="${iso}"]`)?.focus({ preventScroll: true });
   });
 
+  root.addEventListener("submit", (event) => {
+    if (event.target.closest("[data-doc-form]")) event.preventDefault();
+  });
+
   root.addEventListener("input", (event) => {
     const field = event.target.closest("[data-price-note]");
-    if (!field) return;
+    if (!(field instanceof HTMLInputElement)) return;
+    const digits = field.value.replace(/\D/g, "");
+    if (field.value !== digits) field.value = digits;
     const origin = field.getAttribute("data-price-note");
-    const value = field.value.trim();
-    if (value) priceNotes[origin] = value;
+    if (digits) priceNotes[origin] = digits;
     else delete priceNotes[origin];
     localStorage.setItem(PRICE_KEY, JSON.stringify(priceNotes));
+    refreshBudget();
   });
 
   root.addEventListener("change", (event) => {
+    const fileInput = event.target.closest("[data-doc-file]");
+    if (fileInput instanceof HTMLInputElement) {
+      const kindField = root.querySelector("[data-doc-kind]");
+      const kind = parseDocKind(kindField instanceof HTMLSelectElement ? kindField.value : "other");
+      const msg = root.querySelector("[data-doc-msg]");
+      const files = [...(fileInput.files || [])];
+      const tooBig = files.some((file) => file.size > 20 * 1024 * 1024);
+      if (msg) msg.textContent = tooBig ? "Mỗi file tối đa 20 MB." : "";
+      void Promise.all(files.filter((file) => file.size <= 20 * 1024 * 1024).map((file) => putFile(file, kind)))
+        .then(() => {
+          fileInput.value = "";
+          return fillDocs();
+        })
+        .catch(() => {
+          if (msg) msg.textContent = "Không lưu được file.";
+        });
+      return;
+    }
     const input = event.target.closest("input[data-check]");
     if (!input) return;
     const key = input.getAttribute("data-check");

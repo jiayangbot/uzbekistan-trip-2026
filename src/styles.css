@@ -678,6 +678,90 @@ body:not(.is-open) .skip-link {
   color: var(--muted);
 }
 
+.doc-add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 16px;
+}
+
+.doc-add label span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.doc-add select {
+  min-height: 44px;
+  min-width: 12rem;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+}
+
+.doc-pick {
+  position: relative;
+  cursor: pointer;
+}
+
+.doc-pick input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.doc-msg:empty {
+  display: none;
+}
+
+.doc-msg {
+  color: var(--warn);
+  font-weight: 600;
+}
+
+.doc-group {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.doc-group h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.doc-group ul {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.doc-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+}
+
+.doc-row a {
+  overflow: hidden;
+  color: var(--text);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .facts {
   list-style: none;
   display: grid;
@@ -1352,7 +1436,7 @@ body:not(.is-open) .skip-link {
   }
   .topbar nav {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
   .topbar nav a {
     padding: 0 10px;
