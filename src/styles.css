@@ -937,11 +937,7 @@ body:not(.is-open) .skip-link {
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  position: sticky;
-  top: var(--topbar-h);
-  z-index: calc(var(--z-topbar) - 10);
   padding: 10px 0;
-  background: var(--bg);
 }
 
 .filters {
@@ -1022,8 +1018,14 @@ body:not(.is-open) .skip-link {
 }
 
 .day-heading {
+  position: sticky;
+  top: var(--topbar-h);
+  z-index: 20;
+  background: var(--surface);
   font-size: inherit;
   font-weight: inherit;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  box-shadow: 0 1px 0 var(--border);
 }
 
 .day-toggle {
@@ -1116,7 +1118,7 @@ body:not(.is-open) .skip-link {
 
 .slot {
   display: grid;
-  grid-template-columns: 3.5rem 4.5rem minmax(0, 1fr) auto;
+  grid-template-columns: 3.5rem 4.5rem minmax(0, 1fr);
   gap: 8px 12px;
   align-items: start;
   padding: 10px 0;
@@ -1154,10 +1156,26 @@ body:not(.is-open) .skip-link {
   white-space: nowrap;
 }
 
-.slot-sum {
+.day-block {
+  display: grid;
+  gap: 8px;
   margin: 4px 18px 16px;
-  color: var(--muted);
-  font-size: 0.875rem;
+}
+
+.day-block h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+}
+
+.place .k {
+  display: inline-block;
+  min-width: 2.5rem;
+  margin-right: 6px;
+  color: var(--text);
+  font-weight: 700;
 }
 
 .day-panel {
@@ -1421,10 +1439,6 @@ body:not(.is-open) .skip-link {
     grid-template-columns: 3.5rem 4.2rem minmax(0, 1fr);
   }
 
-  .usd {
-    grid-column: 2 / -1;
-  }
-
   :root {
     --topbar-h: 56px;
   }
@@ -1448,8 +1462,9 @@ body:not(.is-open) .skip-link {
   .stats {
     grid-template-columns: 1fr;
   }
-  .toolbar {
-    position: static;
+  .day-block {
+    margin-left: 14px;
+    margin-right: 14px;
   }
   .day-toggle {
     grid-template-columns: auto 1fr;

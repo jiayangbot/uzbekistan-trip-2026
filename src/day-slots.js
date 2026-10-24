@@ -105,21 +105,25 @@ export const daySlots = {
   ],
 };
 
-/** @typedef {{ name: string, query: string, where: string, dishes: string }} EatPlace */
+/** @typedef {{ name: string, query: string, where: string, dishes: string, doing: string, tip: string }} EatPlace */
 /** @typedef {{ note: string, places: EatPlace[] }} DayEats */
 
 const amirTemur = [
   {
     name: "Navvat",
     query: "Navvat Sayilgoh 7 Poytaxt Mall Tashkent",
-    where: "Sayilgoh 7, tầng 1 Poytaxt Mall, khoảng 460 m từ quảng trường Amir Temur. Mở khuya.",
-    dishes: "Norin, shashlik, manti bí, cánh gà nướng.",
+    where: "Sayilgoh 7, tầng 1 Poytaxt Mall, khoảng 460 m từ quảng trường Amir Temur.",
+    dishes: "Norin, shashlik, manti bí, cánh gà nướng. Gọi một món chính và một đĩa chia đôi.",
+    doing: "Ngồi ăn tối sau khi đi bộ quanh quảng trường. Không gọi cả menu.",
+    tip: "Mở khuya. Đi bộ khoảng 10 phút từ Hampton hoặc InterContinental. Cuối tuần đông, tới trước 20:00.",
   },
   {
     name: "Quầy trên Broadway",
     query: "Sayilgoh Street Tashkent Broadway",
     where: "Phố đi bộ Sayilgoh. Đi bộ từ Hampton hoặc InterContinental.",
-    dishes: "Samsa thịt, non nóng, shashlik gà, trà. Chọn quán đông.",
+    dishes: "Samsa thịt, non vừa ra lò, shashlik gà, trà.",
+    doing: "Đi dọc phố, đứng hoặc ngồi ghế thấp ở quầy đông người.",
+    tip: "Chọn quán có khách địa phương. Non nguội thì bỏ. Trả tiền mặt, tờ nhỏ.",
   },
 ];
 
@@ -127,8 +131,10 @@ const chorsu = [
   {
     name: "Khu ăn Chorsu",
     query: "Chorsu Bazaar Tashkent",
-    where: "Trong chợ, sau Hazrati Imam. Trả tiền mặt.",
-    dishes: "Plov, samsa, non, trái cây khô.",
+    where: "Trong chợ, sau khi xem Hazrati Imam.",
+    dishes: "Plov, samsa, non, trái cây khô. Một đĩa plov chia đôi là đủ, hoặc mỗi người một samsa.",
+    doing: "Ăn ở khu food của chợ, rồi mua trái cây mang về nếu muốn.",
+    tip: "Tiền mặt. Mặc cả trái cây, không mặc cả đĩa đã ghi giá. Giữ túi trước người. Kín vai khi sang Hazrati Imam.",
   },
   ...amirTemur,
 ];
@@ -138,19 +144,25 @@ const tashkentCity = [
     name: "Afsona Tashkent City",
     query: "Afsona Ukchi 4 Tashkent",
     where: "Ukchi 4, sát Holiday Inn.",
-    dishes: "Plov, manti, shurpa, samsa. Có manti cá hồi và plov trái cây nếu muốn đổi món.",
+    dishes: "Plov, manti, shurpa, samsa. Muốn đổi món thì manti cá hồi hoặc plov trái cây.",
+    doing: "Ngồi ăn trưa hoặc tối sau khi nhận phòng. Gọi plov thường trước, món lạ để lần sau.",
+    tip: "Đi bộ từ khách sạn, không cần taxi. Quán này là lựa chọn chắc nhất trên Ukchi.",
   },
   {
     name: "Proshashlyk",
     query: "Proshashlyk Ukchi 6 Tashkent",
     where: "Ukchi 6, gần công viên.",
-    dishes: "Shashlik cừu, gà hoặc cá hồi, kèm bánh và salad.",
+    dishes: "Shashlik cừu, gà hoặc cá hồi, non và salad.",
+    doing: "Gọi xiên ở bếp mở, ăn kèm bánh. Không gọi thêm súp nếu đã no plov chỗ khác.",
+    tip: "Đi bộ từ Holiday Inn. Phục vụ lúc được lúc không. Chờ quá 20 phút thì sang Afsona.",
   },
   {
     name: "Boboy",
     query: "BOBOY Tashkent City Mall Batir Zakirov 7",
-    where: "Trong Tashkent City Mall. Máy lạnh, đắt hơn quán ngoài một chút.",
+    where: "Trong Tashkent City Mall, Batir Zakirov 7.",
     dishes: "Plov, manti, shashlik, salad cà tím.",
+    doing: "Ngồi máy lạnh khi vừa đi công viên về, hoặc khi mưa.",
+    tip: "Đắt hơn quán ngoài phố một chút. Hợp để nghỉ chân, không phải quán phải ghé mỗi ngày.",
   },
 ];
 
@@ -158,20 +170,26 @@ const mirabad = [
   {
     name: "Afsona Shevchenko",
     query: "Afsona Taras Shevchenko 30 Tashkent",
-    where: "Shevchenko 30, gần ga Oybek. Có menu tiếng Anh.",
-    dishes: "Plov lễ, plov trà đạo, kazan kabob, mastava, mashhurda, manti bò, shashlik gà. Đĩa tổng hợp khoảng 325.000 som.",
+    where: "Shevchenko 30, gần ga Oybek.",
+    dishes: "Plov lễ, plov trà đạo, kazan kabob, mastava, mashhurda, manti bò, shashlik gà.",
+    doing: "Bữa tối ngồi xuống. Một món chính cho hai người, thêm súp nếu còn đói.",
+    tip: "Có menu tiếng Anh. Đĩa tổng hợp trên menu khoảng 325.000 som, là đĩa của bàn. Từ Swissôtel đi bộ hoặc Yandex ngắn.",
   },
   {
     name: "Caravan",
     query: "Caravan restaurant Abdulla Kahhar 22 Tashkent",
-    where: "Abdulla Kahhar 22, Yakkasaray. Không đi bộ từ Swissôtel, gọi Yandex.",
+    where: "Abdulla Kahhar 22, Yakkasaray.",
     dishes: "Plov, kazan kabob, lagman, manti, beshbarmak, shashlik.",
+    doing: "Bữa tối khi muốn ra khỏi Mirabad. Gọi plov hoặc lagman, không gọi hết các món tên lạ.",
+    tip: "Không đi bộ từ Swissôtel. Gọi Yandex và đối biển số với app trước khi lên xe.",
   },
   {
     name: "Quầy gần Oybek",
     query: "Oybek metro Tashkent samsa",
-    where: "Quanh ga, ăn nhẹ.",
+    where: "Quanh ga Oybek.",
     dishes: "Samsa thịt hoặc khoai, non, trà.",
+    doing: "Ăn nhẹ, hoặc mua sáng hôm sau nếu buffet khách sạn mở muộn.",
+    tip: "Lấy samsa đang nóng. Tiền mặt. Ngày 5/11 mua sẵn cho sáng lên tàu.",
   },
 ];
 
@@ -179,8 +197,10 @@ const plovDay = [
   {
     name: "Besh Qozon",
     query: "Central Asian Plov Center Besh Qozon Tashkent",
-    where: "Trung tâm plov, gần đài động đất. Đi đúng trưa vì nồi hết giữa chiều.",
-    dishes: "Plov nấu nồi lớn, salad, non, trà. Một đĩa khoảng $3.",
+    where: "Trung tâm plov, gần đài động đất.",
+    dishes: "Plov nồi lớn, salad, non, trà. Một đĩa khoảng $3.",
+    doing: "Ăn trưa đúng lúc nồi còn. Ngồi ăn xong rồi mới đi vườn Nhật nếu còn sức.",
+    tip: "Nồi hết giữa chiều, tới sau 14:00 dễ hết. Thứ Tư dễ có chỗ hơn cuối tuần. Taxi từ Swissôtel, gộp một vòng với đài động đất.",
   },
   ...mirabad.slice(0, 2),
 ];
@@ -191,18 +211,24 @@ const samarkand = [
     query: "Shashlik.uz Old Havuz Samarkand",
     where: "Khoảng 300 m từ Registan. Mở 10:00–23:00.",
     dishes: "Shashlik sườn cừu, manti, lagman.",
+    doing: "Ăn tối sau khi xem Registan. Một xiên sườn và bánh, lagman chỉ gọi nếu còn đói.",
+    tip: "Đi bộ từ quảng trường. Quán sát Registan thường tính đắt hơn. Giữ túi khi ngồi ngoài trời.",
   },
   {
     name: "Emirhan",
     query: "Emirhan restaurant Mahmudjonov 1/18 Samarkand",
-    where: "Mahmudjonov 1/18, sân thượng nhìn Registan. Bàn hoàng hôn hết sớm.",
+    where: "Mahmudjonov 1/18, sân thượng nhìn về Registan.",
     dishes: "Plov kiểu Samarkand, lagman, shashlik, non lò tandir.",
+    doing: "Ngồi sân thượng lúc trời còn sáng. Gọi plov Samarkand và non, xem quảng trường từ bàn.",
+    tip: "Bàn hoàng hôn hết sớm. Tới trước 17:30 nếu muốn ngồi hướng Registan. Gió trên sân thượng lạnh hơn dưới phố.",
   },
   {
     name: "Chợ Siab",
     query: "Siyob Bazaar Samarkand",
-    where: "Trong chợ. Tiền mặt.",
-    dishes: "Non nóng, samsa, plov, trái cây. Một đĩa plov chia đôi là đủ.",
+    where: "Trong chợ, gần Bibi-Khanym.",
+    dishes: "Non nóng, samsa, plov, trái cây. Plov thì một đĩa chia đôi.",
+    doing: "Ăn trưa ở quầy trong chợ sau Shah-i-Zinda, rồi sang Bibi-Khanym.",
+    tip: "Tiền mặt. Ăn quầy đông khách. Không theo người kéo vào quán trong hẻm.",
   },
 ];
 
@@ -211,8 +237,10 @@ const lastNight = [
   {
     name: "Afsona Shevchenko",
     query: "Afsona Taras Shevchenko 30 Tashkent",
-    where: "Shevchenko 30. Từ InterContinental gọi Yandex ngắn, không kịp nếu chỉ còn một tiếng.",
+    where: "Shevchenko 30. Từ InterContinental là một cuốc Yandex ngắn.",
     dishes: "Plov, kazan kabob, shashlik gà, mastava.",
+    doing: "Chỉ ghé nếu còn hơn một tiếng trước khi về phòng. Không kịp thì ăn Navvat.",
+    tip: "Đêm 8/11 tàu về trưa, đừng đi xa. Đêm 9/11 bỏ quán này vì 17:15 đã ra sân bay.",
   },
 ];
 

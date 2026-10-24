@@ -1,6 +1,6 @@
 import { days, hotelStays, hotelOptions, meta } from "./trip-data.js";
 import { dayDetails, stayLinks, mapLink, packing, masterChecklist, sources, localLife } from "./trip-guide.js";
-import { dayEats, daySlots, slotCost, tripFoodUsd } from "./day-slots.js";
+import { dayEats, daySlots } from "./day-slots.js";
 import { icon } from "./icons.js";
 import { docKindLabel, docKinds, listFiles, parseDocKind, putFile, removeFile } from "./documents.js";
 
@@ -456,7 +456,7 @@ function renderOverview() {
           <h2 class="card-label">${icon("bed")} Lưu trú</h2>
           <p class="big-number">${totalNights} <span>đêm</span></p>
           <p class="muted">${hotelStays.length} lần nhận phòng · 3 khu Tashkent + Samarkand</p>
-          <p class="muted">Ăn trưa và tối khoảng ${fmtMoney.format(tripFoodUsd)} cho 2 người, ngoài tiền phòng. Sáng đã gồm khi thẻ khách sạn ghi đã gồm. Xe núi chưa tính.</p>
+          <p class="muted">Ăn trưa và tối tính riêng, ngoài tiền phòng. Sáng đã gồm khi thẻ khách sạn ghi đã gồm. Xe núi chưa tính.</p>
         </article>
         <article class="card">
           <h2 class="card-label">${icon("alert")} Việc gấp</h2>
@@ -599,15 +599,6 @@ function renderDetail(entry, stay) {
   const opt = stay ? optionForStay(stay) : null;
   const label = opt ? optionLabel[opt.id] || stay.name : "";
   const links = stay && opt ? stayLinks(stay, label) : null;
-  const places = detail.places
-    .map(
-      (p) => `
-      <li class="place">
-        <span class="place-icon">${icon("pin", 16)}</span>
-        <div>${extLink(mapLink(p.query), p.name, "place-name")}<p>${p.tip}</p></div>
-      </li>`,
-    )
-    .join("");
   const research = detail.research
     .map((n) => `<li><p>${n.text}</p>${extLink(n.url, n.source, "source-link")}</li>`)
     .join("");
@@ -653,17 +644,22 @@ function renderDetail(entry, stay) {
         </section>
       </div>
       <div class="detail-col">
-        ${renderEats(entry.date)}
-        <section class="block">
-          <h4>${icon("pin", 16)} Đi đâu</h4>
-          <ul class="places">${places}</ul>
-        </section>
         <section class="block">
           <h4>${icon("book", 16)} Đã đọc</h4>
           <ul class="notes">${research}</ul>
         </section>
       </div>
     </div>`;
+}
+
+function placeNotes(place) {
+  const rows = [
+    place.where ? `<p>${place.where}</p>` : "",
+    place.eat || place.dishes ? `<p><span class="k">Ăn</span> ${place.eat || place.dishes}</p>` : "",
+    place.doing ? `<p><span class="k">Làm</span> ${place.doing}</p>` : "",
+    place.tip ? `<p><span class="k">Mẹo</span> ${place.tip}</p>` : "",
+  ];
+  return rows.join("");
 }
 
 function renderEats(date) {
@@ -676,16 +672,37 @@ function renderEats(date) {
         <span class="place-icon">${icon("pin", 16)}</span>
         <div>
           ${extLink(mapLink(place.query), place.name, "place-name")}
-          <p>${place.where}</p>
-          <p>${place.dishes}</p>
+          ${placeNotes(place)}
         </div>
       </li>`,
     )
     .join("");
   return `
-    <section class="block">
-      <h4>${icon("wallet", 16)} Quán ăn</h4>
-      <p class="muted">${eats.note} Chọn một quán, không cần ăn hết.</p>
+    <section class="day-block">
+      <h4>${icon("wallet", 16)} Món ngon</h4>
+      <p class="muted">${eats.note} Chọn một chỗ, không cần ăn hết.</p>
+      <ul class="places">${items}</ul>
+    </section>`;
+}
+
+function renderStops(date) {
+  const detail = dayDetails[date];
+  if (!detail) return "";
+  const items = detail.places
+    .map(
+      (place) => `
+      <li class="place">
+        <span class="place-icon">${icon("pin", 16)}</span>
+        <div>
+          ${extLink(mapLink(place.query), place.name, "place-name")}
+          ${placeNotes(place)}
+        </div>
+      </li>`,
+    )
+    .join("");
+  return `
+    <section class="day-block">
+      <h4>${icon("pin", 16)} Chỗ phải đi</h4>
       <ul class="places">${items}</ul>
     </section>`;
 }
@@ -700,13 +717,15 @@ function renderSlots(date) {
           <time datetime="${slot.time}">${slot.time}</time>
           <span class="part">${slot.part}</span>
           <span class="slot-body">${title ? `<span class="slot-eat">${title}. </span>` : ""}${slot.text}</span>
-          <span class="usd">${slot.usd > 0 ? `~${fmtMoney.format(slot.usd)}` : ""}</span>
         </li>`;
     })
     .join("");
-  return `
-    <ol class="slots">${rows}</ol>
-    <p class="slot-sum">Ước lượng ${fmtMoney.format(slotCost(slots))} cho 2 người. Bữa sáng khách sạn không tính vào số này.</p>`;
+  return `<ol class="slots">${rows}</ol>`;
+}
+
+function upcomingDays() {
+  const today = isoOf(new Date());
+  return days.map((entry, index) => ({ entry, index })).filter(({ entry }) => entry.date >= today);
 }
 
 function renderDay(entry, index) {
@@ -715,7 +734,6 @@ function renderDay(entry, index) {
   const info = kindInfo(kind);
   const stay = stayOnDate(entry.date);
   const opt = stay ? optionForStay(stay) : null;
-  const food = slotCost(daySlots[entry.date] || []);
   const prev = index > 0 ? viewDay(days[index - 1]) : null;
   const moved = prev && (prev.hotel !== view.hotel || prev.city !== view.city);
   const areaMoved = view.area !== entry.area;
@@ -737,7 +755,6 @@ function renderDay(entry, index) {
               ${moved ? `<span class="tag tag-move">${icon("swap", 13)} Đổi chỗ ở</span>` : ""}
               ${opt && view.hotel !== "Checkout / flight" ? `<span class="tag tag-plain">${icon("bed", 13)} ${optionLabel[opt.id] || view.hotel}</span>` : ""}
               ${opt && view.hotel !== "Checkout / flight" && breakfastIncluded(opt) ? `<span class="tag tag-ok">${icon("check", 13)} Ăn sáng đã gồm</span>` : ""}
-              ${food > 0 ? `<span class="tag tag-plain">${icon("wallet", 13)} Ăn ~${fmtMoney.format(food)}</span>` : ""}
             </span>
           </span>
           <span class="chev">${icon("chevron", 20)}</span>
@@ -745,6 +762,8 @@ function renderDay(entry, index) {
       </h3>
       ${areaMoved ? `<p class="shift-note">Đêm này ngủ ở ${view.area}. Phần đi chơi trong ngày vẫn theo lịch gốc.</p>` : ""}
       ${renderSlots(entry.date)}
+      ${renderEats(entry.date)}
+      ${renderStops(entry.date)}
       <div class="day-panel" id="p-${entry.date}" role="region" aria-label="Chi tiết ${fmtLong.format(d)}" hidden>
         ${renderDetail(entry, stay)}
       </div>
@@ -752,17 +771,18 @@ function renderDay(entry, index) {
 }
 
 function renderTimeline() {
+  const shown = upcomingDays();
   const filters = [
-    ["all", "Tất cả", days.length],
-    ["weekend", "Cuối tuần", days.filter((d, i) => matchesFilter("weekend", d, i)).length],
-    ["travel", "Tàu & bay", days.filter((d, i) => matchesFilter("travel", d, i)).length],
-    ["move", "Đổi chỗ ở", days.filter((d, i) => matchesFilter("move", d, i)).length],
+    ["all", "Tất cả", shown.length],
+    ["weekend", "Cuối tuần", shown.filter(({ entry, index }) => matchesFilter("weekend", entry, index)).length],
+    ["travel", "Tàu & bay", shown.filter(({ entry, index }) => matchesFilter("travel", entry, index)).length],
+    ["move", "Đổi chỗ ở", shown.filter(({ entry, index }) => matchesFilter("move", entry, index)).length],
   ];
   return `
     <section class="section" id="timeline" aria-labelledby="timeline-title" tabindex="-1">
       <div class="section-head">
         <h2 id="timeline-title">Lịch từng ngày</h2>
-        <p class="muted">Mỗi ngày chia theo giờ. Giá ăn là ước lượng cho 2 người. Bấm một ngày để xem vài quán và món gần chỗ ở.</p>
+        <p class="muted">Cuộn trong một ngày, tên ngày dính phía trên. Ngày đã qua được ẩn. Bấm một ngày để xem khách sạn, thời tiết và việc cần làm.</p>
       </div>
       <div class="toolbar">
         <div class="filters" role="group" aria-label="Lọc ngày">
@@ -775,7 +795,7 @@ function renderTimeline() {
         </div>
         <button type="button" class="btn btn-ghost" data-expand-all aria-pressed="false">Mở tất cả</button>
       </div>
-      <ol class="days">${days.map(renderDay).join("")}</ol>
+      <ol class="days">${shown.length ? shown.map(({ entry, index }) => renderDay(entry, index)).join("") : `<li class="muted">Các ngày trong lịch đã qua.</li>`}</ol>
     </section>`;
 }
 
