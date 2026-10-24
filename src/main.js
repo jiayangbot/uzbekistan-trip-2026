@@ -273,9 +273,15 @@ function viewDay(entry) {
   const stay = activeStays().find((item) => entry.date >= item.checkIn && entry.date < item.checkOut);
   if (!stay) return entry;
   const option = optionForStay(stay);
+  const area =
+    stay.origin === "2026-11-08"
+      ? option.area
+      : sameHotel(stay, option)
+        ? areaByOrigin[stay.origin] || entry.area
+        : option.area;
   return {
     ...entry,
-    area: sameHotel(stay, option) ? areaByOrigin[stay.origin] || entry.area : option.area,
+    area,
     hotel: optionLabel[option.id] || stay.name,
   };
 }
@@ -414,7 +420,7 @@ function renderOverview() {
           <h2 class="card-label">${icon("bed")} Lưu trú</h2>
           <p class="big-number">${totalNights} <span>đêm</span></p>
           <p class="muted">${hotelStays.length} lần nhận phòng · 3 khu Tashkent + Samarkand</p>
-          <p class="muted">Ăn trưa và tối khoảng ${fmtMoney.format(tripFoodUsd)} cho 2 người, ngoài tiền phòng. Sáng đã gồm. Xe núi chưa tính.</p>
+          <p class="muted">Ăn trưa và tối khoảng ${fmtMoney.format(tripFoodUsd)} cho 2 người, ngoài tiền phòng. Sáng đã gồm khi thẻ khách sạn ghi đã gồm. Xe núi chưa tính.</p>
         </article>
         <article class="card">
           <h2 class="card-label">${icon("alert")} Việc gấp</h2>
@@ -428,7 +434,8 @@ function renderOverview() {
 function liveSegmentTitle(segment) {
   const stay = activeStays().find((item) => segmentOfStay[item.origin] === segment);
   if (!stay) return segment;
-  return `${areaByOrigin[stay.origin]} · ${shortDate(stay.checkIn)}–${shortDate(stay.checkOut)}`;
+  const area = stay.origin === "2026-11-08" ? optionForStay(stay).area : areaByOrigin[stay.origin];
+  return `${area} · ${shortDate(stay.checkIn)}–${shortDate(stay.checkOut)}`;
 }
 
 function nightChips(stay) {
@@ -470,7 +477,7 @@ function renderStays() {
             <span class="stay-index seg-${i}" aria-hidden="true">${i + 1}</span>
             <div>
               <h3>${opt.name}</h3>
-              <p class="muted">${icon("pin", 14)} ${sameHotel(s, opt) ? areaFor(s) : opt.area}</p>
+              <p class="muted">${icon("pin", 14)} ${s.origin === "2026-11-08" || !sameHotel(s, opt) ? opt.area : areaFor(s)}</p>
             </div>
           </div>
           <p class="stay-dates">${shortDate(s.checkIn)} → ${shortDate(s.checkOut)} · ${s.nights} đêm</p>
@@ -739,7 +746,7 @@ function renderPrep() {
             <li>8/11, Sharq 711: Samarkand 08:10, Toshkent-Yo'lovchi 12:19. Toa 06 ghế 016 và toa 07 ghế 026. Hai đơn, mỗi vé 200.060 som.</li>
             <li>Ga ТОШКЕНТ-ЙЎЛОВЧИ là ga trung tâm. Yandex tới đó, không phải ga Nam.</li>
             <li>Bấm Download trên ${extLink("https://eticket.uzrailpass.uz/en/", "eticket.uzrailpass.uz")} và giữ PDF offline. Có mặt trước giờ tàu khoảng 40 phút.</li>
-            <li>HY531 cất cánh TAS 21:15 ngày 9/11, Bangkok 05:25 ngày 10/11. Rời Hampton khoảng 17:15.</li>
+            <li>HY531 cất cánh TAS 21:15 ngày 9/11, Bangkok 05:25 ngày 10/11. Rời InterContinental khoảng 17:15.</li>
           </ol>
         </article>
         <article class="card">

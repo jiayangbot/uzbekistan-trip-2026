@@ -330,15 +330,15 @@ export const dayDetails = {
     weather: tashkentEarlyNov,
     places: [
       { name: "Ga Samarkand", query: "Samarkand Railway Station", tip: "Rời Mövenpick khoảng 07:20 cho tàu 08:10." },
-      { name: "Toshkent Markaziy", query: "Tashkent Central Railway Station", tip: "Xuống lúc 12:19. Yandex về Hampton, Istiqbol 17." },
-      { name: "Hampton by Hilton", query: "Hampton by Hilton Tashkent Istiqbol 17", tip: "Một đêm, giường king, ăn sáng. Mai ở lại đến chiều vì bay 21:15." },
+      { name: "Toshkent Markaziy", query: "Tashkent Central Railway Station", tip: "Xuống lúc 12:19. Yandex về InterContinental, 2 Shakhrisabz." },
+      { name: "InterContinental Tashkent", query: "InterContinental Tashkent 2 Shakhrisabz Street", tip: "Một đêm, khác Hampton. Xin phòng nhìn quảng trường, tầng 12–16. Mai ở đến chiều vì bay 21:15." },
     ],
     transport: {
       title: "Sharq 711, đã mua",
       steps: [
         "Chủ Nhật 8/11, Sharq 711, Samarkand 08:10, Toshkent-Yo'lovchi 12:19. Mỗi vé 200.060 som.",
         "Hai đơn riêng. UO78185PYKL348: toa 06, ghế 016. UO78185QSZAOHS: toa 07, ghế 026. Cùng tàu, khác toa. Gặp nhau lúc xuống ga.",
-        "Ga đến là ga trung tâm, không phải ga Nam. Yandex về Hampton.",
+        "Ga đến là ga trung tâm, không phải ga Nam. Yandex về InterContinental, 2 Shakhrisabz.",
         "Rời Mövenpick khoảng 07:20. Bấm Download và giữ PDF offline. HY531 cất cánh 21:15 ngày 9/11.",
       ],
       links: [{ label: "Vé trong tài khoản", url: "https://eticket.uzrailpass.uz/en/" }],
@@ -350,19 +350,19 @@ export const dayDetails = {
         url: "https://us.trip.com/",
       },
     ],
-    checklist: ["PDF Sharq 711, toa 06 và toa 07", "Check-in Hampton", "Khai TDAC Thái Lan trước khi về"],
+    checklist: ["PDF Sharq 711, toa 06 và toa 07", "Check-in InterContinental", "Khai TDAC Thái Lan trước khi về"],
   },
   "2026-11-09": {
     weather: tashkentEarlyNov,
     places: [
-      { name: "Hampton by Hilton", query: "Hampton by Hilton Tashkent Istiqbol 17", tip: "Ăn sáng, gửi hành lý, đi bộ quanh Amir Temur. Lấy đồ lúc 17:00." },
-      { name: "TAS Terminal 2", query: "Tashkent International Airport Terminal 2", tip: "HY531 lúc 21:15. Có mặt khoảng 18:15. Yandex từ Istiqbol, để 40–60 phút." },
+      { name: "InterContinental Tashkent", query: "InterContinental Tashkent 2 Shakhrisabz Street", tip: "Gửi hành lý, đi bộ ra Amir Temur. Lấy đồ lúc 17:00." },
+      { name: "TAS Terminal 2", query: "Tashkent International Airport Terminal 2", tip: "HY531 lúc 21:15. Có mặt khoảng 18:15. Yandex từ Shakhrisabz, để 40–60 phút." },
     ],
     transport: {
       title: "Ra sân bay và về Bangkok",
       steps: [
         "HY531, Uzbekistan Airways. TAS 21:15 ngày 9/11, Bangkok 05:25 ngày 10/11. Giờ địa phương từng sân bay.",
-        "Rời Hampton khoảng 17:15. Terminal 2. Có mặt sân bay khoảng 18:15.",
+        "Rời InterContinental khoảng 17:15. Terminal 2. Có mặt sân bay khoảng 18:15.",
         "Gọi Yandex. Chiều thứ Hai đường có thể chậm hơn 20 phút.",
         "Nộp TDAC trên tdac.immigration.go.th trước khi bay. Tới Thái Lan lúc 05:25.",
       ],
@@ -384,7 +384,7 @@ export const packing = [
   { item: "USD tờ 100, khoảng $600 cho hai người", why: "Mua ở SuperRich Bangkok. Tờ sạch, không rách, không viết. Som đổi ở Tashkent." },
   { item: "Thuốc cá nhân và đơn nếu cần", why: "Khai hải quan nếu thuốc thuộc nhóm kiểm soát." },
   { item: "Áo che vai và quần dài", why: "Phố thì mặc bình thường. Đền và nhà thờ cần kín vai, kín gối." },
-  { item: "Đồ lót và áo thun dư vài ngày", why: "Giặt khách sạn trả hôm sau. Đừng gửi ở Hampton đêm 8/11, vì 17:15 ngày 9/11 đã ra sân bay." },
+  { item: "Đồ lót và áo thun dư vài ngày", why: "Giặt khách sạn trả hôm sau. Đừng gửi đồ đêm 8/11, vì 17:15 ngày 9/11 đã ra sân bay." },
 ];
 
 export const masterChecklist = [

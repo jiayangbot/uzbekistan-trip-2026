@@ -12,7 +12,7 @@ export const meta = {
   quoteDate: "24 Oct 2026",
   sources: "Trip.com, tài khoản đang đăng nhập. Đã gồm thuế. Chưa đặt.",
   purpose:
-    "Chỉ đi chơi. Ba khu Tashkent: Amir Temur → Tashkent City (núi cuối tuần) → Mirabad. Thứ Tư 28/10 và 4/11 không đổi khách sạn. Cả 13 đêm có ăn sáng cho 2 người. Quote $2,784, dưới trần $76.",
+    "Chỉ đi chơi. Ba khu Tashkent: Amir Temur → Tashkent City (núi cuối tuần) → Mirabad. Thứ Tư 28/10 và 4/11 không đổi khách sạn. Đêm 8/11 ở InterContinental, không lặp Hampton. Quote các đêm đã có giá là $2,685, đêm cuối chưa có quote.",
 };
 
 /** @type {DayEntry[]} */
@@ -141,9 +141,9 @@ export const days = [
     date: "2026-11-08",
     day: "Sun",
     city: "Tashkent",
-    area: "Amir Temur / Istiqbol",
-    hotel: "Hampton by Hilton",
-    plan: "Checkout Mövenpick sớm. Sharq 711: Samarkand 08:10, Toshkent Markaziy 12:19. Một người toa 06 ghế 016, một người toa 07 ghế 026. Về Hampton. Chiều đi bộ quanh Amir Temur. Mai bay HY531 lúc 21:15.",
+    area: "2 Shakhrisabz",
+    hotel: "InterContinental Tashkent",
+    plan: "Checkout Mövenpick sớm. Sharq 711: Samarkand 08:10, Toshkent Markaziy 12:19. Một người toa 06 ghế 016, một người toa 07 ghế 026. Về InterContinental, không về Hampton. Mai bay HY531 lúc 21:15.",
     transfer: "Sharq 711, 08:10–12:19",
     status: "Planned",
   },
@@ -151,9 +151,9 @@ export const days = [
     date: "2026-11-09",
     day: "Mon",
     city: "Tashkent",
-    area: "Amir Temur, rồi sân bay",
+    area: "Shakhrisabz, rồi sân bay",
     hotel: "Checkout / flight",
-    plan: "Ở Hampton đến chiều. HY531 cất cánh TAS 21:15, hạ cánh Bangkok 05:25 ngày 10/11. Rời khách sạn khoảng 17:15.",
+    plan: "Ở InterContinental đến chiều. HY531 cất cánh TAS 21:15, hạ cánh Bangkok 05:25 ngày 10/11. Rời khách sạn khoảng 17:15.",
     transfer: "",
     status: "Planned",
   },
@@ -236,13 +236,13 @@ export const hotelStays = [
   {
     checkIn: "2026-11-08",
     checkOut: "2026-11-09",
-    name: "Hampton by Hilton Tashkent",
+    name: "InterContinental Tashkent",
     nights: 1,
     actualTotal: 99,
-    breakfast: "Đã gồm, 2 người",
-    cancel: "Hủy trước 23:59 ngày 5/11",
-    note: "King, một đêm. Bay HY531 lúc 21:15 nên ở đến chiều 9/11.",
-    review: hamptonReview,
+    breakfast: "Phòng Classic view không ghi ăn sáng",
+    cancel: "Xem lúc đặt",
+    note: "2 Shakhrisabz, khác Hampton mấy đêm đầu. Xin phòng Square View tầng 12–16. Bay 21:15 nên ở đến chiều 9/11. Chưa có quote đêm này.",
+    review: null,
   },
 ];
 
@@ -368,7 +368,7 @@ export const hotelOptions = [
   {
     id: "hampton-1",
     segment: "Trước giờ bay · 8–9 Nov",
-    tier: "recommended",
+    tier: "alt",
     name: "Hampton by Hilton",
     area: "Istiqbol 17",
     nights: 1,
@@ -376,12 +376,12 @@ export const hotelOptions = [
     cancel: "Hủy trước 23:59 ngày 5/11",
     breakfast: "Đã gồm, 2 người",
     score: "9.3",
-    why: "Ngủ đêm 8/11. Bay 21:15 nên dùng nốt phòng đến chiều 9/11.",
+    why: "Cùng Hampton với mấy đêm đầu, $99. Chỉ lấy nếu muốn rẻ và ngủ lại chỗ cũ.",
   },
   {
     id: "ic-1",
     segment: "Trước giờ bay · 8–9 Nov",
-    tier: "alt",
+    tier: "recommended",
     name: "InterContinental Tashkent",
     area: "2 Shakhrisabz",
     nights: 1,
