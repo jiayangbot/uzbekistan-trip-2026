@@ -541,6 +541,67 @@ a {
   font-size: 0.9rem;
 }
 
+.nights {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.night {
+  display: grid;
+  justify-items: center;
+  min-width: 58px;
+  padding: 6px 8px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  line-height: 1.2;
+  cursor: grab;
+}
+
+.night .dow {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.night .d {
+  font-family: var(--mono);
+  font-weight: 600;
+}
+
+.night.is-locked {
+  cursor: default;
+  border-style: solid;
+  opacity: 0.75;
+}
+
+.night.is-dragging {
+  opacity: 0.45;
+}
+
+.stay-card.is-drop {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.shift-msg:empty {
+  display: none;
+}
+
+.shift-msg {
+  color: var(--warn);
+  font-weight: 600;
+}
+
+.shift-note {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .facts {
   list-style: none;
   display: grid;

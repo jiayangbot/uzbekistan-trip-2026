@@ -72,7 +72,7 @@ function matchesFilter(filter, entry, index) {
     case "travel":
       return dayKind(entry) === "travel" || dayKind(entry) === "flight";
     case "move":
-      return index > 0 && (days[index - 1].hotel !== entry.hotel || days[index - 1].city !== entry.city);
+      return index > 0 && (viewDay(days[index - 1]).hotel !== viewDay(entry).hotel || days[index - 1].city !== entry.city);
     default: {
       const unreachable = /** @type {never} */ (filter);
       throw new Error(`Unknown filter: ${unreachable}`);
@@ -81,16 +81,17 @@ function matchesFilter(filter, entry, index) {
 }
 
 function stayOnDate(iso) {
+  const stays = activeStays();
   const t = parseDate(iso).getTime();
   return (
-    hotelStays.find((s) => t >= parseDate(s.checkIn).getTime() && t < parseDate(s.checkOut).getTime()) ||
-    hotelStays.find((s) => s.checkOut === iso) ||
+    stays.find((s) => t >= parseDate(s.checkIn).getTime() && t < parseDate(s.checkOut).getTime()) ||
+    stays.find((s) => s.checkOut === iso) ||
     null
   );
 }
 
 function areaFor(stay) {
-  return days.find((d) => d.date === stay.checkIn)?.area ?? "";
+  return areaByOrigin[stay.origin || stay.checkIn] || "";
 }
 
 function renderReview(stay) {
@@ -154,18 +155,173 @@ function loadPicks() {
 /** @type {Record<string, string>} */
 let picks = loadPicks();
 
-function optionsForStay(stay) {
-  const segment = segmentOfStay[stay.checkIn];
-  return hotelOptions.filter((o) => o.segment === segment);
+const SHIFT_KEY = "uz-trip-2026-shifts";
+const TASHKENT_ORIGINS = ["2026-10-27", "2026-10-30", "2026-11-02"];
+const LOCKED_WEDNESDAYS = new Set(["2026-10-28", "2026-11-04"]);
+
+/** @type {Record<string, string>} */
+const areaByOrigin = {
+  "2026-10-27": "Amir Temur / Istiqbol",
+  "2026-10-30": "Tashkent City / Ukchi",
+  "2026-11-02": "Mirabad / Oybek",
+  "2026-11-06": "Trung tâm Samarkand",
+  "2026-11-08": "Amir Temur / Istiqbol",
+};
+
+function isoOf(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
+}
+
+function addDays(iso, count) {
+  const date = parseDate(iso);
+  date.setDate(date.getDate() + count);
+  return isoOf(date);
+}
+
+function nightsBetween(start, end) {
+  return Math.round((parseDate(end).getTime() - parseDate(start).getTime()) / 86400000);
+}
+
+function baseStay(origin) {
+  return hotelStays.find((stay) => stay.checkIn === origin);
+}
+
+function tashkentSpan() {
+  const first = baseStay(TASHKENT_ORIGINS[0]);
+  const last = baseStay(TASHKENT_ORIGINS[TASHKENT_ORIGINS.length - 1]);
+  return nightsBetween(first.checkIn, last.checkOut);
+}
+
+function loadShifts() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(SHIFT_KEY) || "{}");
+    if (!raw || typeof raw !== "object") return {};
+    const nums = TASHKENT_ORIGINS.map((origin) => raw[origin]);
+    if (nums.some((nights) => !Number.isInteger(nights) || nights < 1)) return {};
+    if (nums.reduce((sum, nights) => sum + nights, 0) !== tashkentSpan()) return {};
+    return Object.fromEntries(TASHKENT_ORIGINS.map((origin, index) => [origin, nums[index]]));
+  } catch {
+    return {};
+  }
+}
+
+/** @type {Record<string, number>} */
+let shifts = loadShifts();
+let shiftMsg = "";
+
+function nightsFor(origin) {
+  const stored = shifts[origin];
+  if (Number.isInteger(stored) && stored >= 1) return stored;
+  return baseStay(origin).nights;
+}
+
+function isShifted() {
+  return TASHKENT_ORIGINS.some((origin) => nightsFor(origin) !== baseStay(origin).nights);
+}
+
+function activeStays() {
+  /** @type {Array<HotelStay & { origin: string }>} */
+  const stays = [];
+  let cursor = baseStay(TASHKENT_ORIGINS[0]).checkIn;
+  for (const origin of TASHKENT_ORIGINS) {
+    const nights = nightsFor(origin);
+    stays.push({ ...baseStay(origin), origin, checkIn: cursor, checkOut: addDays(cursor, nights), nights });
+    cursor = addDays(cursor, nights);
+  }
+  for (const stay of hotelStays) {
+    if (TASHKENT_ORIGINS.includes(stay.checkIn)) continue;
+    stays.push({ ...stay, origin: stay.checkIn });
+  }
+  return stays;
+}
+
+function nightsOf(stay) {
+  /** @type {string[]} */
+  const dates = [];
+  let cursor = stay.checkIn;
+  while (cursor < stay.checkOut) {
+    dates.push(cursor);
+    cursor = addDays(cursor, 1);
+  }
+  return dates;
+}
+
+function viewDay(entry) {
+  if (/flight/i.test(entry.hotel)) return entry;
+  const stay = activeStays().find((item) => entry.date >= item.checkIn && entry.date < item.checkOut);
+  if (!stay) return entry;
+  const option = optionForStay(stay);
+  return {
+    ...entry,
+    area: areaByOrigin[stay.origin] || entry.area,
+    hotel: optionLabel[option.id] || stay.name,
+  };
+}
+
+/**
+ * @param {string} iso
+ * @param {string} fromOrigin
+ * @param {string} toOrigin
+ * @returns {{ error: string; next?: Record<string, number> }}
+ */
+function shiftPlan(iso, fromOrigin, toOrigin) {
+  if (!TASHKENT_ORIGINS.includes(fromOrigin) || !TASHKENT_ORIGINS.includes(toOrigin)) {
+    return { error: "Chỉ kéo giữa ba khu Tashkent." };
+  }
+  const fromIndex = TASHKENT_ORIGINS.indexOf(fromOrigin);
+  const toIndex = TASHKENT_ORIGINS.indexOf(toOrigin);
+  if (Math.abs(fromIndex - toIndex) !== 1) return { error: "Chỉ kéo sang khu bên cạnh." };
+  const from = activeStays().find((stay) => stay.origin === fromOrigin);
+  const nights = nightsOf(from);
+  const cut = nights.indexOf(iso);
+  if (cut < 0) return { error: "Ngày này không thuộc khu đang kéo." };
+  /** @type {Record<string, number>} */
+  const next = {};
+  for (const origin of TASHKENT_ORIGINS) next[origin] = nightsFor(origin);
+  if (toIndex === fromIndex + 1) {
+    const moved = nights.length - cut;
+    if (cut < 1) return { error: "Mỗi khu giữ ít nhất một đêm." };
+    if (LOCKED_WEDNESDAYS.has(iso)) return { error: "Thứ Tư không đổi khách sạn." };
+    next[fromOrigin] -= moved;
+    next[toOrigin] += moved;
+  } else {
+    const moved = cut + 1;
+    if (moved >= nights.length) return { error: "Mỗi khu giữ ít nhất một đêm." };
+    const boundary = addDays(iso, 1);
+    if (LOCKED_WEDNESDAYS.has(boundary)) return { error: "Thứ Tư không đổi khách sạn." };
+    next[fromOrigin] -= moved;
+    next[toOrigin] += moved;
+  }
+  return { error: "", next };
+}
+
+function tryShift(iso, fromOrigin, toOrigin) {
+  const plan = shiftPlan(iso, fromOrigin, toOrigin);
+  if (plan.error) return plan.error;
+  shifts = plan.next;
+  localStorage.setItem(SHIFT_KEY, JSON.stringify(shifts));
+  return "";
 }
 
 function optionForStay(stay) {
-  const opts = optionsForStay(stay);
-  return opts.find((o) => o.id === picks[stay.checkIn]) || opts.find((o) => o.tier === "recommended") || opts[0];
+  const origin = stay.origin || stay.checkIn;
+  const opts = hotelOptions.filter((o) => o.segment === segmentOfStay[origin]);
+  return opts.find((o) => o.id === picks[origin]) || opts.find((o) => o.tier === "recommended") || opts[0];
+}
+
+function quoteTotal(stay) {
+  const opt = optionForStay(stay);
+  const base = hotelStays.find((s) => s.checkIn === (stay.origin || stay.checkIn));
+  if (!opt || opt.total == null) return base?.actualTotal ?? 0;
+  if (stay.nights === opt.nights) return opt.total;
+  return Math.round((opt.total / opt.nights) * stay.nights);
 }
 
 function chosenTotal() {
-  return hotelStays.reduce((sum, stay) => sum + (optionForStay(stay)?.total ?? stay.actualTotal), 0);
+  return activeStays().reduce((sum, stay) => sum + quoteTotal(stay), 0);
 }
 
 function breakfastIncluded(option) {
@@ -233,6 +389,7 @@ function renderOverview() {
             ${perNight(quoted, totalNights)}/đêm so với trần ${perNight(meta.budgetUsd, totalNights)}/đêm
           </p>
           ${quoted === meta.quotedTotalUsd ? "" : `<p class="muted">Quote gốc ${fmtMoney.format(meta.quotedTotalUsd)}. Đang chọn phương án khác.</p>`}
+          ${isShifted() ? `<p class="muted">Số đêm đã kéo khác quote. Tổng là giá mỗi đêm nhân số đêm mới, chưa tra lại khách sạn.</p>` : ""}
         </article>
         <article class="card">
           <h2 class="card-label">${icon("bed")} Lưu trú</h2>
@@ -249,10 +406,29 @@ function renderOverview() {
     </section>`;
 }
 
+function liveSegmentTitle(segment) {
+  const stay = activeStays().find((item) => segmentOfStay[item.origin] === segment);
+  if (!stay) return segment;
+  return `${areaByOrigin[stay.origin]} · ${shortDate(stay.checkIn)}–${shortDate(stay.checkOut)}`;
+}
+
+function nightChips(stay) {
+  const movable = TASHKENT_ORIGINS.includes(stay.origin);
+  return nightsOf(stay)
+    .map((iso) => {
+      const date = parseDate(iso);
+      const label = `${fmtWeekday.format(date)} ${shortDate(iso)}`;
+      if (!movable) return `<li><span class="night is-locked">${label}</span></li>`;
+      return `<li><div class="night" role="button" tabindex="0" draggable="true" data-night="${iso}" data-from="${stay.origin}" aria-label="${label}. Kéo sang khu bên cạnh, hoặc bấm mũi tên trái phải."><span class="dow">${fmtWeekday.format(date)}</span><span class="d">${shortDate(iso)}</span></div></li>`;
+    })
+    .join("");
+}
+
 function renderStays() {
+  const stays = activeStays();
   const start = parseDate(days[0].date).getTime();
   const span = parseDate(days[days.length - 1].date).getTime() + 86400000 - start;
-  const strip = hotelStays
+  const strip = stays
     .map((s, i) => {
       const left = ((parseDate(s.checkIn).getTime() - start) / span) * 100;
       const width = ((parseDate(s.checkOut).getTime() - parseDate(s.checkIn).getTime()) / span) * 100;
@@ -260,14 +436,17 @@ function renderStays() {
     })
     .join("");
 
-  const cards = hotelStays
+  const cards = stays
     .map((s, i) => {
       const opt = optionForStay(s);
       const label = optionLabel[opt.id] || s.name;
       const links = stayLinks(s, label);
       const meal = breakfastIncluded(opt) ? "ăn sáng cho 2 người" : opt.breakfast;
+      const total = quoteTotal(s);
+      const base = baseStay(s.origin);
+      const scaled = s.nights !== base.nights;
       return `
-        <li class="card stay-card">
+        <li class="card stay-card" data-origin="${s.origin}">
           <div class="stay-head">
             <span class="stay-index seg-${i}" aria-hidden="true">${i + 1}</span>
             <div>
@@ -276,7 +455,9 @@ function renderStays() {
             </div>
           </div>
           <p class="stay-dates">${shortDate(s.checkIn)} → ${shortDate(s.checkOut)} · ${s.nights} đêm</p>
-          <p class="stay-price"><strong>${perNight(opt.total, s.nights)}</strong>/đêm <span>· ${meal} · ${fmtMoney.format(opt.total)} tổng</span></p>
+          <ul class="nights">${nightChips(s)}</ul>
+          <p class="stay-price"><strong>${perNight(total, s.nights)}</strong>/đêm <span>· ${meal} · ${fmtMoney.format(total)} tổng</span></p>
+          ${scaled ? `<p class="muted">Quote gốc ${base.nights} đêm, ${fmtMoney.format(opt.total)}. Số mới tính theo cùng giá mỗi đêm.</p>` : ""}
           <ul class="facts">
             <li>Hủy: ${opt.cancel}</li>
           </ul>
@@ -304,7 +485,7 @@ function renderStays() {
     .map(
       ([segment, opts]) => `
       <div class="option-group">
-        <h4>${segment}</h4>
+        <h4>${liveSegmentTitle(segment)}</h4>
         <ul>
           ${opts
             .map((o) => {
@@ -332,7 +513,9 @@ function renderStays() {
     <section class="section" id="stays" aria-labelledby="stays-title">
       <div class="section-head">
         <h2 id="stays-title">Khách sạn theo chặng</h2>
-        <p class="muted">Giá Trip.com cho 2 người, đã gồm thuế. Bấm một phương án để chọn cho cả chặng.</p>
+        <p class="muted">Kéo ngày sang khu bên cạnh trong Tashkent. Ba khu giữ liền nhau. Thứ Tư 28/10 và 4/11 không phải ngày đổi khách sạn. Samarkand và đêm 8/11 đứng yên.</p>
+        <p id="shift-msg" class="shift-msg" role="status">${shiftMsg}</p>
+        ${isShifted() ? `<button type="button" class="btn" data-shift-reset>Trả lại số đêm gốc</button>` : ""}
       </div>
       <div class="strip" aria-hidden="true">${strip}</div>
       <ol class="stay-grid">${cards}</ol>
@@ -370,7 +553,7 @@ function renderDetail(entry, stay) {
           stay && links
             ? `<section class="block">
                 <h4>${icon("bed", 16)} Khách sạn đêm nay</h4>
-                <p><strong>${opt.name}</strong> · ${perNight(opt.total, stay.nights)}/đêm</p>
+                <p><strong>${opt.name}</strong> · ${perNight(quoteTotal(stay), stay.nights)}/đêm</p>
                 <p>${breakfastIncluded(opt) ? `${icon("check", 14)} Ăn sáng cho 2 người, đã gồm trong giá.` : `${icon("alert", 14)} ${opt.breakfast}.`}</p>
                 <p class="muted">${opt.cancel}. ${sameHotel(stay, opt) ? stay.note : opt.why}</p>
                 ${sameHotel(stay, opt) ? renderReview(stay) : ""}
@@ -435,13 +618,15 @@ function renderSlots(date) {
 }
 
 function renderDay(entry, index) {
-  const kind = dayKind(entry);
+  const view = viewDay(entry);
+  const kind = dayKind(view);
   const info = kindInfo(kind);
   const stay = stayOnDate(entry.date);
   const opt = stay ? optionForStay(stay) : null;
   const food = slotCost(daySlots[entry.date] || []);
-  const prev = index > 0 ? days[index - 1] : null;
-  const moved = prev && (prev.hotel !== entry.hotel || prev.city !== entry.city);
+  const prev = index > 0 ? viewDay(days[index - 1]) : null;
+  const moved = prev && (prev.hotel !== view.hotel || prev.city !== view.city);
+  const areaMoved = view.area !== entry.area;
   const d = parseDate(entry.date);
   return `
     <li class="day kind-${kind}" id="d-${entry.date}" data-index="${index}">
@@ -454,18 +639,19 @@ function renderDay(entry, index) {
           </span>
           <span class="day-main">
             <span class="sr-only">${fmtLong.format(d)}. </span>
-            <span class="day-title">${entry.city} <span class="muted">· ${entry.area}</span></span>
+            <span class="day-title">${view.city} <span class="muted">· ${view.area}</span></span>
             <span class="tags">
               <span class="tag tag-${kind}">${icon(info.icon, 13)} ${info.label}</span>
               ${moved ? `<span class="tag tag-move">${icon("swap", 13)} Đổi chỗ ở</span>` : ""}
-              ${opt && entry.hotel !== "Checkout / flight" ? `<span class="tag tag-plain">${icon("bed", 13)} ${optionLabel[opt.id] || entry.hotel}</span>` : ""}
-              ${opt && entry.hotel !== "Checkout / flight" && breakfastIncluded(opt) ? `<span class="tag tag-ok">${icon("check", 13)} Ăn sáng đã gồm</span>` : ""}
+              ${opt && view.hotel !== "Checkout / flight" ? `<span class="tag tag-plain">${icon("bed", 13)} ${optionLabel[opt.id] || view.hotel}</span>` : ""}
+              ${opt && view.hotel !== "Checkout / flight" && breakfastIncluded(opt) ? `<span class="tag tag-ok">${icon("check", 13)} Ăn sáng đã gồm</span>` : ""}
               ${food > 0 ? `<span class="tag tag-plain">${icon("wallet", 13)} Ăn ~${fmtMoney.format(food)}</span>` : ""}
             </span>
           </span>
           <span class="chev">${icon("chevron", 20)}</span>
         </button>
       </h3>
+      ${areaMoved ? `<p class="shift-note">Đêm này ngủ ở ${view.area}. Phần đi chơi trong ngày vẫn theo lịch gốc.</p>` : ""}
       ${renderSlots(entry.date)}
       <div class="day-panel" id="p-${entry.date}" role="region" aria-label="Chi tiết ${fmtLong.format(d)}" hidden>
         ${renderDetail(entry, stay)}
@@ -647,7 +833,18 @@ function mount() {
   const root = document.getElementById("app");
   paint();
 
+  let dragNight = null;
+
   root.addEventListener("click", (event) => {
+    const reset = event.target.closest("[data-shift-reset]");
+    if (reset) {
+      shifts = {};
+      shiftMsg = "";
+      localStorage.removeItem(SHIFT_KEY);
+      paint();
+      return;
+    }
+
     const pick = event.target.closest("[data-pick]");
     if (pick) {
       const id = pick.getAttribute("data-pick");
@@ -688,6 +885,55 @@ function mount() {
       expand.textContent = open ? "Thu gọn tất cả" : "Mở tất cả";
       root.querySelectorAll(".day:not([hidden])").forEach((li) => setDayOpen(li, open));
     }
+  });
+
+  root.addEventListener("dragstart", (event) => {
+    const chip = event.target.closest("[data-night]");
+    if (!chip) return;
+    dragNight = { iso: chip.getAttribute("data-night"), from: chip.getAttribute("data-from") };
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/plain", dragNight.iso);
+    chip.classList.add("is-dragging");
+  });
+
+  root.addEventListener("dragend", () => {
+    dragNight = null;
+    root.querySelectorAll(".is-drop, .is-dragging").forEach((el) => el.classList.remove("is-drop", "is-dragging"));
+  });
+
+  root.addEventListener("dragover", (event) => {
+    const card = event.target.closest("[data-origin]");
+    if (!dragNight || !card) return;
+    const to = card.getAttribute("data-origin");
+    if (shiftPlan(dragNight.iso, dragNight.from, to).error) return;
+    event.preventDefault();
+    root.querySelectorAll(".is-drop").forEach((el) => el.classList.remove("is-drop"));
+    card.classList.add("is-drop");
+  });
+
+  root.addEventListener("drop", (event) => {
+    const card = event.target.closest("[data-origin]");
+    if (!dragNight || !card) return;
+    event.preventDefault();
+    const iso = dragNight.iso;
+    shiftMsg = tryShift(iso, dragNight.from, card.getAttribute("data-origin"));
+    dragNight = null;
+    paint();
+    document.querySelector(`[data-night="${iso}"]`)?.focus({ preventScroll: true });
+  });
+
+  root.addEventListener("keydown", (event) => {
+    const chip = event.target.closest("[data-night]");
+    if (!chip || (event.key !== "ArrowLeft" && event.key !== "ArrowRight")) return;
+    const from = chip.getAttribute("data-from");
+    const index = TASHKENT_ORIGINS.indexOf(from);
+    const to = event.key === "ArrowRight" ? TASHKENT_ORIGINS[index + 1] : TASHKENT_ORIGINS[index - 1];
+    if (!to) return;
+    event.preventDefault();
+    const iso = chip.getAttribute("data-night");
+    shiftMsg = tryShift(iso, from, to);
+    paint();
+    document.querySelector(`[data-night="${iso}"]`)?.focus({ preventScroll: true });
   });
 
   root.addEventListener("change", (event) => {
