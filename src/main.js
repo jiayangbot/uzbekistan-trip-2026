@@ -529,7 +529,7 @@ function renderPrep() {
             <li>Vào ${extLink("https://eticket.uzrailpass.uz/en/", "eticket.uzrailpass.uz")}. Site cũ eticket.railway.uz chuyển tiếp sang đây.</li>
             <li>6/11, tàu 768: Toshkent Markaziy 07:55, Samarkand 10:25.</li>
             <li>8/11, tàu 769: Samarkand 16:56, Toshkent Markaziy 19:17. Rồi ngủ Hampton.</li>
-            <li>Chỉ bỏ đêm Hampton nếu bay 9/11 từ khoảng 12:00 giờ Tashkent. Khi đó đi tàu 771 sáng 9/11, 05:21 đến ga 07:42, rồi ra sân bay.</li>
+            <li>HY531 cất cánh TAS 21:15 ngày 9/11, Bangkok 05:25 ngày 10/11. Rời Hampton khoảng 17:15. Không đi tàu 05:21 sáng 9/11.</li>
             <li>Điền đúng số passport. Ga Tashkent là Markaziy, không phải ga Nam. Giữ PDF offline, có mặt trước giờ tàu khoảng 40 phút.</li>
           </ol>
           ${extLink("https://oxusroad.com/en/trains/afrosiyob/", "Giá và giờ mở bán", "text-link")}
