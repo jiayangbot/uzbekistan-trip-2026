@@ -527,7 +527,7 @@ function renderPrep() {
           <h3>${icon("train")} Đặt tàu Afrosiyob</h3>
           <ol class="steps">
             <li>Vào ${extLink("https://eticket.uzrailpass.uz/en/", "eticket.uzrailpass.uz")}. Site cũ eticket.railway.uz chuyển tiếp sang đây.</li>
-            <li>6/11: ô FROM gõ Tashkent, TO gõ Samarkand. Chọn Afrosiyob 768, đi 07:55, tới 10:25. Đừng gõ Toshkent Markaziy.</li>
+            <li>6/11: FROM Tashkent, TO Samarkand. Kéo xuống quá dòng 06:33, chọn Afrosiyob 768 lúc 07:55. Hết ghế thì lấy Sharq 710 lúc 08:37.</li>
             <li>8/11, tàu 769: Samarkand 16:56, Toshkent Markaziy 19:17. Rồi ngủ Hampton.</li>
             <li>HY531 cất cánh TAS 21:15 ngày 9/11, Bangkok 05:25 ngày 10/11. Rời Hampton khoảng 17:15. Không đi tàu 05:21 sáng 9/11.</li>
             <li>Điền đúng số passport. Ga Tashkent là Markaziy, không phải ga Nam. Giữ PDF offline, có mặt trước giờ tàu khoảng 40 phút.</li>

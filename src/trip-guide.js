@@ -288,8 +288,8 @@ export const dayDetails = {
       steps: [
         "Vào eticket.uzrailpass.uz, chọn English. Ô FROM gõ Tashkent, bấm gợi ý Tashkent. Đừng gõ Toshkent Markaziy, ô tìm không ra chữ đó. Đừng chọn Tashkent South, đó là ga Nam.",
         "Ô TO gõ Samarkand. Ngày 06.11.2026, rồi SEARCH.",
-        "Trong kết quả, dòng tàu mới ghi ga đi là Toshkent Markaziy. Chọn Afrosiyob 768: đi 07:55, tới 10:25. Bảng giờ chung có khi ghi 08:00, vẫn là tàu 768, tới 10:25.",
-        "Sớm hơn nếu 768 hết chỗ: 766 lúc 07:30 tới 09:43, hoặc 770 lúc 08:30 tới 10:49. Cả hai đi tiếp Bukhara nhưng dừng Samarkand.",
+        "Kéo xuống dưới dòng 06:33. Thứ tự tiếp theo là 07:00, rồi Afrosiyob 766 lúc 07:30, rồi Afrosiyob 768 lúc 07:55 tới 10:25. Dòng 768 ghi Tashkent Central.",
+        "Nếu 768 cũng hiện There are no seats, lấy Sharq 710 lúc 08:37, tới Samarkand 11:46. Ngày 24/10 còn 4 ghế ngồi, 300.560 som một vé. Vẫn kịp Registan buổi chiều.",
         "Không có tàu nhanh giữa trưa. Chuyến muộn trong ngày là 772 lúc 19:48, tới 22:13, mất buổi chiều Registan.",
         "Chọn 2 ghế, điền đúng passport, giữ PDF. Có mặt ga khoảng 07:15. Yandex từ Swissôtel tới ga trung tâm, không phải ga Nam.",
       ],
