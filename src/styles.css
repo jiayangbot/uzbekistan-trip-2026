@@ -549,6 +549,35 @@ a {
   color: var(--muted);
 }
 
+.review {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  font-size: 0.925rem;
+}
+
+.review-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  font-weight: 600;
+}
+
+.review-watch {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  color: var(--muted);
+}
+
+.review-watch .icon {
+  margin-top: 4px;
+  color: var(--warn);
+}
+
 .alternatives {
   padding: 0;
 }

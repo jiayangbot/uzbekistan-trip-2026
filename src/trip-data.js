@@ -1,5 +1,6 @@
 /** @typedef {{ date: string; day: string; city: string; area: string; hotel: string; work: string; plan: string; transfer: string; status: string }} DayEntry */
-/** @typedef {{ checkIn: string; checkOut: string; name: string; nights: number; actualTotal: number; breakfast: string; cancel: string; note: string }} HotelStay */
+/** @typedef {{ score: string; count: string; url: string; good: string; watch: string }} HotelReview */
+/** @typedef {{ checkIn: string; checkOut: string; name: string; nights: number; actualTotal: number; breakfast: string; cancel: string; note: string; review: HotelReview }} HotelStay */
 /** @typedef {{ id: string; segment: string; tier: string; name: string; area: string; nights: number; total: number | null; cancel: string; breakfast: string; score: string; why: string }} HotelOption */
 
 export const meta = {
@@ -172,6 +173,15 @@ export const days = [
   },
 ];
 
+const hamptonReview = {
+  score: "9.3/10",
+  count: "khoảng 1.100 review, Trip.com",
+  url: "https://us.trip.com/hotels/tashkent-hotel-detail-78123404/hampton-by-hilton-tashkent/review.html",
+  good: "Phòng mới, sạch, sát Amir Temur. Bữa sáng ngon nhưng ít món, có đồ Uzbek.",
+  watch:
+    "Khách tháng 8/2026 ở tầng trên cùng bị rung máy lạnh trên mái. Tháng 7/2026 có người báo wifi bắt mạnh nhưng chậm. Đường lớn hơi ồn. Đo wifi lúc nhận phòng 27/10 và xin phòng không sát mái, vì họp sáng hôm sau.",
+};
+
 /** @type {HotelStay[]} */
 export const hotelStays = [
   {
@@ -183,6 +193,7 @@ export const hotelStays = [
     breakfast: "Đã gồm, 2 người",
     cancel: "Hủy trước 23:59 ngày 24/10",
     note: "King, khoảng 25 m². Istiqbol 17, cạnh Amir Temur. Hạn hủy là hôm nay.",
+    review: hamptonReview,
   },
   {
     checkIn: "2026-10-30",
@@ -193,6 +204,13 @@ export const hotelStays = [
     breakfast: "Đã gồm, 2 người",
     cancel: "Hủy trước 16:00 ngày 29/10",
     note: "Standard, 18–21 m². 3 Ukchi, đối diện City Park. Gói ăn sáng đắt hơn phòng trống $105.",
+    review: {
+      score: "9.2/10",
+      count: "855 review, Booking.com",
+      url: "https://www.booking.com/hotel/uz/holiday-inn-tashkent-city-an-ihg.html",
+      good: "Vị trí 9.7, wifi 9.2. Bữa sáng được khen nhiều, có samsa và bánh. Reddit nói sát công viên và metro khoảng 5 phút.",
+      watch: "Phòng standard bình thường. Một khách công tác tháng 4/2025 kể có nhạc sống 20:00–22:00 và TV trong phòng hỏng.",
+    },
   },
   {
     checkIn: "2026-11-02",
@@ -203,6 +221,14 @@ export const hotelStays = [
     breakfast: "Đã gồm, 2 người",
     cancel: "Hủy trước 23:59 ngày 1/11",
     note: "Advantage King, khoảng 35 m², ban công. Shakhrisabz 4, Mirabad, gần metro Oybek.",
+    review: {
+      score: "9.3/10",
+      count: "166 review, Trip.com",
+      url: "https://us.trip.com/hotels/tashkent-hotel-detail-128118398/swisstel-tashkent/review.html",
+      good: "Sạch 9.6. Khách công tác tháng 9/2026 khen yên và hợp đi họp. Bữa sáng được nhắc là nhiều món và ngon. Phòng King rộng.",
+      watch:
+        "Một phòng King tháng 7/2026 thoát nước vòi sen kém. Cuối tháng 10/2026 có khách phải nhắc mới được dọn phòng. Công trường bên cạnh ồn hồi tháng 3, khách tháng 7 nói đã yên.",
+    },
   },
   {
     checkIn: "2026-11-06",
@@ -213,6 +239,13 @@ export const hotelStays = [
     breakfast: "Đã gồm, 2 người",
     cancel: "Hủy trước 23:59 ngày 5/11",
     note: "Hai giường đơn, khoảng 28 m². Gói ăn sáng đắt hơn phòng trống $75.",
+    review: {
+      score: "9.5/10",
+      count: "115 review, Trip.com",
+      url: "https://us.trip.com/hotels/samarkand-hotel-detail-103084263/mvenpick-samarkand/review.html",
+      good: "Vị trí 9.7. Bữa sáng có món Uzbek, hồ bơi và cách âm được khen tháng 8/2026. Gur-Emir khoảng 3 phút, Registan khoảng 5–15 phút đi bộ.",
+      watch: "Phòng thường không đẹp bằng sảnh. Suite thì nhà tắm nhỏ và nước sen tràn sàn. Mình đang giữ phòng twin thường, không phải suite.",
+    },
   },
   {
     checkIn: "2026-11-08",
@@ -223,6 +256,7 @@ export const hotelStays = [
     breakfast: "Đã gồm, 2 người",
     cancel: "Hủy trước 23:59 ngày 5/11",
     note: "King, một đêm trước giờ bay. Sáng 9/11 ăn sáng rồi ra sân bay.",
+    review: hamptonReview,
   },
 ];
 

@@ -92,6 +92,17 @@ function areaFor(stay) {
   return days.find((d) => d.date === stay.checkIn)?.area ?? "";
 }
 
+function renderReview(stay) {
+  const review = stay.review;
+  if (!review) return "";
+  return `
+    <div class="review">
+      <p>${extLink(review.url, `${review.score} · ${review.count}`, "review-link")}</p>
+      <p>${review.good}</p>
+      <p class="review-watch">${icon("alert", 14)} ${review.watch}</p>
+    </div>`;
+}
+
 function extLink(url, label, cls = "") {
   return `<a class="${cls}" href="${url}" target="_blank" rel="noopener noreferrer">${label}${icon("external", 14)}<span class="sr-only"> (mở tab mới)</span></a>`;
 }
@@ -204,6 +215,7 @@ function renderStays() {
             <li>Ăn sáng: ${s.breakfast}</li>
             <li>Hủy: ${s.cancel}</li>
           </ul>
+          ${renderReview(s)}
           ${
             links
               ? `<div class="actions">
@@ -290,6 +302,7 @@ function renderDetail(entry, stay) {
                 <p><strong>${stay.name}</strong> · ${perNight(stay.actualTotal, stay.nights)}/đêm</p>
                 <p>${icon("check", 14)} Ăn sáng ${stay.breakfast.toLowerCase()}.</p>
                 <p class="muted">${stay.cancel}. ${stay.note}</p>
+                ${renderReview(stay)}
                 <div class="actions">
                   ${extLink(links.trip, "Trip.com", "btn btn-primary")}
                   ${extLink(links.booking, "Booking", "btn")}
