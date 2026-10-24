@@ -107,7 +107,7 @@ export const dayDetails = {
   "2026-10-27": {
     weather: tashkentLateOct,
     places: [
-      { name: "TAS Terminal 2", query: "Tashkent International Airport Terminal 2", tip: "HY532: Bangkok 06:55, TAS 11:45, cả hai là giờ địa phương. Bay quốc tế vào Terminal 2. Sau hải quan: đổi tiền, mua SIM, rồi mới ra cửa." },
+      { name: "TAS Terminal 2", query: "Tashkent International Airport Terminal 2", tip: "HY532: Bangkok 06:55, TAS 11:45. Bay quốc tế vào Terminal 2. Sau hải quan mua SIM, ra làn 1 gọi Yandex về Hampton. Metro không có ga ở sân bay." },
       { name: "Hampton by Hilton", query: "Hampton by Hilton Tashkent Istiqbol 17", tip: "Istiqbol 17, quận gần Amir Temur. Check-in, test wifi trước khi ra ngoài." },
       { name: "Quảng trường Amir Temur", query: "Amir Temur Square Tashkent", tip: "Đi bộ từ khách sạn hoặc Yandex vài phút. Tối nay chỉ cần làm quen khu trung tâm." },
       { name: "Mustaqillik maydoni", query: "Independence Square Tashkent", tip: "Quảng trường Độc lập, cạnh Hampton. Đi bộ được nếu không mệt sau bay." },
@@ -423,6 +423,20 @@ export const localLife = [
     links: [{ label: "Tiền mặt và ATM", url: "https://oxusroad.com/en/travel-guide/money/" }],
   },
   {
+    title: "Đi trong thành phố",
+    icon: "train",
+    paragraphs: [
+      "Tashkent có metro, chạy khoảng 5:00 đến nửa đêm. Một lượt đi đâu cũng một giá. Từ 1/10/2026, chạm thẻ ngân hàng, điện thoại hoặc thẻ ATTO là 2.500 som. Vé giấy mua ở ki-ốt là 3.000 som. Không còn xu nhựa. Đổi tuyến trong cùng một lần qua cửa thì không tính thêm. Mỗi người một lần chạm. Ga đẹp để xem: Kosmonavtlar, Alisher Navoi.",
+      "Hampton sát ga Amir Temur Xiyoboni. Holiday Inn gần ga Xalqlar Do'stligi. Swissôtel gần ga Oybek. Quảng trường thì đi bộ. Mỏi, tối, hoặc có vali thì gọi Yandex Go. App hiện giá trước khi nhận xe. Xe thường là Chevrolet trắng, đối biển số với app. Không vẫy taxi ngoài đường. Samarkand không có metro, trong phố cũng dùng Yandex.",
+      "Sân bay hiện tại không có ga metro. Ga từng được đặt tên dự án Aeroport trên tuyến vòng là Tolariq, nằm vòng ngoài thành phố, không phải nhà ga bay. Ngày 27/10, HY532 vào Terminal 2 lúc 11:45. Hai người có vali: mua SIM trong nhà ga, ra làn 1 gọi Yandex về Hampton. Bảng giá tối đa tháng 9/2026 tính tới quảng trường Amir Temur khoảng 20.000 som cho 7,6 km, trước phụ phí giờ đông. App hiện số cuối. Chưa có mạng thì quầy taxi trong sảnh, giá trong thành phố từ 50.000 som, chốt tại quầy. Đừng nhận người chào trong sảnh.",
+      "Ngày 9/11 rời khách sạn khoảng 17:15, Yandex về Terminal 2. Không đi metro ra sân bay.",
+    ],
+    links: [
+      { label: "Từ sân bay vào phố", url: "https://oxusroad.com/en/travel-guide/tashkent-airport-arrival/" },
+      { label: "Giá vé ATTO", url: "https://atto.uz/en/news/atto-for-passengers" },
+    ],
+  },
+  {
     title: "Ăn mặc và giặt",
     icon: "shirt",
     paragraphs: [
@@ -452,6 +466,7 @@ export const sources = [
   { label: "Site vé tàu", url: "https://eticket.uzrailpass.uz/en/" },
   { label: "Reddit: SIM, Yandex, tiền", url: "https://www.reddit.com/r/Uzbekistan/comments/1nmsn31/firsttime_tourist_tips/" },
   { label: "Đô la và ATM ở Uzbekistan", url: "https://oxusroad.com/en/travel-guide/money/" },
+  { label: "Từ sân bay Tashkent vào phố", url: "https://oxusroad.com/en/travel-guide/tashkent-airport-arrival/" },
   { label: "Tỷ giá SuperRich Thailand", url: "https://www.superrichthailand.com/exchange-rate" },
   { label: "Sân bay và ga", url: "https://oxusroad.com/en/travel-guide/" },
 ];
