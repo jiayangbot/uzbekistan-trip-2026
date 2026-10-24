@@ -92,9 +92,9 @@ const simTip = {
 };
 
 const moneyTip = {
-  text: "Đổi USD tờ sạch, không rách, không viết, không gấp nát. Quầy ngân hàng sân bay mở 24 giờ. Mang khoảng $250/người tiền mặt nếu khách sạn và tàu đã trả trước. ATM Visa/Mastercard chọn rút bằng som, không chọn quy đổi về tiền nước mình.",
-  source: "Oxus Road, cập nhật tháng 9/2026",
-  url: "https://oxusroad.com/en/travel-guide/",
+  text: "Som không nên mua ở Bangkok. Mua USD tờ 100 tại SuperRich trước khi ra sân bay, rồi đổi sang som ở Tashkent. Sân bay chỉ đổi khoảng $100–200 cho mấy ngày đầu. Visa và Mastercard dùng được ở khách sạn, mall và Yandex. Chợ và quán nhỏ cần tiền mặt.",
+  source: "Oxus Road, tiền mặt và thẻ, tháng 9/2026",
+  url: "https://oxusroad.com/en/travel-guide/money/",
 };
 
 export const dayDetails = {
@@ -377,11 +377,12 @@ export const dayDetails = {
 export const packing = [
   { item: "Áo khoác vừa và một lớp ấm", why: "Trưa gần 20°C, đêm 4–7°C. Núi lạnh hơn." },
   { item: "Giày đi bộ đã đi quen", why: "Registan, chợ, và phố đi bộ." },
-  { item: "Khăn cổ, mũ nhẹ", why: "Gió ở quảng trường và trên Amirsoy." },
+  { item: "Khăn cổ, mũ nhẹ", why: "Gió ở quảng trường và trên Amirsoy. Khăn cũng trùm đầu ở Hazrati Imam và Shah-i-Zinda." },
   { item: "Ổ cắm loại C hoặc F", why: "Uzbekistan 220V, ổ châu Âu." },
-  { item: "USD tờ đẹp", why: "Quầy đổi từ chối tờ rách, viết, gấp nát." },
+  { item: "USD tờ 100, khoảng $600 cho hai người", why: "Mua ở SuperRich Bangkok. Tờ sạch, không rách, không viết. Som đổi ở Tashkent." },
   { item: "Thuốc cá nhân và đơn nếu cần", why: "Khai hải quan nếu thuốc thuộc nhóm kiểm soát." },
-  { item: "Áo che vai", why: "Shah-i-Zinda và nhà thờ yêu cầu ăn mặc kín." },
+  { item: "Áo che vai và quần dài", why: "Phố thì mặc bình thường. Đền và nhà thờ cần kín vai, kín gối." },
+  { item: "Đồ lót và áo thun dư vài ngày", why: "Giặt khách sạn trả hôm sau. Đêm 8/11 không kịp lấy đồ." },
 ];
 
 export const masterChecklist = [
@@ -392,6 +393,53 @@ export const masterChecklist = [
   { label: "E-mehmon tại mỗi khách sạn", priority: "High" },
   { label: "Cài Yandex Go và giữ số Uzbekistan", priority: "High" },
   { label: "Báo giá xe Amirsoy, chưa chốt $150 trong bảng", priority: "Medium" },
+  { label: "Đổi USD tờ 100 ở SuperRich, Bangkok, trước giờ ra sân bay", priority: "Medium" },
+];
+
+export const localLife = [
+  {
+    title: "Đổi tiền ở Bangkok",
+    icon: "wallet",
+    paragraphs: [
+      "Mua đô la, không mua som. SuperRich ở Bangkok hầu như không bán som, và tỷ giá som ở Thái kém hơn quầy ngân hàng ở Tashkent.",
+      "Có hai hãng khác nhau. SuperRich Thailand là bảng xanh, trụ sở Rajdamri Soi 1, gần BTS Chit Lom. SuperRich 1965 là bảng cam, nhiều chi nhánh, trụ sở ở Silom. Sáng hôm đổi, mở hai trang tỷ giá và chọn chỗ bán tờ USD 100 rẻ hơn. Sáng 24/10/2026, bảng xanh bán tờ 100 với giá 33.70 baht một đô. Tờ 50 gần bằng tờ 100. Tờ 20 và tờ nhỏ bị trừ.",
+      "Đổi trong thành phố trước khi ra sân bay. Quầy trong sân bay Bangkok thường kém hơn. Mang hộ chiếu. Tờ phải phẳng, không rách, không viết, không ghim. Với hai người, khách sạn và tàu trả bằng thẻ, khoảng $600 tiền mặt là đủ. Đổi $100–200 ngay ở TAS cho vài ngày đầu, phần còn lại đổi ở ngân hàng trong thành phố.",
+    ],
+    links: [
+      { label: "Tỷ giá SuperRich xanh", url: "https://www.superrichthailand.com/exchange-rate" },
+      { label: "Tỷ giá SuperRich cam", url: "https://www.superrich1965.com/" },
+    ],
+  },
+  {
+    title: "Quẹt thẻ ở Uzbekistan",
+    icon: "wallet",
+    paragraphs: [
+      "Visa và Mastercard dùng được ở khách sạn, nhà hàng có máy, siêu thị, mall, Yandex Go và trang mua vé tàu. Visa được nhận rộng hơn Mastercard một chút. American Express đừng tính vào. Mang hai thẻ của hai ngân hàng, và báo ngân hàng trước khi bay.",
+      "ATM chỉ nhả som, không nhả đô. Phí máy khoảng 1–1,5% ở Kapitalbank, Hamkorbank và NBU, cộng phí ngân hàng phát hành thẻ. Màn hình hỏi quy đổi về tiền nước mình thì chọn som. Rút một lần cho vài ngày, vì cuối tuần máy đôi khi hết tiền.",
+      "Chợ Chorsu, chợ Siab, quán lề đường, trà đạo nhỏ và taxi vẫy tay cần tiền mặt. Từ tháng 4/2026, rượu, thuốc lá ở cửa hàng và xăng phải trả bằng thẻ. Nhà hàng và khách sạn vẫn nhận tiền mặt cho rượu.",
+    ],
+    links: [{ label: "Tiền mặt và ATM", url: "https://oxusroad.com/en/travel-guide/money/" }],
+  },
+  {
+    title: "Ăn mặc và giặt",
+    icon: "shirt",
+    paragraphs: [
+      "Phố Tashkent và Samarkand mặc như đi chơi mùa thu: áo thun hoặc sơ mi, quần dài, giày đã đi quen. Không cần vest. Tối khoảng 4–7°C nên có áo khoác hoặc fleece. Ngày núi mặc thêm một lớp, kính râm, giày kín. Trưa vẫn có nắng.",
+      "Vào Hazrati Imam, nhà thờ và Shah-i-Zinda thì kín vai, kín gối. Khăn cổ dùng trùm đầu. Cởi giày ở nhà thờ, nhà người ta và một số quán trà. Ngoài đường phụ nữ không cần trùm khăn.",
+      "Bốn khách sạn đều giặt qua lễ tân, thường trả tối hôm sau. Gửi ở Holiday Inn khoảng 31/10 hoặc ở Swissôtel khoảng 3/11, lấy trước sáng 6/11 lên tàu. Đêm 8/11 không gửi, vì sáng 9/11 bay. Quần áo lót giặt trong phòng thì khó khô vì trời mát, nên mang dư vài bộ.",
+    ],
+    links: [],
+  },
+  {
+    title: "Người và tiếng",
+    icon: "users",
+    paragraphs: [
+      "Người dễ mến, hay mời trà và bánh. Từ chối thì mỉm cười, tay để ngang ngực, không cần giải thích dài. Chợ thì mặc cả vui. Quán có menu thì trả đúng giá. Boa không bắt buộc. Yandex đã chốt giá thì không boa. Nhà hàng ngồi xuống có thể làm tròn hoặc để khoảng 10% nếu thích.",
+      "Tiếng đi đường là tiếng Uzbek và tiếng Nga. Tashkent dùng tiếng Nga rất nhiều ở khách sạn, taxi và người lớn tuổi. Samarkand thêm tiếng Tajik. Tiếng Anh có ở lễ tân và một phần người trẻ, đừng trông vào quán nhỏ. Tải offline tiếng Uzbek và tiếng Nga.",
+      "Chào: salom, hoặc assalomu alaykum. Cảm ơn: rahmat, hoặc spasibo. Có / không: ha / yo'q. Bao nhiêu: qancha, hoặc skolko. Tính tiền: hisob, hoặc schet pozhaluysta. Bánh mì được coi trọng: đừng úp bánh, đừng vứt trước mặt người khác. Đưa đồ bằng tay phải. Ảnh người lạ thì hỏi trước. Không chụp cảnh sát và cổng kiểm soát.",
+    ],
+    links: [{ label: "Ghi chú khách mới", url: "https://www.reddit.com/r/Uzbekistan/comments/1nmsn31/firsttime_tourist_tips/" }],
+  },
 ];
 
 export const sources = [
@@ -401,5 +449,7 @@ export const sources = [
   { label: "Cách mua vé Afrosiyob", url: "https://oxusroad.com/en/trains/afrosiyob/" },
   { label: "Site vé tàu", url: "https://eticket.uzrailpass.uz/en/" },
   { label: "Reddit: SIM, Yandex, tiền", url: "https://www.reddit.com/r/Uzbekistan/comments/1nmsn31/firsttime_tourist_tips/" },
+  { label: "Đô la và ATM ở Uzbekistan", url: "https://oxusroad.com/en/travel-guide/money/" },
+  { label: "Tỷ giá SuperRich Thailand", url: "https://www.superrichthailand.com/exchange-rate" },
   { label: "Sân bay và ga", url: "https://oxusroad.com/en/travel-guide/" },
 ];

@@ -1,5 +1,5 @@
 import { days, hotelStays, hotelOptions, meta } from "./trip-data.js";
-import { dayDetails, stayLinks, mapLink, packing, masterChecklist, sources } from "./trip-guide.js";
+import { dayDetails, stayLinks, mapLink, packing, masterChecklist, sources, localLife } from "./trip-guide.js";
 import { icon } from "./icons.js";
 
 const STORE_KEY = "uz-trip-2026-checks";
@@ -514,6 +514,21 @@ function renderPrep() {
         <article class="card">
           <h3>${icon("book")} Nguồn đã đọc</h3>
           <ul class="source-list">${sources.map((s) => `<li>${extLink(s.url, s.label)}</li>`).join("")}</ul>
+        </article>
+        <article class="card prep-notes">
+          <h3>${icon("users")} Tiền, áo quần, người</h3>
+          <div class="note-list">
+            ${localLife
+              .map(
+                (note) => `
+              <section>
+                <h4>${icon(note.icon, 16)} ${note.title}</h4>
+                ${note.paragraphs.map((p) => `<p>${p}</p>`).join("")}
+                ${note.links.length ? `<p class="actions">${note.links.map((l) => extLink(l.url, l.label, "text-link")).join("")}</p>` : ""}
+              </section>`,
+              )
+              .join("")}
+          </div>
         </article>
       </div>
     </section>`;

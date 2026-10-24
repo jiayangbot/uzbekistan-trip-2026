@@ -1073,6 +1073,35 @@ a {
   align-content: start;
 }
 
+.prep-notes {
+  grid-column: 1 / -1;
+}
+
+.note-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 28px;
+}
+
+.note-list h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+.note-list p {
+  margin: 0 0 8px;
+}
+
+.note-list .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+}
+
 .prep-grid h3 {
   display: flex;
   align-items: center;
@@ -1109,7 +1138,8 @@ a {
     grid-column: 1 / -1;
   }
   .detail-grid,
-  .prep-grid {
+  .prep-grid,
+  .note-list {
     grid-template-columns: 1fr;
   }
 }
