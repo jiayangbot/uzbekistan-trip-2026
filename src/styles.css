@@ -194,8 +194,8 @@ body:not(.is-open) .skip-link {
   background: var(--surface-2);
   color: var(--text);
   font-family: var(--mono);
-  font-size: 1.25rem;
-  letter-spacing: 0.2em;
+  font-size: 1.125rem;
+  letter-spacing: 0.04em;
 }
 
 .gate-error {

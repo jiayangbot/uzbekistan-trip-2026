@@ -1,5 +1,5 @@
 const GATE_KEY = "uz-trip-2026-gate";
-const PASS = "1234";
+const PASS = "higo";
 
 function savedPass() {
   try {
@@ -28,7 +28,7 @@ function showGate() {
         <h1>Lịch trình riêng</h1>
         <p class="muted">Nhập mật khẩu để mở trên máy này. Lần sau máy nhớ, không hỏi lại.</p>
         <label class="gate-label" for="gate-pass">Mật khẩu</label>
-        <input id="gate-pass" name="password" type="password" inputmode="numeric" autocomplete="current-password" enterkeyhint="go" required />
+        <input id="gate-pass" name="password" type="password" autocomplete="current-password" enterkeyhint="go" required />
         <p class="gate-error" role="alert"></p>
         <button class="btn btn-primary" type="submit">Mở lịch</button>
       </form>
