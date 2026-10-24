@@ -377,7 +377,7 @@ export const packing = [
   { item: "Áo khoác vừa và một lớp ấm", why: "Trưa gần 20°C, đêm 4–7°C. Núi lạnh hơn." },
   { item: "Giày đi bộ đã đi quen", why: "Registan, chợ, và phố đi bộ." },
   { item: "Khăn cổ, mũ nhẹ", why: "Gió ở quảng trường và trên Amirsoy. Khăn cũng trùm đầu ở Hazrati Imam và Shah-i-Zinda." },
-  { item: "Đầu chuyển ổ điện chân tròn", why: "Uzbekistan 220V như Thái, nhưng lỗ cắm là chân tròn châu Âu. Sạc chân dẹt của Thái cần đầu chuyển. Sạc đã là chân tròn thì cắm thẳng." },
+  { item: "Đầu chuyển ổ điện chân tròn", why: "Uzbekistan 220V như Thái. Ổ là 2 chân tròn, loại có nối đất vẫn không có chấu thứ ba. Sạc 2 chân dẹt hoặc 3 chấu của Thái cần đầu chuyển nhận đúng phích đó. Sạc đã là 2 chân tròn thì cắm thẳng." },
   { item: "USD tờ 100, khoảng $600 cho hai người", why: "Mua ở SuperRich Bangkok. Tờ sạch, không rách, không viết. Som đổi ở Tashkent." },
   { item: "Thuốc cá nhân và đơn nếu cần", why: "Khai hải quan nếu thuốc thuộc nhóm kiểm soát." },
   { item: "Áo che vai và quần dài", why: "Phố thì mặc bình thường. Đền và nhà thờ cần kín vai, kín gối." },
