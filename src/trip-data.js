@@ -24,7 +24,7 @@ export const days = [
     area: "Amir Temur / Istiqbol",
     hotel: "Hampton by Hilton",
     work: "Remote / flexible",
-    plan: "Bay đến TAS ~11:45; taxi chính thức; check-in Hampton, Istiqbol 17. Test wifi và SIM. Tối đi bộ Amir Temur và Independence Square.",
+    plan: "Hạ cánh TAS khoảng 11:45 giờ Tashkent, tức 13:45 giờ Bangkok. Giờ dự kiến trong bảng gốc, vé chưa chốt. Taxi chính thức, check-in Hampton, Istiqbol 17. Test wifi và SIM. Tối đi bộ Amir Temur và Independence Square.",
     transfer: "",
     status: "Planned",
   },

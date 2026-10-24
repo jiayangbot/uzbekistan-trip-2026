@@ -89,7 +89,7 @@ export const dayDetails = {
   "2026-10-27": {
     weather: tashkentLateOct,
     places: [
-      { name: "TAS Terminal 2", query: "Tashkent International Airport Terminal 2", tip: "Bay quốc tế vào Terminal 2. Sau hải quan: đổi tiền, mua SIM, rồi mới ra cửa." },
+      { name: "TAS Terminal 2", query: "Tashkent International Airport Terminal 2", tip: "Giờ 11:45 trên lịch là giờ hạ cánh tại Tashkent (UTC+5), không phải giờ cất cánh ở Bangkok. Bangkok hơn Tashkent 2 tiếng, nên 11:45 bên đó là 13:45 ở Bangkok. Bay quốc tế vào Terminal 2. Sau hải quan: đổi tiền, mua SIM, rồi mới ra cửa." },
       { name: "Hampton by Hilton", query: "Hampton by Hilton Tashkent Istiqbol 17", tip: "Istiqbol 17, quận gần Amir Temur. Check-in, test wifi trước khi ra ngoài." },
       { name: "Quảng trường Amir Temur", query: "Amir Temur Square Tashkent", tip: "Đi bộ từ khách sạn hoặc Yandex vài phút. Tối nay chỉ cần làm quen khu trung tâm." },
       { name: "Mustaqillik maydoni", query: "Independence Square Tashkent", tip: "Quảng trường Độc lập, cạnh Hampton. Đi bộ được nếu không mệt sau bay." },
