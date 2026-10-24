@@ -156,6 +156,7 @@ function loadPicks() {
 let picks = loadPicks();
 
 const SHIFT_KEY = "uz-trip-2026-shifts";
+const PRICE_KEY = "uz-trip-2026-price-notes";
 const TASHKENT_ORIGINS = ["2026-10-27", "2026-10-30", "2026-11-02"];
 const LOCKED_WEDNESDAYS = new Set(["2026-10-28", "2026-11-04"]);
 
@@ -211,6 +212,23 @@ function loadShifts() {
 /** @type {Record<string, number>} */
 let shifts = loadShifts();
 let shiftMsg = "";
+
+function loadPriceNotes() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(PRICE_KEY) || "{}");
+    if (!raw || typeof raw !== "object") return {};
+    return Object.fromEntries(Object.entries(raw).filter((entry) => typeof entry[1] === "string"));
+  } catch {
+    return {};
+  }
+}
+
+/** @type {Record<string, string>} */
+let priceNotes = loadPriceNotes();
+
+function escapeAttr(value) {
+  return value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+}
 
 function nightsFor(origin) {
   const stored = shifts[origin];
@@ -457,6 +475,10 @@ function renderStays() {
           <p class="stay-dates">${shortDate(s.checkIn)} → ${shortDate(s.checkOut)} · ${s.nights} đêm</p>
           <ul class="nights">${nightChips(s)}</ul>
           <p class="stay-price"><strong>${perNight(total, s.nights)}</strong>/đêm <span>· ${meal} · ${fmtMoney.format(total)} tổng</span></p>
+          <label class="price-note">
+            <span>Giá thực tế</span>
+            <input type="text" data-price-note="${s.origin}" value="${escapeAttr(priceNotes[s.origin] || "")}" placeholder="Ghi giá vừa xem" autocomplete="off" />
+          </label>
           ${scaled ? `<p class="muted">Quote gốc ${base.nights} đêm, ${fmtMoney.format(opt.total)}. Số mới tính theo cùng giá mỗi đêm.</p>` : ""}
           <ul class="facts">
             <li>Hủy: ${opt.cancel}</li>
@@ -934,6 +956,16 @@ function mount() {
     shiftMsg = tryShift(iso, from, to);
     paint();
     document.querySelector(`[data-night="${iso}"]`)?.focus({ preventScroll: true });
+  });
+
+  root.addEventListener("input", (event) => {
+    const field = event.target.closest("[data-price-note]");
+    if (!field) return;
+    const origin = field.getAttribute("data-price-note");
+    const value = field.value.trim();
+    if (value) priceNotes[origin] = value;
+    else delete priceNotes[origin];
+    localStorage.setItem(PRICE_KEY, JSON.stringify(priceNotes));
   });
 
   root.addEventListener("change", (event) => {

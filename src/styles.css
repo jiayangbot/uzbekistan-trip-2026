@@ -602,6 +602,28 @@ a {
   font-size: 0.9rem;
 }
 
+.price-note {
+  display: grid;
+  gap: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.price-note input {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-weight: 400;
+}
+
+.price-note input::placeholder {
+  color: var(--muted);
+}
+
 .facts {
   list-style: none;
   display: grid;
