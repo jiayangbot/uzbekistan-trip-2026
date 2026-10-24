@@ -668,9 +668,9 @@ a {
   background: var(--success-soft);
   color: var(--success);
 }
-.tag-meeting {
-  background: var(--danger-soft);
-  color: var(--danger);
+.tag-stay {
+  background: var(--surface-2);
+  color: var(--text);
 }
 .tag-travel,
 .tag-flight {
@@ -685,9 +685,9 @@ a {
   background: var(--warn-soft);
   color: var(--warn);
 }
-.tag-work {
-  background: var(--surface-2);
-  color: var(--muted);
+.tag-city {
+  background: var(--success-soft);
+  color: var(--success);
 }
 .tag-move {
   background: var(--violet-soft);
@@ -771,8 +771,9 @@ a {
   transition: border-color var(--dur) var(--ease);
 }
 
-.day.kind-meeting {
-  border-left-color: var(--danger);
+.day.kind-stay,
+.day.kind-city {
+  border-left-color: var(--success);
 }
 .day.kind-travel,
 .day.kind-flight {

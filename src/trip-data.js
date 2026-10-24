@@ -1,4 +1,4 @@
-/** @typedef {{ date: string; day: string; city: string; area: string; hotel: string; work: string; plan: string; transfer: string; status: string }} DayEntry */
+/** @typedef {{ date: string; day: string; city: string; area: string; hotel: string; plan: string; transfer: string; status: string }} DayEntry */
 /** @typedef {{ score: string; count: string; url: string; good: string; watch: string }} HotelReview */
 /** @typedef {{ checkIn: string; checkOut: string; name: string; nights: number; actualTotal: number; breakfast: string; cancel: string; note: string; review: HotelReview }} HotelStay */
 /** @typedef {{ id: string; segment: string; tier: string; name: string; area: string; nights: number; total: number | null; cancel: string; breakfast: string; score: string; why: string }} HotelOption */
@@ -12,7 +12,7 @@ export const meta = {
   quoteDate: "24 Oct 2026",
   sources: "Trip.com, tài khoản đang đăng nhập. Đã gồm thuế. Chưa đặt.",
   purpose:
-    "Ba khu Tashkent, đúng nhịp lịch cũ: Amir Temur (họp 28/10) → Tashkent City (núi + Nest One) → Mirabad/Oybek (họp 4/11). Cả 13 đêm đều có ăn sáng cho 2 người. Quote $2,784, dưới trần $76.",
+    "Chỉ đi chơi. Ba khu Tashkent: Amir Temur → Tashkent City (núi cuối tuần) → Mirabad. Thứ Tư 28/10 và 4/11 không đổi khách sạn. Cả 13 đêm có ăn sáng cho 2 người. Quote $2,784, dưới trần $76.",
 };
 
 /** @type {DayEntry[]} */
@@ -23,8 +23,7 @@ export const days = [
     city: "Tashkent",
     area: "Amir Temur / Istiqbol",
     hotel: "Hampton by Hilton",
-    work: "Remote / flexible",
-    plan: "Hạ cánh TAS khoảng 11:45 giờ Tashkent, tức 13:45 giờ Bangkok. Giờ dự kiến trong bảng gốc, vé chưa chốt. Taxi chính thức, check-in Hampton, Istiqbol 17. Test wifi và SIM. Tối đi bộ Amir Temur và Independence Square.",
+    plan: "Hạ cánh TAS khoảng 11:45 giờ Tashkent, tức 13:45 giờ Bangkok. Giờ dự kiến trong bảng gốc, vé chưa chốt. Taxi chính thức, check-in Hampton, Istiqbol 17. Mua SIM. Tối đi bộ Amir Temur và Independence Square.",
     transfer: "",
     status: "Planned",
   },
@@ -34,8 +33,7 @@ export const days = [
     city: "Tashkent",
     area: "Amir Temur / Istiqbol",
     hotel: "Hampton by Hilton",
-    work: "MEETING AM - do not move",
-    plan: "Họp sáng. Không đổi khách sạn. Làm việc; tối ăn quanh trung tâm.",
+    plan: "Không đổi khách sạn. Chorsu, Hazrati Imam và Kukeldash. Tối ăn trên Broadway.",
     transfer: "",
     status: "Planned",
   },
@@ -45,8 +43,7 @@ export const days = [
     city: "Tashkent",
     area: "Amir Temur / Istiqbol",
     hotel: "Hampton by Hilton",
-    work: "Remote / flexible",
-    plan: "Remote tại Hampton. Tối đi taxi xem trước Mirabad Avenue, Oybek, Taras Shevchenko và coworking — ngày mai mới chuyển sang Tashkent City.",
+    plan: "Vẫn Hampton. Bảo tàng Amir Temur, quảng trường Độc lập, và vài ga metro. Tối ăn gần khách sạn.",
     transfer: "",
     status: "Planned",
   },
@@ -56,8 +53,7 @@ export const days = [
     city: "Tashkent",
     area: "Tashkent City / Ukchi",
     hotel: "Holiday Inn Tashkent City",
-    work: "Remote / flexible",
-    plan: "Checkout Hampton. Check-in Holiday Inn, 3 Ukchi, đối diện City Park. Remote, rồi đi bộ khu Tashkent City.",
+    plan: "Checkout Hampton. Check-in Holiday Inn, 3 Ukchi, đối diện City Park. Đi bộ công viên, đài phun nước và mall.",
     transfer: "Đổi khu: Amir Temur → Tashkent City",
     status: "Planned",
   },
@@ -67,8 +63,7 @@ export const days = [
     city: "Tashkent",
     area: "Tashkent City / Ukchi",
     hotel: "Holiday Inn Tashkent City",
-    work: "Weekend",
-    plan: "Xe riêng Amirsoy – Chimgan – Charvak, tùy thời tiết. Tối về Holiday Inn.",
+    plan: "Xe riêng Amirsoy, Chimgan và Charvak, tùy thời tiết. Tối về Holiday Inn.",
     transfer: "",
     status: "Planned",
   },
@@ -78,8 +73,7 @@ export const days = [
     city: "Tashkent",
     area: "Tashkent City / Ukchi",
     hotel: "Holiday Inn Tashkent City",
-    work: "Weekend",
-    plan: "Đi bộ City Park, Tashkent City Mall và Nest One. Ngủ lại Holiday Inn.",
+    plan: "Đi bộ City Park, Tashkent City Mall và Magic City. Ngủ lại Holiday Inn.",
     transfer: "",
     status: "Planned",
   },
@@ -89,7 +83,6 @@ export const days = [
     city: "Tashkent",
     area: "Mirabad / Oybek",
     hotel: "Swissôtel Tashkent",
-    work: "Remote / flexible",
     plan: "Checkout Holiday Inn. Check-in Swissôtel, Shakhrisabz 4, quận Mirabad, gần metro Oybek. Tối ăn trong Mirabad.",
     transfer: "Đổi khu: Tashkent City → Mirabad",
     status: "Planned",
@@ -100,8 +93,7 @@ export const days = [
     city: "Tashkent",
     area: "Mirabad / Oybek",
     hotel: "Swissôtel Tashkent",
-    work: "Remote / flexible",
-    plan: "Remote. Khảo sát căn hộ expat quanh Oybek: sưởi, điện dự phòng, internet cáp quang.",
+    plan: "Bảo tàng Mỹ thuật Ứng dụng, cung điện Romanov và công viên Navoi. Ngủ Swissôtel.",
     transfer: "",
     status: "Planned",
   },
@@ -111,8 +103,7 @@ export const days = [
     city: "Tashkent",
     area: "Mirabad / Oybek",
     hotel: "Swissôtel Tashkent",
-    work: "MEETING AM - do not move",
-    plan: "Họp sáng. Không checkout. Làm việc; tối thử coworking và quán cà phê quanh Oybek.",
+    plan: "Không đổi khách sạn. Đài tưởng niệm động đất, vườn Nhật và trung tâm plov. Tối ăn quanh Oybek.",
     transfer: "",
     status: "Planned",
   },
@@ -122,8 +113,7 @@ export const days = [
     city: "Tashkent",
     area: "Mirabad / Oybek",
     hotel: "Swissôtel Tashkent",
-    work: "Remote / flexible",
-    plan: "Remote. Hoàn tất Oybek và Yakkasaray. Ngủ Swissôtel.",
+    plan: "Đi nhẹ quanh Mirabad. Tối về sớm, mai tàu 07:55.",
     transfer: "",
     status: "Planned",
   },
@@ -133,7 +123,6 @@ export const days = [
     city: "Samarkand",
     area: "Trung tâm Samarkand",
     hotel: "Mövenpick Samarkand",
-    work: "Remote / flexible",
     plan: "Checkout Swissôtel. Afrosiyob 768: Toshkent Markaziy 07:55, đến Samarkand 10:25, giờ địa phương. Gửi hành lý, check-in Mövenpick. Chiều Registan.",
     transfer: "Afrosiyob 768, 07:55–10:25. Ghế xem trên site vé.",
     status: "Planned",
@@ -144,7 +133,6 @@ export const days = [
     city: "Samarkand",
     area: "Trung tâm Samarkand",
     hotel: "Mövenpick Samarkand",
-    work: "Weekend",
     plan: "Shah-i-Zinda, Bibi-Khanym, Siab Bazaar, Gur-e-Amir. Đi theo sức.",
     transfer: "",
     status: "Planned",
@@ -155,7 +143,6 @@ export const days = [
     city: "Tashkent",
     area: "Amir Temur / Istiqbol",
     hotel: "Hampton by Hilton",
-    work: "Weekend",
     plan: "Checkout Mövenpick. Afrosiyob 769: Samarkand 16:56, Toshkent Markaziy 19:17. Về Hampton ngủ, sáng mai ra sân bay. Chỉ bỏ đêm Hampton nếu bay 9/11 từ khoảng 12:00 giờ Tashkent: khi đó ở thêm Samarkand và sáng 9/11 đi tàu 771 lúc 05:21.",
     transfer: "Afrosiyob 769, 16:56–19:17",
     status: "Planned",
@@ -166,8 +153,7 @@ export const days = [
     city: "Tashkent",
     area: "Sân bay TAS",
     hotel: "Checkout / flight",
-    work: "Remote / flexible",
-    plan: "Remote nhẹ. Checkout, gửi hành lý. Có mặt TAS trước giờ bay 3 tiếng. Về BKK.",
+    plan: "Checkout, gửi hành lý. Có mặt TAS trước giờ bay 3 tiếng. Về Bangkok.",
     transfer: "",
     status: "Planned",
   },
@@ -179,7 +165,7 @@ const hamptonReview = {
   url: "https://us.trip.com/hotels/tashkent-hotel-detail-78123404/hampton-by-hilton-tashkent/review.html",
   good: "Phòng mới, sạch, sát Amir Temur. Bữa sáng ngon nhưng ít món, có đồ Uzbek.",
   watch:
-    "Khách tháng 8/2026 ở tầng trên cùng bị rung máy lạnh trên mái. Tháng 7/2026 có người báo wifi bắt mạnh nhưng chậm. Đường lớn hơi ồn. Đo wifi lúc nhận phòng 27/10 và xin phòng không sát mái, vì họp sáng hôm sau.",
+    "Khách tháng 8/2026 ở tầng trên cùng bị rung máy lạnh trên mái. Tháng 7/2026 có người báo wifi bắt mạnh nhưng chậm. Đường lớn hơi ồn. Đo wifi lúc nhận phòng 27/10 và xin phòng không sát mái.",
 };
 
 /** @type {HotelStay[]} */
@@ -209,7 +195,7 @@ export const hotelStays = [
       count: "855 review, Booking.com",
       url: "https://www.booking.com/hotel/uz/holiday-inn-tashkent-city-an-ihg.html",
       good: "Vị trí 9.7, wifi 9.2. Bữa sáng được khen nhiều, có samsa và bánh. Reddit nói sát công viên và metro khoảng 5 phút.",
-      watch: "Phòng standard bình thường. Một khách công tác tháng 4/2025 kể có nhạc sống 20:00–22:00 và TV trong phòng hỏng.",
+      watch: "Phòng standard bình thường. Một khách tháng 4/2025 kể có nhạc sống 20:00–22:00 và TV trong phòng hỏng.",
     },
   },
   {
@@ -225,7 +211,7 @@ export const hotelStays = [
       score: "9.3/10",
       count: "166 review, Trip.com",
       url: "https://us.trip.com/hotels/tashkent-hotel-detail-128118398/swisstel-tashkent/review.html",
-      good: "Sạch 9.6. Khách công tác tháng 9/2026 khen yên và hợp đi họp. Bữa sáng được nhắc là nhiều món và ngon. Phòng King rộng.",
+      good: "Sạch 9.6. Khách tháng 9/2026 khen phòng yên. Bữa sáng được nhắc là nhiều món và ngon. Phòng King rộng.",
       watch:
         "Một phòng King tháng 7/2026 thoát nước vòi sen kém. Cuối tháng 10/2026 có khách phải nhắc mới được dọn phòng. Công trường bên cạnh ồn hồi tháng 3, khách tháng 7 nói đã yên.",
     },
@@ -273,7 +259,7 @@ export const hotelOptions = [
     cancel: "Hủy trước 23:59 ngày 24/10",
     breakfast: "Đã gồm, 2 người",
     score: "9.3",
-    why: "Đúng khu họp 28/10. Giá không hoàn kèm ăn sáng là $753, đắt hơn.",
+    why: "Đúng khu trung tâm 27–30/10. Giá không hoàn kèm ăn sáng là $753, đắt hơn.",
   },
   {
     id: "wyndham-3",
@@ -299,7 +285,7 @@ export const hotelOptions = [
     cancel: "Hủy trước 16:00 ngày 29/10",
     breakfast: "Đã gồm, 2 người",
     score: "9.4",
-    why: "Ngủ trong khu mới cho ngày núi và chủ nhật Nest One.",
+    why: "Ngủ trong khu mới cho ngày núi và chủ nhật ở công viên, mall.",
   },
   {
     id: "hi-room",
@@ -338,7 +324,7 @@ export const hotelOptions = [
     cancel: "Hủy trước 23:59 ngày 1/11",
     breakfast: "Đã gồm, 2 người",
     score: "9.3",
-    why: "Đúng quận khảo sát, phòng khoảng 35 m². Giá Trip thấp hơn quote Booking cũ $1,150 và đã có ăn sáng.",
+    why: "Đúng quận Mirabad, phòng khoảng 35 m². Giá Trip thấp hơn quote Booking cũ $1,150 và đã có ăn sáng.",
   },
   {
     id: "swiss-room",

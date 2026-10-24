@@ -106,50 +106,51 @@ export const dayDetails = {
   "2026-10-28": {
     weather: tashkentLateOct,
     places: [
-      { name: "Hampton by Hilton", query: "Hampton by Hilton Tashkent Istiqbol 17", tip: "Họp sáng. Không checkout, không đổi khách sạn." },
-      { name: "Sayilgoh, Broadway", query: "Sayilgoh Street Tashkent Broadway", tip: "Phố đi bộ trung tâm, hợp để ăn tối sau họp." },
-      { name: "Amir Temur Square", query: "Amir Temur Square Tashkent", tip: "Điểm hẹn dễ tìm nếu ra ngoài buổi tối." },
+      { name: "Hampton by Hilton", query: "Hampton by Hilton Tashkent Istiqbol 17", tip: "Thứ Tư. Ngủ nguyên Hampton, không checkout." },
+      { name: "Chợ Chorsu", query: "Chorsu Bazaar Tashkent", tip: "Chợ mái vòm. Đi buổi sáng, mặc cả trái cây và bánh." },
+      { name: "Hazrati Imam", query: "Hazrati Imam Complex Tashkent", tip: "Quần thể cạnh chợ. Mặc kín vai và đầu gối." },
+      { name: "Sayilgoh, Broadway", query: "Sayilgoh Street Tashkent Broadway", tip: "Phố đi bộ. Ăn tối ở đây rồi đi bộ về khách sạn." },
     ],
     research: [
       {
-        text: "Tối tháng 10 xuống khoảng 7°C dù trưa vẫn gần 20°C. Mang áo khoác khi ra ăn, đừng chỉ mặc đồ trong phòng họp.",
+        text: "Tối tháng 10 xuống khoảng 7°C dù trưa vẫn gần 20°C. Mang áo khoác khi ra chợ và khi ăn tối.",
         source: "Extreme Weather Watch, 28/10 trung bình 19.6°C / 6.7°C",
         url: "https://www.extremeweatherwatch.com/cities/tashkent/month-october",
       },
     ],
-    checklist: ["Pin laptop đầy trước họp", "Xác nhận giờ và địa điểm họp", "Ăn sáng tại khách sạn, đã gồm trong giá"],
+    checklist: ["Ăn sáng tại khách sạn, đã gồm trong giá", "Tiền mặt cho chợ", "Không chuyển khách sạn"],
   },
   "2026-10-29": {
     weather: tashkentLateOct,
     places: [
-      { name: "Mirabad Avenue", query: "Mirabad Avenue Tashkent", tip: "Trục cần xem nhà và tiện ích. Đi taxi từ Hampton, ghi lại đường về." },
-      { name: "Ga tàu điện Oybek", query: "Oybek metro station Tashkent", tip: "Mốc chính của khu Mirabad. Đo thời gian từ Hampton đến đây." },
-      { name: "Taras Shevchenko", query: "Taras Shevchenko Street Tashkent", tip: "Đoạn phố đi cùng Oybek khi khảo sát căn hộ và coworking." },
+      { name: "Bảo tàng Amir Temur", query: "Amir Temur Museum Tashkent", tip: "Ngay quảng trường. Mua vé tại cửa, đóng cửa thứ Hai." },
+      { name: "Quảng trường Độc lập", query: "Independence Square Tashkent", tip: "Đi bộ từ khách sạn. Đài phun nước và vườn." },
+      { name: "Ga Kosmonavtlar", query: "Kosmonavtlar metro station Tashkent", tip: "Một trong các ga metro được trang trí. Mua thẻ rồi đi vài ga." },
     ],
     research: [
       {
-        text: "Tàu điện Tashkent rẻ và sạch, nhưng với hai người và lịch remote thì Yandex vẫn là cách đo thời gian di chuyển thực tế giữa các khu. Ghi số phút Hampton → Oybek → Tashkent City để so sánh trước khi chốt khu ở.",
-        source: "Ghi chú khảo sát của chuyến này",
+        text: "Metro Tashkent rẻ và các ga trung tâm đáng xem. Hai người đi taxi khi mệt; metro hợp cho quãng ngắn trong ngày này.",
+        source: "Yandex Maps, Tashkent",
         url: "https://yandex.com/maps/10335/tashkent/",
       },
     ],
-    checklist: ["Danh sách căn hộ muốn xem", "Hỏi sưởi, điện dự phòng, cáp quang", "Chụp mặt đường buổi tối, không chỉ ban ngày"],
+    checklist: ["Ăn sáng tại khách sạn", "Vé bảo tàng", "Ngày mai mới chuyển sang Tashkent City"],
   },
   "2026-10-30": {
     weather: tashkentLateOct,
     places: [
       { name: "Holiday Inn, 3 Ukchi", query: "Holiday Inn Tashkent City 3 Ukchi Street", tip: "Check-in khu Tashkent City. Đối diện City Park." },
-      { name: "Tashkent City Park", query: "Tashkent City Park", tip: "Đi bộ từ khách sạn. Xem mật độ người buổi tối." },
+      { name: "Tashkent City Park", query: "Tashkent City Park", tip: "Đi bộ từ khách sạn. Ở lại đến tối xem đài phun nước." },
       { name: "Xalqlar Do'stligi", query: "Xalqlar Dostligi metro station Tashkent", tip: "Ga gần khách sạn, khoảng 500 m theo mô tả Hilton/Holiday Inn." },
     ],
     research: [
       {
-        text: "Holiday Inn và Hilton Tashkent City cùng phố Ukchi. Ở Holiday Inn vẫn đi bộ được sang Hilton, mall và Nest One, với giá 3 đêm $560 thay vì $915.",
+        text: "Holiday Inn và Hilton Tashkent City cùng phố Ukchi. Ở Holiday Inn vẫn đi bộ được sang công viên, mall và đài phun nước, với giá 3 đêm $665 đã gồm ăn sáng.",
         source: "Giá Trip.com 24/10/2026, địa chỉ Ukchi",
         url: "https://www.hilton.com/en/hotels/tastchi-hilton-tashkent-city/",
       },
     ],
-    checklist: ["Checkout Hampton trước giờ nhận phòng mới", "Giữ giấy E-mehmon", "Đổi SIM sang mạng ổn ở khu mới nếu wifi yếu"],
+    checklist: ["Checkout Hampton trước giờ nhận phòng mới", "Giữ giấy E-mehmon", "Đi bộ công viên sau khi nhận phòng"],
   },
   "2026-10-31": {
     weather: {
@@ -184,64 +185,73 @@ export const dayDetails = {
   "2026-11-01": {
     weather: tashkentEarlyNov,
     places: [
-      { name: "Nest One", query: "Nest One Tashkent", tip: "Khu căn hộ mới cần khảo sát. Đi bộ hoặc Yandex rất ngắn từ Ukchi." },
-      { name: "Tashkent City Mall", query: "Tashkent City Mall", tip: "Mall cạnh công viên. Xem siêu thị và chỗ ăn quanh nhà." },
-      { name: "Tashkent City Park", query: "Tashkent City Park", tip: "Đi bộ buổi chiều. Ghi tiếng ồn cuối tuần." },
+      { name: "Magic City", query: "Magic City Tashkent", tip: "Đài phun nước và phố đi bộ, cách Holiday Inn một đoạn taxi ngắn." },
+      { name: "Tashkent City Mall", query: "Tashkent City Mall", tip: "Mall cạnh công viên. Ăn trưa và nghỉ chân." },
+      { name: "Tashkent City Park", query: "Tashkent City Park", tip: "Đi bộ buổi chiều. Chủ nhật đông người." },
     ],
     research: [
       {
-        text: "Chủ nhật là ngày đúng để xem Nest One khi cư dân ở nhà: thang máy, bãi xe, quán mở cửa, đường tối.",
-        source: "Lịch khảo sát của chuyến",
-        url: mapLink("Nest One Tashkent"),
+        text: "Chủ nhật công viên và Magic City đông. Đi buổi sáng nếu muốn ít người, tối nếu muốn xem đèn.",
+        source: "Lịch tham quan Tashkent City",
+        url: mapLink("Magic City Tashkent"),
       },
     ],
-    checklist: ["Danh sách toà trong Nest One", "Hỏi phí quản lý và sưởi", "So sánh với Mirabad đã xem ngày 29/10"],
+    checklist: ["Ăn sáng tại khách sạn", "Ngày nghỉ trong khu, không chuyển đồ", "Ngày mai chuyển sang Mirabad"],
   },
   "2026-11-02": {
     weather: tashkentEarlyNov,
     places: [
-      { name: "Swissôtel Tashkent", query: "Swissotel Tashkent Shakhrisabz 4", tip: "Shakhrisabz 4, quận Mirabad. Phòng twin 35 m². Hủy miễn phí trước ngày nhận phòng." },
-      { name: "Ga Oybek", query: "Oybek metro station Tashkent", tip: "Cách khách sạn dưới 2 km. Đây là mốc của bốn đêm khảo sát." },
-      { name: "Mirabad", query: "Mirabad district Tashkent restaurants", tip: "Ăn tối trong quận để xem phố có sống không." },
+      { name: "Swissôtel Tashkent", query: "Swissotel Tashkent Shakhrisabz 4", tip: "Shakhrisabz 4, quận Mirabad. Phòng King khoảng 35 m², có ban công." },
+      { name: "Ga Oybek", query: "Oybek metro station Tashkent", tip: "Cách khách sạn dưới 2 km. Đi bộ hoặc Yandex ngắn." },
+      { name: "Mirabad", query: "Mirabad district Tashkent restaurants", tip: "Ăn tối trong quận. Nhiều quán quanh Oybek." },
     ],
     research: [
       {
-        text: "Swissôtel nằm đúng quận Mirabad, không phải quảng trường Amir Temur. Bốn đêm này là để ở trong khu Oybek–Yakkasaray, và họp sáng 4/11 không phải checkout.",
+        text: "Swissôtel nằm ở quận Mirabad, không phải quảng trường Amir Temur. Bốn đêm này ở nguyên khách sạn, kể cả thứ Tư 4/11.",
         source: "Địa chỉ Swissôtel, 2GIS / Accor",
         url: "https://2gis.uz/tashkent/firm/70000001100646010",
       },
     ],
-    checklist: ["Checkout Holiday Inn", "Check-in Swissôtel, hỏi lại E-mehmon", "Wifi và bàn làm việc trong phòng"],
+    checklist: ["Checkout Holiday Inn", "Check-in Swissôtel, hỏi lại E-mehmon", "Ăn tối trong Mirabad"],
   },
   "2026-11-03": {
     weather: tashkentEarlyNov,
     places: [
-      { name: "Oybek", query: "Oybek Street Tashkent", tip: "Đo thời gian đi bộ và Yandex từ Swissôtel tới cụm căn hộ." },
-      { name: "Yakkasaray", query: "Yakkasaray district Tashkent", tip: "Quận phía nam Mirabad. Xem đường tối và siêu thị." },
+      { name: "Bảo tàng Mỹ thuật Ứng dụng", query: "State Museum of Applied Arts Tashkent", tip: "Nhà gỗ chạm khắc, đồ gốm và thêu. Gần Yakkasaray." },
+      { name: "Cung điện Romanov", query: "Palace of Grand Duke Romanov Tashkent", tip: "Nhà của Nikolai Konstantinovich. Kiểm tra giờ mở cửa." },
+      { name: "Công viên Navoi", query: "Alisher Navoi Park Tashkent", tip: "Công viên lớn. Đi bộ buổi chiều rồi về Swissôtel." },
     ],
     research: [
       {
-        text: "Với căn hộ expat, ba câu quyết định: sưởi trung tâm hay điều hòa hai chiều, máy phát khi mất điện, và cáp quang vào tận nhà chứ không chỉ wifi hành lang.",
-        source: "Mục tiêu khảo sát trong lịch",
-        url: mapLink("Yakkasaray Tashkent"),
+        text: "Bảo tàng Mỹ thuật Ứng dụng là điểm đáng vào nhất quanh Yakkasaray: nhà và bộ sưu tập cùng một vé. Đi buổi sáng, chiều dành cho công viên.",
+        source: "Bảo tàng Mỹ thuật Ứng dụng, Tashkent",
+        url: mapLink("State Museum of Applied Arts Tashkent"),
       },
     ],
-    checklist: ["Hỏi giá thuê đã gồm sưởi chưa", "Chụp đồng hồ điện và tủ mạng", "Hỏi chủ nhà về đăng ký tạm trú"],
+    checklist: ["Ăn sáng tại khách sạn", "Vé bảo tàng", "Ngày mai vẫn ngủ Swissôtel"],
   },
   "2026-11-04": {
     weather: tashkentEarlyNov,
     places: [
-      { name: "Swissôtel", query: "Swissotel Tashkent", tip: "Họp sáng. Không checkout." },
-      { name: "Coworking quanh Oybek", query: "coworking Oybek Tashkent", tip: "Tối thử một quán hoặc coworking. Ghi giá ngày và tốc độ mạng." },
+      { name: "Swissôtel", query: "Swissotel Tashkent", tip: "Thứ Tư. Không checkout, không đổi khách sạn." },
+      { name: "Đài tưởng niệm động đất", query: "Earthquake Memorial Tashkent", tip: "Tượng và bảo tàng nhỏ về trận động đất 1966. Taxi từ Swissôtel." },
+      { name: "Vườn Nhật", query: "Japanese Garden Tashkent", tip: "Vườn cạnh đài tưởng niệm. Vé cửa." },
+      { name: "Trung tâm plov", query: "Central Asian Plov Center Tashkent", tip: "Ăn trưa plov. Cuối tuần đông hơn, thứ Tư dễ có bàn." },
     ],
-    research: [yandexTip],
-    checklist: ["Pin và hộ chiếu nếu họp cần", "Ăn sáng, gói phòng chưa gồm bữa", "Không đặt tàu hoặc chuyển đồ vào sáng nay"],
+    research: [
+      {
+        text: "Đài tưởng niệm, vườn Nhật và trung tâm plov nằm cùng phía tây bắc, một vòng taxi là đủ. Tối về Oybek ăn nhẹ.",
+        source: "Yandex Maps, Tashkent",
+        url: "https://yandex.com/maps/10335/tashkent/",
+      },
+    ],
+    checklist: ["Ăn sáng tại khách sạn, đã gồm trong giá", "Không chuyển đồ", "Không đặt tàu hôm nay"],
   },
   "2026-11-05": {
     weather: tashkentEarlyNov,
     places: [
-      { name: "Oybek", query: "Oybek metro Tashkent", tip: "Chốt những tuyến đã đi hai ngày trước." },
-      { name: "Yakkasaray", query: "Yakkasaray Tashkent", tip: "Đi nốt đoạn còn thiếu. Tối về Swissôtel, mai đi tàu sớm." },
+      { name: "Oybek", query: "Oybek metro Tashkent", tip: "Đi bộ quanh ga nếu còn chỗ muốn xem." },
+      { name: "Mirabad", query: "Mirabad Avenue Tashkent", tip: "Đi nhẹ. Tối về Swissôtel, mai tàu sớm." },
       { name: "Ga trung tâm", query: "Tashkent Central Railway Station", tip: "Chạy thử Yandex từ Swissôtel tới ga để biết phải dậy lúc mấy giờ." },
     ],
     research: [
@@ -354,7 +364,7 @@ export const dayDetails = {
 
 export const packing = [
   { item: "Áo khoác vừa và một lớp ấm", why: "Trưa gần 20°C, đêm 4–7°C. Núi lạnh hơn." },
-  { item: "Giày đi bộ đã đi quen", why: "Registan, chợ, và phố khảo sát." },
+  { item: "Giày đi bộ đã đi quen", why: "Registan, chợ, và phố đi bộ." },
   { item: "Khăn cổ, mũ nhẹ", why: "Gió ở quảng trường và trên Amirsoy." },
   { item: "Ổ cắm loại C hoặc F", why: "Uzbekistan 220V, ổ châu Âu." },
   { item: "USD tờ đẹp", why: "Quầy đổi từ chối tờ rách, viết, gấp nát." },
@@ -368,7 +378,6 @@ export const masterChecklist = [
   { label: "Giờ bay 27/10 và 9/11", priority: "High" },
   { label: "TDAC trước khi về Thái Lan", priority: "High" },
   { label: "E-mehmon tại mỗi khách sạn", priority: "High" },
-  { label: "Hỏi lãnh sự về làm remote với visa du lịch", priority: "High" },
   { label: "Cài Yandex Go và giữ số Uzbekistan", priority: "High" },
   { label: "Báo giá xe Amirsoy, chưa chốt $150 trong bảng", priority: "Medium" },
 ];

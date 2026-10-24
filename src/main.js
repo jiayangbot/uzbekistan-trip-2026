@@ -12,8 +12,8 @@ const fmtMoney = new Intl.NumberFormat("en-US", {
 const fmtWeekday = new Intl.DateTimeFormat("vi-VN", { weekday: "short" });
 const fmtLong = new Intl.DateTimeFormat("vi-VN", { weekday: "long", day: "numeric", month: "long" });
 
-/** @typedef {"meeting" | "travel" | "flight" | "sight" | "weekend" | "work"} DayKind */
-/** @typedef {"all" | "meeting" | "travel" | "move"} Filter */
+/** @typedef {"stay" | "travel" | "flight" | "sight" | "weekend" | "city"} DayKind */
+/** @typedef {"all" | "weekend" | "travel" | "move"} Filter */
 
 function parseDate(iso) {
   const [y, m, d] = iso.split("-").map(Number);
@@ -31,19 +31,19 @@ function perNight(total, nights) {
 
 /** @returns {DayKind} */
 function dayKind(entry) {
-  if (/MEETING/i.test(entry.work)) return "meeting";
-  if (/Train|tàu/i.test(entry.transfer + entry.plan)) return "travel";
-  if (/Bay|sân bay|flight/i.test(entry.plan + entry.hotel)) return "flight";
-  if (/Amirsoy|Registan|Shah-i-Zinda/i.test(entry.plan)) return "sight";
+  if (/flight/i.test(entry.hotel)) return "flight";
+  if (/Afrosiyob/i.test(entry.transfer)) return "travel";
   if (entry.day === "Sat" || entry.day === "Sun") return "weekend";
-  return "work";
+  if (entry.day === "Wed") return "stay";
+  if (/Amirsoy|Registan|Shah-i-Zinda/i.test(entry.plan)) return "sight";
+  return "city";
 }
 
 /** @param {DayKind} kind */
 function kindInfo(kind) {
   switch (kind) {
-    case "meeting":
-      return { label: "Họp sáng", icon: "users" };
+    case "stay":
+      return { label: "Không đổi khách sạn", icon: "bed" };
     case "travel":
       return { label: "Đi tàu", icon: "train" };
     case "flight":
@@ -52,8 +52,8 @@ function kindInfo(kind) {
       return { label: "Tham quan", icon: "mountain" };
     case "weekend":
       return { label: "Cuối tuần", icon: "sun" };
-    case "work":
-      return { label: "Remote", icon: "briefcase" };
+    case "city":
+      return { label: "Tham quan", icon: "pin" };
     default: {
       const unreachable = /** @type {never} */ (kind);
       throw new Error(`Unknown day kind: ${unreachable}`);
@@ -66,8 +66,8 @@ function matchesFilter(filter, entry, index) {
   switch (filter) {
     case "all":
       return true;
-    case "meeting":
-      return dayKind(entry) === "meeting";
+    case "weekend":
+      return dayKind(entry) === "weekend";
     case "travel":
       return dayKind(entry) === "travel" || dayKind(entry) === "flight";
     case "move":
@@ -382,7 +382,7 @@ function renderDay(entry, index) {
 function renderTimeline() {
   const filters = [
     ["all", "Tất cả", days.length],
-    ["meeting", "Ngày họp", days.filter((d, i) => matchesFilter("meeting", d, i)).length],
+    ["weekend", "Cuối tuần", days.filter((d, i) => matchesFilter("weekend", d, i)).length],
     ["travel", "Tàu & bay", days.filter((d, i) => matchesFilter("travel", d, i)).length],
     ["move", "Đổi chỗ ở", days.filter((d, i) => matchesFilter("move", d, i)).length],
   ];
