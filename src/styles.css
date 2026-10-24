@@ -72,6 +72,12 @@ body {
   color: var(--muted);
 }
 
+.purpose {
+  margin: 0.65rem 0 0;
+  max-width: 46rem;
+  color: var(--text);
+}
+
 .hero-stats {
   display: flex;
   gap: 0.75rem;
@@ -110,6 +116,10 @@ body {
   font-size: 0.8rem;
   color: var(--green);
   margin-top: 0.15rem;
+}
+
+.stat-sub.over {
+  color: var(--amber);
 }
 
 .panel {
@@ -153,12 +163,29 @@ body {
   overflow: hidden;
 }
 
-.stay-bar:nth-child(2) {
+.stay-bar.stay-1 {
+  background: linear-gradient(135deg, #0f6e6e, #2ec4b6);
+}
+
+.stay-bar.stay-2 {
+  background: linear-gradient(135deg, #8a5a12, var(--amber));
+}
+
+.stay-bar.stay-3 {
   background: linear-gradient(135deg, #6d4c41, #a1887f);
 }
 
-.stay-bar:nth-child(3) {
+.stay-bar.stay-4 {
   background: linear-gradient(135deg, #2d6a4f, var(--green));
+}
+
+.area-pill {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
 }
 
 .stay-label {

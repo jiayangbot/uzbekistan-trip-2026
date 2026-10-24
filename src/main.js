@@ -95,6 +95,7 @@ function renderTimeline(filter) {
             </header>
             <div class="hotel-strip">
               <span class="hotel-name">${entry.hotel}</span>
+              <span class="area-pill">${entry.area}</span>
               ${
                 stay
                   ? `<span class="hotel-meta">${fmtMoney.format(stay.actualTotal / stay.nights)}/đêm · ${stay.breakfast} · ${stay.cancel}</span>`
@@ -121,7 +122,7 @@ function renderHotelBars() {
   const span = tripEnd - tripStart;
 
   return hotelStays
-    .map((stay) => {
+    .map((stay, i) => {
       const left =
         ((parseDate(stay.checkIn).getTime() - tripStart) / span) * 100;
       const width =
@@ -130,7 +131,7 @@ function renderHotelBars() {
         100;
       const short = stay.name.replace(" Tashkent", "").replace(" Samarkand", "");
       return `
-        <div class="stay-bar" style="left:${left}%;width:${width}%">
+        <div class="stay-bar stay-${i}" style="left:${left}%;width:${width}%">
           <span class="stay-label">${short}</span>
           <span class="stay-price">${fmtMoney.format(stay.actualTotal)} · ${stay.nights}đ</span>
         </div>
@@ -195,6 +196,7 @@ function mount() {
             <p class="eyebrow">${meta.quoteDate} · ${meta.sources}</p>
             <h1>${meta.title}</h1>
             <p class="sub">${meta.dates} · ${meta.guests} khách · 1 phòng</p>
+            <p class="purpose">${meta.purpose}</p>
           </div>
           <div class="hero-stats">
             <div class="stat">
@@ -204,7 +206,7 @@ function mount() {
             <div class="stat highlight">
               <span class="stat-label">Quote đề xuất</span>
               <strong>${fmtMoney.format(meta.quotedTotalUsd)}</strong>
-              <span class="stat-sub">Còn ${fmtMoney.format(meta.budgetUsd - meta.quotedTotalUsd)}</span>
+              <span class="stat-sub ${meta.budgetUsd - meta.quotedTotalUsd < 0 ? "over" : ""}">${meta.budgetUsd - meta.quotedTotalUsd < 0 ? "Vượt" : "Còn"} ${fmtMoney.format(Math.abs(meta.budgetUsd - meta.quotedTotalUsd))}</span>
             </div>
             <div class="stat">
               <span class="stat-label">Đêm KS</span>
