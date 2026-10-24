@@ -112,7 +112,7 @@ export const dayDetails = {
       "Mua SIM có số Uzbekistan",
       "Yandex Go chạy được bằng số mới",
       "Đổi một ít som, tờ nhỏ",
-      "Nhờ lễ tân đăng ký E-mehmon",
+      "Nhờ lễ tân đăng ký E-mehmon, giữ tờ xác nhận",
     ],
   },
   "2026-10-28": {
@@ -389,7 +389,7 @@ export const masterChecklist = [
   { label: "Vé Afrosiyob 769, 8/11, 16:56, 2 ghế", priority: "High" },
   { label: "Lưu vé HY532 và HY531. Màn hình đang hiện 1 khách", priority: "High" },
   { label: "TDAC trước khi về Thái Lan", priority: "High" },
-  { label: "E-mehmon tại mỗi khách sạn", priority: "High" },
+  { label: "E-mehmon: lễ tân đăng ký tạm trú mỗi khách sạn, giữ tờ xác nhận", priority: "High" },
   { label: "Cài Yandex Go và giữ số Uzbekistan", priority: "High" },
   { label: "Báo giá xe Amirsoy, chưa chốt $150 trong bảng", priority: "Medium" },
   { label: "Đổi USD tờ 100 ở SuperRich, Bangkok, trước giờ ra sân bay", priority: "Medium" },
