@@ -286,11 +286,12 @@ export const dayDetails = {
     transport: {
       title: "Afrosiyob, Tashkent → Samarkand",
       steps: [
-        "Giờ lấy trên eticket.uzrailpass.uz ngày 24/10/2026, là giờ địa phương. Nên mua 768.",
-        "768, thứ Sáu 6/11: Toshkent Markaziy 07:55, Samarkand 10:25, 2 giờ 30. Tàu dừng ở Samarkand.",
-        "Sớm hơn nếu cần: 778 lúc 06:10 đến 08:23, hoặc 766 lúc 07:30 đến 09:43. Cả hai đi tiếp Bukhara.",
-        "Đừng lấy 772 lúc 19:48. Tới Samarkand 22:13 thì mất buổi chiều Registan.",
-        "Site trả danh sách tàu nhưng chưa trả số ghế Afrosiyob. Mở đúng chuyến, chọn 2 ghế economy, điền đúng passport, giữ PDF offline.",
+        "Vào eticket.uzrailpass.uz, chọn English. Ô FROM gõ Tashkent, bấm gợi ý Tashkent. Đừng gõ Toshkent Markaziy, ô tìm không ra chữ đó. Đừng chọn Tashkent South, đó là ga Nam.",
+        "Ô TO gõ Samarkand. Ngày 06.11.2026, rồi SEARCH.",
+        "Trong kết quả, dòng tàu mới ghi ga đi là Toshkent Markaziy. Chọn Afrosiyob 768: đi 07:55, tới 10:25. Bảng giờ chung có khi ghi 08:00, vẫn là tàu 768, tới 10:25.",
+        "Sớm hơn nếu 768 hết chỗ: 766 lúc 07:30 tới 09:43, hoặc 770 lúc 08:30 tới 10:49. Cả hai đi tiếp Bukhara nhưng dừng Samarkand.",
+        "Không có tàu nhanh giữa trưa. Chuyến muộn trong ngày là 772 lúc 19:48, tới 22:13, mất buổi chiều Registan.",
+        "Chọn 2 ghế, điền đúng passport, giữ PDF. Có mặt ga khoảng 07:15. Yandex từ Swissôtel tới ga trung tâm, không phải ga Nam.",
       ],
       links: [
         { label: "Đặt vé chính thức", url: "https://eticket.uzrailpass.uz/en/" },
@@ -385,7 +386,7 @@ export const packing = [
 ];
 
 export const masterChecklist = [
-  { label: "Vé Afrosiyob 768, 6/11, 07:55, 2 ghế", priority: "High" },
+  { label: "Vé 768 ngày 6/11: tìm Tashkent → Samarkand, tàu 07:55", priority: "High" },
   { label: "Vé Afrosiyob 769, 8/11, 16:56, 2 ghế", priority: "High" },
   { label: "Lưu vé HY532 và HY531. Màn hình đang hiện 1 khách", priority: "High" },
   { label: "TDAC trước khi về Thái Lan", priority: "High" },
