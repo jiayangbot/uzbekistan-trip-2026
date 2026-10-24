@@ -33,10 +33,22 @@ export const hotelLinks = {
     cityId: 640,
     map: "Mövenpick Samarkand",
   },
+  "Hilton Tashkent City": {
+    tripWord: "Hilton Tashkent City",
+    bookingWord: "Hilton Tashkent City",
+    cityId: 639,
+    map: "Hilton Tashkent City, 1 Ukchi Street",
+  },
+  "Wyndham Tashkent": {
+    tripWord: "Wyndham Tashkent",
+    bookingWord: "Wyndham Tashkent",
+    cityId: 639,
+    map: "Wyndham Tashkent, Amir Temur Avenue",
+  },
 };
 
-export function stayLinks(stay) {
-  const key = Object.keys(hotelLinks).find((name) => stay.name.startsWith(name));
+export function stayLinks(stay, hotelName = stay.name) {
+  const key = Object.keys(hotelLinks).find((name) => hotelName.startsWith(name));
   const info = key ? hotelLinks[key] : null;
   if (!info) return null;
   return {

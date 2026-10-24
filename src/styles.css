@@ -629,15 +629,25 @@ a {
 .option {
   display: grid;
   gap: 6px;
+  width: 100%;
   padding: 14px;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--surface-2);
+  color: inherit;
+  font: inherit;
   font-size: 0.925rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.option:hover {
+  border-color: var(--text);
 }
 
 .option.is-picked {
   border-color: var(--success);
+  box-shadow: inset 0 0 0 1px var(--success);
 }
 
 .option-top {

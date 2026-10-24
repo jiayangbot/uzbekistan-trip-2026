@@ -116,6 +116,65 @@ function loadChecks() {
 }
 
 const checks = loadChecks();
+const PICK_KEY = "uz-trip-2026-picks";
+
+/** @type {Record<string, string>} */
+const segmentOfStay = {
+  "2026-10-27": "Amir Temur · 27–30 Oct",
+  "2026-10-30": "Tashkent City · 30 Oct–2 Nov",
+  "2026-11-02": "Mirabad / Oybek · 2–6 Nov",
+  "2026-11-06": "Samarkand · 6–8 Nov",
+  "2026-11-08": "Trước giờ bay · 8–9 Nov",
+};
+
+/** @type {Record<string, string>} */
+const optionLabel = {
+  "hampton-3": "Hampton by Hilton",
+  "wyndham-3": "Wyndham Tashkent",
+  "hi-3": "Holiday Inn Tashkent City",
+  "hi-room": "Holiday Inn Tashkent City",
+  "hilton-3": "Hilton Tashkent City",
+  "swiss-4": "Swissôtel Tashkent",
+  "swiss-room": "Swissôtel Tashkent",
+  "mov-sam": "Mövenpick Samarkand",
+  "mov-room": "Mövenpick Samarkand",
+  "hampton-1": "Hampton by Hilton",
+};
+
+function loadPicks() {
+  try {
+    const raw = JSON.parse(localStorage.getItem(PICK_KEY) || "{}");
+    return raw && typeof raw === "object" ? raw : {};
+  } catch {
+    return {};
+  }
+}
+
+/** @type {Record<string, string>} */
+let picks = loadPicks();
+
+function optionsForStay(stay) {
+  const segment = segmentOfStay[stay.checkIn];
+  return hotelOptions.filter((o) => o.segment === segment);
+}
+
+function optionForStay(stay) {
+  const opts = optionsForStay(stay);
+  return opts.find((o) => o.id === picks[stay.checkIn]) || opts.find((o) => o.tier === "recommended") || opts[0];
+}
+
+function chosenTotal() {
+  return hotelStays.reduce((sum, stay) => sum + (optionForStay(stay)?.total ?? stay.actualTotal), 0);
+}
+
+function breakfastIncluded(option) {
+  return option.breakfast.startsWith("Đã gồm");
+}
+
+function sameHotel(stay, option) {
+  const label = optionLabel[option.id] || "";
+  return stay.name.startsWith(label);
+}
 
 function checkItem(key, text, extra = "") {
   return `<li><label class="check">
@@ -130,7 +189,6 @@ function progressText(prefix, total) {
 }
 
 const totalNights = hotelStays.reduce((sum, s) => sum + s.nights, 0);
-const diff = meta.budgetUsd - meta.quotedTotalUsd;
 
 function renderTopbar() {
   return `
@@ -148,7 +206,9 @@ function renderTopbar() {
 }
 
 function renderOverview() {
-  const pct = Math.min(100, Math.round((meta.quotedTotalUsd / meta.budgetUsd) * 100));
+  const quoted = chosenTotal();
+  const diff = meta.budgetUsd - quoted;
+  const pct = Math.min(100, Math.round((quoted / meta.budgetUsd) * 100));
   const over = diff < 0;
   const urgent = masterChecklist.filter((c) => c.priority === "High").slice(0, 3);
   return `
@@ -162,15 +222,16 @@ function renderOverview() {
       <div class="stats">
         <article class="card budget-card">
           <h2 class="card-label">${icon("wallet")} Ngân sách khách sạn</h2>
-          <p class="big-number">${fmtMoney.format(meta.quotedTotalUsd)} <span>/ ${fmtMoney.format(meta.budgetUsd)}</span></p>
+          <p class="big-number">${fmtMoney.format(quoted)} <span>/ ${fmtMoney.format(meta.budgetUsd)}</span></p>
           <div class="meter ${over ? "over" : ""}" role="img" aria-label="Quote bằng ${pct}% ngân sách">
             <span style="width:${pct}%"></span>
           </div>
           <p class="status ${over ? "is-over" : "is-ok"}">
             ${icon(over ? "alert" : "check", 16)}
             ${over ? "Vượt" : "Còn"} ${fmtMoney.format(Math.abs(diff))} ·
-            ${perNight(meta.quotedTotalUsd, totalNights)}/đêm so với trần ${perNight(meta.budgetUsd, totalNights)}/đêm
+            ${perNight(quoted, totalNights)}/đêm so với trần ${perNight(meta.budgetUsd, totalNights)}/đêm
           </p>
+          ${quoted === meta.quotedTotalUsd ? "" : `<p class="muted">Quote gốc ${fmtMoney.format(meta.quotedTotalUsd)}. Đang chọn phương án khác.</p>`}
         </article>
         <article class="card">
           <h2 class="card-label">${icon("bed")} Lưu trú</h2>
@@ -199,22 +260,26 @@ function renderStays() {
 
   const cards = hotelStays
     .map((s, i) => {
-      const links = stayLinks(s);
+      const opt = optionForStay(s);
+      const label = optionLabel[opt.id] || s.name;
+      const links = stayLinks(s, label);
+      const meal = breakfastIncluded(opt) ? "ăn sáng cho 2 người" : opt.breakfast;
       return `
         <li class="card stay-card">
           <div class="stay-head">
             <span class="stay-index seg-${i}" aria-hidden="true">${i + 1}</span>
             <div>
-              <h3>${s.name}</h3>
+              <h3>${opt.name}</h3>
               <p class="muted">${icon("pin", 14)} ${areaFor(s)}</p>
             </div>
           </div>
           <p class="stay-dates">${shortDate(s.checkIn)} → ${shortDate(s.checkOut)} · ${s.nights} đêm</p>
-          <p class="stay-price"><strong>${perNight(s.actualTotal, s.nights)}</strong>/đêm <span>· ăn sáng cho 2 người · ${fmtMoney.format(s.actualTotal)} tổng</span></p>
+          <p class="stay-price"><strong>${perNight(opt.total, s.nights)}</strong>/đêm <span>· ${meal} · ${fmtMoney.format(opt.total)} tổng</span></p>
           <ul class="facts">
-            <li>Hủy: ${s.cancel}</li>
+            <li>Hủy: ${opt.cancel}</li>
           </ul>
-          ${renderReview(s)}
+          <p>${sameHotel(s, opt) ? s.note : opt.why}</p>
+          ${sameHotel(s, opt) ? renderReview(s) : ""}
           ${
             links
               ? `<div class="actions">
@@ -240,18 +305,21 @@ function renderStays() {
         <h4>${segment}</h4>
         <ul>
           ${opts
-            .map(
-              (o) => `
-            <li class="option ${o.tier === "recommended" ? "is-picked" : ""}">
-              <div class="option-top">
-                <strong>${o.name}</strong>
-                <span class="num">${o.total != null ? fmtMoney.format(o.total) : "—"}</span>
-              </div>
-              ${o.tier === "recommended" ? `<span class="tag tag-ok">${icon("check", 12)} Đang chọn</span>` : ""}
-              <p class="muted">${o.area} · ${o.score} · ${o.breakfast.startsWith("Đã gồm") ? "ăn sáng cho 2 người" : o.breakfast} · ${o.cancel}</p>
-              <p>${o.why}</p>
-            </li>`,
-            )
+            .map((o) => {
+              const picked = hotelStays.some((s) => segmentOfStay[s.checkIn] === segment && optionForStay(s).id === o.id);
+              return `
+            <li>
+              <button type="button" class="option ${picked ? "is-picked" : ""}" data-pick="${o.id}" aria-pressed="${picked}">
+                <span class="option-top">
+                  <strong>${o.name}</strong>
+                  <span class="num">${o.total != null ? fmtMoney.format(o.total) : "—"}</span>
+                </span>
+                <span class="tag ${picked ? "tag-ok" : "tag-plain"}">${icon(picked ? "check" : "swap", 12)} ${picked ? "Đang chọn" : "Chọn"}</span>
+                <span class="muted">${o.area} · ${o.score} · ${o.breakfast.startsWith("Đã gồm") ? "ăn sáng cho 2 người" : o.breakfast} · ${o.cancel}</span>
+                <span>${o.why}</span>
+              </button>
+            </li>`;
+            })
             .join("")}
         </ul>
       </div>`,
@@ -262,12 +330,12 @@ function renderStays() {
     <section class="section" id="stays" aria-labelledby="stays-title">
       <div class="section-head">
         <h2 id="stays-title">Khách sạn theo chặng</h2>
-        <p class="muted">Giá Trip.com cho 2 người, đã gồm thuế và ăn sáng. Bấm để mở đúng ngày.</p>
+        <p class="muted">Giá Trip.com cho 2 người, đã gồm thuế. Bấm một phương án để chọn cho cả chặng.</p>
       </div>
       <div class="strip" aria-hidden="true">${strip}</div>
       <ol class="stay-grid">${cards}</ol>
-      <details class="card alternatives">
-        <summary>${icon("swap")} Phương án khác để so giá <span class="muted">(${hotelOptions.length})</span>${icon("chevron")}</summary>
+      <details class="card alternatives" open>
+        <summary>${icon("swap")} Chọn khách sạn theo chặng <span class="muted">(${hotelOptions.length})</span>${icon("chevron")}</summary>
         <div class="option-grid">${options}</div>
       </details>
     </section>`;
@@ -276,7 +344,9 @@ function renderStays() {
 function renderDetail(entry, stay) {
   const detail = dayDetails[entry.date];
   if (!detail) return "";
-  const links = stay ? stayLinks(stay) : null;
+  const opt = stay ? optionForStay(stay) : null;
+  const label = opt ? optionLabel[opt.id] || stay.name : "";
+  const links = stay && opt ? stayLinks(stay, label) : null;
   const places = detail.places
     .map(
       (p) => `
@@ -298,10 +368,10 @@ function renderDetail(entry, stay) {
           stay && links
             ? `<section class="block">
                 <h4>${icon("bed", 16)} Khách sạn đêm nay</h4>
-                <p><strong>${stay.name}</strong> · ${perNight(stay.actualTotal, stay.nights)}/đêm</p>
-                <p>${icon("check", 14)} Ăn sáng cho 2 người, đã gồm trong giá.</p>
-                <p class="muted">${stay.cancel}. ${stay.note}</p>
-                ${renderReview(stay)}
+                <p><strong>${opt.name}</strong> · ${perNight(opt.total, stay.nights)}/đêm</p>
+                <p>${breakfastIncluded(opt) ? `${icon("check", 14)} Ăn sáng cho 2 người, đã gồm trong giá.` : `${icon("alert", 14)} ${opt.breakfast}.`}</p>
+                <p class="muted">${opt.cancel}. ${sameHotel(stay, opt) ? stay.note : opt.why}</p>
+                ${sameHotel(stay, opt) ? renderReview(stay) : ""}
                 <div class="actions">
                   ${extLink(links.trip, "Trip.com", "btn btn-primary")}
                   ${extLink(links.booking, "Booking", "btn")}
@@ -347,6 +417,7 @@ function renderDay(entry, index) {
   const kind = dayKind(entry);
   const info = kindInfo(kind);
   const stay = stayOnDate(entry.date);
+  const opt = stay ? optionForStay(stay) : null;
   const prev = index > 0 ? days[index - 1] : null;
   const moved = prev && (prev.hotel !== entry.hotel || prev.city !== entry.city);
   const d = parseDate(entry.date);
@@ -366,8 +437,8 @@ function renderDay(entry, index) {
             <span class="tags">
               <span class="tag tag-${kind}">${icon(info.icon, 13)} ${info.label}</span>
               ${moved ? `<span class="tag tag-move">${icon("swap", 13)} Đổi chỗ ở</span>` : ""}
-              ${stay && entry.hotel !== "Checkout / flight" ? `<span class="tag tag-plain">${icon("bed", 13)} ${entry.hotel}</span>` : ""}
-              ${stay && stay.breakfast.startsWith("Đã gồm") ? `<span class="tag tag-ok">${icon("check", 13)} Ăn sáng đã gồm</span>` : ""}
+              ${opt && entry.hotel !== "Checkout / flight" ? `<span class="tag tag-plain">${icon("bed", 13)} ${optionLabel[opt.id] || entry.hotel}</span>` : ""}
+              ${opt && entry.hotel !== "Checkout / flight" && breakfastIncluded(opt) ? `<span class="tag tag-ok">${icon("check", 13)} Ăn sáng đã gồm</span>` : ""}
             </span>
           </span>
           <span class="chev">${icon("chevron", 20)}</span>
@@ -456,9 +527,10 @@ function setDayOpen(li, open) {
   li.classList.toggle("open", open);
 }
 
-function mount() {
-  const root = document.getElementById("app");
-  root.innerHTML = `
+let navObserver = null;
+
+function pageHtml() {
+  return `
     ${renderTopbar()}
     <main class="page">
       ${renderOverview()}
@@ -467,8 +539,91 @@ function mount() {
       ${renderPrep()}
       <footer class="footer">Giá là quote, chưa đặt. Kiểm tra lại tổng và điều kiện hủy trước khi trả tiền.</footer>
     </main>`;
+}
+
+function captureUi() {
+  const root = document.getElementById("app");
+  return {
+    scroll: window.scrollY,
+    openDays: [...root.querySelectorAll(".day.open")].map((li) => li.id),
+    detailsOpen: root.querySelector(".alternatives")?.open ?? true,
+    filter: root.querySelector("[data-filter][aria-pressed='true']")?.getAttribute("data-filter") || "all",
+    expanded: root.querySelector("[data-expand-all]")?.getAttribute("aria-pressed") === "true",
+  };
+}
+
+function restoreUi(ui) {
+  const root = document.getElementById("app");
+  const details = root.querySelector(".alternatives");
+  if (details) details.open = ui.detailsOpen;
+  if (ui.filter !== "all") {
+    root.querySelectorAll("[data-filter]").forEach((c) => {
+      c.setAttribute("aria-pressed", String(c.getAttribute("data-filter") === ui.filter));
+    });
+    root.querySelectorAll(".day").forEach((li) => {
+      const index = Number(li.getAttribute("data-index"));
+      li.hidden = !matchesFilter(/** @type {Filter} */ (ui.filter), days[index], index);
+    });
+  }
+  if (ui.expanded) {
+    const expand = root.querySelector("[data-expand-all]");
+    expand.setAttribute("aria-pressed", "true");
+    expand.textContent = "Thu gọn tất cả";
+  }
+  for (const id of ui.openDays) {
+    const li = document.getElementById(id);
+    if (li && !li.hidden) setDayOpen(li, true);
+  }
+  window.scrollTo(0, ui.scroll);
+}
+
+function watchNav() {
+  navObserver?.disconnect();
+  const root = document.getElementById("app");
+  const navLinks = root.querySelectorAll("[data-nav]");
+  navObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        navLinks.forEach((a) => {
+          const active = a.getAttribute("data-nav") === entry.target.id;
+          if (active) a.setAttribute("aria-current", "true");
+          else a.removeAttribute("aria-current");
+        });
+      }
+    },
+    { rootMargin: "-45% 0px -50% 0px" },
+  );
+  ["overview", "stays", "timeline", "prep"].forEach((id) => navObserver.observe(document.getElementById(id)));
+}
+
+function paint(focusId) {
+  const root = document.getElementById("app");
+  const ui = root.querySelector(".page") ? captureUi() : null;
+  root.innerHTML = pageHtml();
+  if (ui) restoreUi(ui);
+  if (focusId) root.querySelector(`[data-pick="${CSS.escape(focusId)}"]`)?.focus({ preventScroll: true });
+  watchNav();
+}
+
+function mount() {
+  const root = document.getElementById("app");
+  paint();
 
   root.addEventListener("click", (event) => {
+    const pick = event.target.closest("[data-pick]");
+    if (pick) {
+      const id = pick.getAttribute("data-pick");
+      const opt = hotelOptions.find((o) => o.id === id);
+      const checkIn = Object.entries(segmentOfStay).find(([, segment]) => segment === opt?.segment)?.[0];
+      const stay = hotelStays.find((s) => s.checkIn === checkIn);
+      if (!opt || !stay || optionForStay(stay).id === id) return;
+      picks = { ...picks, [checkIn]: id };
+      localStorage.setItem(PICK_KEY, JSON.stringify(picks));
+      paint(id);
+      return;
+    }
+
     const toggle = event.target.closest(".day-toggle");
     if (toggle) {
       const li = toggle.closest(".day");
@@ -511,22 +666,6 @@ function mount() {
       el.textContent = progressText(prefix, total);
     });
   });
-
-  const navLinks = root.querySelectorAll("[data-nav]");
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        navLinks.forEach((a) => {
-          const active = a.getAttribute("data-nav") === entry.target.id;
-          if (active) a.setAttribute("aria-current", "true");
-          else a.removeAttribute("aria-current");
-        });
-      }
-    },
-    { rootMargin: "-45% 0px -50% 0px" },
-  );
-  ["overview", "stays", "timeline", "prep"].forEach((id) => observer.observe(document.getElementById(id)));
 
   const openFromHash = () => {
     if (!location.hash.startsWith("#d-")) return;
