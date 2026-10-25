@@ -186,6 +186,7 @@ function renderTopbar() {
             .map(([id, label, ic]) => `<a href="#${id}" data-nav="${id}">${icon(ic, 20)}<span>${label}</span></a>`)
             .join("")}
         </nav>
+        ${renderLangSwitch()}
       </div>
     </header>`;
 }
@@ -650,12 +651,9 @@ function renderAgendaDay(day) {
 function renderPrep() {
   return `
     <section class="section" id="prep" aria-labelledby="prep-title">
-      <div class="section-head prep-head">
-        <div>
-          <h2 id="prep-title">${t("Lịch trình", "Itinerary")}</h2>
-          <p class="muted">${t("Từ 26/10 chuẩn bị ở Bangkok đến 10/11 về. Tick lưu trên máy này.", "From 26 Oct prep in Bangkok through the 10 Nov return. Ticks stay on this phone.")}</p>
-        </div>
-        ${renderLangSwitch()}
+      <div class="section-head">
+        <h2 id="prep-title">${t("Lịch trình", "Itinerary")}</h2>
+        <p class="muted">${t("Từ 26/10 chuẩn bị ở Bangkok đến 10/11 về. Tick lưu trên máy này.", "From 26 Oct prep in Bangkok through the 10 Nov return. Ticks stay on this phone.")}</p>
       </div>
       <ol class="agenda">${agendaDays.map(renderAgendaDay).join("")}</ol>
       <div class="prep-grid">
