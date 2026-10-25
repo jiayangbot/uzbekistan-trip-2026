@@ -1,6 +1,7 @@
 import { days, meta } from "./trip-data.js";
 import { dayDetails, mapLink, sources, localLife } from "./trip-guide.js";
 import { dayEats, daySlots } from "./day-slots.js";
+import { dayAddons } from "./addons.js";
 import { icon } from "./icons.js";
 import { bookingFor, bookings, checkoutOn, legs, legsOn, tripCosts } from "./bookings.js";
 import { applyLang, getLang, pick, setLang, t } from "./i18n.js";
@@ -557,6 +558,23 @@ function renderSlots(date) {
   return `<ol class="slots">${rows}</ol>`;
 }
 
+function renderAddons(date) {
+  const items = dayAddons[date];
+  if (!items?.length) return "";
+  return `
+    <section class="addons" aria-label="${t("Thử thêm", "Add-ons")}">
+      <h4>${icon("list", 16)} ${t("Thử thêm", "Add-ons")}</h4>
+      <ul>
+        ${items
+          .map(
+            (item) =>
+              `<li><span class="tag tag-plain">${escapeHtml(pick(item.mode))}</span><span>${escapeHtml(pick(item.text))}</span></li>`,
+          )
+          .join("")}
+      </ul>
+    </section>`;
+}
+
 function allEntries() {
   const extra = agendaDays
     .filter((day) => day.city && day.plan && !days.some((entry) => entry.date === day.date))
@@ -652,6 +670,7 @@ function renderDay(entry, index) {
       ${renderDayTasks(entry.date)}
       ${renderEssentials(entry.date)}
       ${renderSlots(entry.date)}
+      ${renderAddons(entry.date)}
       ${renderStops(entry.date)}
       ${renderEats(entry.date)}
       ${detail ? `<div class="day-panel" id="p-${entry.date}" role="region" aria-label="${t("Chi tiết", "Details")} ${fmtLong(d)}" hidden>${detail}</div>` : ""}

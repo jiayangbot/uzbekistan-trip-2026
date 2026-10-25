@@ -107,7 +107,7 @@ export const dayDetails = {
         query: "Chorsu Bazaar Tashkent",
         eat: "Plov hoặc samsa trong khu ăn của chợ, non, trái cây khô.",
         doing: "Đi buổi sáng, xem mái vòm, mua trái cây nếu muốn, rồi sang Hazrati Imam.",
-        tip: "Yandex từ Hampton. Tiền mặt, tờ nhỏ. Mặc cả trái cây, không mặc cả đĩa đã niêm giá. Giữ túi phía trước.",
+        tip: "Metro từ Hampton, mệt thì Yandex. Tiền mặt, tờ nhỏ. Mặc cả trái cây, không mặc cả đĩa đã niêm giá. Giữ túi phía trước.",
       },
       {
         name: "Hazrati Imam",
@@ -154,7 +154,7 @@ export const dayDetails = {
         name: "Ga Kosmonavtlar",
         query: "Kosmonavtlar metro station Tashkent",
         eat: "Không ăn dưới ga. Tối về gần Hampton gọi shashlik, salad và non.",
-        doing: "Mua lượt metro, đi vài ga cho xem trần và tường, rồi về Amir Temur Xiyoboni.",
+        doing: "Đi tới Kosmonavtlar, xem trần, rồi lên một xe buýt thành phố đi vài điểm.",
         tip: "Chạm thẻ hoặc điện thoại 2.500 som một lượt, vé giấy 3.000. Mỗi người một lần chạm. Không có xu nhựa.",
       },
     ],
@@ -667,6 +667,7 @@ export const localLife = [
     icon: "train",
     paragraphs: [
       "Tashkent có metro, chạy khoảng 5:00 đến nửa đêm. Một lượt đi đâu cũng một giá. Từ 1/10/2026, chạm thẻ ngân hàng, điện thoại hoặc thẻ ATTO là 2.500 som. Vé giấy mua ở ki-ốt là 3.000 som. Không còn xu nhựa. Đổi tuyến trong cùng một lần qua cửa thì không tính thêm. Mỗi người một lần chạm. Ga đẹp để xem: Kosmonavtlar, Alisher Navoi.",
+      "Xe buýt thành phố chạm cùng thẻ, 2.500 som một lượt. Xe buýt nhỏ chạy tuyến cố định: hỏi giá trước khi ngồi, trả tiền mặt tờ nhỏ. Đừng tìm tàu điện trên mặt đường. Metro đi ngầm, tàu ngoại ô là chuyến lên núi, tàu Sharq là chuyến Samarkand.",
       "Hampton sát ga Amir Temur Xiyoboni. Hilton gần ga Xalqlar Do'stligi. Swissôtel gần ga Oybek. Quảng trường thì đi bộ. Mỏi, tối, hoặc có vali thì gọi Yandex Go. App hiện giá trước khi nhận xe. Xe thường là Chevrolet trắng, đối biển số với app. Không vẫy taxi ngoài đường. Samarkand không có metro, trong phố cũng dùng Yandex.",
       "Sân bay hiện tại không có ga metro. Ga từng được đặt tên dự án Aeroport trên tuyến vòng là Tolariq, nằm vòng ngoài thành phố, không phải nhà ga bay. Ngày 27/10, HY532 vào Terminal 2 lúc 11:45. Hai người có vali: mua SIM trong nhà ga, ra làn 1 gọi Yandex về Hampton. Bảng giá tối đa tháng 9/2026 tính tới quảng trường Amir Temur khoảng 20.000 som cho 7,6 km, trước phụ phí giờ đông. App hiện số cuối. Chưa có mạng thì quầy taxi trong sảnh, giá trong thành phố từ 50.000 som, chốt tại quầy. Đừng nhận người chào trong sảnh.",
       "Ngày 9/11 rời khách sạn khoảng 17:15, Yandex về Terminal 2. Không đi metro ra sân bay.",

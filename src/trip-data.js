@@ -24,7 +24,7 @@ export const days = [
     city: "Tashkent",
     area: "Amir Temur / Istiqbol",
     hotel: "Hampton by Hilton",
-    plan: "Chorsu, Hazrati Imam và Kukeldash. Tối ăn trên Broadway.",
+    plan: "Metro tới Chorsu, rồi Hazrati Imam và Kukeldash. Tối ăn trên Broadway.",
     transfer: "",
   },
   {
@@ -33,7 +33,7 @@ export const days = [
     city: "Tashkent",
     area: "Amir Temur / Istiqbol",
     hotel: "Hampton by Hilton",
-    plan: "Bảo tàng Amir Temur, quảng trường Độc lập, vài ga metro.",
+    plan: "Bảo tàng Amir Temur, quảng trường Độc lập, metro Kosmonavtlar, rồi một chuyến xe buýt.",
     transfer: "",
   },
   {
@@ -96,7 +96,7 @@ export const days = [
     city: "Tashkent",
     area: "Mirabad / Oybek",
     hotel: "Swissôtel Tashkent",
-    plan: "Đi nhẹ quanh Mirabad. Gói đồ, mai tàu 08:37.",
+    plan: "Đi nhẹ quanh Mirabad và một chuyến xe buýt nhỏ. Gói đồ, mai tàu 08:37.",
     transfer: "",
   },
   {
@@ -114,7 +114,7 @@ export const days = [
     city: "Samarkand",
     area: "Trung tâm Samarkand",
     hotel: "Zarafshon Parkside",
-    plan: "Shah-i-Zinda, Bibi-Khanym, chợ Siab, Gur-e-Amir.",
+    plan: "Đi bộ Shah-i-Zinda, chợ Siab, Bibi-Khanym và Gur-e-Amir.",
     transfer: "",
   },
   {

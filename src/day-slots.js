@@ -12,7 +12,7 @@ export const daySlots = {
   ],
   "2026-10-28": [
     { time: "08:30", part: "Sáng", eat: "Hampton", text: "Ăn sáng tại khách sạn. Thứ Tư, không đổi khách sạn.", usd: 0, query: "Hampton by Hilton Tashkent" },
-    { time: "09:30", part: "Sáng", eat: "Chợ Chorsu", text: "Rồi sang Hazrati Imam. Kín vai, kín gối, tiền mặt.", usd: 0, query: "Chorsu Bazaar Tashkent" },
+    { time: "09:30", part: "Sáng", eat: "Chợ Chorsu", text: "Đi metro từ ga Amir Temur Xiyoboni, rồi sang Hazrati Imam. Kín vai, kín gối, tiền mặt.", usd: 0, query: "Chorsu Bazaar Tashkent" },
     { time: "13:00", part: "Trưa", eat: "Plov hoặc samsa trong chợ", text: "Ăn ở khu food hall của chợ. Một đĩa plov hoặc samsa và trà.", usd: 10, query: "Chorsu Bazaar Tashkent" },
     { time: "15:30", part: "Chiều", eat: "Kukeldash", text: "Xem trường rồi metro hoặc đi bộ về khách sạn.", usd: 0, query: "Kukeldash Madrasah Tashkent" },
     { time: "19:00", part: "Tối", eat: "Broadway", text: "Lagman hoặc shashlik ở quán quốc dân trên phố đi bộ.", usd: 16, query: "Sayilgoh Street Tashkent Broadway" },
@@ -21,7 +21,7 @@ export const daySlots = {
     { time: "08:30", part: "Sáng", eat: "Hampton", text: "Ăn sáng tại khách sạn.", usd: 0 },
     { time: "10:00", part: "Sáng", eat: "Bảo tàng Amir Temur", text: "Rồi đi bộ quảng trường Độc lập. Vé mua tại cửa.", usd: 0, query: "Amir Temur Museum Tashkent" },
     { time: "13:00", part: "Trưa", eat: "Lagman gần quảng trường", text: "Một tô mì ở quán thường quanh quảng trường.", usd: 14, query: "Independence Square Tashkent restaurants" },
-    { time: "15:30", part: "Chiều", eat: "Ga Kosmonavtlar", text: "Đi vài ga metro cho đẹp, rồi về.", usd: 0, query: "Kosmonavtlar metro station Tashkent" },
+    { time: "15:30", part: "Chiều", eat: "Ga Kosmonavtlar", text: "Xem trần ga, rồi lên một xe buýt thành phố đi vài điểm.", usd: 0, query: "Kosmonavtlar metro station Tashkent" },
     { time: "19:00", part: "Tối", eat: "Shashlik gần Hampton", text: "Một xiên gà hoặc bò, salad, bánh. Đi bộ về.", usd: 16, query: "shashlik near Istiqbol Street Tashkent" },
   ],
   "2026-10-30": [
