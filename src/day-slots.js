@@ -31,11 +31,13 @@ export const daySlots = {
     { time: "19:30", part: "Tối", eat: "Shashlik gần công viên", text: "Một xiên, salad và bánh ở quán cạnh công viên.", usd: 18, query: "restaurants near Tashkent City Park" },
   ],
   "2026-10-31": [
-    { time: "07:30", part: "Sáng", eat: "Quầy samsa, rồi cửa hàng", text: "Hilton không gồm ăn sáng. Mua samsa, non, trái cây và nước, ăn trên xe.", usd: 10 },
-    { time: "08:30", part: "Sáng", eat: "Amirsoy, Chimgan, Charvak", text: "Xe riêng, không gọi Yandex cả ngày. Hilton tới Amirsoy khoảng 85 km, khoảng 1,5 giờ. Cả vòng qua Chimgan và Charvak khoảng 210 km, lái khoảng 4 giờ chưa kể dừng. $150 là báo giá chưa chốt.", usd: 0, query: "Amirsoy Mountain Resort" },
-    { time: "13:00", part: "Trưa", eat: "Đồ đã mang theo", text: "Ăn picnic. Trên núi chỉ uống trà nếu quán resort đắt.", usd: 6 },
-    { time: "17:30", part: "Chiều", eat: "", text: "Từ Charvak về Hilton khoảng 1,5 giờ. Nghỉ.", usd: 0 },
-    { time: "20:00", part: "Tối", eat: "Lagman gần Ukchi", text: "Bữa nóng sau một ngày gió. Gần khách sạn.", usd: 14, query: "lagman near Ukchi Street Tashkent" },
+    { time: "08:15", part: "Sáng", eat: "Samsa rồi ra ga", text: "Hilton không gồm ăn sáng. Mua samsa và nước. Yandex ra ga trung tâm, khoảng 5 km, 15–25 phút. Có mặt trước 08:45.", usd: 10, query: "Tashkent Central Railway Station" },
+    { time: "09:10", part: "Sáng", eat: "Tàu 7201", text: "Rời Toshkent Markaziy. Tàu có ở ga từ 08:55. Tới Chinorkent 10:33. Vé 30.000 som mỗi người, trả trên tàu.", usd: 0 },
+    { time: "10:40", part: "Sáng", eat: "Xe 324", text: "Ở ga Chinorkent, lên xe 324 đi Amirsoy. 10.000 som, hãng ghi khoảng 40 phút.", usd: 0, query: "Chinorkent railway station" },
+    { time: "11:20", part: "Trưa", eat: "Amirsoy", text: "Ăn đồ mang theo. Cáp treo thứ Bảy 135.000 som khứ hồi mỗi người, chỉ mua nếu đang chạy. Không đi Chimgan và Charvak.", usd: 6, query: "Amirsoy Mountain Resort" },
+    { time: "15:10", part: "Chiều", eat: "Xe 325 về", text: "Xe 325 về phía ga, đừng đi xe 324 vì chiều đó vòng lên núi. Xuống Khodjikent cho tàu 16:12. Muốn về sớm thì Chinorkent, tàu 7204 lúc 14:19, phải rời Amirsoy khoảng 13:20.", usd: 0, query: "Khodjikent railway station" },
+    { time: "18:25", part: "Tối", eat: "Ga Nam", text: "Tàu 6436 tới ga Nam lúc 18:25. Xuống trước đó ở Toshkent Markaziy, Yandex về Hilton khoảng 5 km.", usd: 0, query: "Tashkent Central Railway Station" },
+    { time: "20:00", part: "Tối", eat: "Lagman gần Ukchi", text: "Bữa nóng sau một ngày gió. Gần khách sạn. LOTOS mở tới 23:00 nếu gửi giặt.", usd: 14, query: "lagman near Ukchi Street Tashkent" },
   ],
   "2026-11-01": [
     { time: "09:00", part: "Sáng", eat: "Samsa, non, trà", text: "Hilton không gồm ăn sáng. Ăn quầy quanh Ukchi, hoặc buffet khách sạn $30 mỗi người.", usd: 8, query: "samsa near Ukchi Street Tashkent" },

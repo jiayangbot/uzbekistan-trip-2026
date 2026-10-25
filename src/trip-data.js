@@ -51,7 +51,7 @@ export const days = [
     city: "Tashkent",
     area: "Tashkent City / Ukchi",
     hotel: "Hilton Tashkent City",
-    plan: "Xe riêng đi Amirsoy, khoảng 85 km và 1,5 giờ. Cả vòng Chimgan, Charvak khoảng 210 km.",
+    plan: "Tàu 7201, ga trung tâm 09:10, Chinorkent 10:33, xe 324 lên Amirsoy. Về tàu 16:12.",
     transfer: "",
   },
   {

@@ -99,8 +99,8 @@ export const agendaDays = [
       {
         id: "amirsoy",
         when: { vi: "Tối", en: "Evening" },
-        text: { vi: "Hỏi giá xe Amirsoy cho sáng mai. Chưa chốt $150", en: "Ask the Amirsoy car price for tomorrow morning. $150 is not agreed yet" },
-        detail: { vi: "Hilton tới Amirsoy khoảng 85 km, khoảng 1,5 giờ. Cả vòng Chimgan và Charvak khoảng 210 km, lái khoảng 4 giờ chưa kể dừng.", en: "Hilton to Amirsoy is about 85 km, about 1.5 hours. The Chimgan and Charvak loop is about 210 km, about 4 hours of driving before stops." },
+        text: { vi: "Xem lại giờ tàu 7201 cho sáng mai", en: "Check train 7201 for tomorrow morning" },
+        detail: { vi: "Lịch từ 8/9/2026: ga trung tâm có tàu 08:55, rời 09:10, Chinorkent 10:33. Tàu hay hủy sát ngày. Xe riêng chỉ khi tàu không chạy.", en: "Schedule from 8 Sep 2026: the train is at the central station at 08:55, leaves at 09:10, Chinorkent at 10:33. Trains are often cancelled close to the day. Use a private car only if the train is not running." },
         priority: "medium",
       },
     ],
@@ -110,11 +110,11 @@ export const agendaDays = [
     tasks: [
       {
         id: "laundry",
-        when: { vi: "Trong ngày", en: "During the day" },
-        text: { vi: "Giặt ở LOTOS, Tashkent City Mall, tầng hầm", en: "Wash clothes at LOTOS, Tashkent City Mall, basement" },
+        when: { vi: "Tối", en: "Evening" },
+        text: { vi: "Giặt ở LOTOS sau khi về núi", en: "Wash clothes at LOTOS after the mountain" },
         detail: {
-          vi: "Cách Hilton khoảng 400 m, mở tới 23:00. Muốn tự giặt thì Yandex tới Londry, Iftixor 1A, khoảng 4 km, xong trong khoảng 2 giờ. Không gửi lễ tân.",
-          en: "About 400 m from the Hilton, open until 23:00. To wash it yourself, take Yandex to Londry at Iftixor 1A, about 4 km, done in about 2 hours. Do not leave it with reception.",
+          vi: "Đi Amirsoy cả ngày. Tối về rồi gửi, tầng hầm Tashkent City Mall, cách Hilton khoảng 400 m, mở tới 23:00. Không gửi lễ tân.",
+          en: "Amirsoy takes the whole day. Drop the clothes after you get back, in the basement of Tashkent City Mall, about 400 m from the Hilton, open until 23:00. Do not leave them with reception.",
         },
         priority: "medium",
       },
