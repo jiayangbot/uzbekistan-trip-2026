@@ -6,6 +6,8 @@ import { bookingFor, bookings, checkoutOn, legs, legsOn, tripCosts } from "./boo
 import { applyLang, getLang, pick, setLang, t } from "./i18n.js";
 import { tr } from "./tr.js";
 import { agendaDays, borderCards, packItems } from "./prep.js";
+import { stops } from "./overview.js";
+import { destroyTripMap, fitTrip, focusStop, mountTripMap } from "./trip-map.js";
 
 const STORE_KEY = "uz-trip-2026-checks";
 const STAY_NOTE_KEY = "uz-trip-2026-stay-notes";
@@ -179,6 +181,7 @@ const totalNights = bookings.reduce((sum, b) => sum + b.nights, 0);
 
 function navItems() {
   return [
+    ["overview", t("Tổng quan", "Overview"), "pin"],
     ["now", t("Hôm nay", "Today"), "sun"],
     ["timeline", t("Lịch", "Days"), "calendar"],
     ["stays", t("Khách sạn", "Hotels"), "bed"],
@@ -189,7 +192,7 @@ function renderTopbar() {
   return `
     <header class="topbar">
       <div class="topbar-inner">
-        <a class="brand" href="#now">Uzbekistan <span>2026</span></a>
+        <a class="brand" href="#overview">Uzbekistan <span>2026</span></a>
         <nav aria-label="${t("Các phần", "Sections")}">
           ${navItems()
             .map(([id, label, ic]) => `<a href="#${id}" data-nav="${id}">${icon(ic, 20)}<span>${label}</span></a>`)
@@ -242,6 +245,45 @@ function renderEssentials(iso) {
     </li>`);
   }
   return `<div class="essentials"><ul class="ess-list">${rows.join("")}</ul></div>`;
+}
+
+function renderOverview() {
+  const cards = stops
+    .map((stop, index) => {
+      const photo = stop.image
+        ? `<img src="${stop.image}" alt="" width="960" height="640" loading="lazy" />`
+        : `<span class="place-fallback">${icon("pin", 28)}</span>`;
+      const credit = stop.file ? extLink(stop.file, "Wikimedia", "photo-credit") : "";
+      return `
+        <article class="place-card" data-stop="${stop.id}">
+          <button type="button" class="place-open">
+            <span class="place-photo">${photo}<span class="place-n">${index + 1}</span></span>
+            <span class="place-copy">
+              <span class="place-when">${pick(stop.when)}</span>
+              <strong>${pick(stop.title)}</strong>
+              <span class="muted">${pick(stop.text)}</span>
+            </span>
+          </button>
+          <p class="place-links">${credit}<a class="text-link" href="#${stop.dayId}">${t("Xem ngày", "Open the day")}</a></p>
+        </article>`;
+    })
+    .join("");
+  return `
+    <section class="section" id="overview" aria-labelledby="overview-title">
+      <div class="section-head">
+        <h2 id="overview-title">${t("Tổng quan", "Overview")}</h2>
+        <p class="muted">${t("Bangkok sang Tashkent, một ngày lên núi, hai đêm Samarkand, rồi bay về.", "Bangkok to Tashkent, one day in the mountains, two nights in Samarkand, then fly home.")}</p>
+      </div>
+      <div class="map-tools">
+        <div class="filters" role="group" aria-label="${t("Phạm vi bản đồ", "Map extent")}">
+          <button type="button" class="chip" data-map-fit="uz" aria-pressed="true">${t("Trong Uzbekistan", "In Uzbekistan")}</button>
+          <button type="button" class="chip" data-map-fit="all" aria-pressed="false">${t("Cả đường bay", "Whole route")}</button>
+        </div>
+      </div>
+      <div id="trip-map" class="trip-map" role="region" aria-label="${t("Bản đồ chuyến đi", "Trip map")}"></div>
+      <div class="place-grid">${cards}</div>
+      <p class="photo-note">${t("Ảnh trên Wikimedia Commons. Bấm một chỗ để bản đồ bay tới đó.", "Photos are on Wikimedia Commons. Tap a place and the map flies there.")}</p>
+    </section>`;
 }
 
 function renderNow() {
@@ -707,6 +749,7 @@ function pageHtml() {
   return `
     ${renderTopbar()}
     <main class="page">
+      ${renderOverview()}
       ${renderNow()}
       ${renderTimeline()}
       ${renderStays()}
@@ -770,9 +813,11 @@ function watchNav() {
 function paint() {
   const root = document.getElementById("app");
   const ui = root.querySelector(".page") ? captureUi() : null;
+  destroyTripMap();
   root.innerHTML = pageHtml();
   if (ui) restoreUi(ui);
   watchNav();
+  mountTripMap();
 }
 
 function mount() {
@@ -788,6 +833,19 @@ function mount() {
         setLang(value);
         paint();
       }
+      return;
+    }
+
+    const fit = event.target.closest("[data-map-fit]");
+    if (fit instanceof HTMLElement) {
+      const mode = fit.getAttribute("data-map-fit");
+      if (mode === "uz" || mode === "all") fitTrip(mode);
+      return;
+    }
+
+    const stop = event.target.closest("[data-stop]");
+    if (stop instanceof HTMLElement && !event.target.closest("a")) {
+      focusStop(stop.getAttribute("data-stop") || "");
       return;
     }
 
