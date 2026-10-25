@@ -1720,33 +1720,6 @@ code {
   gap: 16px;
 }
 
-.say-card {
-  display: grid;
-  gap: 10px;
-  align-content: start;
-}
-
-.say-card h3 {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1.1rem;
-}
-
-.say-list {
-  list-style: none;
-  display: grid;
-  gap: 12px;
-}
-
-.say-line {
-  margin: 0;
-}
-
-.say-line p {
-  margin: 0;
-}
-
 .agenda {
   list-style: none;
   display: grid;
@@ -1817,30 +1790,6 @@ code {
 .agenda-tasks .check {
   padding-left: 0;
   padding-right: 0;
-}
-
-.agenda-tasks .say-card {
-  margin-top: 8px;
-}
-
-.say-tag {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--primary);
-}
-
-.say-en,
-.say-vi {
-  margin: 0;
-}
-
-.say-en {
-  font-weight: 600;
-}
-
-.say-vi {
-  color: var(--muted);
 }
 
 .prep-phase {

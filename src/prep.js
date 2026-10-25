@@ -15,19 +15,6 @@
  * @property {Copy} why
  */
 /**
- * @typedef {Object} BorderLine
- * @property {string} en
- * @property {string} vi
- */
-/**
- * @typedef {Object} BorderCard
- * @property {string} id
- * @property {Copy} title
- * @property {Copy} hint
- * @property {BorderLine[]} lines
- */
-
-/**
  * @typedef {Object} AgendaDay
  * @property {string} date
  * @property {Copy} [city]
@@ -35,7 +22,6 @@
  * @property {Copy} [plan]
  * @property {PrepStep[]} tasks
  * @property {boolean} [pack]
- * @property {"uz" | "th"} [border]
  */
 
 /** Một dòng thời gian theo ngày. Ngày 27/10–9/11 lấy tên chỗ và kế hoạch từ lịch chuyến đi. */
@@ -82,20 +68,12 @@ export const agendaDays = [
   },
   {
     date: "2026-10-27",
-    border: "uz",
     tasks: [
       {
         id: "bkk",
         when: { vi: "Sáng", en: "Morning" },
         text: { vi: "Có mặt BKK trước 3 tiếng. HY532 cất cánh 06:55", en: "Be at BKK 3 hours early. HY532 departs 06:55" },
         detail: { vi: "Trên máy bay khoảng 6 giờ 50 phút. Tới TAS Terminal 2 lúc 11:45, rồi Yandex về Hampton khoảng 11 km, 20–40 phút.", en: "About 6 hours 50 minutes in the air. Arrive TAS Terminal 2 at 11:45, then Yandex to the Hampton, about 11 km, 20–40 minutes." },
-        priority: "high",
-      },
-      {
-        id: "uz",
-        when: { vi: "Nhập cảnh", en: "Immigration" },
-        text: { vi: "Đưa điện thoại cho cán bộ. Họ đọc thẻ nhập cảnh ngay dưới", en: "Hand over the phone. The officer reads the arrival card below" },
-        detail: { vi: "Mở thẻ Nhập cảnh Uzbekistan.", en: "Open the Uzbekistan arrival card." },
         priority: "high",
       },
       {
@@ -247,19 +225,10 @@ export const agendaDays = [
     city: { vi: "Bangkok", en: "Bangkok" },
     area: { vi: "Về tới", en: "Arrival" },
     plan: {
-      vi: "HY531 hạ cánh khoảng 05:25. Nhập cảnh Thái Lan.",
-      en: "HY531 lands about 05:25. Clear Thailand immigration.",
+      vi: "HY531 hạ cánh khoảng 05:25.",
+      en: "HY531 lands about 05:25.",
     },
-    border: "th",
-    tasks: [
-      {
-        id: "thai",
-        when: { vi: "05:25", en: "05:25" },
-        text: { vi: "Nhập cảnh Thái Lan. Đưa điện thoại cho cán bộ", en: "Thailand immigration. Hand over the phone" },
-        detail: { vi: "Mở thẻ Nhập cảnh Thái Lan ngay dưới.", en: "Open the Thailand arrival card below." },
-        priority: "high",
-      },
-    ],
+    tasks: [],
   },
 ];
 
@@ -299,63 +268,5 @@ export const packItems = [
     id: "spare",
     item: { vi: "Đồ lót và áo thun dư vài ngày", en: "Spare underwear and t-shirts for a few days" },
     why: { vi: "Giặt ngoài khách sạn. Đêm 8/11 không kịp: 17:15 ngày 9/11 ra sân bay.", en: "Wash clothes outside the hotel. The night of 8 Nov is too late: the airport car leaves at 17:15 on 9 Nov." },
-  },
-];
-
-/** @type {BorderCard[]} */
-export const borderCards = [
-  {
-    id: "uz",
-    title: { vi: "Nhập cảnh Uzbekistan", en: "Uzbekistan arrival" },
-    hint: {
-      vi: "27/10, sân bay Tashkent. Đưa máy cho cán bộ.",
-      en: "27 Oct, Tashkent airport. Hand over the phone.",
-    },
-    lines: [
-      { en: "We are tourists. Two people.", vi: "Chúng tôi đi du lịch. Hai người." },
-      {
-        en: "We arrive on 27 October 2026 on flight HY532 from Bangkok, and we leave on 9 November 2026 on flight HY531 to Bangkok.",
-        vi: "Chúng tôi tới ngày 27/10/2026, chuyến HY532 từ Bangkok, và về ngày 9/11/2026, chuyến HY531 đi Bangkok.",
-      },
-      {
-        en: "Our first hotel is Hampton by Hilton Tashkent, 17 Istiqbol Street. After that we stay at other hotels in Tashkent, and two nights in Samarkand.",
-        vi: "Khách sạn đầu tiên là Hampton by Hilton Tashkent, số 17 đường Istiqbol. Sau đó chúng tôi ở các khách sạn khác tại Tashkent, và hai đêm ở Samarkand.",
-      },
-      {
-        en: "We have nothing to declare. We are not carrying commercial goods.",
-        vi: "Chúng tôi không có gì phải khai. Không mang hàng thương mại.",
-      },
-      {
-        en: "Any medicine is personal, for our own use. We can show a prescription if you need it.",
-        vi: "Thuốc chỉ để dùng cá nhân. Chúng tôi đưa đơn thuốc nếu cán bộ cần.",
-      },
-      {
-        en: "We are carrying about 600 US dollars in cash for meals and taxis. The hotels are already paid by card.",
-        vi: "Chúng tôi mang khoảng 600 đô la tiền mặt cho ăn uống và taxi. Khách sạn đã trả bằng thẻ.",
-      },
-    ],
-  },
-  {
-    id: "th",
-    title: { vi: "Nhập cảnh Thái Lan", en: "Thailand arrival" },
-    hint: {
-      vi: "10/11, khoảng 05:25 tại Bangkok. TDAC phải nộp trước khi bay.",
-      en: "10 Nov, about 05:25 in Bangkok. TDAC must be filed before the flight.",
-    },
-    lines: [
-      {
-        en: "We are returning to Bangkok. Flight HY531 from Tashkent, arriving 10 November 2026 at 05:25.",
-        vi: "Chúng tôi về Bangkok. Chuyến HY531 từ Tashkent, tới ngày 10/11/2026 lúc 05:25.",
-      },
-      { en: "Our TDAC is already submitted.", vi: "Chúng tôi đã nộp TDAC." },
-      {
-        en: "We have nothing to declare. No commercial goods.",
-        vi: "Chúng tôi không có gì phải khai. Không có hàng thương mại.",
-      },
-      {
-        en: "Any medicine is personal, for our own use.",
-        vi: "Thuốc chỉ để dùng cá nhân.",
-      },
-    ],
   },
 ];

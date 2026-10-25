@@ -5,7 +5,7 @@ import { icon } from "./icons.js";
 import { bookingFor, bookings, checkoutOn, legs, legsOn, tripCosts } from "./bookings.js";
 import { applyLang, getLang, pick, setLang, t } from "./i18n.js";
 import { tr } from "./tr.js";
-import { agendaDays, borderCards, packItems } from "./prep.js";
+import { agendaDays, packItems } from "./prep.js";
 import { stops } from "./overview.js";
 import { destroyTripMap, fitTrip, focusStop, mountTripMap } from "./trip-map.js";
 
@@ -585,14 +585,12 @@ function renderDayTasks(date) {
   const prefix = `agenda:${date}:`;
   const steps = day.tasks
     .map((step) => {
-      const card = day.border && (step.id === "uz" || step.id === "thai") ? renderBorder(borderCards.find((item) => item.id === day.border)) : "";
       return `<li>
         <p class="prep-when">${escapeHtml(pick(step.when))}</p>
         ${checkLabel(
           `${prefix}${step.id}`,
           `<span class="check-line"><span class="prio prio-${step.priority}">${step.priority === "high" ? t("Gấp", "Now") : t("Vừa", "Soon")}</span><strong>${escapeHtml(pick(step.text))}</strong></span>${step.detail ? `<span class="muted">${escapeHtml(pick(step.detail))}</span>` : ""}`,
         )}
-        ${card}
       </li>`;
     })
     .join("");
@@ -723,17 +721,6 @@ function renderLangSwitch() {
       <button type="button" data-lang="vi" aria-pressed="${current === "vi"}">VI</button>
       <button type="button" data-lang="en" aria-pressed="${current === "en"}">EN</button>
     </div>`;
-}
-
-function renderBorder(card) {
-  return `
-    <article class="card say-card" id="border-${card.id}">
-      <h3>${icon("users", 16)} ${pick(card.title)}</h3>
-      <p class="muted">${pick(card.hint)}</p>
-      <ul class="say-list">
-        ${card.lines.map((line) => `<li class="say-line"><p>${escapeHtml(getLang() === "en" ? line.en : line.vi)}</p></li>`).join("")}
-      </ul>
-    </article>`;
 }
 
 function setDayOpen(li, open) {
