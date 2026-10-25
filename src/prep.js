@@ -131,10 +131,10 @@ export const agendaDays = [
       {
         id: "laundry",
         when: { vi: "Trong ngày", en: "During the day" },
-        text: { vi: "Giặt xong trước sáng lên tàu Samarkand", en: "Finish laundry before the Samarkand train morning" },
+        text: { vi: "Giặt ở LOTOS, Tashkent City Mall, tầng hầm", en: "Wash clothes at LOTOS, Tashkent City Mall, basement" },
         detail: {
-          vi: "Gửi ở Hilton khoảng 31/10 hoặc Swissôtel khoảng 3/11. Đêm 8/11 không gửi: 17:15 ngày 9/11 đã ra sân bay.",
-          en: "Send it at Hilton around 31 Oct or Swissôtel around 3 Nov. Do not send laundry on the night of 8 Nov. The airport car leaves at 17:15 on 9 Nov.",
+          vi: "Cách Hilton khoảng 400 m, mở tới 23:00. Muốn tự giặt thì Yandex tới Londry, Iftixor 1A, khoảng 4 km, xong trong khoảng 2 giờ. Không gửi lễ tân.",
+          en: "About 400 m from the Hilton, open until 23:00. To wash it yourself, take Yandex to Londry at Iftixor 1A, about 4 km, done in about 2 hours. Do not leave it with reception.",
         },
         priority: "medium",
       },
@@ -175,6 +175,16 @@ export const agendaDays = [
         text: { vi: "Sharq 710, 08:37. Cùng toa 16, ghế 007 và 034", en: "Sharq 710 at 08:37. Same carriage 16, seats 007 and 034" },
         detail: { vi: "Tới Samarkand 11:46. Hai ghế không ngồi cạnh nhau.", en: "Arrive in Samarkand at 11:46. The two seats are not next to each other." },
         priority: "high",
+      },
+      {
+        id: "laundry",
+        when: { vi: "Chiều", en: "Afternoon" },
+        text: { vi: "Nếu đồ chưa giặt, gửi Taskin trên phố Namozgoh", en: "If the clothes are still dirty, take them to Taskin on Namozgoh Street" },
+        detail: {
+          vi: "Cách Zarafshon khoảng 2 km, đi Yandex. Khách năm 2026 trả khoảng 40.000 som mỗi kg, lấy hôm sau. Lấy trước tàu sáng 8/11.",
+          en: "About 2 km from Zarafshon, by Yandex. Travelers in 2026 paid about 40,000 som per kg and collected it the next day. Pick it up before the train on the morning of 8 Nov.",
+        },
+        priority: "medium",
       },
       {
         id: "emehmon",
@@ -285,7 +295,7 @@ export const packItems = [
   {
     id: "spare",
     item: { vi: "Đồ lót và áo thun dư vài ngày", en: "Spare underwear and t-shirts for a few days" },
-    why: { vi: "Giặt khách sạn trả hôm sau. Đêm 8/11 không gửi đồ.", en: "Hotel laundry comes back the next day. Do not send laundry on 8 Nov." },
+    why: { vi: "Giặt ngoài khách sạn. Đêm 8/11 không kịp: 17:15 ngày 9/11 ra sân bay.", en: "Wash clothes outside the hotel. The night of 8 Nov is too late: the airport car leaves at 17:15 on 9 Nov." },
   },
 ];
 

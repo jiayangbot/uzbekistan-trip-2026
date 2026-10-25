@@ -598,7 +598,7 @@ export const packing = [
   { item: "USD tờ 100, khoảng $600 cho hai người", why: "Mua ở SuperRich Bangkok. Tờ sạch, không rách, không viết. Som đổi ở Tashkent." },
   { item: "Thuốc cá nhân và đơn nếu cần", why: "Khai hải quan nếu thuốc thuộc nhóm kiểm soát." },
   { item: "Áo che vai và quần dài", why: "Phố thì mặc bình thường. Đền và nhà thờ cần kín vai, kín gối." },
-  { item: "Đồ lót và áo thun dư vài ngày", why: "Giặt khách sạn trả hôm sau. Đừng gửi đồ đêm 8/11, vì 17:15 ngày 9/11 đã ra sân bay." },
+  { item: "Đồ lót và áo thun dư vài ngày", why: "Giặt ngoài khách sạn. Đêm 8/11 không kịp, vì 17:15 ngày 9/11 đã ra sân bay." },
 ];
 
 export const masterChecklist = [
@@ -653,7 +653,7 @@ export const localLife = [
     paragraphs: [
       "Phố Tashkent và Samarkand mặc như đi chơi mùa thu: áo thun hoặc sơ mi, quần dài, giày đã đi quen. Không cần vest. Tối khoảng 4–7°C nên có áo khoác hoặc fleece. Ngày núi mặc thêm một lớp, kính râm, giày kín. Trưa vẫn có nắng.",
       "Vào Hazrati Imam, nhà thờ và Shah-i-Zinda thì kín vai, kín gối. Khăn cổ dùng trùm đầu. Cởi giày ở nhà thờ, nhà người ta và một số quán trà. Ngoài đường phụ nữ không cần trùm khăn.",
-      "Các khách sạn đều giặt qua lễ tân, thường trả tối hôm sau. Gửi ở Hilton khoảng 31/10 hoặc ở Swissôtel khoảng 3/11, lấy trước sáng 6/11 lên tàu. Đêm 8/11 không gửi: 17:15 ngày 9/11 đã ra sân bay cho chuyến 21:15. Quần áo lót giặt trong phòng thì khó khô vì trời mát, nên mang dư vài bộ.",
+      "Không giặt ở lễ tân, giá khách sạn mắc. Ngày 31/10 đang ở Hilton thì đi bộ khoảng 400 m tới LOTOS, tầng hầm Tashkent City Mall, mở tới 23:00. Muốn tự giặt và lấy trong khoảng 2 giờ thì Yandex tới Londry, Iftixor 1A, khoảng 4 km từ Hilton. Ở Swissôtel thì Contrast, phố Mirabad số 6, khoảng 1,5 km, mở 09:00–19:00. Ở Samarkand, Taskin trên phố Namozgoh cách Zarafshon khoảng 2 km. Khách năm 2026 trả khoảng 40.000 som mỗi kg và lấy hôm sau, nên gửi ngày 6/11 và lấy trước tàu sáng 8/11. Đêm 8/11 không giặt: 17:15 ngày 9/11 đã ra sân bay. Quần áo lót giặt trong phòng khó khô, mang dư vài bộ.",
     ],
     links: [],
   },
