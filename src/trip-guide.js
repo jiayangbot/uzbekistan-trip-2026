@@ -222,7 +222,7 @@ export const dayDetails = {
         query: "Tashkent Central Railway Station",
         eat: "Ăn samsa đã mua. Trên tàu không có bữa.",
         doing: "Yandex từ Hilton, khoảng 5 km. Tìm tàu 7201. Tàu đứng ở ga 08:55 và rời 09:10.",
-        tip: "Đây là ga trung tâm, ga của tàu Samarkand, không phải ga Nam. Vé 30.000 som mỗi người, trả trên tàu.",
+        tip: "Đây là ga trung tâm, ga của tàu Samarkand, không phải ga Nam. Không đặt vé trước. Không có số ghế, ngồi chỗ trống. Vé 30.000 som mỗi người, trả người soát vé.",
       },
       {
         name: "Amirsoy",
@@ -242,7 +242,7 @@ export const dayDetails = {
     transport: {
       title: "Tàu 7201 rồi xe 324",
       steps: [
-        "08:15 rời Hilton, Yandex ra ga trung tâm. 09:10 tàu 7201 rời Toshkent Markaziy, tới Chinorkent 10:33. Vé 30.000 som mỗi người.",
+        "08:15 rời Hilton, Yandex ra ga trung tâm. Không đặt vé trước. Tàu đứng 08:55–09:10, lên lúc đó để ngồi, không có số ghế. 09:10 rời ga, tới Chinorkent 10:33. Vé 30.000 som mỗi người, trả người soát vé.",
         "10:40 xe 324 tới Amirsoy, 10.000 som, khoảng 40 phút. Về bằng xe 325, vì xe 324 từ đây đi tiếp lên núi.",
         "16:12 tàu 6436 ở Khodjikent, tới ga Nam 18:25. Xuống ga trung tâm. Muốn về sớm thì tàu 7204, Chinorkent 14:19, và phải rời Amirsoy khoảng 13:20.",
         "Hai người khứ hồi khoảng 160.000 som, cộng hai cuốc Yandex. Tối 30/10 mở elektropoyezd.uz xem tàu còn chạy không.",
