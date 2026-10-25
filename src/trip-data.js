@@ -15,7 +15,7 @@ export const days = [
     city: "Tashkent",
     area: "Amir Temur / Istiqbol",
     hotel: "Hampton by Hilton",
-    plan: "HY532, Bangkok 06:55, TAS 11:45. Mua SIM, Yandex về Hampton. Tối đi bộ Amir Temur.",
+    plan: "HY532 khoảng 6 giờ 50 phút, TAS 11:45. Yandex về Hampton khoảng 11 km. Tối đi bộ Amir Temur.",
     transfer: "",
   },
   {
@@ -42,7 +42,7 @@ export const days = [
     city: "Tashkent",
     area: "Tashkent City / Ukchi",
     hotel: "Hilton Tashkent City",
-    plan: "Checkout Hampton. Check-in Hilton, 1 Ukchi. Đi bộ công viên, đài phun nước và mall.",
+    plan: "Yandex Hampton sang Hilton khoảng 4 km, 15–25 phút. Rồi đi bộ công viên và mall.",
     transfer: "Đổi khu: Amir Temur → Tashkent City",
   },
   {
@@ -51,7 +51,7 @@ export const days = [
     city: "Tashkent",
     area: "Tashkent City / Ukchi",
     hotel: "Hilton Tashkent City",
-    plan: "Xe riêng Amirsoy, Chimgan và Charvak, tùy thời tiết.",
+    plan: "Xe riêng đi Amirsoy, khoảng 85 km và 1,5 giờ. Cả vòng Chimgan, Charvak khoảng 210 km.",
     transfer: "",
   },
   {
@@ -69,7 +69,7 @@ export const days = [
     city: "Tashkent",
     area: "Mirabad / Oybek",
     hotel: "Swissôtel Tashkent",
-    plan: "Checkout Hilton. Check-in Swissôtel, Shakhrisabz 4. Tối ăn trong Mirabad.",
+    plan: "Yandex Hilton sang Swissôtel khoảng 4 km, 15–25 phút. Tối ăn trong Mirabad.",
     transfer: "Đổi khu: Tashkent City → Mirabad",
   },
   {
@@ -105,7 +105,7 @@ export const days = [
     city: "Samarkand",
     area: "Trung tâm Samarkand",
     hotel: "Zarafshon Parkside",
-    plan: "Sharq 710 tới Samarkand 11:46. Gửi đồ ở Zarafshon. Chiều Registan.",
+    plan: "Sharq 710, 343 km, khoảng 3 giờ 9 phút, tới 11:46. Yandex tới Zarafshon khoảng 5 km.",
     transfer: "Sharq 710, 08:37–11:46",
   },
   {
@@ -123,7 +123,7 @@ export const days = [
     city: "Tashkent",
     area: "Navoi 1A",
     hotel: "Hyatt Regency Tashkent",
-    plan: "Sharq 711 về Tashkent 12:19. Gửi vali ở Hyatt, nhận phòng 15:00.",
+    plan: "Sharq 711, cùng 343 km nhưng khoảng 4 giờ 9 phút, tới 12:19. Yandex tới Hyatt khoảng 4 km.",
     transfer: "Sharq 711, 08:10–12:19",
   },
   {
@@ -132,7 +132,7 @@ export const days = [
     city: "Tashkent",
     area: "Navoi 1A, rồi sân bay",
     hotel: "Checkout / flight",
-    plan: "Trả phòng 12:00, gửi vali. HY531 cất cánh 21:15.",
+    plan: "17:15 Yandex ra sân bay khoảng 11 km. HY531 cất cánh 21:15, bay khoảng 6 giờ 10 phút.",
     transfer: "",
   },
 ];

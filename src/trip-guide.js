@@ -74,6 +74,15 @@ export const dayDetails = {
         tip: "Nằm cạnh khách sạn. Bỏ qua nếu chân đã mỏi, mai vẫn ở khu này.",
       },
     ],
+    transport: {
+      title: "Bay rồi Yandex về Hampton",
+      steps: [
+        "HY532 cất cánh 06:55 giờ Bangkok, hạ cánh TAS Terminal 2 lúc 11:45. Trên máy bay khoảng 6 giờ 50 phút vì Tashkent chậm Bangkok 2 tiếng.",
+        "Mua SIM trong nhà ga, ra làn 1 gọi Yandex. Đừng nhận người chào xe trong sảnh.",
+        "Hampton cách sân bay khoảng 11 km, 20–40 phút.",
+      ],
+      links: [{ label: "Bản đồ sân bay", url: mapLink("Tashkent International Airport Terminal 2") }],
+    },
     research: [yandexTip, simTip, moneyTip],
     checklist: [
       "Passport và vé máy bay offline",
@@ -183,6 +192,14 @@ export const dayDetails = {
         tip: "Đi bộ được từ Hilton. Một giá cho mọi ga. Đổi tuyến trong cùng lượt thì không tính thêm.",
       },
     ],
+    transport: {
+      title: "Yandex sang Hilton",
+      steps: [
+        "Hampton tới Hilton khoảng 4 km, 15–25 phút. Có vali thì gọi Yandex, không đi metro.",
+        "Trả phòng Hampton trước 12:00. Hilton nhận phòng từ 14:00, tới sớm thì gửi vali.",
+      ],
+      links: [{ label: "Bản đồ Hilton", url: mapLink("Hilton Tashkent City 1 Ukchi Street") }],
+    },
     research: [
       {
         text: "Hilton đặt phòng Twin, không gồm ăn sáng. Ba sáng 31/10, 1/11, 2/11 ăn quầy samsa hoặc trong mall. Buffet khách sạn $30 mỗi người nếu muốn ăn tại chỗ.",
@@ -225,9 +242,9 @@ export const dayDetails = {
     transport: {
       title: "Xe riêng trong ngày",
       steps: [
-        "Không dùng Yandex cho cả ngày núi. Đặt xe riêng, giá trong bảng chi phí là $150 dự phòng, chưa phải báo giá.",
-        "Xuất phát sau khi mua đồ ăn sáng, về Hilton trước tối.",
-        "Chốt với tài xế: Amirsoy, Chimgan, Charvak, giờ về, và tiền xăng đã gồm chưa.",
+        "Không dùng Yandex cho cả ngày núi. Xe riêng từ Hilton tới Amirsoy khoảng 85 km, khoảng 1,5 giờ. $150 trong bảng là dự phòng, chưa phải báo giá.",
+        "Cả vòng Amirsoy, Chimgan và Charvak khoảng 210 km, lái khoảng 4 giờ chưa kể dừng. Chimgan cách Amirsoy khoảng 15 km.",
+        "Chốt với tài xế: Amirsoy, Chimgan, Charvak, giờ về, và tiền xăng đã gồm chưa. Từ Charvak về Hilton khoảng 1,5 giờ.",
       ],
       links: [{ label: "Bản đồ Amirsoy", url: mapLink("Amirsoy Mountain Resort Uzbekistan") }],
     },
@@ -299,6 +316,14 @@ export const dayDetails = {
         tip: "Caravan ở Yakkasaray thì phải gọi Yandex, đừng đi bộ tối. Menu Afsona có tiếng Anh.",
       },
     ],
+    transport: {
+      title: "Yandex sang Swissôtel",
+      steps: [
+        "Hilton tới Swissôtel khoảng 4 km, 15–25 phút. Có vali thì gọi Yandex.",
+        "Trả phòng Hilton trước 12:00. Swissôtel nhận phòng từ 14:00, tới sớm thì gửi vali.",
+      ],
+      links: [{ label: "Bản đồ Swissôtel", url: mapLink("Swissotel Tashkent Shakhrisabz 4") }],
+    },
     research: [
       {
         text: "Swissôtel nằm ở quận Mirabad, không phải quảng trường Amir Temur. Bốn đêm này ở nguyên khách sạn, kể cả thứ Tư 4/11.",
@@ -452,10 +477,10 @@ export const dayDetails = {
     transport: {
       title: "Sharq 710, đã mua",
       steps: [
-        "Sharq 710, thứ Sáu 6/11, Toshkent-Yo'lovchi 08:37, Samarkand 11:46.",
+        "Sharq 710, thứ Sáu 6/11, Toshkent-Yo'lovchi 08:37, Samarkand 11:46. Đường ray 343 km, khoảng 3 giờ 9 phút.",
         "Cùng toa ngồi 16, ghế 007 và 034. Không ngồi cạnh nhau. Gặp nhau ở cửa toa.",
-        "Ga đi là ТОШКЕНТ-ЙЎЛОВЧИ, tức ga trung tâm. Yandex từ Swissôtel tới đó, không phải ga Nam.",
-        "Rời khách sạn khoảng 07:15. Có mặt ga trước 08:37 khoảng 40 phút.",
+        "Ga đi là ТОШКЕНТ-ЙЎЛОВЧИ, tức ga trung tâm. Từ Swissôtel khoảng 3 km, 10–20 phút bằng Yandex, không phải ga Nam.",
+        "Rời khách sạn khoảng 07:15. Có mặt ga trước 08:37 khoảng 40 phút. Từ ga Samarkand tới Zarafshon khoảng 5 km, 15–20 phút.",
       ],
       links: [],
     },
@@ -544,10 +569,10 @@ export const dayDetails = {
     transport: {
       title: "Sharq 711, đã mua",
       steps: [
-        "Chủ Nhật 8/11, Sharq 711, Samarkand 08:10, Toshkent-Yo'lovchi 12:19. Mỗi vé 200.060 som.",
+        "Chủ Nhật 8/11, Sharq 711, Samarkand 08:10, Toshkent-Yo'lovchi 12:19. Cùng 343 km, chuyến này khoảng 4 giờ 9 phút vì dừng nhiều hơn. Mỗi vé 200.060 som.",
         "Toa 06 ghế 016 và toa 07 ghế 026. Cùng tàu, khác toa. Gặp nhau lúc xuống ga.",
-        "Ga đến là ga trung tâm, không phải ga Nam. Yandex về Hyatt Regency, Navoi 1A.",
-        "Rời Zarafshon khoảng 07:20. HY531 cất cánh 21:15 ngày 9/11.",
+        "Ga đến là ga trung tâm, không phải ga Nam. Tới Hyatt khoảng 4 km, 15–25 phút.",
+        "Zarafshon tới ga Samarkand khoảng 6 km, 15–20 phút. Rời khách sạn khoảng 07:20.",
       ],
       links: [],
     },
@@ -569,15 +594,15 @@ export const dayDetails = {
         query: "Tashkent International Airport Terminal 2",
         eat: "Ăn nhẹ trong sân bay nếu đói. Bữa chính phải xong trước 15:30.",
         doing: "Yandex ra Terminal 2, làm thủ tục, nộp TDAC nếu chưa nộp.",
-        tip: "HY531 cất cánh 21:15, Bangkok 05:25 ngày 10/11. Có mặt sân bay khoảng 18:15. Không đi metro. Để 40–60 phút cho đường.",
+        tip: "HY531 cất cánh 21:15, trên máy bay khoảng 6 giờ 10 phút, Bangkok 05:25 ngày 10/11. Hyatt tới Terminal 2 khoảng 11 km. Đường trống khoảng 25 phút, chiều thứ Hai để 40–60 phút. Không đi metro.",
       },
     ],
     transport: {
       title: "Ra sân bay và về Bangkok",
       steps: [
         "HY531, Uzbekistan Airways. TAS 21:15 ngày 9/11, Bangkok 05:25 ngày 10/11. Giờ địa phương từng sân bay.",
-        "Rời Hyatt khoảng 17:15. Terminal 2. Có mặt sân bay khoảng 18:15.",
-        "Gọi Yandex. Chiều thứ Hai đường có thể chậm hơn 20 phút.",
+        "Rời Hyatt khoảng 17:15. Yandex ra Terminal 2 khoảng 11 km. Đường trống khoảng 25 phút, chiều thứ Hai để 40–60 phút. Có mặt sân bay khoảng 18:15.",
+        "HY531 trên máy bay khoảng 6 giờ 10 phút. Hạ cánh Bangkok 05:25 ngày 10/11.",
         "Nộp TDAC trên tdac.immigration.go.th trước khi bay. Tới Thái Lan lúc 05:25.",
       ],
       links: [

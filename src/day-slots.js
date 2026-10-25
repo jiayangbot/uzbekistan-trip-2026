@@ -4,8 +4,8 @@
 /** @type {Record<string, DaySlot[]>} */
 export const daySlots = {
   "2026-10-27": [
-    { time: "06:55", part: "Bay", eat: "Bangkok, HY532", text: "Cất cánh giờ Bangkok. Tới TAS lúc 11:45 giờ Tashkent.", usd: 0, query: "Suvarnabhumi Airport" },
-    { time: "11:45", part: "Đến", eat: "Sân bay TAS", text: "Taxi chính thức, mua SIM, đổi $100–200 sang som.", usd: 0, query: "Tashkent International Airport Terminal 2" },
+    { time: "06:55", part: "Bay", eat: "Bangkok, HY532", text: "Cất cánh giờ Bangkok. Trên máy bay khoảng 6 giờ 50 phút, vì Tashkent chậm 2 tiếng. Hạ cánh TAS 11:45.", usd: 0, query: "Suvarnabhumi Airport" },
+    { time: "11:45", part: "Đến", eat: "Sân bay TAS", text: "Mua SIM, đổi $100–200. Ra làn 1 gọi Yandex về Hampton, khoảng 11 km, 20–40 phút.", usd: 0, query: "Tashkent International Airport Terminal 2" },
     { time: "14:00", part: "Trưa", eat: "Lagman gần Hampton", text: "Ăn muộn sau khi nhận phòng. Một tô mì và trà.", usd: 14, query: "lagman restaurant Amir Temur Square Tashkent" },
     { time: "17:00", part: "Chiều", eat: "", text: "Nghỉ ở Hampton. Đi bộ nếu còn sức.", usd: 0 },
     { time: "19:30", part: "Tối", eat: "Quảng trường Amir Temur", text: "Đi bộ sang quảng trường Độc lập. Chỉ trà và samsa nếu còn đói.", usd: 8, query: "Amir Temur Square Tashkent" },
@@ -25,16 +25,16 @@ export const daySlots = {
     { time: "19:00", part: "Tối", eat: "Shashlik gần Hampton", text: "Một xiên gà hoặc bò, salad, bánh. Đi bộ về.", usd: 16, query: "shashlik near Istiqbol Street Tashkent" },
   ],
   "2026-10-30": [
-    { time: "08:30", part: "Sáng", eat: "Hampton", text: "Ăn sáng, trả phòng trước 12:00, Yandex sang Hilton. Nhận phòng từ 14:00, tới sớm thì gửi vali.", usd: 0 },
+    { time: "08:30", part: "Sáng", eat: "Hampton", text: "Ăn sáng, trả phòng trước 12:00. Yandex sang Hilton khoảng 4 km, 15–25 phút. Nhận phòng từ 14:00, tới sớm thì gửi vali.", usd: 0 },
     { time: "13:00", part: "Trưa", eat: "Food court Tashkent City Mall", text: "Ăn sau khi gửi đồ. Chọn món địa phương trong mall, rẻ hơn nhà hàng khách sạn.", usd: 14, query: "Tashkent City Mall" },
     { time: "15:30", part: "Chiều", eat: "City Park", text: "Đi bộ công viên và xem đài phun nước.", usd: 0, query: "Tashkent City Park" },
     { time: "19:30", part: "Tối", eat: "Shashlik gần công viên", text: "Một xiên, salad và bánh ở quán cạnh công viên.", usd: 18, query: "restaurants near Tashkent City Park" },
   ],
   "2026-10-31": [
     { time: "07:30", part: "Sáng", eat: "Quầy samsa, rồi cửa hàng", text: "Hilton không gồm ăn sáng. Mua samsa, non, trái cây và nước, ăn trên xe.", usd: 10 },
-    { time: "08:30", part: "Sáng", eat: "Amirsoy, Chimgan, Charvak", text: "Xe riêng cả ngày. Khoảng $150 là báo giá chưa chốt, không nằm trong tiền ăn.", usd: 0, query: "Amirsoy Mountain Resort" },
+    { time: "08:30", part: "Sáng", eat: "Amirsoy, Chimgan, Charvak", text: "Xe riêng, không gọi Yandex cả ngày. Hilton tới Amirsoy khoảng 85 km, khoảng 1,5 giờ. Cả vòng qua Chimgan và Charvak khoảng 210 km, lái khoảng 4 giờ chưa kể dừng. $150 là báo giá chưa chốt.", usd: 0, query: "Amirsoy Mountain Resort" },
     { time: "13:00", part: "Trưa", eat: "Đồ đã mang theo", text: "Ăn picnic. Trên núi chỉ uống trà nếu quán resort đắt.", usd: 6 },
-    { time: "17:30", part: "Chiều", eat: "", text: "Về Hilton, nghỉ.", usd: 0 },
+    { time: "17:30", part: "Chiều", eat: "", text: "Từ Charvak về Hilton khoảng 1,5 giờ. Nghỉ.", usd: 0 },
     { time: "20:00", part: "Tối", eat: "Lagman gần Ukchi", text: "Bữa nóng sau một ngày gió. Gần khách sạn.", usd: 14, query: "lagman near Ukchi Street Tashkent" },
   ],
   "2026-11-01": [
@@ -45,7 +45,7 @@ export const daySlots = {
     { time: "19:30", part: "Tối", eat: "Quán quốc dân gần Ukchi", text: "Lagman hoặc shashlik. Ngày mai chuyển sang Mirabad.", usd: 16, query: "restaurants Ukchi Street Tashkent" },
   ],
   "2026-11-02": [
-    { time: "08:30", part: "Sáng", eat: "Ăn nhẹ gần Ukchi", text: "Trả phòng Hilton trước 12:00, Yandex sang Swissôtel. Nhận phòng từ 14:00, tới sớm thì gửi vali.", usd: 8 },
+    { time: "08:30", part: "Sáng", eat: "Ăn nhẹ gần Ukchi", text: "Trả phòng Hilton trước 12:00. Yandex sang Swissôtel khoảng 4 km, 15–25 phút. Nhận phòng từ 14:00, tới sớm thì gửi vali.", usd: 8 },
     { time: "13:00", part: "Trưa", eat: "Lagman ở Mirabad", text: "Ăn gần Oybek sau khi gửi đồ.", usd: 14, query: "Mirabad district Tashkent restaurants" },
     { time: "16:00", part: "Chiều", eat: "Ga Oybek", text: "Đi bộ quanh khu, xem phố tối có sống không.", usd: 0, query: "Oybek metro station Tashkent" },
     { time: "19:30", part: "Tối", eat: "Afsona, Shevchenko 30", text: "Shashlik gà, salad, bánh và trà. Đĩa tổng hợp trên menu khoảng 325.000 som.", usd: 22, query: "Afsona restaurant Taras Shevchenko 30 Tashkent" },
@@ -68,13 +68,13 @@ export const daySlots = {
     { time: "09:00", part: "Sáng", eat: "Swissôtel", text: "Ăn sáng. Mai tàu 08:37.", usd: 0 },
     { time: "10:30", part: "Sáng", eat: "Mirabad", text: "Đi bộ nhẹ. Mua samsa và nước cho sáng mai nếu buffet mở muộn.", usd: 6, query: "Mirabad Avenue Tashkent" },
     { time: "13:00", part: "Trưa", eat: "Lagman gần Swissôtel", text: "Bữa chính trong ngày.", usd: 14, query: "Swissotel Tashkent" },
-    { time: "16:00", part: "Chiều", eat: "", text: "Gói đồ và nghỉ. Chạy thử Yandex tới ga trung tâm.", usd: 0 },
+    { time: "16:00", part: "Chiều", eat: "", text: "Gói đồ và nghỉ. Chạy thử Yandex tới ga trung tâm, khoảng 3 km, 10–20 phút.", usd: 0 },
     { time: "19:00", part: "Tối", eat: "Súp gần khách sạn", text: "Ăn sớm, ngủ sớm.", usd: 12, query: "restaurant near Shakhrisabz Street Tashkent" },
   ],
   "2026-11-06": [
-    { time: "07:15", part: "Sáng", eat: "Swissôtel", text: "Ăn sáng nếu buffet đã mở, rồi trả phòng. Chưa mở thì ăn samsa đã mua tối qua.", usd: 0 },
-    { time: "08:37", part: "Sáng", eat: "Sharq 710", text: "Toshkent Markaziy đến Samarkand 11:46. Cùng toa 16, ghế 007 và 034, không ngồi cạnh nhau.", usd: 0 },
-    { time: "12:15", part: "Trưa", eat: "Zarafshon", text: "Gửi đồ, nhận phòng. Jomiy 65, không sát Registan.", usd: 0, query: "Zarafshon Parkside Samarkand" },
+    { time: "07:15", part: "Sáng", eat: "Swissôtel", text: "Ăn sáng nếu buffet đã mở, rồi trả phòng. Yandex ra ga trung tâm khoảng 3 km, 10–20 phút. Chưa ăn thì samsa đã mua tối qua.", usd: 0 },
+    { time: "08:37", part: "Sáng", eat: "Sharq 710", text: "343 km, khoảng 3 giờ 9 phút, tới Samarkand 11:46. Cùng toa 16, ghế 007 và 034, không ngồi cạnh nhau.", usd: 0 },
+    { time: "12:15", part: "Trưa", eat: "Zarafshon", text: "Yandex từ ga khoảng 5 km, 15–20 phút. Gửi đồ, nhận phòng. Jomiy 65, không sát Registan.", usd: 0, query: "Zarafshon Parkside Samarkand" },
     { time: "13:30", part: "Trưa", eat: "Lagman gần khách sạn", text: "Một tô gần khách sạn. Quán sát Registan thường tính đắt hơn, và phải gọi xe.", usd: 12, query: "lagman near Registan Samarkand" },
     { time: "15:00", part: "Chiều", eat: "Registan", text: "Xem quảng trường khi trời còn sáng.", usd: 0, query: "Registan Samarkand" },
     { time: "19:00", part: "Tối", eat: "Shashlik gần Gur-Emir", text: "Đi bộ từ khách sạn vài phút. Một xiên, bánh, trà.", usd: 16, query: "Gur-e-Amir Samarkand" },
@@ -88,9 +88,9 @@ export const daySlots = {
   ],
   "2026-11-08": [
     { time: "06:45", part: "Sáng", eat: "Zarafshon", text: "Ăn sáng nếu buffet đã mở, trả phòng. Chưa mở thì mua samsa ở ga.", usd: 0, query: "Zarafshon Parkside Samarkand" },
-    { time: "07:20", part: "Sáng", eat: "Yandex ra ga", text: "Có mặt trước giờ tàu khoảng 40 phút.", usd: 0, query: "Samarkand Railway Station" },
-    { time: "08:10", part: "Sáng", eat: "Sharq 711", text: "Samarkand tới Tashkent Central 12:19. Toa 06 ghế 016 và toa 07 ghế 026. Gặp nhau lúc xuống ga.", usd: 0 },
-    { time: "12:45", part: "Trưa", eat: "Hyatt Regency", text: "Yandex từ ga trung tâm tới Navoi 1A. Nhận phòng từ 15:00, giờ này gửi vali ở lễ tân.", usd: 0, query: "Hyatt Regency Tashkent" },
+    { time: "07:20", part: "Sáng", eat: "Yandex ra ga", text: "Ga Samarkand cách Zarafshon khoảng 6 km, 15–20 phút. Có mặt trước giờ tàu khoảng 40 phút.", usd: 0, query: "Samarkand Railway Station" },
+    { time: "08:10", part: "Sáng", eat: "Sharq 711", text: "Cùng 343 km, chuyến về khoảng 4 giờ 9 phút vì dừng nhiều hơn. Tới Tashkent 12:19. Toa 06 ghế 016 và toa 07 ghế 026. Gặp nhau lúc xuống ga.", usd: 0 },
+    { time: "12:45", part: "Trưa", eat: "Hyatt Regency", text: "Yandex tới Hyatt khoảng 4 km, 15–25 phút. Nhận phòng từ 15:00, giờ này gửi vali ở lễ tân.", usd: 0, query: "Hyatt Regency Tashkent" },
     { time: "13:30", part: "Trưa", eat: "Lagman gần khách sạn", text: "Bữa chính sau tàu. Ăn gần Hyatt, đừng đi xa khi chưa nhận phòng.", usd: 14, query: "lagman restaurant near Navoi Avenue Tashkent" },
     { time: "15:00", part: "Chiều", eat: "Hyatt Regency", text: "Nhận phòng, tắm, nghỉ.", usd: 0, query: "Hyatt Regency Tashkent" },
     { time: "16:30", part: "Chiều", eat: "Amir Temur", text: "Ra quảng trường lúc chiều. Xem bản đồ, gần thì đi bộ, xa thì Yandex.", usd: 0, query: "Amir Temur Square Tashkent" },
@@ -103,8 +103,8 @@ export const daySlots = {
     { time: "13:00", part: "Trưa", eat: "Lagman gần khách sạn", text: "Bữa chính trong ngày. Ăn xong trước 15:00.", usd: 14, query: "lagman restaurant near Navoi Avenue Tashkent" },
     { time: "15:00", part: "Chiều", eat: "Amir Temur", text: "Đi dạo lần cuối, mua quà. Đừng đi xa khách sạn.", usd: 0, query: "Amir Temur Square Tashkent" },
     { time: "16:45", part: "Chiều", eat: "", text: "Về Hyatt lấy vali. Kiểm tra passport, vé HY531, TDAC.", usd: 0 },
-    { time: "17:15", part: "Chiều", eat: "Yandex ra TAS", text: "Bay 21:15, có mặt sân bay khoảng 18:15. Terminal 2.", usd: 0, query: "Tashkent International Airport Terminal 2" },
-    { time: "21:15", part: "Bay", eat: "HY531", text: "Cất cánh giờ Tashkent. Hạ cánh Bangkok 05:25 ngày 10/11. Ăn nhẹ ở sân bay nếu đói.", usd: 8, query: "Tashkent International Airport Terminal 2" },
+    { time: "17:15", part: "Chiều", eat: "Yandex ra TAS", text: "Yandex ra Terminal 2 khoảng 11 km. Đường trống khoảng 25 phút, chiều thứ Hai để 40–60 phút. Bay 21:15, có mặt sân bay khoảng 18:15.", usd: 0, query: "Tashkent International Airport Terminal 2" },
+    { time: "21:15", part: "Bay", eat: "HY531", text: "Trên máy bay khoảng 6 giờ 10 phút. Hạ cánh Bangkok 05:25 ngày 10/11. Ăn nhẹ ở sân bay nếu đói.", usd: 8, query: "Tashkent International Airport Terminal 2" },
   ],
 };
 
