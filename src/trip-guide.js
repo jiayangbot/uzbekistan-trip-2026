@@ -99,14 +99,14 @@ export const dayDetails = {
         name: "Hampton by Hilton",
         query: "Hampton by Hilton Tashkent Istiqbol 17",
         eat: "Buffet sáng tại khách sạn, đã gồm trong giá.",
-        doing: "Ăn sáng rồi đi. Không checkout. Thứ Tư, ngủ nguyên đây.",
+        doing: "Ăn sáng trước 08:30, ở khách sạn đến 09:30. Không checkout. Thứ Tư, ngủ nguyên đây.",
         tip: "Về lại đúng Hampton tối nay. Đừng nhận phòng chỗ khác giữa ngày.",
       },
       {
         name: "Chợ Chorsu",
         query: "Chorsu Bazaar Tashkent",
         eat: "Plov hoặc samsa trong khu ăn của chợ, non, trái cây khô.",
-        doing: "Đi buổi sáng, xem mái vòm, mua trái cây nếu muốn, rồi sang Hazrati Imam.",
+        doing: "Sau 09:30 mới đi. Xem mái vòm, mua trái cây nếu muốn, rồi sang Hazrati Imam.",
         tip: "Metro từ Hampton, mệt thì Yandex. Tiền mặt, tờ nhỏ. Mặc cả trái cây, không mặc cả đĩa đã niêm giá. Giữ túi phía trước.",
       },
       {

@@ -11,8 +11,9 @@ export const daySlots = {
     { time: "19:30", part: "Tối", eat: "Quảng trường Amir Temur", text: "Đi bộ sang quảng trường Độc lập. Chỉ trà và samsa nếu còn đói.", usd: 8, query: "Amir Temur Square Tashkent" },
   ],
   "2026-10-28": [
-    { time: "08:30", part: "Sáng", eat: "Hampton", text: "Ăn sáng tại khách sạn. Thứ Tư, không đổi khách sạn.", usd: 0, query: "Hampton by Hilton Tashkent" },
-    { time: "09:30", part: "Sáng", eat: "Chợ Chorsu", text: "Đi metro từ ga Amir Temur Xiyoboni, rồi sang Hazrati Imam. Kín vai, kín gối, tiền mặt.", usd: 0, query: "Chorsu Bazaar Tashkent" },
+    { time: "07:30", part: "Sáng", eat: "Hampton", text: "Ăn sáng tại khách sạn, xong trước 08:30. Thứ Tư, không đổi khách sạn.", usd: 0, query: "Hampton by Hilton Tashkent" },
+    { time: "08:30", part: "Sáng", eat: "", text: "Bận đến 09:30 giờ Tashkent, tức 11:30 GMT+7. Không xếp việc.", usd: 0 },
+    { time: "10:00", part: "Sáng", eat: "Chợ Chorsu", text: "Đi metro từ ga Amir Temur Xiyoboni, rồi sang Hazrati Imam. Kín vai, kín gối, tiền mặt.", usd: 0, query: "Chorsu Bazaar Tashkent" },
     { time: "13:00", part: "Trưa", eat: "Plov hoặc samsa trong chợ", text: "Ăn ở khu food hall của chợ. Một đĩa plov hoặc samsa và trà.", usd: 10, query: "Chorsu Bazaar Tashkent" },
     { time: "15:30", part: "Chiều", eat: "Kukeldash", text: "Xem trường rồi metro hoặc đi bộ về khách sạn.", usd: 0, query: "Kukeldash Madrasah Tashkent" },
     { time: "19:00", part: "Tối", eat: "Broadway", text: "Lagman hoặc shashlik ở quán quốc dân trên phố đi bộ.", usd: 16, query: "Sayilgoh Street Tashkent Broadway" },

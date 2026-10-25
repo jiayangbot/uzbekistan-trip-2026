@@ -24,7 +24,7 @@ export const days = [
     city: "Tashkent",
     area: "Amir Temur / Istiqbol",
     hotel: "Hampton by Hilton",
-    plan: "Metro tới Chorsu, rồi Hazrati Imam và Kukeldash. Tối ăn trên Broadway.",
+    plan: "08:30–09:30 bận. Rồi metro tới Chorsu, Hazrati Imam và Kukeldash. Tối ăn trên Broadway.",
     transfer: "",
   },
   {
