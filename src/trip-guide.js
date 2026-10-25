@@ -274,7 +274,7 @@ export const dayDetails = {
       {
         name: "Tashkent City Mall",
         query: "Tashkent City Mall",
-        eat: "Boboy trong mall: plov, manti, shashlik, salad cà tím. Hoặc food court.",
+        eat: "Boboy trong mall: plov, manti, shashlik, salad cà tím. Food court thì bỏ quầy Ấn, đừng ngồi gần mùi cari.",
         doing: "Nghỉ chân, vào nhà vệ sinh, sưởi nếu ngoài trời lạnh.",
         tip: "Cạnh công viên, đi bộ từ khách sạn. Đắt hơn quán Ukchi một chút. Máy lạnh mạnh, mang áo khoác khi ra.",
       },
@@ -676,6 +676,15 @@ export const localLife = [
       { label: "Từ sân bay vào phố", url: "https://oxusroad.com/en/travel-guide/tashkent-airport-arrival/" },
       { label: "Giá vé ATTO", url: "https://atto.uz/en/news/atto-for-passengers" },
     ],
+  },
+  {
+    title: "Không ăn Ấn",
+    icon: "coffee",
+    paragraphs: [
+      "Không ăn đồ Ấn, và không ngồi gần quầy cari. Mùi đó không chịu được. Trong mall có quầy Ấn thì đi chỗ khác.",
+      "Gọi món Uzbek: plov, lagman, shashlik, samsa, manti, norin, non, trà. Các quán đã chọn, Navvat, Afsona, Boboy, Besh Qozon, Proshashlyk, là món này.",
+    ],
+    links: [],
   },
   {
     title: "Ăn mặc và giặt",

@@ -528,7 +528,7 @@ function renderEats(date) {
   return `
     <details class="day-block">
       <summary>${icon("coffee", 16)} ${t("Món ngon", "Food")} <span class="muted">(${eats.places.length})</span>${icon("chevron", 16)}</summary>
-      <p class="muted">${tr(eats.note)} ${t("Chọn một chỗ, không cần ăn hết.", "Pick one place. You do not need to eat at all of them.")}</p>
+      <p class="muted">${tr(eats.note)} ${t("Chọn một chỗ, không cần ăn hết.", "Pick one place. You do not need to eat at all of them.")} ${t("Không vào quán Ấn và không ngồi gần quầy cari. Mùi đó không ăn được.", "Do not go into an Indian restaurant or sit near a curry counter. That smell does not work.")}</p>
       <ul class="places">${renderPlaces(eats.places)}</ul>
     </details>`;
 }

@@ -26,7 +26,7 @@ export const daySlots = {
   ],
   "2026-10-30": [
     { time: "08:30", part: "Sáng", eat: "Hampton", text: "Ăn sáng, trả phòng trước 12:00. Yandex sang Hilton khoảng 4 km, 15–25 phút. Nhận phòng từ 14:00, tới sớm thì gửi vali.", usd: 0 },
-    { time: "13:00", part: "Trưa", eat: "Food court Tashkent City Mall", text: "Ăn sau khi gửi đồ. Chọn món địa phương trong mall, rẻ hơn nhà hàng khách sạn.", usd: 14, query: "Tashkent City Mall" },
+    { time: "13:00", part: "Trưa", eat: "Food court Tashkent City Mall", text: "Ăn sau khi gửi đồ. Vào Boboy, gọi plov hoặc manti. Bỏ quầy cari Ấn, đừng ngồi gần.", usd: 14, query: "Tashkent City Mall" },
     { time: "15:30", part: "Chiều", eat: "City Park", text: "Đi bộ công viên và xem đài phun nước.", usd: 0, query: "Tashkent City Park" },
     { time: "19:30", part: "Tối", eat: "Shashlik gần công viên", text: "Một xiên, salad và bánh ở quán cạnh công viên.", usd: 18, query: "restaurants near Tashkent City Park" },
   ],
@@ -42,7 +42,7 @@ export const daySlots = {
   "2026-11-01": [
     { time: "09:00", part: "Sáng", eat: "Samsa, non, trà", text: "Hilton không gồm ăn sáng. Ăn quầy quanh Ukchi, hoặc buffet khách sạn $30 mỗi người.", usd: 8, query: "samsa near Ukchi Street Tashkent" },
     { time: "10:30", part: "Sáng", eat: "City Park", text: "Đi bộ khi chưa đông.", usd: 0, query: "Tashkent City Park" },
-    { time: "13:00", part: "Trưa", eat: "Food court trong mall", text: "Nghỉ chân, ăn món địa phương.", usd: 14, query: "Tashkent City Mall" },
+    { time: "13:00", part: "Trưa", eat: "Food court trong mall", text: "Nghỉ chân ở Boboy. Gọi plov, manti hoặc shashlik. Không ngồi gần quầy Ấn.", usd: 14, query: "Tashkent City Mall" },
     { time: "16:00", part: "Chiều", eat: "Magic City", text: "Đài phun nước. Taxi ngắn từ khách sạn.", usd: 0, query: "Magic City Tashkent" },
     { time: "19:30", part: "Tối", eat: "Quán quốc dân gần Ukchi", text: "Lagman hoặc shashlik. Ngày mai chuyển sang Mirabad.", usd: 16, query: "restaurants Ukchi Street Tashkent" },
   ],
