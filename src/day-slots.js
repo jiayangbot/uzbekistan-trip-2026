@@ -32,7 +32,7 @@ export const daySlots = {
   ],
   "2026-10-31": [
     { time: "08:15", part: "Sáng", eat: "Samsa rồi ra ga", text: "Hilton không gồm ăn sáng. Mua samsa và nước. Yandex ra ga trung tâm, khoảng 5 km, 15–25 phút. Có mặt trước 08:45.", usd: 10, query: "Tashkent Central Railway Station" },
-    { time: "09:10", part: "Sáng", eat: "Tàu 7201", text: "Không đặt trước. Tàu đứng 08:55–09:10, lên lúc đó để ngồi. Không có số ghế. Trên tàu khoảng 1 giờ 23 phút, tới Chinorkent 10:33. Vé 30.000 som mỗi người, trả người soát vé.", usd: 0 },
+    { time: "09:10", part: "Sáng", eat: "Tàu 7201", text: "Không đặt trước. Tàu đứng 08:55–09:10, lên lúc đó để ngồi. Không có số ghế. Trên tàu khoảng 1 giờ 23 phút, tới Chinorkent 10:33. Vé 30.000 som (~$2.50) mỗi người, trả người soát vé.", usd: 0 },
     { time: "10:40", part: "Sáng", eat: "Xe 324", text: "Ở ga Chinorkent, lên xe 324 đi Amirsoy. 10.000 som, hãng ghi khoảng 40 phút.", usd: 0, query: "Chinorkent railway station" },
     { time: "11:20", part: "Trưa", eat: "Amirsoy", text: "Ăn đồ mang theo. Cáp treo thứ Bảy 135.000 som khứ hồi mỗi người, chỉ mua nếu đang chạy. Không đi Chimgan và Charvak.", usd: 6, query: "Amirsoy Mountain Resort" },
     { time: "15:10", part: "Chiều", eat: "Xe 325 về", text: "Xe 325 về phía ga, đừng đi xe 324 vì chiều đó vòng lên núi. Xuống Khodjikent cho tàu 16:12. Muốn về sớm thì Chinorkent, tàu 7204 lúc 14:19, phải rời Amirsoy khoảng 13:20.", usd: 0, query: "Khodjikent railway station" },
