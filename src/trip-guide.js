@@ -1,73 +1,5 @@
-const trip = (cityId, word, checkIn, checkOut) =>
-  `https://us.trip.com/hotels/list?cityId=${cityId}&searchWord=${encodeURIComponent(word)}&checkin=${checkIn}&checkout=${checkOut}&crn=1&adult=2&children=0&curr=USD&locale=en-US&old=1`;
-
-const booking = (word, checkIn, checkOut) =>
-  `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(word)}&checkin=${checkIn}&checkout=${checkOut}&group_adults=2&no_rooms=1&group_children=0&selected_currency=USD`;
-
 export function mapLink(query) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-}
-
-export const hotelLinks = {
-  "Hampton by Hilton": {
-    tripWord: "Hampton by Hilton Tashkent",
-    bookingWord: "Hampton by Hilton Tashkent",
-    cityId: 639,
-    map: "Hampton by Hilton Tashkent, Istiqbol 17",
-  },
-  "Holiday Inn Tashkent City": {
-    tripWord: "Holiday Inn Tashkent City",
-    bookingWord: "Holiday Inn Tashkent City",
-    cityId: 639,
-    map: "Holiday Inn Tashkent City, 3 Ukchi Street",
-  },
-  "Swissôtel Tashkent": {
-    tripWord: "Swissotel Tashkent",
-    bookingWord: "Swissotel Tashkent",
-    cityId: 639,
-    map: "Swissotel Tashkent, Shakhrisabz Passage 4",
-  },
-  "Mövenpick Samarkand": {
-    tripWord: "Mövenpick Samarkand",
-    bookingWord: "Mövenpick Samarkand",
-    cityId: 640,
-    map: "Mövenpick Samarkand",
-  },
-  "Hilton Tashkent City": {
-    tripWord: "Hilton Tashkent City",
-    bookingWord: "Hilton Tashkent City",
-    cityId: 639,
-    map: "Hilton Tashkent City, 1 Ukchi Street",
-  },
-  "Wyndham Tashkent": {
-    tripWord: "Wyndham Tashkent",
-    bookingWord: "Wyndham Tashkent",
-    cityId: 639,
-    map: "Wyndham Tashkent, Amir Temur Avenue",
-  },
-  "InterContinental Tashkent": {
-    tripWord: "InterContinental Tashkent",
-    bookingWord: "InterContinental Tashkent",
-    cityId: 639,
-    map: "InterContinental Tashkent, 2 Shakhrisabz Street",
-  },
-  "Hyatt Regency Tashkent": {
-    tripWord: "Hyatt Regency Tashkent",
-    bookingWord: "Hyatt Regency Tashkent",
-    cityId: 639,
-    map: "Hyatt Regency Tashkent, 1A Navoi Street",
-  },
-};
-
-export function stayLinks(stay, hotelName = stay.name) {
-  const key = Object.keys(hotelLinks).find((name) => hotelName.startsWith(name));
-  const info = key ? hotelLinks[key] : null;
-  if (!info) return null;
-  return {
-    map: mapLink(info.map),
-    trip: trip(info.cityId, info.tripWord, stay.checkIn, stay.checkOut),
-    booking: booking(info.bookingWord, stay.checkIn, stay.checkOut),
-  };
 }
 
 const tashkentLateOct = {
@@ -230,11 +162,11 @@ export const dayDetails = {
     weather: tashkentLateOct,
     places: [
       {
-        name: "Holiday Inn, 3 Ukchi",
-        query: "Holiday Inn Tashkent City 3 Ukchi Street",
+        name: "Hilton Tashkent City, 1 Ukchi",
+        query: "Hilton Tashkent City 1 Ukchi Street",
         eat: "Sau khi gửi đồ, ăn trong mall hoặc Afsona ở Ukchi 4. Gọi plov hoặc manti.",
-        doing: "Checkout Hampton, Yandex sang đây, check-in, hỏi lại E-mehmon.",
-        tip: "Ukchi 3, đối diện City Park. Ga Xalqlar Do'stligi khoảng 400 m. Afsona Ukchi 4 là quán sát cửa.",
+        doing: "Checkout Hampton, Yandex sang đây. Nhận phòng từ 14:00, tới sớm thì gửi vali. Hỏi lại E-mehmon.",
+        tip: "Ukchi 1, cạnh City Park. Ba sáng ở đây không gồm ăn sáng, buffet $30 mỗi người. Afsona Ukchi 4 cùng phố.",
       },
       {
         name: "Tashkent City Park",
@@ -248,13 +180,13 @@ export const dayDetails = {
         query: "Xalqlar Dostligi metro station Tashkent",
         eat: "Không ăn ở ga.",
         doing: "Chỉ cần biết cửa ga để hôm sau đi metro nếu muốn. Hôm nay đi bộ là đủ.",
-        tip: "Khoảng 360–410 m từ Holiday Inn. Một giá cho mọi ga. Đổi tuyến trong cùng lượt thì không tính thêm.",
+        tip: "Đi bộ được từ Hilton. Một giá cho mọi ga. Đổi tuyến trong cùng lượt thì không tính thêm.",
       },
     ],
     research: [
       {
-        text: "Holiday Inn và Hilton Tashkent City cùng phố Ukchi. Ở Holiday Inn vẫn đi bộ được sang công viên, mall và đài phun nước, với giá 3 đêm $665 đã gồm ăn sáng.",
-        source: "Giá Trip.com 24/10/2026, địa chỉ Ukchi",
+        text: "Hilton đặt phòng Twin, không gồm ăn sáng. Ba sáng 31/10, 1/11, 2/11 ăn quầy samsa hoặc trong mall. Buffet khách sạn $30 mỗi người nếu muốn ăn tại chỗ.",
+        source: "Email xác nhận Trip.com",
         url: "https://www.hilton.com/en/hotels/tastchi-hilton-tashkent-city/",
       },
     ],
@@ -286,7 +218,7 @@ export const dayDetails = {
         name: "Hồ Charvak",
         query: "Charvak Reservoir",
         eat: "Không tắm, không ăn hải sản hồ. Tối về Ukchi gọi lagman.",
-        doing: "Dừng nhìn hồ trên đường về, rồi về Holiday Inn trước tối.",
+        doing: "Dừng nhìn hồ trên đường về, rồi về Hilton trước tối.",
         tip: "Tháng 10 không phải mùa tắm. Gió hồ lạnh. Chốt với tài xế giờ về và tiền xăng đã gồm chưa.",
       },
     ],
@@ -294,7 +226,7 @@ export const dayDetails = {
       title: "Xe riêng trong ngày",
       steps: [
         "Không dùng Yandex cho cả ngày núi. Đặt xe riêng, giá trong bảng chi phí là $150 dự phòng, chưa phải báo giá.",
-        "Xuất phát sau bữa sáng, về Holiday Inn trước tối.",
+        "Xuất phát sau khi mua đồ ăn sáng, về Hilton trước tối.",
         "Chốt với tài xế: Amirsoy, Chimgan, Charvak, giờ về, và tiền xăng đã gồm chưa.",
       ],
       links: [{ label: "Bản đồ Amirsoy", url: mapLink("Amirsoy Mountain Resort Uzbekistan") }],
@@ -316,7 +248,7 @@ export const dayDetails = {
         query: "Magic City Tashkent",
         eat: "Ăn ở mall hoặc Afsona trước khi sang. Ở đây xem đèn, không chọn bữa chính.",
         doing: "Xem đài phun nước và phố đi bộ, rồi Yandex về Ukchi.",
-        tip: "Taxi ngắn từ Holiday Inn. Chủ nhật đông. Đi sáng nếu muốn vắng, tối nếu muốn xem đèn.",
+        tip: "Taxi ngắn từ Hilton. Chủ nhật đông. Đi sáng nếu muốn vắng, tối nếu muốn xem đèn.",
       },
       {
         name: "Tashkent City Mall",
@@ -330,7 +262,7 @@ export const dayDetails = {
         query: "Tashkent City Park",
         eat: "Không ăn giữa công viên. Tối về Ukchi, lagman hoặc shashlik ở Afsona.",
         doing: "Đi bộ buổi chiều khi chưa đông, vòng về khách sạn.",
-        tip: "Chủ nhật đông người. Đối diện Holiday Inn. Mai chuyển sang Mirabad, tối nay gói đồ nhẹ.",
+        tip: "Chủ nhật đông người. Sát Hilton. Mai chuyển sang Mirabad, tối nay gói đồ nhẹ.",
       },
     ],
     research: [
@@ -340,7 +272,7 @@ export const dayDetails = {
         url: mapLink("Magic City Tashkent"),
       },
     ],
-    checklist: ["Ăn sáng tại khách sạn", "Ngày nghỉ trong khu, không chuyển đồ", "Ngày mai chuyển sang Mirabad"],
+    checklist: ["Ăn sáng ngoài, Hilton không gồm", "Ngày nghỉ trong khu, không chuyển đồ", "Ngày mai chuyển sang Mirabad"],
   },
   "2026-11-02": {
     weather: tashkentEarlyNov,
@@ -349,7 +281,7 @@ export const dayDetails = {
         name: "Swissôtel Tashkent",
         query: "Swissotel Tashkent Shakhrisabz 4",
         eat: "Ăn sáng tại khách sạn từ ngày mai. Hôm nay ăn tối ở Afsona Shevchenko.",
-        doing: "Checkout Holiday Inn, nhận phòng, hỏi E-mehmon, xem ban công và cửa sổ.",
+        doing: "Checkout Hilton trước 12:00. Nhận phòng từ 14:00, hỏi E-mehmon, xem ban công và cửa sổ.",
         tip: "Shakhrisabz 4, Mirabad, không phải quảng trường Amir Temur. Phòng King khoảng 35 m². Bốn đêm liền, kể cả thứ Tư 4/11.",
       },
       {
@@ -374,7 +306,7 @@ export const dayDetails = {
         url: "https://2gis.uz/tashkent/firm/70000001100646010",
       },
     ],
-    checklist: ["Checkout Holiday Inn", "Check-in Swissôtel, hỏi lại E-mehmon", "Ăn tối trong Mirabad"],
+    checklist: ["Checkout Hilton trước 12:00", "Check-in Swissôtel, hỏi lại E-mehmon", "Ăn tối trong Mirabad"],
   },
   "2026-11-03": {
     weather: tashkentEarlyNov,
@@ -483,7 +415,7 @@ export const dayDetails = {
         url: "https://oxusroad.com/en/travel-guide/",
       },
     ],
-    checklist: ["Vali gần xong", "Vé tàu offline và passport đúng số đã đặt", "Yandex sáng mai tới Toshkent Markaziy"],
+    checklist: ["Vali gần xong", "Yandex sáng mai tới Toshkent Markaziy"],
   },
   "2026-11-06": {
     weather: samarkandNov,
@@ -492,22 +424,22 @@ export const dayDetails = {
         name: "Toshkent Markaziy",
         query: "Tashkent Central Railway Station",
         eat: "Ăn sáng ở Swissôtel nếu buffet đã mở. Chưa mở thì samsa mua từ tối qua.",
-        doing: "Rời khách sạn khoảng 07:15. Soát passport và vé, vào toa 16.",
-        tip: "Sharq 710, 08:37, ghế 007 và 034, không ngồi cạnh. Đơn UO78185JOUVPRC. Có mặt trước giờ tàu khoảng 40 phút. PDF để offline.",
+        doing: "Rời khách sạn khoảng 07:15. Vào toa 16.",
+        tip: "Sharq 710, 08:37, ghế 007 và 034, không ngồi cạnh. Có mặt trước giờ tàu khoảng 40 phút.",
       },
       {
         name: "Ga Samarkand",
         query: "Samarkand Railway Station",
-        eat: "Chưa ăn ở ga. Ăn sau khi gửi đồ, gần Mövenpick.",
+        eat: "Chưa ăn ở ga. Ăn sau khi gửi đồ, gần khách sạn.",
         doing: "Ra cửa, mở Yandex, đối biển số rồi mới lên xe.",
         tip: "Đừng nhận taxi vẫy tay. Samarkand không có metro.",
       },
       {
-        name: "Mövenpick Samarkand",
-        query: "Mövenpick Samarkand",
-        eat: "Lagman ở phố gần khách sạn. Quán sát Registan thường đắt hơn.",
-        doing: "Gửi vali nếu phòng chưa sẵn, rồi đi Registan. Nhận phòng khi quay lại.",
-        tip: "Khách sạn cách Registan vài phút đi bộ. Giữ passport trong túi trước, không để trong vali gửi.",
+        name: "Zarafshon Parkside",
+        query: "Zarafshon Parkside Abdurakhmon Jomiy 65 Samarkand",
+        eat: "Lagman gần khách sạn nếu đói ngay. Bữa nhìn Registan thì gọi xe ra Old Havuz hoặc Emirhan.",
+        doing: "Gửi vali nếu phòng chưa sẵn, rồi Yandex ra Registan. Nhận phòng khi quay lại.",
+        tip: "Jomiy 65, không sát Registan. Trip ghi Mövenpick cách đây khoảng 450 m. Đừng đi bộ ra quảng trường với vali.",
       },
       {
         name: "Registan",
@@ -520,12 +452,12 @@ export const dayDetails = {
     transport: {
       title: "Sharq 710, đã mua",
       steps: [
-        "Đơn UO78185JOUVPRC. Sharq 710, thứ Sáu 6/11, Toshkent-Yo'lovchi 08:37, Samarkand 11:46. 601.120 som cho cả hai.",
+        "Sharq 710, thứ Sáu 6/11, Toshkent-Yo'lovchi 08:37, Samarkand 11:46.",
         "Cùng toa ngồi 16, ghế 007 và 034. Không ngồi cạnh nhau. Gặp nhau ở cửa toa.",
         "Ga đi là ТОШКЕНТ-ЙЎЛОВЧИ, tức ga trung tâm. Yandex từ Swissôtel tới đó, không phải ga Nam.",
-        "Rời khách sạn khoảng 07:15. Có mặt ga trước 08:37 khoảng 40 phút. Bấm Download và giữ PDF offline.",
+        "Rời khách sạn khoảng 07:15. Có mặt ga trước 08:37 khoảng 40 phút.",
       ],
-      links: [{ label: "Vé trong tài khoản", url: "https://eticket.uzrailpass.uz/en/" }],
+      links: [],
     },
     research: [
       {
@@ -544,7 +476,7 @@ export const dayDetails = {
         query: "Shah-i-Zinda Samarkand",
         eat: "Chưa ăn. Giữ bụng cho Siab lúc trưa.",
         doing: "Đi lối lăng từ dưới lên. Dừng ở các cổng gạch, không chen vào nơi có người cầu.",
-        tip: "Đi buổi sáng. Kín vai, khăn. Cởi giày ở một số lối. Yandex từ Mövenpick, đừng đi bộ cả quãng này.",
+        tip: "Đi buổi sáng. Kín vai, khăn. Cởi giày ở một số lối. Yandex từ Zarafshon, đừng đi bộ cả quãng này.",
       },
       {
         name: "Bibi-Khanym",
@@ -572,17 +504,17 @@ export const dayDetails = {
         query: "Registan Samarkand",
         eat: "Nếu chưa ăn tối, Old Havuz cách khoảng 300 m.",
         doing: "Chỉ quay lại nếu hôm qua nhìn ngoài. Không xem lại hết ba trường.",
-        tip: "Về Mövenpick trước 21:00. Vé tàu và passport để sẵn cho sáng mai.",
+        tip: "Về Zarafshon trước 21:00. Vé tàu và passport để sẵn cho sáng mai.",
       },
     ],
     research: [
       {
-        text: "Bốn điểm này nằm trong trung tâm lịch sử, đi bộ và Yandex ngắn được từ Mövenpick. Không cần thuê xe cả ngày. Đi theo sức, gió quảng trường lạnh hơn nhiệt độ khí tượng.",
+        text: "Bốn điểm này nằm trong trung tâm lịch sử. Từ Zarafshon gọi Yandex, không đi bộ cả quãng. Không cần thuê xe cả ngày. Gió quảng trường lạnh hơn nhiệt độ khí tượng.",
         source: "Bố cục trung tâm Samarkand",
         url: mapLink("Registan Shah-i-Zinda Siab Bazaar walking"),
       },
     ],
-    checklist: ["Giày dễ cởi", "Áo khoác", "Nước", "Vé tàu 08:10 sáng mai đã nằm trong điện thoại"],
+    checklist: ["Giày dễ cởi", "Áo khoác", "Nước", "Sáng mai tàu 08:10"],
   },
   "2026-11-08": {
     weather: tashkentEarlyNov,
@@ -590,53 +522,47 @@ export const dayDetails = {
       {
         name: "Ga Samarkand",
         query: "Samarkand Railway Station",
-        eat: "Ăn sáng ở Mövenpick nếu buffet đã mở. Chưa mở thì samsa ở ga, đừng ngồi quán lâu.",
-        doing: "Rời khách sạn khoảng 07:20. Soát vé, tìm đúng toa.",
-        tip: "Sharq 711, 08:10. Toa 06 ghế 016 và toa 07 ghế 026, hai đơn khác nhau. Gặp nhau lúc xuống ga Tashkent. PDF offline.",
+        eat: "Ăn sáng ở Zarafshon nếu buffet đã mở. Chưa mở thì samsa ở ga, đừng ngồi quán lâu.",
+        doing: "Rời khách sạn khoảng 07:20. Tìm đúng toa.",
+        tip: "Sharq 711, 08:10. Toa 06 ghế 016 và toa 07 ghế 026. Gặp nhau lúc xuống ga Tashkent.",
       },
       {
         name: "Toshkent Markaziy",
         query: "Tashkent Central Railway Station",
         eat: "Chưa ăn ở ga. Bữa chính là lagman sau khi nhận phòng.",
         doing: "Xuống 12:19, gặp nhau ở cửa ga, gọi Yandex.",
-        tip: "Ga trung tâm, không phải ga Nam. Nói tài xế InterContinental, 2 Shakhrisabz.",
+        tip: "Ga trung tâm, không phải ga Nam. Nói tài xế Hyatt Regency, Navoi 1A.",
       },
       {
-        name: "InterContinental Tashkent",
-        query: "InterContinental Tashkent 2 Shakhrisabz Street",
-        eat: "Lagman gần Shakhrisabz cho bữa chính. Tối súp hoặc Navvat nếu còn sức. Đừng sang Afsona Shevchenko nếu chỉ còn một tiếng.",
-        doing: "Check-in, xin phòng nhìn quảng trường tầng cao, gửi đồ, đi bộ ra Amir Temur khoảng 10 phút.",
-        tip: "Một đêm, khác Hampton. Mai ở đến khoảng 17:15 vì bay 21:15. Hỏi lễ tân gửi hành lý ngày mai đến 17:00.",
+        name: "Hyatt Regency Tashkent",
+        query: "Hyatt Regency Tashkent 1A Navoi Avenue",
+        eat: "Lagman gần khách sạn cho bữa chính. Tối súp hoặc Navvat nếu còn sức. Không gồm ăn sáng.",
+        doing: "Gửi vali khoảng 12:45, đi ăn trưa, nhận phòng từ 15:00. Hỏi lễ tân giữ vali ngày mai tới 17:00.",
+        tip: "Một đêm, không hoàn. Trả phòng 12:00 ngày 9/11 mà bay 21:15, nên phải gửi vali buổi chiều.",
       },
     ],
     transport: {
       title: "Sharq 711, đã mua",
       steps: [
         "Chủ Nhật 8/11, Sharq 711, Samarkand 08:10, Toshkent-Yo'lovchi 12:19. Mỗi vé 200.060 som.",
-        "Hai đơn riêng. UO78185PYKL348: toa 06, ghế 016. UO78185QSZAOHS: toa 07, ghế 026. Cùng tàu, khác toa. Gặp nhau lúc xuống ga.",
-        "Ga đến là ga trung tâm, không phải ga Nam. Yandex về InterContinental, 2 Shakhrisabz.",
-        "Rời Mövenpick khoảng 07:20. Bấm Download và giữ PDF offline. HY531 cất cánh 21:15 ngày 9/11.",
+        "Toa 06 ghế 016 và toa 07 ghế 026. Cùng tàu, khác toa. Gặp nhau lúc xuống ga.",
+        "Ga đến là ga trung tâm, không phải ga Nam. Yandex về Hyatt Regency, Navoi 1A.",
+        "Rời Zarafshon khoảng 07:20. HY531 cất cánh 21:15 ngày 9/11.",
       ],
-      links: [{ label: "Vé trong tài khoản", url: "https://eticket.uzrailpass.uz/en/" }],
+      links: [],
     },
-    research: [
-      {
-        text: "Vé Trip.com: HY531, TAS 21:15 ngày 9/11, Bangkok 05:25 ngày 10/11. Màn hình đang ghi 1 hành khách, Huy Hiep Huynh, giá $1,804.38. Người thứ hai cần cùng hai chuyến HY532 và HY531.",
-        source: "Vé Trip.com, xem 24/10/2026",
-        url: "https://us.trip.com/",
-      },
-    ],
-    checklist: ["PDF Sharq 711, toa 06 và toa 07", "Check-in InterContinental", "Khai TDAC Thái Lan trước khi về"],
+    research: [],
+    checklist: ["Gửi vali Hyatt, nhận phòng 15:00", "Khai TDAC Thái Lan trước khi về"],
   },
   "2026-11-09": {
     weather: tashkentEarlyNov,
     places: [
       {
-        name: "InterContinental Tashkent",
-        query: "InterContinental Tashkent 2 Shakhrisabz Street",
-        eat: "Phòng classic view không ghi ăn sáng. Sáng và trưa ăn Navvat hoặc Broadway: norin, shashlik, samsa, non. Không ngồi nhà hàng tối.",
-        doing: "Nhờ lễ tân giữ vali đến khoảng 17:00. Đi bộ Amir Temur buổi sáng, về lúc 15:30 tắm và lấy đồ.",
-        tip: "Rời khách sạn 17:15. Kiểm tra passport và vé HY531 trước khi gọi xe.",
+        name: "Hyatt Regency Tashkent",
+        query: "Hyatt Regency Tashkent 1A Navoi Avenue",
+        eat: "Không gồm ăn sáng, buffet $22 mỗi người. Trưa lagman hoặc Navvat, xong trước 15:00. Không ngồi nhà hàng tối.",
+        doing: "Trả phòng trước 12:00, gửi vali ở lễ tân. Lấy vali lúc 16:45.",
+        tip: "Rời khách sạn 17:15. Kiểm tra passport, vé HY531 và TDAC trước khi gọi xe.",
       },
       {
         name: "TAS Terminal 2",
@@ -650,7 +576,7 @@ export const dayDetails = {
       title: "Ra sân bay và về Bangkok",
       steps: [
         "HY531, Uzbekistan Airways. TAS 21:15 ngày 9/11, Bangkok 05:25 ngày 10/11. Giờ địa phương từng sân bay.",
-        "Rời InterContinental khoảng 17:15. Terminal 2. Có mặt sân bay khoảng 18:15.",
+        "Rời Hyatt khoảng 17:15. Terminal 2. Có mặt sân bay khoảng 18:15.",
         "Gọi Yandex. Chiều thứ Hai đường có thể chậm hơn 20 phút.",
         "Nộp TDAC trên tdac.immigration.go.th trước khi bay. Tới Thái Lan lúc 05:25.",
       ],
@@ -676,9 +602,6 @@ export const packing = [
 ];
 
 export const masterChecklist = [
-  { label: "PDF Sharq 710, 6/11, 08:37, toa 16", priority: "High" },
-  { label: "PDF Sharq 711, 8/11, 08:10, toa 06 và toa 07", priority: "High" },
-  { label: "Lưu vé HY532 và HY531. Màn hình đang hiện 1 khách", priority: "High" },
   { label: "TDAC trước khi về Thái Lan", priority: "High" },
   { label: "E-mehmon: lễ tân đăng ký tạm trú mỗi khách sạn, giữ tờ xác nhận", priority: "High" },
   { label: "Cài Yandex Go và giữ số Uzbekistan", priority: "High" },
@@ -715,7 +638,7 @@ export const localLife = [
     icon: "train",
     paragraphs: [
       "Tashkent có metro, chạy khoảng 5:00 đến nửa đêm. Một lượt đi đâu cũng một giá. Từ 1/10/2026, chạm thẻ ngân hàng, điện thoại hoặc thẻ ATTO là 2.500 som. Vé giấy mua ở ki-ốt là 3.000 som. Không còn xu nhựa. Đổi tuyến trong cùng một lần qua cửa thì không tính thêm. Mỗi người một lần chạm. Ga đẹp để xem: Kosmonavtlar, Alisher Navoi.",
-      "Hampton sát ga Amir Temur Xiyoboni. Holiday Inn gần ga Xalqlar Do'stligi. Swissôtel gần ga Oybek. Quảng trường thì đi bộ. Mỏi, tối, hoặc có vali thì gọi Yandex Go. App hiện giá trước khi nhận xe. Xe thường là Chevrolet trắng, đối biển số với app. Không vẫy taxi ngoài đường. Samarkand không có metro, trong phố cũng dùng Yandex.",
+      "Hampton sát ga Amir Temur Xiyoboni. Hilton gần ga Xalqlar Do'stligi. Swissôtel gần ga Oybek. Quảng trường thì đi bộ. Mỏi, tối, hoặc có vali thì gọi Yandex Go. App hiện giá trước khi nhận xe. Xe thường là Chevrolet trắng, đối biển số với app. Không vẫy taxi ngoài đường. Samarkand không có metro, trong phố cũng dùng Yandex.",
       "Sân bay hiện tại không có ga metro. Ga từng được đặt tên dự án Aeroport trên tuyến vòng là Tolariq, nằm vòng ngoài thành phố, không phải nhà ga bay. Ngày 27/10, HY532 vào Terminal 2 lúc 11:45. Hai người có vali: mua SIM trong nhà ga, ra làn 1 gọi Yandex về Hampton. Bảng giá tối đa tháng 9/2026 tính tới quảng trường Amir Temur khoảng 20.000 som cho 7,6 km, trước phụ phí giờ đông. App hiện số cuối. Chưa có mạng thì quầy taxi trong sảnh, giá trong thành phố từ 50.000 som, chốt tại quầy. Đừng nhận người chào trong sảnh.",
       "Ngày 9/11 rời khách sạn khoảng 17:15, Yandex về Terminal 2. Không đi metro ra sân bay.",
     ],
@@ -730,7 +653,7 @@ export const localLife = [
     paragraphs: [
       "Phố Tashkent và Samarkand mặc như đi chơi mùa thu: áo thun hoặc sơ mi, quần dài, giày đã đi quen. Không cần vest. Tối khoảng 4–7°C nên có áo khoác hoặc fleece. Ngày núi mặc thêm một lớp, kính râm, giày kín. Trưa vẫn có nắng.",
       "Vào Hazrati Imam, nhà thờ và Shah-i-Zinda thì kín vai, kín gối. Khăn cổ dùng trùm đầu. Cởi giày ở nhà thờ, nhà người ta và một số quán trà. Ngoài đường phụ nữ không cần trùm khăn.",
-      "Bốn khách sạn đều giặt qua lễ tân, thường trả tối hôm sau. Gửi ở Holiday Inn khoảng 31/10 hoặc ở Swissôtel khoảng 3/11, lấy trước sáng 6/11 lên tàu. Đêm 8/11 không gửi: 17:15 ngày 9/11 đã ra sân bay cho chuyến 21:15. Quần áo lót giặt trong phòng thì khó khô vì trời mát, nên mang dư vài bộ.",
+      "Các khách sạn đều giặt qua lễ tân, thường trả tối hôm sau. Gửi ở Hilton khoảng 31/10 hoặc ở Swissôtel khoảng 3/11, lấy trước sáng 6/11 lên tàu. Đêm 8/11 không gửi: 17:15 ngày 9/11 đã ra sân bay cho chuyến 21:15. Quần áo lót giặt trong phòng thì khó khô vì trời mát, nên mang dư vài bộ.",
     ],
     links: [],
   },
@@ -751,7 +674,6 @@ export const sources = [
   { label: "Khí hậu đầu tháng 11", url: "https://en.climate-data.org/asia/uzbekistan/tashkent-738/r/november-11/" },
   { label: "Chuẩn khí hậu Samarkand tháng 11", url: "https://aroundca.com/blog/uzbekistan-in-autumn/" },
   { label: "Cách mua vé Afrosiyob", url: "https://oxusroad.com/en/trains/afrosiyob/" },
-  { label: "Site vé tàu", url: "https://eticket.uzrailpass.uz/en/" },
   { label: "Reddit: SIM, Yandex, tiền", url: "https://www.reddit.com/r/Uzbekistan/comments/1nmsn31/firsttime_tourist_tips/" },
   { label: "Đô la và ATM ở Uzbekistan", url: "https://oxusroad.com/en/travel-guide/money/" },
   { label: "Từ sân bay Tashkent vào phố", url: "https://oxusroad.com/en/travel-guide/tashkent-airport-arrival/" },
