@@ -5,7 +5,7 @@ import { icon } from "./icons.js";
 import { bookingFor, bookings, checkoutOn, legs, legsOn, tripCosts } from "./bookings.js";
 import { applyLang, getLang, pick, setLang, t } from "./i18n.js";
 import { tr } from "./tr.js";
-import { borderCards, packItems, prepPhases } from "./prep.js";
+import { agendaDays, borderCards, packItems } from "./prep.js";
 
 const STORE_KEY = "uz-trip-2026-checks";
 const STAY_NOTE_KEY = "uz-trip-2026-stay-notes";
@@ -169,7 +169,7 @@ const totalNights = bookings.reduce((sum, b) => sum + b.nights, 0);
 
 function navItems() {
   return [
-    ["prep", t("Chuẩn bị", "Prepare"), "list"],
+    ["prep", t("Ngày", "Days"), "list"],
     ["now", t("Hôm nay", "Today"), "sun"],
     ["timeline", t("Lịch", "Plan"), "calendar"],
     ["stays", t("Khách sạn", "Hotels"), "bed"],
@@ -240,7 +240,16 @@ function renderNow() {
   const total = tripCosts.paidUsd + tripCosts.atHotelUsd;
   const left = tripCosts.capUsd - total;
   const pct = Math.min(100, Math.round((total / tripCosts.capUsd) * 100));
-  const urgent = prepPhases.flatMap((phase) => phase.steps.filter((step) => step.priority === "high")).slice(0, 4);
+  const urgent = [];
+  for (const day of agendaDays) {
+    if (day.date < today) continue;
+    for (const step of day.tasks) {
+      if (step.priority !== "high" || checks[`agenda:${day.date}:${step.id}`]) continue;
+      urgent.push(step);
+      if (urgent.length === 4) break;
+    }
+    if (urgent.length === 4) break;
+  }
   /** @type {{ title: string; focus: string | null; label: string }} */
   const head = (() => {
     switch (phase) {
@@ -304,8 +313,8 @@ function renderNow() {
         </article>
         <article class="card">
           <h2 class="card-label">${icon("alert")} ${t("Việc gấp", "Do next")}</h2>
-          <ul class="mini-list">${urgent.map((step) => `<li>${pick(step.text)}</li>`).join("")}</ul>
-          <a class="text-link" href="#prep">${t("Xem timeline", "Open the timeline")}</a>
+          <ul class="mini-list">${urgent.length ? urgent.map((step) => `<li>${pick(step.text)}</li>`).join("") : `<li>${t("Không còn việc gấp.", "Nothing urgent left.")}</li>`}</ul>
+          <a class="text-link" href="#prep">${t("Mở lịch trình", "Open the itinerary")}</a>
         </article>
       </div>
     </section>`;
@@ -584,50 +593,71 @@ function renderBorder(card) {
     </article>`;
 }
 
-function renderPrep() {
-  const packBlock = `<li class="prep-step" id="step-pack">
-    <p class="prep-when">${t("Đêm trước khi bay", "The night before the flight")}</p>
-    <h4 class="prep-pack-title">${icon("shirt", 16)} ${t("Soạn vali", "Pack the bag")}</h4>
-    <ul class="checks">${packItems
-      .map((item) => checkItem(`prep:go:pack:${item.id}`, `<strong>${escapeHtml(pick(item.item))}</strong><span class="muted">${escapeHtml(pick(item.why))}</span>`))
-      .join("")}</ul>
-  </li>`;
-  const phases = prepPhases
-    .map((phase) => {
-      const steps = phase.steps
-        .map((step) => {
-          const before = phase.id === "go" && step.id === "bkk" ? packBlock : "";
-          return `${before}<li class="prep-step" id="step-${step.id}">
-            <p class="prep-when">${escapeHtml(pick(step.when))}</p>
-            ${checkItem(
-              `prep:${phase.id}:${step.id}`,
-              `<strong>${escapeHtml(pick(step.text))}</strong>${step.detail ? `<span class="muted">${escapeHtml(pick(step.detail))}</span>` : ""}`,
-              `<span class="prio prio-${step.priority}">${step.priority === "high" ? t("Gấp", "Now") : t("Vừa", "Soon")}</span>`,
-            )}
-          </li>`;
-        })
-        .join("");
-      const total = phase.steps.length + (phase.id === "go" ? packItems.length : 0);
-      return `
-        <section class="prep-phase" aria-labelledby="phase-${phase.id}">
-          <h3 id="phase-${phase.id}">${pick(phase.title)} <span class="count" data-progress="prep:${phase.id}:">${progressText(`prep:${phase.id}:`, total)}</span></h3>
-          <ol class="prep-line">${steps}</ol>
-        </section>`;
+function renderAgendaDay(day) {
+  const trip = days.find((entry) => entry.date === day.date);
+  const city = day.city ? pick(day.city) : tr(trip.city);
+  const area = day.area ? pick(day.area) : tr(trip.area);
+  const plan = day.plan ? pick(day.plan) : tr(trip.plan);
+  const date = parseDate(day.date);
+  const today = todayIso();
+  const nextDate = agendaDays.find((item) => item.date >= today)?.date ?? "";
+  const mark = day.date === today ? "is-today" : day.date === nextDate ? "is-next" : "";
+  const prefix = `agenda:${day.date}:`;
+  const packCount = day.pack ? packItems.length : 0;
+  const total = day.tasks.length + packCount;
+  const steps = day.tasks
+    .map((step) => {
+      const card = day.border && (step.id === "uz" || step.id === "thai") ? renderBorder(borderCards.find((item) => item.id === day.border)) : "";
+      return `<li class="prep-step">
+        <p class="prep-when">${escapeHtml(pick(step.when))}</p>
+        ${checkItem(
+          `${prefix}${step.id}`,
+          `<strong>${escapeHtml(pick(step.text))}</strong>${step.detail ? `<span class="muted">${escapeHtml(pick(step.detail))}</span>` : ""}`,
+          `<span class="prio prio-${step.priority}">${step.priority === "high" ? t("Gấp", "Now") : t("Vừa", "Soon")}</span>`,
+        )}
+        ${card}
+      </li>`;
     })
     .join("");
+  const pack = day.pack
+    ? `<li class="prep-step">
+        <p class="prep-when">${t("Tối", "Evening")}</p>
+        <h4 class="prep-pack-title">${icon("shirt", 16)} ${t("Soạn vali", "Pack the bag")}</h4>
+        <ul class="checks">${packItems
+          .map((item) => checkItem(`${prefix}pack:${item.id}`, `<strong>${escapeHtml(pick(item.item))}</strong><span class="muted">${escapeHtml(pick(item.why))}</span>`))
+          .join("")}</ul>
+      </li>`
+    : "";
+  const nextMark = mark === "is-next" ? `<span class="today-dot">${t("Kế tiếp", "Next")}</span> ` : "";
+  const todayMark = mark === "is-today" ? `<span class="today-dot">${t("Hôm nay", "Today")}</span> ` : "";
+  return `
+    <li class="agenda-day ${mark}" id="a-${day.date}">
+      <span class="date-chip" aria-hidden="true">
+        <span class="dow">${fmtWeekday(date)}</span>
+        <span class="dnum">${date.getDate()}</span>
+        <span class="mon">${fmtMonth(date)}</span>
+      </span>
+      <div class="agenda-body">
+        <h3>${todayMark}${nextMark}${city} <span class="muted">· ${area}</span>${total ? ` <span class="count" data-progress="${prefix}">${progressText(prefix, total)}</span>` : ""}</h3>
+        <p class="day-plan">${plan}</p>
+        ${trip ? `<p class="muted">${icon("bed", 14)} ${tr(trip.hotel)}</p>` : ""}
+        ${steps || pack ? `<ol class="prep-line">${steps}${pack}</ol>` : ""}
+        ${trip ? `<a class="text-link" href="#d-${day.date}">${t("Giờ giấc ngày này", "Times for this day")}</a>` : ""}
+      </div>
+    </li>`;
+}
+
+function renderPrep() {
   return `
     <section class="section" id="prep" aria-labelledby="prep-title">
       <div class="section-head prep-head">
         <div>
-          <h2 id="prep-title">${t("Chuẩn bị", "Prepare")}</h2>
-          <p class="muted">${t("Làm từ trên xuống. Tick được lưu trên máy này.", "Work from the top down. Ticks stay on this phone.")}</p>
+          <h2 id="prep-title">${t("Lịch trình", "Itinerary")}</h2>
+          <p class="muted">${t("Từ 26/10 chuẩn bị ở Bangkok đến 10/11 về. Tick lưu trên máy này.", "From 26 Oct prep in Bangkok through the 10 Nov return. Ticks stay on this phone.")}</p>
         </div>
         ${renderLangSwitch()}
       </div>
-      <div class="say-grid">
-        ${borderCards.map(renderBorder).join("")}
-      </div>
-      ${phases}
+      <ol class="agenda">${agendaDays.map(renderAgendaDay).join("")}</ol>
       <div class="prep-grid">
         <article class="card">
           <h3>${icon("train")} ${t("Bay và tàu", "Flights and trains")}</h3>

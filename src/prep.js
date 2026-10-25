@@ -27,15 +27,33 @@
  * @property {BorderLine[]} lines
  */
 
-/** @type {{ id: "go" | "back", title: Copy, steps: PrepStep[] }[]} */
-export const prepPhases = [
+/**
+ * @typedef {Object} AgendaDay
+ * @property {string} date
+ * @property {Copy} [city]
+ * @property {Copy} [area]
+ * @property {Copy} [plan]
+ * @property {PrepStep[]} tasks
+ * @property {boolean} [pack]
+ * @property {"uz" | "th"} [border]
+ */
+
+/** Một dòng thời gian theo ngày. Ngày 27/10–9/11 lấy tên chỗ và kế hoạch từ lịch chuyến đi. */
+/** @type {AgendaDay[]} */
+export const agendaDays = [
   {
-    id: "go",
-    title: { vi: "Chuẩn bị đi", en: "Before leaving" },
-    steps: [
+    date: "2026-10-26",
+    city: { vi: "Bangkok", en: "Bangkok" },
+    area: { vi: "Ngày chuẩn bị", en: "Prep day" },
+    plan: {
+      vi: "Ở Bangkok. Xong tiền, thẻ, app và vali trước khi ngủ.",
+      en: "Stay in Bangkok. Finish cash, cards, the app, and the bag before bed.",
+    },
+    pack: true,
+    tasks: [
       {
         id: "usd",
-        when: { vi: "Trước ngày bay, ở Bangkok", en: "Before the flight, in Bangkok" },
+        when: { vi: "Trong ngày", en: "During the day" },
         text: { vi: "Đổi USD tờ 100, khoảng $600 cho hai người", en: "Buy about $600 in clean $100 bills for two people" },
         detail: {
           vi: "SuperRich trong thành phố, không đợi tới sân bay. Tờ phẳng, không rách, không viết. Khách sạn và tàu trả bằng thẻ.",
@@ -60,9 +78,15 @@ export const prepPhases = [
         },
         priority: "high",
       },
+    ],
+  },
+  {
+    date: "2026-10-27",
+    border: "uz",
+    tasks: [
       {
         id: "bkk",
-        when: { vi: "27/10, sáng", en: "27 Oct, morning" },
+        when: { vi: "Sáng", en: "Morning" },
         text: { vi: "Có mặt BKK trước 3 tiếng. HY532 cất cánh 06:55", en: "Be at BKK 3 hours early. HY532 departs 06:55" },
         detail: { vi: "Tới Tashkent TAS Terminal 2 lúc 11:45.", en: "Arrive Tashkent TAS Terminal 2 at 11:45." },
         priority: "high",
@@ -70,32 +94,43 @@ export const prepPhases = [
       {
         id: "uz",
         when: { vi: "27/10, nhập cảnh TAS", en: "27 Oct, TAS immigration" },
-        text: { vi: "Đưa điện thoại cho cán bộ, phần tiếng Anh ở trên", en: "Show the phone. The officer reads the English lines above" },
+        text: { vi: "Đưa điện thoại cho cán bộ. Họ đọc thẻ nhập cảnh ngay dưới", en: "Hand over the phone. The officer reads the arrival card below" },
         detail: { vi: "Mở thẻ Nhập cảnh Uzbekistan.", en: "Open the Uzbekistan arrival card." },
         priority: "high",
       },
       {
         id: "emehmon",
-        when: { vi: "Mỗi lần nhận phòng", en: "At every check-in" },
-        text: { vi: "Nhờ lễ tân đăng ký tạm trú e-mehmon và giữ tờ xác nhận", en: "Ask reception to file e-mehmon and keep the slip" },
-        detail: { vi: "Làm ở cả năm khách sạn.", en: "Do this at all five hotels." },
+        when: { vi: "Chiều", en: "Afternoon" },
+        text: { vi: "Nhận phòng Hampton. Nhờ lễ tân đăng ký e-mehmon và giữ tờ xác nhận", en: "Check in at the Hampton. Ask reception to file e-mehmon and keep the slip" },
+        priority: "high",
+      },
+    ],
+  },
+  { date: "2026-10-28", tasks: [] },
+  { date: "2026-10-29", tasks: [] },
+  {
+    date: "2026-10-30",
+    tasks: [
+      {
+        id: "emehmon",
+        when: { vi: "Chiều", en: "Afternoon" },
+        text: { vi: "Nhận phòng Hilton. Nhờ lễ tân đăng ký e-mehmon và giữ tờ xác nhận", en: "Check in at the Hilton. Ask reception to file e-mehmon and keep the slip" },
         priority: "high",
       },
       {
         id: "amirsoy",
-        when: { vi: "Trước ngày lên núi", en: "Before the mountain day" },
-        text: { vi: "Hỏi giá xe Amirsoy. Chưa chốt $150", en: "Ask the Amirsoy car price. $150 is not agreed yet" },
+        when: { vi: "Tối", en: "Evening" },
+        text: { vi: "Hỏi giá xe Amirsoy cho sáng mai. Chưa chốt $150", en: "Ask the Amirsoy car price for tomorrow morning. $150 is not agreed yet" },
         priority: "medium",
       },
     ],
   },
   {
-    id: "back",
-    title: { vi: "Chuẩn bị lúc về", en: "Before flying back" },
-    steps: [
+    date: "2026-10-31",
+    tasks: [
       {
         id: "laundry",
-        when: { vi: "Trước 6/11", en: "Before 6 Nov" },
+        when: { vi: "Trong ngày", en: "During the day" },
         text: { vi: "Giặt xong trước sáng lên tàu Samarkand", en: "Finish laundry before the Samarkand train morning" },
         detail: {
           vi: "Gửi ở Hilton khoảng 31/10 hoặc Swissôtel khoảng 3/11. Đêm 8/11 không gửi: 17:15 ngày 9/11 đã ra sân bay.",
@@ -103,32 +138,112 @@ export const prepPhases = [
         },
         priority: "medium",
       },
+    ],
+  },
+  { date: "2026-11-01", tasks: [] },
+  {
+    date: "2026-11-02",
+    tasks: [
+      {
+        id: "emehmon",
+        when: { vi: "Chiều", en: "Afternoon" },
+        text: { vi: "Nhận phòng Swissôtel. Nhờ lễ tân đăng ký e-mehmon và giữ tờ xác nhận", en: "Check in at the Swissôtel. Ask reception to file e-mehmon and keep the slip" },
+        priority: "high",
+      },
+    ],
+  },
+  { date: "2026-11-03", tasks: [] },
+  { date: "2026-11-04", tasks: [] },
+  {
+    date: "2026-11-05",
+    tasks: [
+      {
+        id: "bags",
+        when: { vi: "Chiều", en: "Afternoon" },
+        text: { vi: "Gói đồ và chạy thử Yandex tới ga trung tâm", en: "Pack the bags and test a Yandex ride to the central station" },
+        detail: { vi: "Mai tàu 08:37.", en: "The train is at 08:37 tomorrow." },
+        priority: "high",
+      },
+    ],
+  },
+  {
+    date: "2026-11-06",
+    tasks: [
+      {
+        id: "train",
+        when: { vi: "Sáng", en: "Morning" },
+        text: { vi: "Sharq 710, 08:37. Cùng toa 16, ghế 007 và 034", en: "Sharq 710 at 08:37. Same carriage 16, seats 007 and 034" },
+        detail: { vi: "Tới Samarkand 11:46. Hai ghế không ngồi cạnh nhau.", en: "Arrive in Samarkand at 11:46. The two seats are not next to each other." },
+        priority: "high",
+      },
+      {
+        id: "emehmon",
+        when: { vi: "Trưa", en: "Midday" },
+        text: { vi: "Gửi đồ ở Zarafshon. Nhờ lễ tân đăng ký e-mehmon và giữ tờ xác nhận", en: "Leave the bags at Zarafshon. Ask reception to file e-mehmon and keep the slip" },
+        priority: "high",
+      },
+    ],
+  },
+  { date: "2026-11-07", tasks: [] },
+  {
+    date: "2026-11-08",
+    tasks: [
+      {
+        id: "train",
+        when: { vi: "Sáng", en: "Morning" },
+        text: { vi: "Sharq 711, 08:10. Toa 06 ghế 016, toa 07 ghế 026", en: "Sharq 711 at 08:10. Carriage 06 seat 016, carriage 07 seat 026" },
+        detail: { vi: "Tới Tashkent 12:19. Gặp nhau lúc xuống ga. Không gửi giặt tối nay.", en: "Arrive in Tashkent at 12:19. Meet when you get off. Do not send laundry tonight." },
+        priority: "high",
+      },
+      {
+        id: "emehmon",
+        when: { vi: "Chiều", en: "Afternoon" },
+        text: { vi: "Gửi vali ở Hyatt, nhận phòng từ 15:00. Nhờ lễ tân đăng ký e-mehmon", en: "Leave the bags at the Hyatt and check in from 15:00. Ask reception to file e-mehmon" },
+        priority: "high",
+      },
       {
         id: "tdac",
-        when: { vi: "Trước khi bay 9/11", en: "Before the 9 Nov flight" },
+        when: { vi: "Tối", en: "Evening" },
         text: { vi: "Nộp TDAC trên tdac.immigration.go.th", en: "Submit TDAC at tdac.immigration.go.th" },
         detail: { vi: "Làm trước, đừng đợi tới quầy Thái Lan.", en: "File it before you fly. Do not wait for the Thai desk." },
         priority: "high",
       },
+    ],
+  },
+  {
+    date: "2026-11-09",
+    tasks: [
       {
         id: "checkout",
-        when: { vi: "9/11, trước 12:00", en: "9 Nov, before 12:00" },
+        when: { vi: "Trước 12:00", en: "Before 12:00" },
         text: { vi: "Trả phòng Hyatt và gửi vali ở lễ tân", en: "Check out of the Hyatt and leave the bags at reception" },
-        detail: { vi: "Lấy vali lúc 16:45. Khách sạn không gồm ăn sáng.", en: "Pick the bags up at 16:45. Breakfast is not included." },
+        detail: { vi: "Sáng đi bộ quanh khách sạn. Lấy vali lúc 16:45. Khách sạn không gồm ăn sáng.", en: "Walk near the hotel in the morning. Pick the bags up at 16:45. Breakfast is not included." },
         priority: "high",
       },
       {
         id: "leave",
-        when: { vi: "9/11, chiều", en: "9 Nov, afternoon" },
+        when: { vi: "Chiều", en: "Afternoon" },
         text: { vi: "17:15 rời Hyatt. Sân bay Terminal 2 khoảng 18:15", en: "Leave the Hyatt at 17:15. Be at Terminal 2 around 18:15" },
         detail: { vi: "HY531 cất cánh 21:15. Gọi Yandex, không đi metro.", en: "HY531 departs 21:15. Take Yandex, not the metro." },
         priority: "high",
       },
+    ],
+  },
+  {
+    date: "2026-11-10",
+    city: { vi: "Bangkok", en: "Bangkok" },
+    area: { vi: "Về tới", en: "Arrival" },
+    plan: {
+      vi: "HY531 hạ cánh khoảng 05:25. Nhập cảnh Thái Lan.",
+      en: "HY531 lands about 05:25. Clear Thailand immigration.",
+    },
+    border: "th",
+    tasks: [
       {
         id: "thai",
-        when: { vi: "10/11, 05:25 tại BKK", en: "10 Nov, 05:25 at BKK" },
-        text: { vi: "Nhập cảnh Thái Lan. Đưa phần tiếng Anh cho cán bộ", en: "Thailand immigration. Show the English lines" },
-        detail: { vi: "Mở thẻ Nhập cảnh Thái Lan.", en: "Open the Thailand arrival card." },
+        when: { vi: "05:25", en: "05:25" },
+        text: { vi: "Nhập cảnh Thái Lan. Đưa điện thoại cho cán bộ", en: "Thailand immigration. Hand over the phone" },
+        detail: { vi: "Mở thẻ Nhập cảnh Thái Lan ngay dưới.", en: "Open the Thailand arrival card below." },
         priority: "high",
       },
     ],
@@ -180,8 +295,8 @@ export const borderCards = [
     id: "uz",
     title: { vi: "Nhập cảnh Uzbekistan", en: "Uzbekistan arrival" },
     hint: {
-      vi: "27/10, sân bay Tashkent. Đưa máy cho cán bộ. Họ đọc dòng English.",
-      en: "27 Oct, Tashkent airport. Hand over the phone. The officer reads the English line.",
+      vi: "27/10, sân bay Tashkent. Đưa máy cho cán bộ.",
+      en: "27 Oct, Tashkent airport. Hand over the phone.",
     },
     lines: [
       { en: "We are tourists. Two people.", vi: "Chúng tôi đi du lịch. Hai người." },

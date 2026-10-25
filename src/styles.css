@@ -1554,10 +1554,72 @@ code {
 }
 
 .say-line {
+  margin: 0;
+}
+
+.say-line p {
+  margin: 0;
+}
+
+.agenda {
+  list-style: none;
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 4px 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.agenda-day {
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr);
+  gap: 12px 14px;
+  position: relative;
+  padding-bottom: 22px;
+}
+
+.agenda-day::before {
+  content: "";
+  position: absolute;
+  left: 29px;
+  top: 72px;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.agenda-day:last-child::before {
+  display: none;
+}
+
+.agenda-day.is-today .date-chip,
+.agenda-day.is-next .date-chip {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+.agenda-day.is-today .dow,
+.agenda-day.is-today .mon,
+.agenda-day.is-next .dow,
+.agenda-day.is-next .mon {
+  color: inherit;
+}
+
+.agenda-body {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding-bottom: 8px;
+}
+
+.agenda-body h3 {
+  display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
+  gap: 6px;
+  font-size: 1.15rem;
+}
+
+.agenda-body .prep-line {
+  margin-top: 4px;
 }
 
 .say-tag {
