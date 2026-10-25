@@ -4,6 +4,7 @@ import { dayEats, daySlots } from "./day-slots.js";
 import { icon } from "./icons.js";
 import { bookingFor, bookings, checkoutOn, legs, legsOn, tripCosts } from "./bookings.js";
 import { applyLang, getLang, pick, setLang, t } from "./i18n.js";
+import { tr } from "./tr.js";
 import { borderCards, packItems, prepPhases } from "./prep.js";
 
 const STORE_KEY = "uz-trip-2026-checks";
@@ -76,7 +77,7 @@ function escapeHtml(value) {
 }
 
 function extLink(url, label, cls = "") {
-  return `<a class="${cls}" href="${url}" target="_blank" rel="noopener noreferrer">${label}${icon("external", 14)}<span class="sr-only"> (mở tab mới)</span></a>`;
+  return `<a class="${cls}" href="${url}" target="_blank" rel="noopener noreferrer">${label}${icon("external", 14)}<span class="sr-only"> ${t("(mở tab mới)", "(opens in a new tab)")}</span></a>`;
 }
 
 function telLink(phone, cls = "") {
@@ -194,8 +195,8 @@ function renderLeg(leg) {
     <span class="ess-icon">${icon(leg.kind === "flight" ? "plane" : "train", 18)}</span>
     <span class="ess-text">
       <strong>${leg.code} · <span class="num">${leg.depart}</span> → <span class="num">${leg.arrive}</span></strong>
-      <span>${leg.from} → ${leg.to}. ${leg.seats}.</span>
-      <span class="muted">${leg.note}</span>
+      <span>${leg.from} → ${leg.to}${leg.seats ? `. ${tr(leg.seats)}` : ""}.</span>
+      <span class="muted">${tr(leg.note)}</span>
     </span>
   </li>`;
 }
@@ -209,7 +210,7 @@ function renderEssentials(iso) {
   if (morning) {
     rows.push(`<li class="ess-row">
       <span class="ess-icon">${icon("coffee", 18)}</span>
-      <span class="ess-text"><strong>${morning.breakfast ? t(`Ăn sáng ở ${morning.short}, đã gồm`, `Breakfast at ${morning.short}, included`) : t(`Tự ăn sáng, ${morning.short} không gồm`, `Buy breakfast. ${morning.short} does not include it`)}</strong><span class="muted">${morning.breakfastNote}</span></span>
+      <span class="ess-text"><strong>${morning.breakfast ? t(`Ăn sáng ở ${morning.short}, đã gồm`, `Breakfast at ${morning.short}, included`) : t(`Tự ăn sáng, ${morning.short} không gồm`, `Buy breakfast. ${morning.short} does not include it`)}</strong><span class="muted">${tr(morning.breakfastNote)}</span></span>
     </li>`);
   }
   if (out) {
@@ -269,7 +270,7 @@ function renderNow() {
       <div class="hero">
         <p class="eyebrow">${meta.dates} · ${meta.guests} ${t("người", "people")} · ${totalNights} ${t("đêm", "nights")} · ${t("5/5 khách sạn đã đặt", "5/5 hotels booked")}</p>
         <h1 id="now-title">${head.title}</h1>
-        <p class="lead">${meta.purpose}</p>
+        <p class="lead">${tr(meta.purpose)}</p>
       </div>
       ${
         focusEntry
@@ -278,7 +279,7 @@ function renderNow() {
                 <div>
                   <p class="card-label">${icon("calendar")} ${head.label}</p>
                   <h2>${fmtLong(parseDate(focusEntry.date))}</h2>
-                  <p class="muted">${focusEntry.plan}</p>
+                  <p class="muted">${tr(focusEntry.plan)}</p>
                 </div>
                 <a class="btn" href="#d-${focusEntry.date}">${t("Lịch ngày này", "This day")}</a>
               </div>
@@ -314,9 +315,9 @@ function renderReview(review) {
   if (!review) return "";
   return `
     <div class="review">
-      <p>${extLink(review.url, `${review.score} · ${review.count}`, "review-link")}</p>
-      <p>${review.good}</p>
-      <p class="review-watch">${icon("alert", 14)} ${review.watch}</p>
+      <p>${extLink(review.url, `${review.score} · ${tr(review.count)}`, "review-link")}</p>
+      <p>${tr(review.good)}</p>
+      <p class="review-watch">${icon("alert", 14)} ${tr(review.watch)}</p>
     </div>`;
 }
 
@@ -341,22 +342,22 @@ function renderStays() {
             <span class="stay-index seg-${i}" aria-hidden="true">${i + 1}</span>
             <div>
               <h3>${b.name}</h3>
-              <p class="muted">${b.city} · ${b.area}</p>
+              <p class="muted">${tr(b.city)} · ${tr(b.area)}</p>
             </div>
             <span class="tag tag-ok">${icon("check", 13)} ${t("Đã đặt", "Booked")}</span>
           </div>
           <div class="stay-when">
-            <p><span class="k">${t("Nhận", "In")}</span><span class="num">${fmtWeekday(parseDate(b.checkIn))} ${shortDate(b.checkIn)}</span> ${t("từ", "from")} <span class="num">${b.checkInTime}</span></p>
-            <p><span class="k">${t("Trả", "Out")}</span><span class="num">${fmtWeekday(parseDate(b.checkOut))} ${shortDate(b.checkOut)}</span> ${t("trước", "before")} <span class="num">${b.checkOutTime}</span></p>
-            <p class="muted">${b.nights} ${t("đêm", "nights")} · ${b.room}</p>
+            <p><span class="k">${t("Nhận", "In")}</span> <span class="num">${fmtWeekday(parseDate(b.checkIn))} ${shortDate(b.checkIn)}</span> ${t("từ", "from")} <span class="num">${b.checkInTime}</span></p>
+            <p><span class="k">${t("Trả", "Out")}</span> <span class="num">${fmtWeekday(parseDate(b.checkOut))} ${shortDate(b.checkOut)}</span> ${t("trước", "before")} <span class="num">${b.checkOutTime}</span></p>
+            <p class="muted">${b.nights} ${t("đêm", "nights")} · ${tr(b.room)}</p>
           </div>
           <div class="stay-bill">
             <p class="stay-total">${fmtCents.format(b.paidUsd + b.atHotelUsd)}<span>${t("Đã trả", "Paid")} ${fmtCents.format(b.paidUsd)}${b.atHotelUsd ? t(` · thuế tại khách sạn ${fmtCents.format(b.atHotelUsd)}`, ` · hotel tax ${fmtCents.format(b.atHotelUsd)}`) : ""}</span></p>
             ${b.breakfast ? `<span class="tag tag-meal">${icon("coffee", 13)} ${t("Có ăn sáng", "Breakfast included")}</span>` : `<span class="tag tag-nomeal">${icon("alert", 13)} ${t("Không ăn sáng", "No breakfast")}</span>`}
           </div>
-          <p class="muted">${b.breakfastNote}</p>
-          <p class="${cancelOpen ? "cancel-open" : "muted"}">${icon(cancelOpen ? "clock" : "alert", 14)} ${b.cancel}</p>
-          <p>${b.address}. ${b.note}</p>
+          <p class="muted">${tr(b.breakfastNote)}</p>
+          <p class="${cancelOpen ? "cancel-open" : "muted"}">${icon(cancelOpen ? "clock" : "alert", 14)} ${tr(b.cancel)}</p>
+          <p>${b.address}. ${tr(b.note)}</p>
           <div class="actions">
             ${extLink(mapLink(b.mapQuery), t("Bản đồ", "Map"), "btn")}
             ${telLink(b.phone, "btn")}
@@ -384,8 +385,8 @@ function renderDetail(entry) {
   const detail = dayDetails[entry.date];
   if (!detail) return "";
   const stay = bookingFor(entry.date);
-  const research = detail.research.map((n) => `<li><p>${n.text}</p>${extLink(n.url, n.source, "source-link")}</li>`).join("");
-  const todo = detail.checklist.map((t, i) => checkItem(`day:${entry.date}:${i}`, t)).join("");
+  const research = detail.research.map((n) => `<li><p>${tr(n.text)}</p>${extLink(n.url, tr(n.source), "source-link")}</li>`).join("");
+  const todo = detail.checklist.map((item, i) => checkItem(`day:${entry.date}:${i}`, tr(item))).join("");
   return `
     <div class="detail-grid">
       <div class="detail-col">
@@ -393,8 +394,8 @@ function renderDetail(entry) {
           stay
             ? `<section class="block">
                 <h4>${icon("bed", 16)} ${stay.name}</h4>
-                <p>${stay.room}</p>
-                <p class="muted">${stay.cancel}</p>
+                <p>${tr(stay.room)}</p>
+                <p class="muted">${tr(stay.cancel)}</p>
                 <div class="actions">
                   ${extLink(mapLink(stay.mapQuery), t("Bản đồ", "Map"), "btn")}
                   ${telLink(stay.phone, "btn")}
@@ -403,22 +404,22 @@ function renderDetail(entry) {
             : ""
         }
         <section class="block">
-          <h4>${icon("thermo", 16)} Thời tiết</h4>
-          <p><strong>${detail.weather.label}</strong></p>
-          <p class="muted">${detail.weather.note}</p>
-          ${extLink(detail.weather.url, detail.weather.source, "source-link")}
+          <h4>${icon("thermo", 16)} ${t("Thời tiết", "Weather")}</h4>
+          <p><strong>${tr(detail.weather.label)}</strong></p>
+          <p class="muted">${tr(detail.weather.note)}</p>
+          ${extLink(detail.weather.url, tr(detail.weather.source), "source-link")}
         </section>
         ${
           detail.transport
             ? `<section class="block block-accent">
-                <h4>${icon("train", 16)} ${detail.transport.title}</h4>
-                <ol class="steps">${detail.transport.steps.map((s) => `<li>${s}</li>`).join("")}</ol>
-                <div class="actions">${detail.transport.links.map((l, i) => extLink(l.url, l.label, i === 0 ? "btn btn-primary" : "btn")).join("")}</div>
+                <h4>${icon("train", 16)} ${tr(detail.transport.title)}</h4>
+                <ol class="steps">${detail.transport.steps.map((s) => `<li>${tr(s)}</li>`).join("")}</ol>
+                <div class="actions">${detail.transport.links.map((l, i) => extLink(l.url, tr(l.label), i === 0 ? "btn btn-primary" : "btn")).join("")}</div>
               </section>`
             : ""
         }
         <section class="block">
-          <h4>${icon("list", 16)} Việc trong ngày <span class="count" data-progress="day:${entry.date}:">${progressText(`day:${entry.date}:`, detail.checklist.length)}</span></h4>
+          <h4>${icon("list", 16)} ${t("Việc trong ngày", "Today's list")} <span class="count" data-progress="day:${entry.date}:">${progressText(`day:${entry.date}:`, detail.checklist.length)}</span></h4>
           <ul class="checks">${todo}</ul>
         </section>
       </div>
@@ -426,7 +427,7 @@ function renderDetail(entry) {
         research
           ? `<div class="detail-col">
         <section class="block">
-          <h4>${icon("book", 16)} Đã đọc</h4>
+          <h4>${icon("book", 16)} ${t("Đã đọc", "Read")}</h4>
           <ul class="notes">${research}</ul>
         </section>
       </div>`
@@ -437,10 +438,10 @@ function renderDetail(entry) {
 
 function placeNotes(place) {
   return [
-    place.where ? `<p>${place.where}</p>` : "",
-    place.eat || place.dishes ? `<p><span class="k">Ăn</span> ${place.eat || place.dishes}</p>` : "",
-    place.doing ? `<p><span class="k">Làm</span> ${place.doing}</p>` : "",
-    place.tip ? `<p><span class="k">Mẹo</span> ${place.tip}</p>` : "",
+    place.where ? `<p>${tr(place.where)}</p>` : "",
+    place.eat || place.dishes ? `<p><span class="k">${t("Ăn", "Eat")}</span> ${tr(place.eat || place.dishes)}</p>` : "",
+    place.doing ? `<p><span class="k">${t("Làm", "Do")}</span> ${tr(place.doing)}</p>` : "",
+    place.tip ? `<p><span class="k">${t("Mẹo", "Tip")}</span> ${tr(place.tip)}</p>` : "",
   ].join("");
 }
 
@@ -451,7 +452,7 @@ function renderPlaces(list) {
       <li class="place">
         <span class="place-icon">${icon("pin", 16)}</span>
         <div>
-          ${extLink(mapLink(place.query), place.name, "place-name")}
+          ${extLink(mapLink(place.query), tr(place.name), "place-name")}
           ${placeNotes(place)}
         </div>
       </li>`,
@@ -464,8 +465,8 @@ function renderEats(date) {
   if (!eats) return "";
   return `
     <details class="day-block">
-      <summary>${icon("coffee", 16)} Món ngon <span class="muted">(${eats.places.length})</span>${icon("chevron", 16)}</summary>
-      <p class="muted">${eats.note} Chọn một chỗ, không cần ăn hết.</p>
+      <summary>${icon("coffee", 16)} ${t("Món ngon", "Food")} <span class="muted">(${eats.places.length})</span>${icon("chevron", 16)}</summary>
+      <p class="muted">${tr(eats.note)} ${t("Chọn một chỗ, không cần ăn hết.", "Pick one place. You do not need to eat at all of them.")}</p>
       <ul class="places">${renderPlaces(eats.places)}</ul>
     </details>`;
 }
@@ -475,7 +476,7 @@ function renderStops(date) {
   if (!detail) return "";
   return `
     <details class="day-block">
-      <summary>${icon("pin", 16)} Chỗ phải đi <span class="muted">(${detail.places.length})</span>${icon("chevron", 16)}</summary>
+      <summary>${icon("pin", 16)} ${t("Chỗ phải đi", "Places")} <span class="muted">(${detail.places.length})</span>${icon("chevron", 16)}</summary>
       <ul class="places">${renderPlaces(detail.places)}</ul>
     </details>`;
 }
@@ -483,12 +484,12 @@ function renderStops(date) {
 function renderSlots(date) {
   const rows = (daySlots[date] || [])
     .map((slot) => {
-      const title = slot.eat ? (slot.query ? extLink(mapLink(slot.query), slot.eat, "slot-link") : `<strong>${slot.eat}</strong>`) : "";
+      const title = slot.eat ? (slot.query ? extLink(mapLink(slot.query), tr(slot.eat), "slot-link") : `<strong>${tr(slot.eat)}</strong>`) : "";
       return `
         <li class="slot">
           <time datetime="${slot.time}">${slot.time}</time>
-          <span class="part">${slot.part}</span>
-          <span class="slot-body">${title ? `<span class="slot-eat">${title}. </span>` : ""}${slot.text}</span>
+          <span class="part">${tr(slot.part)}</span>
+          <span class="slot-body">${title ? `<span class="slot-eat">${title}. </span>` : ""}${tr(slot.text)}</span>
         </li>`;
     })
     .join("");
@@ -518,7 +519,7 @@ function renderDay(entry, index) {
           </span>
           <span class="day-main">
             <span class="sr-only">${fmtLong(d)}. </span>
-            <span class="day-title">${isToday ? `<span class="today-dot">${t("Hôm nay", "Today")}</span> ` : ""}${entry.city} <span class="muted">· ${entry.area}</span></span>
+            <span class="day-title">${isToday ? `<span class="today-dot">${t("Hôm nay", "Today")}</span> ` : ""}${tr(entry.city)} <span class="muted">· ${tr(entry.area)}</span></span>
             <span class="tags">
               <span class="tag tag-${kind}">${icon(info.icon, 13)} ${info.label}</span>
               ${moving ? `<span class="tag tag-move">${icon("swap", 13)} ${t("Đổi khách sạn", "Hotel change")}</span>` : ""}
@@ -578,16 +579,7 @@ function renderBorder(card) {
       <h3>${icon("users", 16)} ${pick(card.title)}</h3>
       <p class="muted">${pick(card.hint)}</p>
       <ul class="say-list">
-        ${card.lines
-          .map(
-            (line) => `<li class="say-line">
-              <span class="say-tag">EN</span>
-              <p class="say-en">${escapeHtml(line.en)}</p>
-              <span class="say-tag">VI</span>
-              <p class="say-vi">${escapeHtml(line.vi)}</p>
-            </li>`,
-          )
-          .join("")}
+        ${card.lines.map((line) => `<li class="say-line"><p>${escapeHtml(getLang() === "en" ? line.en : line.vi)}</p></li>`).join("")}
       </ul>
     </article>`;
 }
@@ -612,7 +604,6 @@ function renderPrep() {
               `<strong>${escapeHtml(pick(step.text))}</strong>${step.detail ? `<span class="muted">${escapeHtml(pick(step.detail))}</span>` : ""}`,
               `<span class="prio prio-${step.priority}">${step.priority === "high" ? t("Gấp", "Now") : t("Vừa", "Soon")}</span>`,
             )}
-            <p class="prep-alt">${escapeHtml(getLang() === "en" ? step.text.vi : step.text.en)}</p>
           </li>`;
         })
         .join("");
@@ -645,7 +636,7 @@ function renderPrep() {
         </article>
         <article class="card">
           <h3>${icon("book")} ${t("Nguồn đã đọc", "Sources")}</h3>
-          <ul class="source-list">${sources.map((s) => `<li>${extLink(s.url, s.label)}</li>`).join("")}</ul>
+          <ul class="source-list">${sources.map((s) => `<li>${extLink(s.url, tr(s.label))}</li>`).join("")}</ul>
         </article>
         <article class="card prep-notes">
           <h3>${icon("users")} ${t("Tiền, áo quần, người", "Money, clothes, people")}</h3>
@@ -654,9 +645,9 @@ function renderPrep() {
               .map(
                 (note) => `
               <section>
-                <h4>${icon(note.icon, 16)} ${note.title}</h4>
-                ${note.paragraphs.map((p) => `<p>${p}</p>`).join("")}
-                ${note.links.length ? `<p class="actions">${note.links.map((l) => extLink(l.url, l.label, "text-link")).join("")}</p>` : ""}
+                <h4>${icon(note.icon, 16)} ${tr(note.title)}</h4>
+                ${note.paragraphs.map((p) => `<p>${tr(p)}</p>`).join("")}
+                ${note.links.length ? `<p class="actions">${note.links.map((l) => extLink(l.url, tr(l.label), "text-link")).join("")}</p>` : ""}
               </section>`,
               )
               .join("")}
