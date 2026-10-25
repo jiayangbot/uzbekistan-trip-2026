@@ -29,7 +29,7 @@ function fmtMonth(date) {
   return getLang() === "en" ? new Intl.DateTimeFormat("en-GB", { month: "short" }).format(date) : `thg ${date.getMonth() + 1}`;
 }
 
-/** @typedef {"stay" | "travel" | "flight" | "sight" | "weekend" | "city"} DayKind */
+/** @typedef {"stay" | "travel" | "flight" | "sight" | "weekend" | "city" | "prep" | "return"} DayKind */
 /** @typedef {"all" | "weekend" | "travel" | "move"} Filter */
 /** @typedef {"before" | "during" | "after"} TripPhase */
 
@@ -86,6 +86,8 @@ function telLink(phone, cls = "") {
 
 /** @returns {DayKind} */
 function dayKind(entry) {
+  if (entry.date < days[0].date) return "prep";
+  if (entry.date > days[days.length - 1].date) return "return";
   if (/flight/i.test(entry.hotel) || entry.date === days[0].date) return "flight";
   if (/Afrosiyob|Sharq/i.test(entry.transfer)) return "travel";
   if (entry.day === "Sat" || entry.day === "Sun") return "weekend";
@@ -109,6 +111,10 @@ function kindInfo(kind) {
       return { label: t("Cuối tuần", "Weekend"), icon: "sun" };
     case "city":
       return { label: t("Tham quan", "Sightseeing"), icon: "pin" };
+    case "prep":
+      return { label: t("Chuẩn bị", "Prepare"), icon: "list" };
+    case "return":
+      return { label: t("Về", "Return"), icon: "plane" };
     default: {
       const unreachable = /** @type {never} */ (kind);
       throw new Error(`Unknown day kind: ${unreachable}`);
@@ -173,9 +179,8 @@ const totalNights = bookings.reduce((sum, b) => sum + b.nights, 0);
 
 function navItems() {
   return [
-    ["prep", t("Ngày", "Days"), "list"],
     ["now", t("Hôm nay", "Today"), "sun"],
-    ["timeline", t("Lịch", "Plan"), "calendar"],
+    ["timeline", t("Lịch", "Days"), "calendar"],
     ["stays", t("Khách sạn", "Hotels"), "bed"],
   ];
 }
@@ -319,7 +324,7 @@ function renderNow() {
         <article class="card">
           <h2 class="card-label">${icon("alert")} ${t("Việc gấp", "Do next")}</h2>
           <ul class="mini-list">${urgent.length ? urgent.map((step) => `<li>${pick(step.text)}</li>`).join("") : `<li>${t("Không còn việc gấp.", "Nothing urgent left.")}</li>`}</ul>
-          <a class="text-link" href="#prep">${t("Mở lịch trình", "Open the itinerary")}</a>
+          <a class="text-link" href="#timeline">${t("Mở lịch từng ngày", "Open the days")}</a>
         </article>
       </div>
     </section>`;
@@ -510,9 +515,55 @@ function renderSlots(date) {
   return `<ol class="slots">${rows}</ol>`;
 }
 
-function upcomingDays() {
+function allEntries() {
+  const extra = agendaDays
+    .filter((day) => day.city && day.plan && !days.some((entry) => entry.date === day.date))
+    .map((day) => ({
+      date: day.date,
+      day: day.date === "2026-10-26" ? "Mon" : "Tue",
+      city: day.city.vi,
+      area: day.area?.vi ?? "",
+      hotel: "",
+      plan: day.plan.vi,
+      transfer: "",
+    }));
+  return [...extra.filter((entry) => entry.date < days[0].date), ...days, ...extra.filter((entry) => entry.date > days[days.length - 1].date)];
+}
+
+function shownEntries() {
   const today = todayIso();
-  return days.map((entry, index) => ({ entry, index })).filter(({ entry }) => entry.date >= today);
+  return allEntries()
+    .map((entry, index) => ({ entry, index }))
+    .filter(({ entry }) => entry.date >= today);
+}
+
+function renderDayTasks(date) {
+  const day = agendaDays.find((item) => item.date === date);
+  if (!day || (day.tasks.length === 0 && !day.pack)) return "";
+  const prefix = `agenda:${date}:`;
+  const steps = day.tasks
+    .map((step) => {
+      const card = day.border && (step.id === "uz" || step.id === "thai") ? renderBorder(borderCards.find((item) => item.id === day.border)) : "";
+      return `<li>
+        <p class="prep-when">${escapeHtml(pick(step.when))}</p>
+        ${checkLabel(
+          `${prefix}${step.id}`,
+          `<span class="check-line"><span class="prio prio-${step.priority}">${step.priority === "high" ? t("Gấp", "Now") : t("Vừa", "Soon")}</span><strong>${escapeHtml(pick(step.text))}</strong></span>${step.detail ? `<span class="muted">${escapeHtml(pick(step.detail))}</span>` : ""}`,
+        )}
+        ${card}
+      </li>`;
+    })
+    .join("");
+  const pack = day.pack
+    ? `<li>
+        <p class="prep-when">${t("Tối", "Evening")}</p>
+        <h4 class="prep-pack-title">${icon("shirt", 16)} ${t("Soạn vali", "Pack the bag")}</h4>
+        <ul class="checks">${packItems
+          .map((item) => checkItem(`${prefix}pack:${item.id}`, `<strong>${escapeHtml(pick(item.item))}</strong><span class="muted">${escapeHtml(pick(item.why))}</span>`))
+          .join("")}</ul>
+      </li>`
+    : "";
+  return `<ul class="agenda-tasks">${steps}${pack}</ul>`;
 }
 
 function renderDay(entry, index) {
@@ -522,39 +573,83 @@ function renderDay(entry, index) {
   const moving = index > 0 && stay?.checkIn === entry.date;
   const d = parseDate(entry.date);
   const isToday = entry.date === todayIso();
+  const extra = agendaDays.find((day) => day.date === entry.date);
+  const city = extra?.city ? pick(extra.city) : tr(entry.city);
+  const area = extra?.area ? pick(extra.area) : tr(entry.area);
+  const plan = extra?.plan ? pick(extra.plan) : tr(entry.plan);
+  const detail = renderDetail(entry);
+  const prefix = `agenda:${entry.date}:`;
+  const taskCount = (extra?.tasks.length ?? 0) + (extra?.pack ? packItems.length : 0);
+  const head = `
+    <span class="date-chip" aria-hidden="true">
+      <span class="dow">${fmtWeekday(d)}</span>
+      <span class="dnum">${d.getDate()}</span>
+      <span class="mon">${fmtMonth(d)}</span>
+    </span>
+    <span class="day-main">
+      <span class="sr-only">${fmtLong(d)}. </span>
+      <span class="day-title">${isToday ? `<span class="today-dot">${t("Hôm nay", "Today")}</span> ` : ""}${city} <span class="muted">· ${area}</span></span>
+      <span class="tags">
+        <span class="tag tag-${kind}">${icon(info.icon, 13)} ${info.label}</span>
+        ${moving ? `<span class="tag tag-move">${icon("swap", 13)} ${t("Đổi khách sạn", "Hotel change")}</span>` : ""}
+        ${stay ? `<span class="tag tag-plain">${icon("bed", 13)} ${stay.short}</span>` : ""}
+        ${taskCount ? `<span class="tag tag-plain" data-progress="${prefix}">${progressText(prefix, taskCount)}</span>` : ""}
+      </span>
+    </span>`;
   return `
     <li class="day kind-${kind} ${isToday ? "is-today" : ""}" id="d-${entry.date}" data-index="${index}">
       <h3 class="day-heading">
-        <button type="button" class="day-toggle" aria-expanded="false" aria-controls="p-${entry.date}">
-          <span class="date-chip" aria-hidden="true">
-            <span class="dow">${fmtWeekday(d)}</span>
-            <span class="dnum">${d.getDate()}</span>
-            <span class="mon">${fmtMonth(d)}</span>
-          </span>
-          <span class="day-main">
-            <span class="sr-only">${fmtLong(d)}. </span>
-            <span class="day-title">${isToday ? `<span class="today-dot">${t("Hôm nay", "Today")}</span> ` : ""}${tr(entry.city)} <span class="muted">· ${tr(entry.area)}</span></span>
-            <span class="tags">
-              <span class="tag tag-${kind}">${icon(info.icon, 13)} ${info.label}</span>
-              ${moving ? `<span class="tag tag-move">${icon("swap", 13)} ${t("Đổi khách sạn", "Hotel change")}</span>` : ""}
-              ${stay ? `<span class="tag tag-plain">${icon("bed", 13)} ${stay.short}</span>` : ""}
-            </span>
-          </span>
-          <span class="chev">${icon("chevron", 20)}</span>
-        </button>
+        ${
+          detail
+            ? `<button type="button" class="day-toggle" aria-expanded="false" aria-controls="p-${entry.date}">
+                ${head}
+                <span class="chev">${icon("chevron", 20)}</span>
+              </button>`
+            : `<div class="day-head">${head}</div>`
+        }
       </h3>
+      ${(daySlots[entry.date] || []).length ? "" : `<p class="day-plan">${plan}</p>`}
+      ${renderDayTasks(entry.date)}
       ${renderEssentials(entry.date)}
       ${renderSlots(entry.date)}
       ${renderStops(entry.date)}
       ${renderEats(entry.date)}
-      <div class="day-panel" id="p-${entry.date}" role="region" aria-label="${t("Chi tiết", "Details")} ${fmtLong(d)}" hidden>
-        ${renderDetail(entry)}
-      </div>
+      ${detail ? `<div class="day-panel" id="p-${entry.date}" role="region" aria-label="${t("Chi tiết", "Details")} ${fmtLong(d)}" hidden>${detail}</div>` : ""}
     </li>`;
 }
 
+function renderNotes() {
+  return `
+    <div class="prep-grid">
+      <article class="card">
+        <h3>${icon("train")} ${t("Bay và tàu", "Flights and trains")}</h3>
+        <ul class="ess-list">${legs.map(renderLeg).join("")}</ul>
+        <p class="muted">${t("Ga ТОШКЕНТ-ЙЎЛОВЧИ là ga trung tâm, không phải ga Nam.", "ТОШКЕНТ-ЙЎЛОВЧИ is the central station, not the south station.")}</p>
+      </article>
+      <article class="card">
+        <h3>${icon("book")} ${t("Nguồn đã đọc", "Sources")}</h3>
+        <ul class="source-list">${sources.map((s) => `<li>${extLink(s.url, tr(s.label))}</li>`).join("")}</ul>
+      </article>
+      <article class="card prep-notes">
+        <h3>${icon("users")} ${t("Tiền, áo quần, người", "Money, clothes, people")}</h3>
+        <div class="note-list">
+          ${localLife
+            .map(
+              (note) => `
+            <section>
+              <h4>${icon(note.icon, 16)} ${tr(note.title)}</h4>
+              ${note.paragraphs.map((p) => `<p>${tr(p)}</p>`).join("")}
+              ${note.links.length ? `<p class="actions">${note.links.map((l) => extLink(l.url, tr(l.label), "text-link")).join("")}</p>` : ""}
+            </section>`,
+            )
+            .join("")}
+        </div>
+      </article>
+    </div>`;
+}
+
 function renderTimeline() {
-  const shown = upcomingDays();
+  const shown = shownEntries();
   const filters = [
     ["all", t("Tất cả", "All"), shown.length],
     ["travel", t("Bay & tàu", "Flights & trains"), shown.filter(({ entry, index }) => matchesFilter("travel", entry, index)).length],
@@ -565,7 +660,7 @@ function renderTimeline() {
     <section class="section" id="timeline" aria-labelledby="timeline-title" tabindex="-1">
       <div class="section-head">
         <h2 id="timeline-title">${t("Lịch từng ngày", "Day by day")}</h2>
-        <p class="muted">${t("Ngày đã qua tự ẩn. Mỗi ngày có giờ giấc, chỗ đi và món ăn. Bấm tên ngày để xem thời tiết và checklist.", "Past days hide themselves. Each day has times, places, and food. Open a day for weather and the checklist.")}</p>
+        <p class="muted">${t("Từ 26/10 chuẩn bị đến 10/11 về. Việc của ngày nào nằm trong ngày đó. Tick lưu trên máy này.", "From prep on 26 Oct through the return on 10 Nov. Each day's jobs sit on that day. Ticks stay on this phone.")}</p>
       </div>
       <div class="toolbar">
         <div class="filters" role="group" aria-label="${t("Lọc ngày", "Filter days")}">
@@ -575,6 +670,7 @@ function renderTimeline() {
         </div>
       </div>
       <ol class="days">${shown.length ? shown.map(({ entry, index }) => renderDay(entry, index)).join("") : `<li class="muted">${t("Các ngày trong lịch đã qua.", "Every day in the plan has passed.")}</li>`}</ol>
+      ${renderNotes()}
     </section>`;
 }
 
@@ -598,99 +694,12 @@ function renderBorder(card) {
     </article>`;
 }
 
-function renderAgendaDay(day) {
-  const trip = days.find((entry) => entry.date === day.date);
-  const city = day.city ? pick(day.city) : tr(trip.city);
-  const area = day.area ? pick(day.area) : tr(trip.area);
-  const plan = day.plan ? pick(day.plan) : tr(trip.plan);
-  const date = parseDate(day.date);
-  const today = todayIso();
-  const nextDate = agendaDays.find((item) => item.date >= today)?.date ?? "";
-  const mark = day.date === today ? "is-today" : day.date === nextDate ? "is-next" : "";
-  const prefix = `agenda:${day.date}:`;
-  const packCount = day.pack ? packItems.length : 0;
-  const total = day.tasks.length + packCount;
-  const steps = day.tasks
-    .map((step) => {
-      const card = day.border && (step.id === "uz" || step.id === "thai") ? renderBorder(borderCards.find((item) => item.id === day.border)) : "";
-      return `<li>
-        <p class="prep-when">${escapeHtml(pick(step.when))}</p>
-        ${checkLabel(
-          `${prefix}${step.id}`,
-          `<span class="check-line"><span class="prio prio-${step.priority}">${step.priority === "high" ? t("Gấp", "Now") : t("Vừa", "Soon")}</span><strong>${escapeHtml(pick(step.text))}</strong></span>${step.detail ? `<span class="muted">${escapeHtml(pick(step.detail))}</span>` : ""}`,
-        )}
-        ${card}
-      </li>`;
-    })
-    .join("");
-  const pack = day.pack
-    ? `<li>
-        <p class="prep-when">${t("Tối", "Evening")}</p>
-        <h4 class="prep-pack-title">${icon("shirt", 16)} ${t("Soạn vali", "Pack the bag")}</h4>
-        <ul class="checks">${packItems
-          .map((item) => checkItem(`${prefix}pack:${item.id}`, `<strong>${escapeHtml(pick(item.item))}</strong><span class="muted">${escapeHtml(pick(item.why))}</span>`))
-          .join("")}</ul>
-      </li>`
-    : "";
-  const nextMark = mark === "is-next" ? `<span class="today-dot">${t("Kế tiếp", "Next")}</span> ` : "";
-  const todayMark = mark === "is-today" ? `<span class="today-dot">${t("Hôm nay", "Today")}</span> ` : "";
-  return `
-    <li class="agenda-day ${mark}" id="a-${day.date}">
-      <span class="date-chip" aria-hidden="true">
-        <span class="dow">${fmtWeekday(date)}</span>
-        <span class="dnum">${date.getDate()}</span>
-        <span class="mon">${fmtMonth(date)}</span>
-      </span>
-      <div class="agenda-body">
-        <h3>${todayMark}${nextMark}${city} <span class="muted">· ${area}</span>${total ? ` <span class="count" data-progress="${prefix}">${progressText(prefix, total)}</span>` : ""}</h3>
-        <p class="day-plan">${plan}</p>
-        ${trip ? `<p class="muted">${icon("bed", 14)} ${tr(trip.hotel)}</p>` : ""}
-        ${steps || pack ? `<ul class="agenda-tasks">${steps}${pack}</ul>` : ""}
-        ${trip ? `<a class="text-link" href="#d-${day.date}">${t("Giờ giấc ngày này", "Times for this day")}</a>` : ""}
-      </div>
-    </li>`;
-}
-
-function renderPrep() {
-  return `
-    <section class="section" id="prep" aria-labelledby="prep-title">
-      <div class="section-head">
-        <h2 id="prep-title">${t("Lịch trình", "Itinerary")}</h2>
-        <p class="muted">${t("Từ 26/10 chuẩn bị ở Bangkok đến 10/11 về. Tick lưu trên máy này.", "From 26 Oct prep in Bangkok through the 10 Nov return. Ticks stay on this phone.")}</p>
-      </div>
-      <ol class="agenda">${agendaDays.map(renderAgendaDay).join("")}</ol>
-      <div class="prep-grid">
-        <article class="card">
-          <h3>${icon("train")} ${t("Bay và tàu", "Flights and trains")}</h3>
-          <ul class="ess-list">${legs.map(renderLeg).join("")}</ul>
-          <p class="muted">${t("Ga ТОШКЕНТ-ЙЎЛОВЧИ là ga trung tâm, không phải ga Nam.", "ТОШКЕНТ-ЙЎЛОВЧИ is the central station, not the south station.")}</p>
-        </article>
-        <article class="card">
-          <h3>${icon("book")} ${t("Nguồn đã đọc", "Sources")}</h3>
-          <ul class="source-list">${sources.map((s) => `<li>${extLink(s.url, tr(s.label))}</li>`).join("")}</ul>
-        </article>
-        <article class="card prep-notes">
-          <h3>${icon("users")} ${t("Tiền, áo quần, người", "Money, clothes, people")}</h3>
-          <div class="note-list">
-            ${localLife
-              .map(
-                (note) => `
-              <section>
-                <h4>${icon(note.icon, 16)} ${tr(note.title)}</h4>
-                ${note.paragraphs.map((p) => `<p>${tr(p)}</p>`).join("")}
-                ${note.links.length ? `<p class="actions">${note.links.map((l) => extLink(l.url, tr(l.label), "text-link")).join("")}</p>` : ""}
-              </section>`,
-              )
-              .join("")}
-          </div>
-        </article>
-      </div>
-    </section>`;
-}
-
 function setDayOpen(li, open) {
-  li.querySelector(".day-toggle").setAttribute("aria-expanded", String(open));
-  li.querySelector(".day-panel").hidden = !open;
+  const toggle = li.querySelector(".day-toggle");
+  const panel = li.querySelector(".day-panel");
+  if (!toggle || !panel) return;
+  toggle.setAttribute("aria-expanded", String(open));
+  panel.hidden = !open;
   li.classList.toggle("open", open);
 }
 
@@ -698,7 +707,6 @@ function pageHtml() {
   return `
     ${renderTopbar()}
     <main class="page">
-      ${renderPrep()}
       ${renderNow()}
       ${renderTimeline()}
       ${renderStays()}
@@ -721,7 +729,7 @@ function applyFilter(filter) {
   root.querySelectorAll("[data-filter]").forEach((c) => c.setAttribute("aria-pressed", String(c.getAttribute("data-filter") === filter)));
   root.querySelectorAll(".day").forEach((li) => {
     const index = Number(li.getAttribute("data-index"));
-    li.hidden = !matchesFilter(/** @type {Filter} */ (filter), days[index], index);
+    li.hidden = !matchesFilter(/** @type {Filter} */ (filter), allEntries()[index], index);
   });
 }
 
@@ -786,6 +794,7 @@ function mount() {
     const toggle = event.target.closest(".day-toggle");
     if (toggle) {
       const li = toggle.closest(".day");
+      if (!li.querySelector(".day-panel")) return;
       const open = toggle.getAttribute("aria-expanded") !== "true";
       setDayOpen(li, open);
       history.replaceState(null, "", open ? `#${li.id}` : "#timeline");

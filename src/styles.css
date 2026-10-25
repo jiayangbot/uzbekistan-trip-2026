@@ -1128,6 +1128,12 @@ code {
 .day.kind-weekend {
   border-left-color: var(--warn);
 }
+.day.kind-prep {
+  border-left-color: var(--primary);
+}
+.day.kind-return {
+  border-left-color: var(--teal);
+}
 
 .day.open {
   border-color: var(--muted);
@@ -1144,7 +1150,8 @@ code {
   box-shadow: 0 1px 0 var(--border);
 }
 
-.day-toggle {
+.day-toggle,
+.day-head {
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 16px;
@@ -1156,9 +1163,12 @@ code {
   color: inherit;
   font: inherit;
   text-align: left;
-  cursor: pointer;
   border-radius: var(--radius-lg);
   touch-action: manipulation;
+}
+
+.day-toggle {
+  cursor: pointer;
 }
 
 .day-toggle:hover .day-title {
@@ -1206,7 +1216,12 @@ code {
 }
 
 .day-plan {
+  margin: 0 18px 8px;
   color: var(--muted);
+}
+
+.day .agenda-tasks {
+  margin: 4px 18px 8px;
 }
 
 .chev {
@@ -1883,7 +1898,8 @@ code {
     margin-left: 14px;
     margin-right: 14px;
   }
-  .day-toggle {
+  .day-toggle,
+  .day-head {
     grid-template-columns: auto 1fr;
     gap: 12px;
     padding: 14px;
