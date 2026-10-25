@@ -153,11 +153,15 @@ const stayNotes = Object.fromEntries(
     .filter((entry) => entry[1].trim() !== ""),
 );
 
-function checkItem(key, text, extra = "") {
-  return `<li><label class="check">
+function checkLabel(key, text, extra = "") {
+  return `<label class="check">
     <input type="checkbox" data-check="${key}" ${checks[key] ? "checked" : ""} />
     <span class="check-text">${extra}${text}</span>
-  </label></li>`;
+  </label>`;
+}
+
+function checkItem(key, text, extra = "") {
+  return `<li>${checkLabel(key, text, extra)}</li>`;
 }
 
 function progressText(prefix, total) {
@@ -609,19 +613,18 @@ function renderAgendaDay(day) {
   const steps = day.tasks
     .map((step) => {
       const card = day.border && (step.id === "uz" || step.id === "thai") ? renderBorder(borderCards.find((item) => item.id === day.border)) : "";
-      return `<li class="prep-step">
+      return `<li>
         <p class="prep-when">${escapeHtml(pick(step.when))}</p>
-        ${checkItem(
+        ${checkLabel(
           `${prefix}${step.id}`,
-          `<strong>${escapeHtml(pick(step.text))}</strong>${step.detail ? `<span class="muted">${escapeHtml(pick(step.detail))}</span>` : ""}`,
-          `<span class="prio prio-${step.priority}">${step.priority === "high" ? t("Gấp", "Now") : t("Vừa", "Soon")}</span>`,
+          `<span class="check-line"><span class="prio prio-${step.priority}">${step.priority === "high" ? t("Gấp", "Now") : t("Vừa", "Soon")}</span><strong>${escapeHtml(pick(step.text))}</strong></span>${step.detail ? `<span class="muted">${escapeHtml(pick(step.detail))}</span>` : ""}`,
         )}
         ${card}
       </li>`;
     })
     .join("");
   const pack = day.pack
-    ? `<li class="prep-step">
+    ? `<li>
         <p class="prep-when">${t("Tối", "Evening")}</p>
         <h4 class="prep-pack-title">${icon("shirt", 16)} ${t("Soạn vali", "Pack the bag")}</h4>
         <ul class="checks">${packItems
@@ -642,7 +645,7 @@ function renderAgendaDay(day) {
         <h3>${todayMark}${nextMark}${city} <span class="muted">· ${area}</span>${total ? ` <span class="count" data-progress="${prefix}">${progressText(prefix, total)}</span>` : ""}</h3>
         <p class="day-plan">${plan}</p>
         ${trip ? `<p class="muted">${icon("bed", 14)} ${tr(trip.hotel)}</p>` : ""}
-        ${steps || pack ? `<ol class="prep-line">${steps}${pack}</ol>` : ""}
+        ${steps || pack ? `<ul class="agenda-tasks">${steps}${pack}</ul>` : ""}
         ${trip ? `<a class="text-link" href="#d-${day.date}">${t("Giờ giấc ngày này", "Times for this day")}</a>` : ""}
       </div>
     </li>`;

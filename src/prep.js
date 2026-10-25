@@ -93,7 +93,7 @@ export const agendaDays = [
       },
       {
         id: "uz",
-        when: { vi: "27/10, nhập cảnh TAS", en: "27 Oct, TAS immigration" },
+        when: { vi: "Nhập cảnh", en: "Immigration" },
         text: { vi: "Đưa điện thoại cho cán bộ. Họ đọc thẻ nhập cảnh ngay dưới", en: "Hand over the phone. The officer reads the arrival card below" },
         detail: { vi: "Mở thẻ Nhập cảnh Uzbekistan.", en: "Open the Uzbekistan arrival card." },
         priority: "high",

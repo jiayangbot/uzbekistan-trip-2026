@@ -1459,10 +1459,21 @@ code {
 
 .check-text {
   display: grid;
-  gap: 2px;
+  gap: 4px;
+  min-width: 0;
+}
+
+.check-line {
+  display: block;
+}
+
+.check-line .prio {
+  margin-right: 8px;
+  vertical-align: 2px;
 }
 
 .check-text .muted {
+  display: block;
   font-size: 0.9rem;
 }
 
@@ -1473,12 +1484,11 @@ code {
 
 .prio {
   display: inline-block;
-  margin-right: 8px;
   padding: 0 8px;
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 700;
-  vertical-align: 1px;
+  line-height: 1.6;
 }
 
 .prio-high {
@@ -1489,10 +1499,6 @@ code {
 .prio-medium {
   background: var(--warn-soft);
   color: var(--warn);
-}
-
-.check-text:has(.prio) {
-  display: block;
 }
 
 /* Prep */
@@ -1563,24 +1569,20 @@ code {
 
 .agenda-day {
   display: grid;
-  grid-template-columns: 60px minmax(0, 1fr);
-  gap: 12px 14px;
-  position: relative;
-  padding-bottom: 22px;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 8px 16px;
+  align-items: start;
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
 }
 
-.agenda-day::before {
-  content: "";
-  position: absolute;
-  left: 29px;
-  top: 72px;
-  bottom: 0;
-  width: 2px;
-  background: var(--border);
+.agenda-day:first-child {
+  border-top: 0;
+  padding-top: 0;
 }
 
-.agenda-day:last-child::before {
-  display: none;
+.agenda-day .date-chip {
+  align-self: start;
 }
 
 .agenda-day.is-today .date-chip,
@@ -1611,8 +1613,27 @@ code {
   font-size: 1.15rem;
 }
 
-.agenda-body .prep-line {
-  margin-top: 4px;
+.agenda-tasks {
+  list-style: none;
+  display: grid;
+  gap: 16px;
+  margin: 4px 0 0;
+  padding: 0;
+}
+
+.agenda-tasks > li {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.agenda-tasks .check {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.agenda-tasks .say-card {
+  margin-top: 8px;
 }
 
 .say-tag {
