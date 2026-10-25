@@ -56,8 +56,8 @@ export const agendaDays = [
         when: { vi: "Trong ngày", en: "During the day" },
         text: { vi: "Đổi USD tờ 100, khoảng $600 cho hai người", en: "Buy about $600 in clean $100 bills for two people" },
         detail: {
-          vi: "SuperRich trong thành phố, không đợi tới sân bay. Tờ phẳng, không rách, không viết. Khách sạn và tàu trả bằng thẻ.",
-          en: "Exchange in the city, not at the airport. Bills must be flat, unwritten, and untorn. Hotels and trains are paid by card.",
+          vi: "SuperRich trong thành phố, không đợi tới sân bay. Tờ phẳng, không rách, không viết. Khách sạn và tàu trả bằng thẻ. Sang Tashkent đổi tại Kapitalbank, số 7 phố Sayilgoh.",
+          en: "Exchange in the city, not at the airport. Bills must be flat, unwritten, and untorn. Hotels and trains are paid by card. In Tashkent, change them at Kapitalbank, 7 Sayilgoh Street.",
         },
         priority: "high",
       },

@@ -36,7 +36,7 @@ const simTip = {
 };
 
 const moneyTip = {
-  text: "Som không nên mua ở Bangkok. Mua USD tờ 100 tại SuperRich trước khi ra sân bay, rồi đổi sang som ở Tashkent. Sân bay chỉ đổi khoảng $100–200 cho mấy ngày đầu. Visa và Mastercard dùng được ở khách sạn, mall và Yandex. Chợ và quán nhỏ cần tiền mặt.",
+  text: "Som không mua ở Bangkok. Mua USD tờ 100 tại SuperRich. Trong nhà ga Tashkent, quầy NBU mở cả ngày, chỉ đổi $100–200 cho SIM và vài bữa đầu. Phần còn lại đổi tại Kapitalbank, số 7 phố Sayilgoh, sát quảng trường Amir Temur, đi bộ từ Hampton, thứ Hai–thứ Sáu 09:00–17:00. Hạ cánh 11:45 nên kịp chiều 27/10. Trễ quá 17:00 thì sáng 28/10. Mang hộ chiếu, xin tờ 5.000 đến 50.000. Chủ nhật ngân hàng đóng. Ở Samarkand nếu thiếu som thì NBU chi nhánh Registon, phố Firdavsi số 7, ngày thường đến 17:00. Visa và Mastercard dùng được ở khách sạn, mall và Yandex. Chợ và quán nhỏ cần tiền mặt.",
   source: "Oxus Road, tiền mặt và thẻ, tháng 9/2026",
   url: "https://oxusroad.com/en/travel-guide/money/",
 };
@@ -79,7 +79,7 @@ export const dayDetails = {
       "Passport và vé máy bay offline",
       "Mua SIM có số Uzbekistan",
       "Yandex Go chạy được bằng số mới",
-      "Đổi một ít som, tờ nhỏ",
+      "Đổi som tại Kapitalbank, số 7 phố Sayilgoh, tờ nhỏ",
       "Nhờ lễ tân đăng ký E-mehmon, giữ tờ xác nhận",
     ],
   },
@@ -616,7 +616,7 @@ export const localLife = [
     paragraphs: [
       "Mua đô la, không mua som. SuperRich ở Bangkok hầu như không bán som, và tỷ giá som ở Thái kém hơn quầy ngân hàng ở Tashkent.",
       "Có hai hãng khác nhau. SuperRich Thailand là bảng xanh, trụ sở Rajdamri Soi 1, gần BTS Chit Lom. SuperRich 1965 là bảng cam, nhiều chi nhánh, trụ sở ở Silom. Sáng hôm đổi, mở hai trang tỷ giá và chọn chỗ bán tờ USD 100 rẻ hơn. Sáng 24/10/2026, bảng xanh bán tờ 100 với giá 33.70 baht một đô. Tờ 50 gần bằng tờ 100. Tờ 20 và tờ nhỏ bị trừ.",
-      "Đổi trong thành phố trước khi ra sân bay. Quầy trong sân bay Bangkok thường kém hơn. Mang hộ chiếu. Tờ phải phẳng, không rách, không viết, không ghim. Với hai người, khách sạn và tàu trả bằng thẻ, khoảng $600 tiền mặt là đủ. Đổi $100–200 ngay ở TAS cho vài ngày đầu, phần còn lại đổi ở ngân hàng trong thành phố.",
+      "Đổi trong thành phố trước khi ra sân bay. Quầy trong sân bay Bangkok thường kém hơn. Mang hộ chiếu. Tờ phải phẳng, không rách, không viết, không ghim. Với hai người, khách sạn và tàu trả bằng thẻ, khoảng $600 tiền mặt là đủ. Ở nhà ga Tashkent, quầy NBU mở cả ngày, chỉ đổi $100–200. Phần còn lại đổi tại Kapitalbank, số 7 phố Sayilgoh, sát quảng trường Amir Temur, đi bộ từ Hampton, thứ Hai–thứ Sáu 09:00–17:00. Hạ cánh 11:45 nên kịp chiều 27/10. Trễ quá 17:00 thì sáng 28/10. Xin tờ 5.000 đến 50.000. Chủ nhật ngân hàng đóng. Nếu đến Samarkand mà thiếu som thì NBU chi nhánh Registon, phố Firdavsi số 7, ngày thường đến 17:00.",
     ],
     links: [
       { label: "Tỷ giá SuperRich xanh", url: "https://www.superrichthailand.com/exchange-rate" },
