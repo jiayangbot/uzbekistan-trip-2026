@@ -5,7 +5,7 @@
 export const daySlots = {
   "2026-10-27": [
     { time: "06:55", part: "Bay", eat: "Bangkok, HY532", text: "Cất cánh giờ Bangkok. Trên máy bay khoảng 6 giờ 50 phút, vì Tashkent chậm 2 tiếng. Hạ cánh TAS 11:45.", usd: 0, query: "Suvarnabhumi Airport" },
-    { time: "11:45", part: "Đến", eat: "Sân bay TAS", text: "Mua SIM, đổi $100–200. Ra làn 1 gọi Yandex về Hampton, khoảng 11 km, 20–40 phút.", usd: 0, query: "Tashkent International Airport Terminal 2" },
+    { time: "11:45", part: "Đến", eat: "Sân bay TAS", text: "Qua cửa hộ chiếu, mua SIM trong phòng lấy vali. Đổi $100–200. Ra làn 1 gọi Yandex về Hampton, khoảng 11 km, 20–40 phút.", usd: 0, query: "Tashkent International Airport Terminal 2" },
     { time: "14:00", part: "Trưa", eat: "Lagman gần Hampton", text: "Ăn muộn sau khi nhận phòng. Một tô mì và trà.", usd: 14, query: "lagman restaurant Amir Temur Square Tashkent" },
     { time: "17:00", part: "Chiều", eat: "", text: "Nghỉ ở Hampton. Đi bộ nếu còn sức.", usd: 0 },
     { time: "19:30", part: "Tối", eat: "Quảng trường Amir Temur", text: "Đi bộ sang quảng trường Độc lập. Chỉ trà và samsa nếu còn đói.", usd: 8, query: "Amir Temur Square Tashkent" },

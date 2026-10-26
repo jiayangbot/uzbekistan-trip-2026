@@ -30,7 +30,7 @@ const yandexTip = {
 };
 
 const simTip = {
-  text: "Mua SIM/eSIM Ucell hoặc Beeline ngay sau hải quan, khoảng 70.000 som (~$6) cho gói tháng có data và số nội địa. Cần số Uzbekistan để nhận mã Yandex và mua vé tàu trên điện thoại. eSIM nước ngoài không cho số local.",
+  text: "Qua cửa hộ chiếu trước. Quầy Ucell ở giữa phòng lấy vali. Mua trước máy soi ra ngoài, khoảng 70.000 som (~$6) cho gói tháng, 35 GB, có số nội địa. Ra cửa rồi không vào lại được. Cần số Uzbekistan để nhận mã Yandex và mua vé tàu trên điện thoại. eSIM nước ngoài không cho số local.",
   source: "r/Tashkent, Landing in Tashkent",
   url: "https://www.reddit.com/r/Tashkent/comments/1w76eiz/landing_in_tashkent_everything_i_did_at_the/",
 };
@@ -49,7 +49,7 @@ export const dayDetails = {
         name: "TAS Terminal 2",
         query: "Tashkent International Airport Terminal 2",
         eat: "Ăn trên máy bay. Trong sân bay chỉ uống nước, bữa đầu để gần Hampton.",
-        doing: "Hải quan, mua SIM Ucell hoặc Beeline có số nội địa, ra làn 1 gọi Yandex.",
+        doing: "Qua cửa hộ chiếu, mua SIM Ucell trong phòng lấy vali, rồi ra làn 1 gọi Yandex.",
         tip: "HY532: Bangkok 06:55, TAS 11:45, Terminal 2. Không có metro ra sân bay. Đừng nhận người chào xe trong sảnh.",
       },
       {
@@ -78,7 +78,7 @@ export const dayDetails = {
       title: "Bay rồi Yandex về Hampton",
       steps: [
         "HY532 cất cánh 06:55 giờ Bangkok, hạ cánh TAS Terminal 2 lúc 11:45. Trên máy bay khoảng 6 giờ 50 phút vì Tashkent chậm Bangkok 2 tiếng.",
-        "Mua SIM trong nhà ga, ra làn 1 gọi Yandex. Đừng nhận người chào xe trong sảnh.",
+        "Qua cửa hộ chiếu, mua SIM trong phòng lấy vali, trước máy soi ra ngoài. Ra làn 1 gọi Yandex. Đừng nhận người chào xe trong sảnh.",
         "Hampton cách sân bay khoảng 11 km, 20–40 phút.",
       ],
       links: [{ label: "Bản đồ sân bay", url: mapLink("Tashkent International Airport Terminal 2") }],
@@ -669,7 +669,7 @@ export const localLife = [
       "Tashkent có metro, chạy khoảng 5:00 đến nửa đêm. Một lượt đi đâu cũng một giá. Từ 1/10/2026, chạm thẻ ngân hàng, điện thoại hoặc thẻ ATTO là 2.500 som. Vé giấy mua ở ki-ốt là 3.000 som. Không còn xu nhựa. Đổi tuyến trong cùng một lần qua cửa thì không tính thêm. Mỗi người một lần chạm. Ga đẹp để xem: Kosmonavtlar, Alisher Navoi.",
       "Xe buýt thành phố chạm cùng thẻ, 2.500 som một lượt. Xe buýt nhỏ chạy tuyến cố định: hỏi giá trước khi ngồi, trả tiền mặt tờ nhỏ. Đừng tìm tàu điện trên mặt đường. Metro đi ngầm, tàu ngoại ô là chuyến lên núi, tàu Sharq là chuyến Samarkand.",
       "Hampton sát ga Amir Temur Xiyoboni. Hilton gần ga Xalqlar Do'stligi. Swissôtel gần ga Oybek. Quảng trường thì đi bộ. Mỏi, tối, hoặc có vali thì gọi Yandex Go. App hiện giá trước khi nhận xe. Xe thường là Chevrolet trắng, đối biển số với app. Không vẫy taxi ngoài đường. Samarkand không có metro, trong phố cũng dùng Yandex.",
-      "Sân bay hiện tại không có ga metro. Ga từng được đặt tên dự án Aeroport trên tuyến vòng là Tolariq, nằm vòng ngoài thành phố, không phải nhà ga bay. Ngày 27/10, HY532 vào Terminal 2 lúc 11:45. Hai người có vali: mua SIM trong nhà ga, ra làn 1 gọi Yandex về Hampton. Bảng giá tối đa tháng 9/2026 tính tới quảng trường Amir Temur khoảng 20.000 som cho 7,6 km, trước phụ phí giờ đông. App hiện số cuối. Chưa có mạng thì quầy taxi trong sảnh, giá trong thành phố từ 50.000 som, chốt tại quầy. Đừng nhận người chào trong sảnh.",
+      "Sân bay hiện tại không có ga metro. Ga từng được đặt tên dự án Aeroport trên tuyến vòng là Tolariq, nằm vòng ngoài thành phố, không phải nhà ga bay. Ngày 27/10, HY532 vào Terminal 2 lúc 11:45. Hai người có vali: qua cửa hộ chiếu, mua SIM trong phòng lấy vali, rồi ra làn 1 gọi Yandex về Hampton. Bảng giá tối đa tháng 9/2026 tính tới quảng trường Amir Temur khoảng 20.000 som cho 7,6 km, trước phụ phí giờ đông. App hiện số cuối. Chưa có mạng thì quầy taxi trong sảnh, giá trong thành phố từ 50.000 som, chốt tại quầy. Đừng nhận người chào trong sảnh.",
       "Ngày 9/11 rời khách sạn khoảng 17:15, Yandex về Terminal 2. Không đi metro ra sân bay.",
     ],
     links: [
