@@ -1,0 +1,21 @@
+---
+description: Som prices include USD and VND in chat, and USD only on the page
+alwaysApply: true
+---
+
+# Giá som
+
+Khi trả lời người dùng, mỗi giá som kèm USD và VND trong cùng câu.
+
+`70.000 som (~$5.90, ~154.000 đồng)`
+
+Trên trang chỉ ghi som và USD. Không thêm đồng.
+
+`70.000 som (~$5.90)`
+
+Tỷ giá khóa ngày 26/10/2026:
+
+- 1 USD = 11.850 som (ngân hàng bán USD)
+- 1 USD = 26.030 đồng (Vietcombank bán)
+
+USD lấy hai số lẻ. Đồng làm tròn tới hàng nghìn, dấu chấm ngăn cách. Mệnh giá tờ tiền không phải giá, không quy đổi. Giá đã ghi bằng USD thì giữ nguyên, trừ khi câu đó đang nói một số som.
